@@ -6,8 +6,6 @@ using Autofac;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Dialogs.Internals;
 using Microsoft.Bot.Connector;
-using TechieBot.Dialogs;
-
 namespace TechieBot
 {
     [BotAuthentication]
