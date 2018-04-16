@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Luis;
@@ -7,12 +8,13 @@ using Microsoft.Bot.Connector;
 
 namespace TechieBot.Dialogs
 {
-    [LuisModel("app-id", "subscription-key")]
+    [LuisModel("{luis_app_id}","{subscription_key}")]
     [Serializable]
-    public class RootLUISDialog : LuisDialog<object>
+    public class RootLUISDialog : LuisDialog<IMessageActivity>
     {
 
-        public RootLUISDialog()
+
+        public RootLUISDialog(ILuisService luis) : base(luis)
         {
         }
 
