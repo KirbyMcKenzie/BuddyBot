@@ -2,11 +2,11 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using Autofac;
 using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Builder.Dialogs.Internals;
 using Microsoft.Bot.Connector;
-namespace TechieBot
+using TechieBot.Dialogs;
+
+namespace TechieBot.Controllers
 {
     [BotAuthentication]
     public class MessagesController : ApiController
@@ -19,10 +19,7 @@ namespace TechieBot
         {
             if (activity.Type == ActivityTypes.Message)
             {
-                using (var scope = DialogModule.BeginLifetimeScope(Conversation.Container, activity))
-                {
-                    await Conversation.SendAsync(activity, () => scope.Resolve<LuisDialog<IMessageActivity>>());
-                }
+                await Conversation.SendAsync(activity, () => new RootLUISDialog());
             }
             else
             {

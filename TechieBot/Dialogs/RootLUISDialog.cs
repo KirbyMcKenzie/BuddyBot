@@ -12,9 +12,12 @@ namespace TechieBot.Dialogs
 {
     [LuisModel("{luis_app_id}", "{subscription_key}")]
     [Serializable]
-    public class RootLUISDialog : LuisDialog<IMessageActivity>
+    public class RootLUISDialog : LuisDialog<object>
     {
-        public RootLUISDialog(ILuisService luis) : base(luis)
+        public RootLUISDialog() : base(new LuisService(new LuisModelAttribute(
+            ConfigurationManager.AppSettings["luis:ModelId"],
+            ConfigurationManager.AppSettings["luis:SubscriptionId"]
+            )))
         {
         }
 
