@@ -81,21 +81,5 @@ namespace TechieBot.Dialogs
 
             context.Wait(MessageReceived);
         }
-
-        //TODO - Uneeded method now?
-        public Task StartAsync(IDialogContext context, LuisResult result)
-        {
-            context.Wait(MessageReceivedAsync);
-
-            return Task.CompletedTask;
-        }
-
-        //TODO - Look at moving these methods into a parent class?
-        private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<object> result)
-        {
-            var activity = await result as IMessageActivity;
-
-            context.Wait(MessageReceivedAsync);
-        }
     }
 }
