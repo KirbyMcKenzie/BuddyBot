@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Luis;
@@ -9,16 +10,13 @@ using Microsoft.Bot.Connector;
 
 namespace TechieBot.Dialogs
 {
-    [LuisModel("{luis_app_id}","{subscription_key}")]
+    [LuisModel("{luis_app_id}", "{subscription_key}")]
     [Serializable]
     public class RootLUISDialog : LuisDialog<IMessageActivity>
     {
-
-
         public RootLUISDialog(ILuisService luis) : base(luis)
         {
         }
-
 
         [LuisIntent("")]
         public async Task None(IDialogContext context, LuisResult result)
@@ -30,10 +28,9 @@ namespace TechieBot.Dialogs
         [LuisIntent("Greeting")]
         public async Task Greeting(IDialogContext context, LuisResult result)
         {
-
             await context.PostAsync("Hi I'm TechieBot!");
-            
-                IMessageActivity reply = context.MakeMessage();
+
+            IMessageActivity reply = context.MakeMessage();
 
             reply.Text = "I'm here to help you with all your " +
                 "tech support needs. \n\n Here's some examples of things I can help with. If you're stuck just type 'Help' :)";
@@ -50,14 +47,22 @@ namespace TechieBot.Dialogs
 
             await context.PostAsync(reply);
 
-
             context.Wait(MessageReceived);
         }
 
         [LuisIntent("Diagnose.Internet.Connection")]
         public async Task DiagnoseInternetConnection(IDialogContext context, LuisResult result)
         {
-            await context.PostAsync("We need to get that fixed. The Zuck needs his ad money!");
+            await context.PostAsync("Diagnose.Internet.Connection called");
+
+            await context.Forward(new DiagnoseInternetConnectionDialog(), PromptFurtherHelp, context.Activity, CancellationToken.None);
+
+            context.Wait(MessageReceived);
+        }
+
+        private async Task PromptFurtherHelp(IDialogContext context, IAwaitable<object> result)
+        {
+            await context.PostAsync("Is there anything else I can help with today?");
 
             context.Wait(MessageReceived);
         }
@@ -73,11 +78,10 @@ namespace TechieBot.Dialogs
         [LuisIntent("Diagnose.Device.RestartLoop")]
         public async Task DiagnoseDeviceRestartLoop(IDialogContext context, LuisResult result)
         {
-            await context.PostAsync("Looks like we need an exit condition");
+            await context.PostAsync("Diagnose.Device.RestartLoop called");
 
             context.Wait(MessageReceived);
         }
-
 
         //TODO - Uneeded method now?
         public Task StartAsync(IDialogContext context, LuisResult result)
@@ -87,7 +91,7 @@ namespace TechieBot.Dialogs
             return Task.CompletedTask;
         }
 
-        //TODO - Look at moving these methods into a parent class? 
+        //TODO - Look at moving these methods into a parent class?
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<object> result)
         {
             var activity = await result as IMessageActivity;
