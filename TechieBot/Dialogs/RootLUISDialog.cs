@@ -10,14 +10,12 @@ using Microsoft.Bot.Connector;
 
 namespace TechieBot.Dialogs
 {
-    [LuisModel("{luis_app_id}", "{subscription_key}")]
     [Serializable]
     public class RootLUISDialog : LuisDialog<object>
     {
         public RootLUISDialog() : base(new LuisService(new LuisModelAttribute(
             ConfigurationManager.AppSettings["luis:ModelId"],
-            ConfigurationManager.AppSettings["luis:SubscriptionId"]
-            )))
+            ConfigurationManager.AppSettings["luis:SubscriptionId"])))
         {
         }
 
