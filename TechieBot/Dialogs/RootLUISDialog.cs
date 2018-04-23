@@ -56,8 +56,6 @@ namespace TechieBot.Dialogs
         {
             await context.PostAsync("Diagnose.Internet.Connection called");
 
-            await context.Forward(new DiagnoseInternetConnectionDialog(), PromptFurtherHelp, context.Activity, CancellationToken.None);
-
             context.Wait(MessageReceived);
         }
 
