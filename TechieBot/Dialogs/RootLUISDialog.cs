@@ -4,9 +4,11 @@ using System.Configuration;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Builder.FormFlow;
 using Microsoft.Bot.Builder.Luis;
 using Microsoft.Bot.Builder.Luis.Models;
 using Microsoft.Bot.Connector;
+using TechieBot.Models;
 
 namespace TechieBot.Dialogs
 {
@@ -56,7 +58,11 @@ namespace TechieBot.Dialogs
         {
             await context.PostAsync("Diagnose.Internet.Connection called");
 
-            context.Wait(MessageReceived);
+            var diagnoseInternetProblems = new DiagnoseInternetConnection();
+
+            var diagnoseInternetFormDialog = new FormDialog<DiagnoseInternetConnection>(diagnoseInternetProblems, this.BuildDiagnoseInternetForm, FormOptions.PromptInStart, result.Entities);
+
+            context.Call(diagnoseInternetFormDialog, this.ResumeAfterDiagnoseInternetForm);
         }
 
         private async Task PromptFurtherHelp(IDialogContext context, IAwaitable<object> result)
@@ -80,6 +86,59 @@ namespace TechieBot.Dialogs
             await context.PostAsync("Diagnose.Device.RestartLoop called");
 
             context.Wait(MessageReceived);
+        }
+
+        /* TODO - See if it's possible to move these to another/child dialogs*/
+
+        private IForm<DiagnoseInternetConnection> BuildDiagnoseInternetForm()
+        {
+            OnCompletionAsyncDelegate<DiagnoseInternetConnection> diagnoseInternetProblem = async (context, state) =>
+            {
+                //TODO Change strings to make sense
+                var message = "Searching for Problems";
+                if (!string.IsNullOrEmpty(state.CurrentDevice.ToString()))
+                {
+                    message += $" in {state.RestartedDevice.ToString()}...";
+                }
+                else if (!string.IsNullOrEmpty(state.RestartedRouter.ToString()))
+                {
+                    message += $" near {state.RestartedRouter.ToString()} ...";
+                }
+
+                await context.PostAsync(message);
+            };
+
+            return new FormBuilder<DiagnoseInternetConnection>()
+                .OnCompletion(diagnoseInternetProblem)
+                .Build();
+        }
+
+        private async Task ResumeAfterDiagnoseInternetForm(IDialogContext context, IAwaitable<DiagnoseInternetConnection> result)
+        {
+            try
+            {
+                var searchQuery = await result;
+                await context.PostAsync($"Is this your selection? {searchQuery.CurrentDevice.ToString()} etc, etc:");
+            }
+            catch (FormCanceledException ex)
+            {
+                string reply;
+
+                if (ex.InnerException == null)
+                {
+                    reply = "You have canceled the operation.";
+                }
+                else
+                {
+                    reply = $"Oops! Something went wrong :( Technical Details: {ex.InnerException.Message}";
+                }
+
+                await context.PostAsync(reply);
+            }
+            finally
+            {
+                context.Done<object>(null);
+            }
         }
     }
 }
