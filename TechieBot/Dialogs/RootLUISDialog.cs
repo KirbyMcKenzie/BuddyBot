@@ -90,7 +90,10 @@ namespace TechieBot.Dialogs
             try
             {
                 var searchQuery = await result;
-                await context.PostAsync($"Is this your selection? {searchQuery.CurrentDevice.ToString()} etc, etc:");
+                await context.PostAsync($"Is this your selection? \n\n " +
+                    $"Current Device: {searchQuery.CurrentDevice.ToString()} \n\n" +
+                    $"Restarted Device: {searchQuery.RestartedDevice.ToString()} \n\n" +
+                    $"Restarted Router: {searchQuery.RestartedRouter.ToString()}");
             }
             catch (FormCanceledException ex)
             {
