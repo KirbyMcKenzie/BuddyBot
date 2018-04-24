@@ -56,13 +56,10 @@ namespace TechieBot.Dialogs
         [LuisIntent("Diagnose.Internet.Connection")]
         public async Task DiagnoseInternetConnection(IDialogContext context, LuisResult result)
         {
-            await context.PostAsync("Diagnose.Internet.Connection called");
+            await context.PostAsync("Not good! Let's get you connected again. \n\nPlease answer the following with 'Yes' or 'No' answers");
 
-            var diagnoseInternetProblems = new DiagnoseInternetConnection();
-
-            var diagnoseInternetFormDialog = new FormDialog<DiagnoseInternetConnection>(diagnoseInternetProblems, this.BuildDiagnoseInternetForm, FormOptions.PromptInStart, result.Entities);
-
-            context.Call(diagnoseInternetFormDialog, this.ResumeAfterDiagnoseInternetForm);
+            var form = new FormDialog<DiagnoseInternetConnectionForm>(new DiagnoseInternetConnectionForm(), DiagnoseInternetConnectionForm.BuildForm, FormOptions.PromptInStart);
+            context.Call(form, ResumeAfterDiagnoseInternetForm);
         }
 
         private async Task PromptFurtherHelp(IDialogContext context, IAwaitable<object> result)
@@ -88,32 +85,7 @@ namespace TechieBot.Dialogs
             context.Wait(MessageReceived);
         }
 
-        /* TODO - See if it's possible to move these to another/child dialogs*/
-
-        private IForm<DiagnoseInternetConnection> BuildDiagnoseInternetForm()
-        {
-            OnCompletionAsyncDelegate<DiagnoseInternetConnection> diagnoseInternetProblem = async (context, state) =>
-            {
-                //TODO Change strings to make sense
-                var message = "Searching for Problems";
-                if (!string.IsNullOrEmpty(state.CurrentDevice.ToString()))
-                {
-                    message += $" in {state.RestartedDevice.ToString()}...";
-                }
-                else if (!string.IsNullOrEmpty(state.RestartedRouter.ToString()))
-                {
-                    message += $" near {state.RestartedRouter.ToString()} ...";
-                }
-
-                await context.PostAsync(message);
-            };
-
-            return new FormBuilder<DiagnoseInternetConnection>()
-                .OnCompletion(diagnoseInternetProblem)
-                .Build();
-        }
-
-        private async Task ResumeAfterDiagnoseInternetForm(IDialogContext context, IAwaitable<DiagnoseInternetConnection> result)
+        private async Task ResumeAfterDiagnoseInternetForm(IDialogContext context, IAwaitable<DiagnoseInternetConnectionForm> result)
         {
             try
             {
