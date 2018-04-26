@@ -62,13 +62,6 @@ namespace TechieBot.Dialogs
             context.Call(form, ResumeAfterDiagnoseInternetForm);
         }
 
-        private async Task PromptFurtherHelp(IDialogContext context, IAwaitable<object> result)
-        {
-            await context.PostAsync("Is there anything else I can help with today?");
-
-            context.Wait(MessageReceived);
-        }
-
         [LuisIntent("Diagnose.Device.Bootup")]
         public async Task DiagnoseDeviceBootup(IDialogContext context, LuisResult result)
         {
@@ -90,10 +83,11 @@ namespace TechieBot.Dialogs
             try
             {
                 var searchQuery = await result;
-                await context.PostAsync($"Is this your selection? \n\n " +
-                    $"Current Device: {searchQuery.CurrentDevice.ToString()} \n\n" +
-                    $"Restarted Device: {searchQuery.RestartedDevice.ToString()} \n\n" +
-                    $"Restarted Router: {searchQuery.RestartedRouter.ToString()}");
+                await context.PostAsync($"Answers \n\n " +
+                    $"Current Device: {searchQuery.CurrentDevice} \n\n" +
+                    $"Restarted Device: {searchQuery.RestartedDevice} \n\n" +
+                    $"Restarted Router: {searchQuery.RestartedRouter} \n\n" +
+                    $"Problem Resolved: {searchQuery.ProblemResolved}");
             }
             catch (FormCanceledException ex)
             {
