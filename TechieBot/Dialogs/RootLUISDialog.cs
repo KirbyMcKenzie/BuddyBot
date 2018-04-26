@@ -85,6 +85,7 @@ namespace TechieBot.Dialogs
                 var searchQuery = await result;
                 await context.PostAsync($"Answers \n\n " +
                     $"Current Device: {searchQuery.CurrentDevice} \n\n" +
+                    $"Operating System: {searchQuery.OperatingSystem} \n\n" +
                     $"Restarted Device: {searchQuery.RestartedDevice} \n\n" +
                     $"Restarted Router: {searchQuery.RestartedRouter} \n\n" +
                     $"Problem Resolved: {searchQuery.ProblemResolved}");
