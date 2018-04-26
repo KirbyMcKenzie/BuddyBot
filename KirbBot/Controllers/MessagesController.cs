@@ -19,7 +19,7 @@ namespace KirbBot.Controllers
         {
             if (activity.Type == ActivityTypes.Message)
             {
-                await Conversation.SendAsync(activity, () => new RootLUISDialog());
+                await Conversation.SendAsync(activity, () => new RootLuisDialog());
             }
             else
             {

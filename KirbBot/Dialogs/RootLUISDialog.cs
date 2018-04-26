@@ -13,9 +13,9 @@ using Microsoft.Bot.Connector;
 namespace KirbBot.Dialogs
 {
     [Serializable]
-    public class RootLUISDialog : LuisDialog<object>
+    public class RootLuisDialog : LuisDialog<object>
     {
-        public RootLUISDialog() : base(new LuisService(new LuisModelAttribute(
+        public RootLuisDialog() : base(new LuisService(new LuisModelAttribute(
             ConfigurationManager.AppSettings["luis:ModelId"],
             ConfigurationManager.AppSettings["luis:SubscriptionId"])))
         {
