@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Threading.Tasks;
 using KirbBot.Models;
+using KirbBot.Services;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.FormFlow;
 using Microsoft.Bot.Builder.Luis;
@@ -30,24 +31,34 @@ namespace KirbBot.Dialogs
         [LuisIntent("Greeting")]
         public async Task Greeting(IDialogContext context, LuisResult result)
         {
-            await context.PostAsync("Hi I'm KirbBot!");
+            await context.PostAsync("Hi I'm KirbBot! 🤖");
 
             IMessageActivity reply = context.MakeMessage();
 
-            reply.Text = "I'm here to help you with all your " +
-                "tech support needs. \n\n Here's some examples of things I can help with. If you're stuck just type 'Help' :)";
+            reply.Text = "I'm here to help you with whatever you need. However, I'm still learning so be paitent!😀 Heres some things I can help you with now";
 
             reply.SuggestedActions = new SuggestedActions
             {
                 Actions = new List<CardAction>()
                 {
-                    new CardAction(){ Title = "I can't connect to the Internet", Type=ActionTypes.ImBack, Value="No Internet Connection" },
-                    new CardAction(){ Title = "My device won't turn on", Type=ActionTypes.ImBack, Value="Device No Bootup" },
-                    new CardAction(){ Title = "My device keeps restarting", Type=ActionTypes.ImBack, Value="Device Restart Loop" },
+                    new CardAction(){ Title = "Generate Random Number", Type=ActionTypes.ImBack, Value="Generate Random Number" },
+                    new CardAction(){ Title = "Tell me a joke", Type=ActionTypes.ImBack, Value="Tell me a joke" },
+                    new CardAction(){ Title = "What's the weather doing?", Type=ActionTypes.ImBack, Value="What's the weather doing?" },
                 }
             };
 
             await context.PostAsync(reply);
+
+            context.Wait(MessageReceived);
+        }
+
+        [LuisIntent("Joke")]
+        public async Task Joke(IDialogContext context, LuisResult result)
+        {
+            //TODO - remove dependency
+            JokeService joke = new JokeService();
+
+            await context.PostAsync(joke.GetRandomJoke());
 
             context.Wait(MessageReceived);
         }
@@ -59,14 +70,6 @@ namespace KirbBot.Dialogs
 
             var form = new FormDialog<DiagnoseInternetConnectionForm>(new DiagnoseInternetConnectionForm(), DiagnoseInternetConnectionForm.BuildForm, FormOptions.PromptInStart);
             context.Call(form, ResumeAfterDiagnoseInternetForm);
-        }
-
-        [LuisIntent("Diagnose.Device.Bootup")]
-        public async Task DiagnoseDeviceBootup(IDialogContext context, LuisResult result)
-        {
-            await context.PostAsync("Bootup problems called");
-
-            context.Wait(MessageReceived);
         }
 
         [LuisIntent("Diagnose.Device.RestartLoop")]

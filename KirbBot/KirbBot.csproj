@@ -120,6 +120,8 @@
     <Compile Include="Models\DiagnoseInternetConnectionForm.cs" />
     <Compile Include="Models\Enums\OperatingSystems.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IJokeService.cs" />
+    <Compile Include="Services\JokeService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
