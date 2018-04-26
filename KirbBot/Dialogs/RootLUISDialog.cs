@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Threading;
 using System.Threading.Tasks;
+using KirbBot.Models;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.FormFlow;
 using Microsoft.Bot.Builder.Luis;
 using Microsoft.Bot.Builder.Luis.Models;
 using Microsoft.Bot.Connector;
-using TechieBot.Models;
 
-namespace TechieBot.Dialogs
+namespace KirbBot.Dialogs
 {
     [Serializable]
     public class RootLUISDialog : LuisDialog<object>

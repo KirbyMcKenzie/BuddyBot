@@ -2,11 +2,11 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using KirbBot.Dialogs;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
-using TechieBot.Dialogs;
 
-namespace TechieBot.Controllers
+namespace KirbBot.Controllers
 {
     [BotAuthentication]
     public class MessagesController : ApiController

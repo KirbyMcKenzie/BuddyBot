@@ -1,11 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using System.Web.Http;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
 
-namespace TechieBot
+namespace KirbBot
 {
     public static class WebApiConfig
     {

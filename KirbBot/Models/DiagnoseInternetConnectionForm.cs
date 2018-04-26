@@ -1,9 +1,9 @@
-﻿using Microsoft.Bot.Builder.FormFlow;
-using System;
+﻿using System;
+using KirbBot.Models.Enums;
+using Microsoft.Bot.Builder.FormFlow;
 using Microsoft.Bot.Builder.FormFlow.Advanced;
-using TechieBot.Models.Enums;
 
-namespace TechieBot.Models
+namespace KirbBot.Models
 {
     [Serializable]
     [Template(TemplateUsage.NotUnderstood,

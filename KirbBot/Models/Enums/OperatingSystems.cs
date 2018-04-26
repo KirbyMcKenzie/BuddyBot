@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using Microsoft.Bot.Builder.FormFlow;
 
-namespace TechieBot.Models.Enums
+namespace KirbBot.Models.Enums
 {
     [Serializable]
     public enum OperatingSystems

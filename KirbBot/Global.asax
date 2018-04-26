@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="TechieBot.WebApiApplication" Language="C#" %>
+﻿<%@ Application CodeBehind="Global.asax.cs" Inherits="KirbBot.WebApiApplication" Language="C#" %>

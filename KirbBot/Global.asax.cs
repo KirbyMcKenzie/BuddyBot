@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
 
-namespace TechieBot
+namespace KirbBot
 {
     public class WebApiApplication : System.Web.HttpApplication
     {
