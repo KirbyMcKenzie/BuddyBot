@@ -1,15 +1,14 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Builder.FormFlow;
+﻿using Microsoft.Bot.Builder.FormFlow;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using Microsoft.Bot.Builder.FormFlow.Advanced;
 using TechieBot.Models.Enums;
 
 namespace TechieBot.Models
 {
     [Serializable]
+    [Template(TemplateUsage.NotUnderstood,
+        "I'm sorry I don't understand what you mean by \"{0}\". " +
+        "Please be more specific or type \"help\" to get more info.")]
     public class DiagnoseInternetConnectionForm
     {
         [Prompt("Has this fixed the problem? {||}")]
@@ -18,7 +17,7 @@ namespace TechieBot.Models
         [Prompt("I think it's safe to assume you're having problems connecting on another device? {||}")]
         public bool CurrentDevice { get; set; }
 
-        [Prompt("What operating system does your device run? {||}")]
+        [Prompt("What {&} is your device running? {||}")]
         public OperatingSystems OperatingSystem { get; set; }
 
         [Prompt("Have you tried turning it off and on? {||}")]

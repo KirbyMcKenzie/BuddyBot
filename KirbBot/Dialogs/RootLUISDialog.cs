@@ -31,7 +31,7 @@ namespace TechieBot.Dialogs
         [LuisIntent("Greeting")]
         public async Task Greeting(IDialogContext context, LuisResult result)
         {
-            await context.PostAsync("Hi I'm TechieBot!");
+            await context.PostAsync("Hi I'm KirbBot!");
 
             IMessageActivity reply = context.MakeMessage();
 
