@@ -56,9 +56,9 @@ namespace KirbBot.Dialogs
         public async Task Joke(IDialogContext context, LuisResult result)
         {
             //TODO - remove dependency
-            JokeService joke = new JokeService();
+            IJokeService joke = new JokeService();
 
-            await context.PostAsync(joke.GetRandomJoke());
+            await context.PostAsync(await joke.GetRandomJoke());
 
             context.Wait(MessageReceived);
         }
@@ -68,6 +68,7 @@ namespace KirbBot.Dialogs
         {
             await context.PostAsync("Not good! Let's get you connected again. \n\nPlease answer the following with 'Yes' or 'No' answers");
 
+            // TODO - remove dependency
             var form = new FormDialog<DiagnoseInternetConnectionForm>(new DiagnoseInternetConnectionForm(), DiagnoseInternetConnectionForm.BuildForm, FormOptions.PromptInStart);
             context.Call(form, ResumeAfterDiagnoseInternetForm);
         }

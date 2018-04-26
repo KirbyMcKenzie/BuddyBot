@@ -8,6 +8,6 @@ namespace KirbBot.Services
 {
     public interface IJokeService
     {
-        string GetRandomJoke();
+        Task<String> GetRandomJoke();
     }
 }
