@@ -20,6 +20,20 @@ namespace BuddyBot.Dialogs
         {
             var message = await result;
 
+            List<int> integersList = ExtractIntegersFromMessageActivity(message);
+
+            int min = integersList.Min();
+            int max = integersList.Max();
+
+            int randomNumber = new Random().Next(min, max);
+
+            await context.PostAsync($" Rolling a {max} sided dice...  🎲");
+
+            context.Done(randomNumber);
+        }
+
+        private static List<int> ExtractIntegersFromMessageActivity(IMessageActivity message)
+        {
             string[] values = Regex.Split(message.Text, @"\D+");
             List<int> integersList = new List<int>();
 
@@ -29,14 +43,7 @@ namespace BuddyBot.Dialogs
                 integersList.Add(number);
             }
 
-            var min = integersList.Min();
-            var max = integersList.Max();
-
-            var randomNumber = new Random().Next(min, max);
-
-            await context.PostAsync($" Rolling a {max} sided dice...  🎲");
-
-            context.Done(randomNumber);
+            return integersList;
         }
     }
 }

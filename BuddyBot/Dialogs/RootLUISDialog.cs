@@ -103,7 +103,7 @@ namespace BuddyBot.Dialogs
         {
             var randomNumber = await result;
 
-            await context.PostAsync($"The result is...{randomNumber}! 🎉🎉");
+            await context.PostAsync($"The result is... {randomNumber}! 🎉🎉");
 
             context.Wait(MessageReceived);
         }
