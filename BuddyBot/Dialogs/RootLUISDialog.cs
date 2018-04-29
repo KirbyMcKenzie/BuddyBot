@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Threading;
 using System.Threading.Tasks;
 using BuddyBot.Models;
 using BuddyBot.Services;
@@ -36,6 +37,14 @@ namespace BuddyBot.Dialogs
             context.Wait(MessageReceived);
         }
 
+        [LuisIntent("Bot.Abuse")]
+        public async Task BotAbuse(IDialogContext context, LuisResult result)
+        {
+            await context.PostAsync("I'm sorry, I'm still learning 😖");
+
+            context.Wait(MessageReceived);
+        }
+
         [LuisIntent("Greeting")]
         public async Task Greeting(IDialogContext context, LuisResult result)
         {
@@ -43,8 +52,8 @@ namespace BuddyBot.Dialogs
 
             IMessageActivity reply = context.MakeMessage();
 
-            reply.Text = "I'm here to help you with whatever you need. However, " +
-                         "I'm still learning so be paitent! " +
+            reply.Text = "I'm here to help you with whatever you need. " +
+                         "However, I'm still learning so be paitent! " +
                          "Heres some things I can help you with now. 😀";
 
             reply.SuggestedActions = new SuggestedActions
@@ -77,6 +86,24 @@ namespace BuddyBot.Dialogs
         public async Task QueryWeather(IDialogContext context, LuisResult result)
         {
             await context.PostAsync("It's pretty cold right now");
+
+            context.Wait(MessageReceived);
+        }
+
+        //TODO - See if it's possible to pull entities into method call
+        [LuisIntent("Random.Number")]
+        public async Task RandomNumber(IDialogContext context, LuisResult result)
+        {
+            await context.PostAsync("Please enter an lower and upper value");
+
+            context.Call(new RandomNumberDialog(), this.ResumeAfterRandomNumberDialog);
+        }
+
+        public async Task ResumeAfterRandomNumberDialog(IDialogContext context, IAwaitable<int> result)
+        {
+            var randomNumber = await result;
+
+            await context.PostAsync($"The result is...{randomNumber}! 🎉🎉");
 
             context.Wait(MessageReceived);
         }
