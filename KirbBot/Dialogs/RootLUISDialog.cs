@@ -28,6 +28,14 @@ namespace KirbBot.Dialogs
             context.Wait(MessageReceived);
         }
 
+        [LuisIntent("Appreciation")]
+        public async Task Appreciation(IDialogContext context, LuisResult result)
+        {
+            await context.PostAsync("No worries 😀");
+
+            context.Wait(MessageReceived);
+        }
+
         [LuisIntent("Greeting")]
         public async Task Greeting(IDialogContext context, LuisResult result)
         {
@@ -35,7 +43,9 @@ namespace KirbBot.Dialogs
 
             IMessageActivity reply = context.MakeMessage();
 
-            reply.Text = "I'm here to help you with whatever you need. However, I'm still learning so be paitent!😀 Heres some things I can help you with now";
+            reply.Text = "I'm here to help you with whatever you need. However, " +
+                         "I'm still learning so be paitent! " +
+                         "Heres some things I can help you with now. 😀";
 
             reply.SuggestedActions = new SuggestedActions
             {
@@ -59,6 +69,14 @@ namespace KirbBot.Dialogs
             IJokeService joke = new JokeService();
 
             await context.PostAsync(await joke.GetRandomJoke());
+
+            context.Wait(MessageReceived);
+        }
+
+        [LuisIntent("Query.Weather")]
+        public async Task QueryWeather(IDialogContext context, LuisResult result)
+        {
+            await context.PostAsync("It's pretty cold right now");
 
             context.Wait(MessageReceived);
         }
