@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Web;
 using Newtonsoft.Json;
 
-namespace KirbBot.Services
+namespace BuddyBot.Services
 {
     public class JokeService : IJokeService
     {

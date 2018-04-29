@@ -1,9 +1,9 @@
 ﻿using System;
-using KirbBot.Models.Enums;
+using BuddyBot.Models.Enums;
 using Microsoft.Bot.Builder.FormFlow;
 using Microsoft.Bot.Builder.FormFlow.Advanced;
 
-namespace KirbBot.Models
+namespace BuddyBot.Models
 {
     [Serializable]
     [Template(TemplateUsage.NotUnderstood,

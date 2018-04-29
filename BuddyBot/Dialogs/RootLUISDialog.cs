@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Threading.Tasks;
-using KirbBot.Models;
-using KirbBot.Services;
+using BuddyBot.Models;
+using BuddyBot.Services;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.FormFlow;
 using Microsoft.Bot.Builder.Luis;
 using Microsoft.Bot.Builder.Luis.Models;
 using Microsoft.Bot.Connector;
 
-namespace KirbBot.Dialogs
+namespace BuddyBot.Dialogs
 {
     [Serializable]
     public class RootLuisDialog : LuisDialog<object>
@@ -39,7 +39,7 @@ namespace KirbBot.Dialogs
         [LuisIntent("Greeting")]
         public async Task Greeting(IDialogContext context, LuisResult result)
         {
-            await context.PostAsync("Hi I'm KirbBot! 🤖");
+            await context.PostAsync("Hi I'm BuddyBot! 🤖");
 
             IMessageActivity reply = context.MakeMessage();
 

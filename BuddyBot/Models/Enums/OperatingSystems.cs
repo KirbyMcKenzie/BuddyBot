@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Bot.Builder.FormFlow;
 
-namespace KirbBot.Models.Enums
+namespace BuddyBot.Models.Enums
 {
     [Serializable]
     public enum OperatingSystems

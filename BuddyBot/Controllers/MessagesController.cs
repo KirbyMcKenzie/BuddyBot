@@ -2,11 +2,11 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using KirbBot.Dialogs;
+using BuddyBot.Dialogs;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 
-namespace KirbBot.Controllers
+namespace BuddyBot.Controllers
 {
     [BotAuthentication]
     public class MessagesController : ApiController
