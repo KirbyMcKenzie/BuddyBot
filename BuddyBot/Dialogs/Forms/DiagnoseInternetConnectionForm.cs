@@ -3,7 +3,7 @@ using BuddyBot.Models.Enums;
 using Microsoft.Bot.Builder.FormFlow;
 using Microsoft.Bot.Builder.FormFlow.Advanced;
 
-namespace BuddyBot.Models
+namespace BuddyBot.Dialogs.Forms
 {
     [Serializable]
     [Template(TemplateUsage.NotUnderstood,

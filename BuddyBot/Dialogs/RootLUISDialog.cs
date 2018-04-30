@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Threading;
 using System.Threading.Tasks;
-using BuddyBot.Models;
+using BuddyBot.Dialogs.Forms;
 using BuddyBot.Services;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.FormFlow;

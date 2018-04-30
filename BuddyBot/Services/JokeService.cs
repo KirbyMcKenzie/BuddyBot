@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Security.Cryptography.Xml;
 using System.Threading.Tasks;
-using System.Web;
+using BuddyBot.Models.Dtos;
 using Newtonsoft.Json;
 
 namespace BuddyBot.Services
@@ -38,13 +35,5 @@ namespace BuddyBot.Services
                 return "I'm having problems computing a joke. Please try again later";
             }
         }
-    }
-
-    [Serializable]
-    public class JokeDto
-    {
-        public string Id { get; set; }
-        public string Joke { get; set; }
-        public int Status { get; set; }
     }
 }
