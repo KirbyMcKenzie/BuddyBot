@@ -9,3 +9,4 @@ namespace BuddyBot.Models.Dtos
         public string Joke { get; set; }
         public int Status { get; set; }
     }
+}
