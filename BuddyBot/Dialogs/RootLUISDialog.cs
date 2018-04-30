@@ -23,6 +23,7 @@ namespace BuddyBot.Dialogs
         }
 
         [LuisIntent("")]
+        [LuisIntent("None")]
         public async Task None(IDialogContext context, LuisResult result)
         {
             await context.PostAsync("I'm sorry I don't know what you mean");
@@ -104,6 +105,27 @@ namespace BuddyBot.Dialogs
 
             context.Wait(MessageReceived);
         }
+
+        [LuisIntent("Showcase")]
+        public async Task Showcase(IDialogContext context, LuisResult result)
+        {
+            await context.PostAsync("You ready?");
+
+            context.Call(new ShowcaseDialog(), Resume_AfterShowcaseDialog);
+
+            context.Wait(MessageReceived);
+        }
+
+        public async Task Resume_AfterShowcaseDialog(IDialogContext context, IAwaitable<object> result)
+        {
+            var message = await result;
+
+            await context.PostAsync($"{message}");
+
+            context.Wait(MessageReceived);
+        }
+
+
 
         [LuisIntent("Diagnose.Internet.Connection")]
         public async Task DiagnoseInternetConnection(IDialogContext context, LuisResult result)

@@ -128,6 +128,7 @@
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Dialogs\RandomNumberDialog.cs" />
     <Compile Include="Dialogs\RootLuisDialog.cs" />
+    <Compile Include="Dialogs\ShowcaseDialog.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
