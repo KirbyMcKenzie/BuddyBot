@@ -48,11 +48,11 @@ namespace BuddyBot.Dialogs
             }
             else
             {
-                PromptDialog.Text(context, Resume, "Please enter upper and lower values");
+                PromptDialog.Text(context, Resume_AfterPickNumbersPrompt, "Please enter upper and lower values");
             }
         }
 
-        private async Task Resume(IDialogContext context, IAwaitable<string> result)
+        private async Task Resume_AfterPickNumbersPrompt(IDialogContext context, IAwaitable<string> result)
         {
             var message = await result;
 
