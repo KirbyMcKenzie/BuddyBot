@@ -43,7 +43,7 @@ namespace BuddyBot.Dialogs
                 _max = integersList.Max();
                 _randomNumber = new Random().Next((int)_min, (int)_max);
 
-                await context.PostAsync($" Rolling a {_max} sided dice...  🎲");
+                await context.PostAsync($"Generating a random number between {_min} & {_max}... 🎲");
                 context.Done(_randomNumber);
             }
             else
@@ -63,7 +63,7 @@ namespace BuddyBot.Dialogs
 
             _randomNumber = new Random().Next((int)_min, (int)_max);
 
-            await context.PostAsync($" Rolling a {_max} sided dice...  🎲");
+            await context.PostAsync($"Generating a random number between {_min} & {_max}... 🎲");
             context.Done(_randomNumber);
         }
     }
