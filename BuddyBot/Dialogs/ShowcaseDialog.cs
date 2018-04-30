@@ -8,7 +8,6 @@ using System.Web;
 
 namespace BuddyBot.Dialogs
 {
-
     [Serializable]
     public class ShowcaseDialog : IDialog<object>
     {
@@ -25,8 +24,5 @@ namespace BuddyBot.Dialogs
             await context.PostAsync("You said: " + message.Text);
             context.Wait(MessageReceivedAsync);
         }
-
-
-
     }
 }
