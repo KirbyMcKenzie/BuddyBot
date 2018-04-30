@@ -90,16 +90,13 @@ namespace BuddyBot.Dialogs
             context.Wait(MessageReceived);
         }
 
-        //TODO - See if it's possible to pull entities into method call
         [LuisIntent("Random.Number")]
         public async Task RandomNumber(IDialogContext context, LuisResult result)
         {
-            //await context.PostAsync("Please enter an lower and upper value");
-
-            context.Call(new RandomNumberDialog(result.Entities), this.ResumeAfterRandomNumberDialog);
+            context.Call(new RandomNumberDialog(result.Entities), Resume_AfterRandomNumberDialog);
         }
 
-        public async Task ResumeAfterRandomNumberDialog(IDialogContext context, IAwaitable<int> result)
+        public async Task Resume_AfterRandomNumberDialog(IDialogContext context, IAwaitable<int> result)
         {
             var randomNumber = await result;
 

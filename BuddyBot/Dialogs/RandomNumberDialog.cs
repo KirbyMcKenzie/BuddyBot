@@ -14,12 +14,11 @@ namespace BuddyBot.Dialogs
     public class RandomNumberDialog : IDialog<int>
     {
         private readonly IList<EntityRecommendation> _entities;
-        private int? _min, _max;
-        private int? _randomNumber;
+        private int _min, _max;
 
         public RandomNumberDialog(IList<EntityRecommendation> entities)
         {
-            this._entities = entities;
+            _entities = entities;
         }
 
         public async Task StartAsync(IDialogContext context)
@@ -41,14 +40,15 @@ namespace BuddyBot.Dialogs
 
                 _min = integersList.Min();
                 _max = integersList.Max();
-                _randomNumber = new Random().Next((int)_min, (int)_max);
+                var randomNumber = new Random().Next(_min, _max);
 
-                await context.PostAsync($"Generating a random number between {_min} & {_max}... 🎲");
-                context.Done(_randomNumber);
+                await context.PostAsync($"Picking a random number between {_min} & {_max}... 🎲");
+                context.Done(randomNumber);
             }
             else
             {
-                PromptDialog.Text(context, Resume_AfterPickNumbersPrompt, "Please enter upper and lower values");
+                //Luis could not pick up entities, prompt user to pick numbers
+                PromptDialog.Text(context, Resume_AfterPickNumbersPrompt, "Enter upper and lower number, and I'll pick a number between the two.");
             }
         }
 
@@ -61,10 +61,10 @@ namespace BuddyBot.Dialogs
             _min = integersList.Min();
             _max = integersList.Max();
 
-            _randomNumber = new Random().Next((int)_min, (int)_max);
+            var randomNumber = new Random().Next(_min, _max);
 
             await context.PostAsync($"Generating a random number between {_min} & {_max}... 🎲");
-            context.Done(_randomNumber);
+            context.Done(randomNumber);
         }
     }
 }
