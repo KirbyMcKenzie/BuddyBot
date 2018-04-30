@@ -94,9 +94,9 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Random.Number")]
         public async Task RandomNumber(IDialogContext context, LuisResult result)
         {
-            await context.PostAsync("Please enter an lower and upper value");
+            //await context.PostAsync("Please enter an lower and upper value");
 
-            context.Call(new RandomNumberDialog(), this.ResumeAfterRandomNumberDialog);
+            context.Call(new RandomNumberDialog(result.Entities), this.ResumeAfterRandomNumberDialog);
         }
 
         public async Task ResumeAfterRandomNumberDialog(IDialogContext context, IAwaitable<int> result)
