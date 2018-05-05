@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BuddyBot.Helpers;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Luis.Models;
+using BuddyBot.Helpers;
 
 namespace BuddyBot.Dialogs
 {
     [Serializable]
+    
     public class RandomNumberDialog : IDialog<int>
     {
         private readonly IList<EntityRecommendation> _entities;
@@ -26,11 +27,12 @@ namespace BuddyBot.Dialogs
             await Respond(context);
         }
 
-
+        //TODO - Check best practise to see if this should be renamed to MessagedRecievedAsync
         public async Task Respond(IDialogContext context)
         {
             var messageNumberList = new List<int>();
 
+            // Luis found entities, try parse them to use as random number inputs
             if (_entities.Count > 0)
             {
                 foreach (var entity in _entities.Where(e => e.Type == "Number"))

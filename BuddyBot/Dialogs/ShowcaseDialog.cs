@@ -1,10 +1,7 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Connector;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Threading.Tasks;
-using System.Web;
+using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Connector;
 
 namespace BuddyBot.Dialogs
 {
@@ -25,8 +22,5 @@ namespace BuddyBot.Dialogs
             await context.PostAsync("You said: " + message.Text);
             context.Wait(MessageReceivedAsync);
         }
-
-
-
     }
 }

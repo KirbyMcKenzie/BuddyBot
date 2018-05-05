@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Threading;
 using System.Threading.Tasks;
-using BuddyBot.Dialogs.Forms;
-using BuddyBot.Services;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.FormFlow;
 using Microsoft.Bot.Builder.Luis;
 using Microsoft.Bot.Builder.Luis.Models;
 using Microsoft.Bot.Connector;
+using BuddyBot.Dialogs.Forms;
+using BuddyBot.Services;
 
 namespace BuddyBot.Dialogs
 {
@@ -91,6 +90,7 @@ namespace BuddyBot.Dialogs
             context.Wait(MessageReceived);
         }
 
+        //TODO - Add async to method
         [LuisIntent("Random.Number")]
         public async Task RandomNumber(IDialogContext context, LuisResult result)
         {
@@ -111,6 +111,7 @@ namespace BuddyBot.Dialogs
         {
             await context.PostAsync("You ready?");
 
+            // TODO - Remove dependency
             context.Call(new ShowcaseDialog(), Resume_AfterShowcaseDialog);
 
             context.Wait(MessageReceived);
@@ -145,6 +146,7 @@ namespace BuddyBot.Dialogs
             context.Wait(MessageReceived);
         }
 
+        // TODO - See if possible to move this into form or seperate dialog
         private async Task ResumeAfterDiagnoseInternetForm(IDialogContext context, IAwaitable<DiagnoseInternetConnectionForm> result)
         {
             try
