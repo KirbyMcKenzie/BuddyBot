@@ -5,7 +5,6 @@ using Microsoft.Bot.Connector;
 
 namespace BuddyBot.Dialogs
 {
-
     [Serializable]
     public class ShowcaseDialog : IDialog<object>
     {

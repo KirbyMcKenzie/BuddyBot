@@ -113,8 +113,6 @@ namespace BuddyBot.Dialogs
 
             // TODO - Remove dependency
             context.Call(new ShowcaseDialog(), Resume_AfterShowcaseDialog);
-
-            context.Wait(MessageReceived);
         }
 
         public async Task Resume_AfterShowcaseDialog(IDialogContext context, IAwaitable<object> result)
@@ -125,8 +123,6 @@ namespace BuddyBot.Dialogs
 
             context.Wait(MessageReceived);
         }
-
-
 
         [LuisIntent("Diagnose.Internet.Connection")]
         public async Task DiagnoseInternetConnection(IDialogContext context, LuisResult result)
