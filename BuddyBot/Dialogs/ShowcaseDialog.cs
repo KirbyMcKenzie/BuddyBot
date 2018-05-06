@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Connector;
 
 namespace BuddyBot.Dialogs
 {
@@ -10,16 +9,30 @@ namespace BuddyBot.Dialogs
     {
         public async Task StartAsync(IDialogContext context)
         {
-            await context.PostAsync("Hello world!");
+            //Todo - make this more sinister
+            await context.PostAsync("In order for me to show you what I can really do, you must click 'yes' on the following button. ");
 
-            context.Wait(MessageReceivedAsync);
+            PromptDialog.Confirm(context, MessageReceivedAsync, "Would you like me to cause chaos?");
         }
 
-        public async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> argument)
+        public async Task MessageReceivedAsync(IDialogContext context, IAwaitable<bool> argument)
         {
-            var message = await argument;
-            await context.PostAsync("You said: " + message.Text);
-            context.Wait(MessageReceivedAsync);
+            if (await argument)
+                await CauseChaos(context);
+            context.Done("Fine..");
+
+        }
+
+        private async Task CauseChaos(IDialogContext context)
+        {
+
+            for (int i = 0; i < 5; i++)
+            {
+                System.Threading.Thread.Sleep(1000);
+                await context.PostAsync("1 second wait");
+            };
+
+            context.Done("That was fun. Let's do this again");
         }
     }
 }

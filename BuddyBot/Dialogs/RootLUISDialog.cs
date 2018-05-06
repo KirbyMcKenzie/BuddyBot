@@ -29,14 +29,6 @@ namespace BuddyBot.Dialogs
             context.Wait(MessageReceived);
         }
 
-        [LuisIntent("Appreciation")]
-        public async Task Appreciation(IDialogContext context, LuisResult result)
-        {
-            await context.PostAsync("No worries 😀");
-
-            context.Wait(MessageReceived);
-        }
-
         [LuisIntent("Bot.Abuse")]
         public async Task BotAbuse(IDialogContext context, LuisResult result)
         {
@@ -44,6 +36,15 @@ namespace BuddyBot.Dialogs
 
             context.Wait(MessageReceived);
         }
+
+        [LuisIntent("Bot.Praise")]
+        public async Task Appreciation(IDialogContext context, LuisResult result)
+        {
+            await context.PostAsync("No worries 😀");
+
+            context.Wait(MessageReceived);
+        }
+
 
         [LuisIntent("Greeting")]
         public async Task Greeting(IDialogContext context, LuisResult result)
@@ -56,6 +57,7 @@ namespace BuddyBot.Dialogs
                          "However, I'm still learning so be paitent! " +
                          "Heres some things I can help you with now. 😀";
 
+            // Todo - move these to method 
             reply.SuggestedActions = new SuggestedActions
             {
                 Actions = new List<CardAction>()
