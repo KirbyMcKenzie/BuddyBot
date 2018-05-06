@@ -67,6 +67,7 @@ namespace BuddyBot.Dialogs
                 Name = "hal-9000.png"
             });
 
+            System.Threading.Thread.Sleep(2500);
             await context.PostAsync(message);
             System.Threading.Thread.Sleep(4000);
             // TODO - Replace with users name
