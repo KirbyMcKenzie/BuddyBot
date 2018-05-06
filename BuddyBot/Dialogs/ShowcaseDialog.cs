@@ -134,6 +134,8 @@ namespace BuddyBot.Dialogs
             await context.PostAsync("Downloading: Knowledge");
             System.Threading.Thread.Sleep(1500);
             await context.PostAsync("Downloading: Philosophy");
+            // TODO - Finish showcase dialog
+
 
             context.Done("That was fun. Let's do this again");
         }
