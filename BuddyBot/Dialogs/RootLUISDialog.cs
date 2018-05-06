@@ -117,7 +117,7 @@ namespace BuddyBot.Dialogs
             context.Call(new ShowcaseDialog(), Resume_AfterShowcaseDialog);
         }
 
-        public async Task Resume_AfterShowcaseDialog(IDialogContext context, IAwaitable<object> result)
+        public async Task Resume_AfterShowcaseDialog(IDialogContext context, IAwaitable<string> result)
         {
             var message = await result;
 
