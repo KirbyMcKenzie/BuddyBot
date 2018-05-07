@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Threading;
 using System.Threading.Tasks;
-using BuddyBot.Dialogs.Forms;
-using BuddyBot.Services;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.FormFlow;
 using Microsoft.Bot.Builder.Luis;
 using Microsoft.Bot.Builder.Luis.Models;
 using Microsoft.Bot.Connector;
+using BuddyBot.Dialogs.Forms;
+using BuddyBot.Services;
 
 namespace BuddyBot.Dialogs
 {
@@ -30,25 +29,18 @@ namespace BuddyBot.Dialogs
             context.Wait(MessageReceived);
         }
 
-        [LuisIntent("Hello")]
-        public async Task Hello(IDialogContext context, LuisResult result)
-        {
-            await context.PostAsync("sup");
-            context.Wait(MessageReceived);
-        }
-
-        [LuisIntent("Appreciation")]
-        public async Task Appreciation(IDialogContext context, LuisResult result)
-        {
-            await context.PostAsync("No worries 😀");
-
-            context.Wait(MessageReceived);
-        }
-
         [LuisIntent("Bot.Abuse")]
         public async Task BotAbuse(IDialogContext context, LuisResult result)
         {
             await context.PostAsync("I'm sorry, I'm still learning 😖");
+
+            context.Wait(MessageReceived);
+        }
+
+        [LuisIntent("Bot.Praise")]
+        public async Task Appreciation(IDialogContext context, LuisResult result)
+        {
+            await context.PostAsync("No worries 😀");
 
             context.Wait(MessageReceived);
         }
@@ -64,6 +56,7 @@ namespace BuddyBot.Dialogs
                          "However, I'm still learning so be patient! " +
                          "Heres some things I can help you with now. 😀";
 
+            // Todo - move these to method
             reply.SuggestedActions = new SuggestedActions
             {
                 Actions = new List<CardAction>()
@@ -98,6 +91,7 @@ namespace BuddyBot.Dialogs
             context.Wait(MessageReceived);
         }
 
+        //TODO - Add async to method
         [LuisIntent("Random.Number")]
         public async Task RandomNumber(IDialogContext context, LuisResult result)
         {
@@ -118,14 +112,16 @@ namespace BuddyBot.Dialogs
         {
             await context.PostAsync("You ready?");
 
+            // TODO - Remove dependency
             context.Call(new ShowcaseDialog(), Resume_AfterShowcaseDialog);
         }
 
-        public async Task Resume_AfterShowcaseDialog(IDialogContext context, IAwaitable<object> result)
+        // TODO - Find out why this isnt being called
+        public async Task Resume_AfterShowcaseDialog(IDialogContext context, IAwaitable<string> result)
         {
             var message = await result;
 
-            await context.PostAsync($"{message}");
+            await context.PostAsync($" Got you! ::{message}");
 
             context.Wait(MessageReceived);
         }
@@ -148,6 +144,7 @@ namespace BuddyBot.Dialogs
             context.Wait(MessageReceived);
         }
 
+        // TODO - See if possible to move this into form or seperate dialog
         private async Task ResumeAfterDiagnoseInternetForm(IDialogContext context, IAwaitable<DiagnoseInternetConnectionForm> result)
         {
             try

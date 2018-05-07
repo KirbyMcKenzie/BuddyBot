@@ -15,7 +15,6 @@ namespace BuddyBot.Helpers
                 int.TryParse(value, out var number);
                 integersList.Add(number);
             }
-
             return integersList;
         }
     }
