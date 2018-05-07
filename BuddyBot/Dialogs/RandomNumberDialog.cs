@@ -14,18 +14,15 @@ namespace BuddyBot.Dialogs
         private readonly IList<EntityRecommendation> _entities;
         private int _min, _max;
 
-
         public RandomNumberDialog(IList<EntityRecommendation> entities)
         {
             _entities = entities;
         }
 
-
         public async Task StartAsync(IDialogContext context)
         {
             await Respond(context);
         }
-
 
         public async Task Respond(IDialogContext context)
         {
@@ -53,7 +50,6 @@ namespace BuddyBot.Dialogs
                 PromptDialog.Text(context, Resume_AfterPickNumbersPrompt, "Enter upper and lower number, and I'll pick a number between the two.");
             }
         }
-
 
         private async Task Resume_AfterPickNumbersPrompt(IDialogContext context, IAwaitable<string> result)
         {

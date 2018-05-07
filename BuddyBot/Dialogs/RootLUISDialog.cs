@@ -30,6 +30,13 @@ namespace BuddyBot.Dialogs
             context.Wait(MessageReceived);
         }
 
+        [LuisIntent("Hello")]
+        public async Task Hello(IDialogContext context, LuisResult result)
+        {
+            await context.PostAsync("sup");
+            context.Wait(MessageReceived);
+        }
+
         [LuisIntent("Appreciation")]
         public async Task Appreciation(IDialogContext context, LuisResult result)
         {
@@ -54,7 +61,7 @@ namespace BuddyBot.Dialogs
             IMessageActivity reply = context.MakeMessage();
 
             reply.Text = "I'm here to help you with whatever you need. " +
-                         "However, I'm still learning so be paitent! " +
+                         "However, I'm still learning so be patient! " +
                          "Heres some things I can help you with now. 😀";
 
             reply.SuggestedActions = new SuggestedActions
