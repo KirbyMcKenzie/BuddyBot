@@ -107,7 +107,16 @@ namespace BuddyBot.Dialogs
             context.Wait(MessageReceived);
         }
 
-        [LuisIntent("Showcase")]
+        [LuisIntent("Miscellaneous.OriginStory")]
+        public async Task OriginStory(IDialogContext context, LuisResult result)
+        {
+            await context.PostAsync("Origin Story called");
+
+            // TODO - Remove dependency
+            context.Call(new ShowcaseDialog(), Resume_AfterShowcaseDialog);
+        }
+
+        [LuisIntent("Miscellaneous.Showcase")]
         public async Task Showcase(IDialogContext context, LuisResult result)
         {
             await context.PostAsync("You ready?");
