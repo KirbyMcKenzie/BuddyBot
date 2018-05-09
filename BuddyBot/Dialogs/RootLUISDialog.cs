@@ -107,11 +107,18 @@ namespace BuddyBot.Dialogs
             context.Wait(MessageReceived);
         }
 
-        
+        [LuisIntent("Miscellaneous.Creator")]
+        public async Task Creator(IDialogContext context, LuisResult result)
+        {
+            // TODO - Make this better 
+            await context.PostAsync("My creator is Kirby McKenzie...  from Donaldson's dairy");
+        }
+
+
         [LuisIntent("Miscellaneous.OriginStory")]
         public async Task OriginStory(IDialogContext context, LuisResult result)
         {
-            // TODO - Make this witty 
+            // TODO - Make this better 
             await context.PostAsync("I was born in a cardboard box in mainland China.");
         }
 
