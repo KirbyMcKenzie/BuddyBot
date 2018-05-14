@@ -107,6 +107,26 @@ namespace BuddyBot.Dialogs
             context.Wait(MessageReceived);
         }
 
+        [LuisIntent("Miscellaneous.ConfirmRobot")]
+        public async Task ConfirmRobot(IDialogContext context, LuisResult result)
+        {
+            await context.PostAsync("I am a Robot.");
+            await context.PostAsync("Here's a selfie I took recently.");
+            IMessageActivity message = context.MakeMessage();
+
+            message.Attachments.Add(new Attachment()
+            {
+                ContentUrl = "http://assets2.bigthink.com/system/idea_thumbnails/60606/size_1024/robot_child.jpg?1457480666",
+                ContentType = "image/jpeg",
+                Name = "Robots.jpg"
+            });
+
+            await context.PostAsync(message);
+
+            await context.PostAsync("See the computer in the background?");
+            await context.PostAsync(".. Yeah I use that to reply to you");
+        }
+
         [LuisIntent("Miscellaneous.Creator")]
         public async Task Creator(IDialogContext context, LuisResult result)
         {
