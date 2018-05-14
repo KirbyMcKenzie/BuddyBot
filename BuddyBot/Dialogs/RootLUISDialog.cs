@@ -118,8 +118,7 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Miscellaneous.OriginStory")]
         public async Task OriginStory(IDialogContext context, LuisResult result)
         {
-            // TODO - Make this better 
-            await context.PostAsync("I was born in a cardboard box in mainland China.");
+            await context.PostAsync("I was born in a Bitcoin mine deep within mainland China.");
         }
 
         [LuisIntent("Miscellaneous.Showcase")]
