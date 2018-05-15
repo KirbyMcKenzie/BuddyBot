@@ -147,25 +147,6 @@ namespace BuddyBot.Dialogs
             await context.PostAsync("I was born in a Bitcoin mine deep within mainland China.");
         }
 
-        [LuisIntent("Miscellaneous.Showcase")]
-        public async Task Showcase(IDialogContext context, LuisResult result)
-        {
-            await context.PostAsync("You ready?");
-
-            // TODO - Remove dependency
-            context.Call(new ShowcaseDialog(), Resume_AfterShowcaseDialog);
-        }
-
-        // TODO - Find out why this isnt being called
-        public async Task Resume_AfterShowcaseDialog(IDialogContext context, IAwaitable<string> result)
-        {
-            var message = await result;
-
-            await context.PostAsync($" Got you! ::{message}");
-
-            context.Wait(MessageReceived);
-        }
-
         [LuisIntent("Diagnose.Internet.Connection")]
         public async Task DiagnoseInternetConnection(IDialogContext context, LuisResult result)
         {
