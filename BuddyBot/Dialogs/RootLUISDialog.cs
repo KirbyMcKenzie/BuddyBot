@@ -57,7 +57,7 @@ namespace BuddyBot.Dialogs
                          "However, I'm still learning so be patient! " +
                          "Heres some things I can help you with now. 😀";
 
-            // Todo - move these to method
+            // TODO - move these to dialog
             reply.SuggestedActions = new SuggestedActions
             {
                 Actions = new List<CardAction>()
@@ -87,6 +87,7 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Query.Weather")]
         public async Task QueryWeather(IDialogContext context, LuisResult result)
         {
+            // TODO - Add weather api
             await context.PostAsync("It's pretty cold right now");
 
             context.Wait(MessageReceived);
@@ -106,6 +107,12 @@ namespace BuddyBot.Dialogs
             await context.PostAsync($"The result is... {randomNumber}! 🎉🎉");
 
             context.Wait(MessageReceived);
+        }
+
+        [LuisIntent("Miscellaneous.ChatbotName")]
+        public async Task ChatbotName(IDialogContext context, LuisResult result)
+        {
+            await context.PostAsync("My name is BuddyBot.");
         }
 
         [LuisIntent("Miscellaneous.ConfirmRobot")]
