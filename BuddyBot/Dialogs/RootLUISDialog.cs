@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.FormFlow;
@@ -112,9 +113,9 @@ namespace BuddyBot.Dialogs
         {
             //TODO - Move to dialog
             await context.PostAsync("I am a Robot.");
-            System.Threading.Thread.Sleep(2500);
+            Thread.Sleep(2500);
             await context.PostAsync("Here's a selfie I took recently.");
-            System.Threading.Thread.Sleep(2500);
+            Thread.Sleep(2500);
             IMessageActivity message = context.MakeMessage();
 
             message.Attachments.Add(new Attachment()
@@ -126,9 +127,9 @@ namespace BuddyBot.Dialogs
 
             await context.PostAsync(message);
 
-            System.Threading.Thread.Sleep(3000);
+            Thread.Sleep(3000);
             await context.PostAsync("See the computer in the background?");
-            System.Threading.Thread.Sleep(2000);
+            Thread.Sleep(2000);
             await context.PostAsync("I use that to reply to you");
         }
 
