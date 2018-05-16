@@ -109,8 +109,8 @@ namespace BuddyBot.Dialogs
             context.Wait(MessageReceived);
         }
 
-        [LuisIntent("Miscellaneous.ChatbotName")]
-        public async Task ChatbotName(IDialogContext context, LuisResult result)
+        [LuisIntent("Miscellaneous.QueryName")]
+        public async Task QueryName(IDialogContext context, LuisResult result)
         {
             await context.PostAsync("My name is BuddyBot.");
         }
