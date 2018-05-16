@@ -8,7 +8,6 @@ using Microsoft.Bot.Builder.FormFlow;
 using Microsoft.Bot.Builder.Luis;
 using Microsoft.Bot.Builder.Luis.Models;
 using Microsoft.Bot.Connector;
-using BuddyBot.Dialogs.Forms;
 using BuddyBot.Services;
 
 namespace BuddyBot.Dialogs
@@ -152,58 +151,6 @@ namespace BuddyBot.Dialogs
         public async Task OriginStory(IDialogContext context, LuisResult result)
         {
             await context.PostAsync("I was born in a Bitcoin mine deep within mainland China.");
-        }
-
-        [LuisIntent("Diagnose.Internet.Connection")]
-        public async Task DiagnoseInternetConnection(IDialogContext context, LuisResult result)
-        {
-            await context.PostAsync("Not good! Let's get you connected again. \n\nPlease answer the following with 'Yes' or 'No' answers");
-
-            // TODO - remove dependency
-            var form = new FormDialog<DiagnoseInternetConnectionForm>(new DiagnoseInternetConnectionForm(), DiagnoseInternetConnectionForm.BuildForm, FormOptions.PromptInStart);
-            context.Call(form, ResumeAfterDiagnoseInternetForm);
-        }
-
-        [LuisIntent("Diagnose.Device.RestartLoop")]
-        public async Task DiagnoseDeviceRestartLoop(IDialogContext context, LuisResult result)
-        {
-            await context.PostAsync("Diagnose.Device.RestartLoop called");
-
-            context.Wait(MessageReceived);
-        }
-
-        // TODO - See if possible to move this into form or seperate dialog
-        private async Task ResumeAfterDiagnoseInternetForm(IDialogContext context, IAwaitable<DiagnoseInternetConnectionForm> result)
-        {
-            try
-            {
-                var searchQuery = await result;
-                await context.PostAsync($"Answers \n\n " +
-                    $"Current Device: {searchQuery.CurrentDevice} \n\n" +
-                    $"Operating System: {searchQuery.OperatingSystem} \n\n" +
-                    $"Restarted Device: {searchQuery.RestartedDevice} \n\n" +
-                    $"Restarted Router: {searchQuery.RestartedRouter} \n\n" +
-                    $"Problem Resolved: {searchQuery.ProblemResolved}");
-            }
-            catch (FormCanceledException ex)
-            {
-                string reply;
-
-                if (ex.InnerException == null)
-                {
-                    reply = "You have canceled the operation.";
-                }
-                else
-                {
-                    reply = $"Oops! Something went wrong :( Technical Details: {ex.InnerException.Message}";
-                }
-
-                await context.PostAsync(reply);
-            }
-            finally
-            {
-                context.Done<object>(null);
-            }
         }
     }
 }
