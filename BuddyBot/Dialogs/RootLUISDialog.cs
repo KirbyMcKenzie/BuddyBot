@@ -92,11 +92,11 @@ namespace BuddyBot.Dialogs
             context.Wait(MessageReceived);
         }
 
-        //TODO - Add async to method
         [LuisIntent("Random.Number")]
         public async Task RandomNumber(IDialogContext context, LuisResult result)
         {
             context.Call(new RandomNumberDialog(result.Entities), Resume_AfterRandomNumberDialog);
+            await Task.Yield();
         }
 
         public async Task Resume_AfterRandomNumberDialog(IDialogContext context, IAwaitable<int> result)
