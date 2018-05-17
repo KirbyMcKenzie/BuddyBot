@@ -108,6 +108,13 @@ namespace BuddyBot.Dialogs
             context.Wait(MessageReceived);
         }
 
+        [LuisIntent("Miscellaneous.QueryHowDoesItWork")]
+        public async Task QueryHowDoesItWork(IDialogContext context, LuisResult result)
+        {
+            // TODO - Improve answer
+            await context.PostAsync("I'm built using the Microsoft bot framework.");
+        }
+
         [LuisIntent("Miscellaneous.QueryName")]
         public async Task QueryName(IDialogContext context, LuisResult result)
         {
