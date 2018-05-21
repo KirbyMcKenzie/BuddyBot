@@ -129,12 +129,10 @@
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Dialogs\RandomNumberDialog.cs" />
     <Compile Include="Dialogs\RootLuisDialog.cs" />
-    <Compile Include="Dialogs\ShowcaseDialog.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\MessageHelper.cs" />
-    <Compile Include="Dialogs\Forms\DiagnoseInternetConnectionForm.cs" />
     <Compile Include="Models\Enums\OperatingSystems.cs" />
     <Compile Include="Models\Dtos\JokeDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -153,7 +151,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Dialogs\Forms\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

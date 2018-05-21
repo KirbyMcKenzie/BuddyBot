@@ -4,7 +4,6 @@ using System.Configuration;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Builder.FormFlow;
 using Microsoft.Bot.Builder.Luis;
 using Microsoft.Bot.Builder.Luis.Models;
 using Microsoft.Bot.Connector;
@@ -158,6 +157,12 @@ namespace BuddyBot.Dialogs
         public async Task OriginStory(IDialogContext context, LuisResult result)
         {
             await context.PostAsync("I was born in a Bitcoin mine deep within mainland China.");
+        }
+
+        [LuisIntent("Miscellaneous.OpinionOfNotablePerson")]
+        public async Task OpinionOfNotablePerson(IDialogContext context, LuisResult result)
+        {
+            await context.PostAsync($"I am a bot. My opinion doesn't matter...");
         }
     }
 }
