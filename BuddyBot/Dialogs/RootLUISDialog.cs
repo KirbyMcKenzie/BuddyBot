@@ -141,7 +141,10 @@ namespace BuddyBot.Dialogs
         public async Task Creator(IDialogContext context, LuisResult result)
         {
             // TODO - Make this better 
-            await context.PostAsync("My creator is Kirby McKenzie...  from Donaldson's dairy");
+            await context.PostAsync(
+                "My creator is Kirby McKenzie." +
+                " You can view his github here:" +
+                " https://github.com/KirbyMcKenzie");
         }
 
 

@@ -12,8 +12,6 @@ namespace BuddyBot.Dialogs
     [Serializable]
     public class ConfirmRobotDialog: IDialog<string>
     {
-        
-
         public async Task StartAsync(IDialogContext context)
         {
             
