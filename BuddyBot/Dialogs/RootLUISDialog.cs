@@ -162,6 +162,7 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Miscellaneous.OpinionOfNotablePerson")]
         public async Task OpinionOfNotablePerson(IDialogContext context, LuisResult result)
         {
+            // Todo: Pull entities from Luis
             await context.PostAsync($"I am a bot. My opinion doesn't matter...");
         }
     }
