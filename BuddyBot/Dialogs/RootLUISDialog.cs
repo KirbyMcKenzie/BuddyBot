@@ -123,26 +123,18 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Miscellaneous.ConfirmRobot")]
         public async Task ConfirmRobot(IDialogContext context, LuisResult result)
         {
-            //TODO - Move to dialog
-            await context.PostAsync("I am a Robot.");
-            Thread.Sleep(2500);
-            await context.PostAsync("Here's a selfie I took recently.");
-            Thread.Sleep(2500);
-            IMessageActivity message = context.MakeMessage();
+            context.Call(new ConfirmRobotDialog(), Resume_ConfirmRobotDialog);
 
-            message.Attachments.Add(new Attachment()
-            {
-                ContentUrl = "http://assets2.bigthink.com/system/idea_thumbnails/60606/size_1024/robot_child.jpg?1457480666",
-                ContentType = "image/jpeg",
-                Name = "Robots.jpg"
-            });
+            await Task.Yield();
+        }
 
-            await context.PostAsync(message);
+        private async Task Resume_ConfirmRobotDialog(IDialogContext context, IAwaitable<string> result)
+        {
 
-            Thread.Sleep(3000);
-            await context.PostAsync("See the computer in the background?");
-            Thread.Sleep(2000);
-            await context.PostAsync("I use that to reply to you");
+            var message = await result;
+            await context.PostAsync($"{message}");
+
+            context.Wait(MessageReceived);
         }
 
         [LuisIntent("Miscellaneous.Creator")]
