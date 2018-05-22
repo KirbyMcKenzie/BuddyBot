@@ -16,7 +16,7 @@ namespace BuddyBot.Dialogs
 
         public async Task StartAsync(IDialogContext context)
         {
-            //TODO - Move to dialog
+            
             await context.PostAsync("I am a Robot.");
             Thread.Sleep(2500);
             await context.PostAsync("Here's a selfie I took recently.");
