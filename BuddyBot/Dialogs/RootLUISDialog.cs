@@ -140,11 +140,9 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Miscellaneous.Creator")]
         public async Task Creator(IDialogContext context, LuisResult result)
         {
-            // TODO - Make this better 
-            await context.PostAsync(
-                "My creator is Kirby McKenzie." +
-                " You can view his github here:" +
-                " https://github.com/KirbyMcKenzie");
+            await context.PostAsync("My creator is Kirby McKenzie.");
+            await context.PostAsync("You can view his github here: https://github.com/KirbyMcKenzie");
+                
         }
 
 
