@@ -12,6 +12,7 @@ namespace BuddyBot.Services
 
             int result = random.Next(0, 2);
 
+            //TODO - improve answer
             switch (result)
             {
                 case 1:

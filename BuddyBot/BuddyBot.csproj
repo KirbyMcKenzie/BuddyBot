@@ -128,6 +128,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Dialogs\ConfirmRobotDialog.cs" />
+    <Compile Include="Services\HeadTailsService.cs" />
+    <Compile Include="Contracts\IHeadTailsService.cs" />
     <Compile Include="Dialogs\RandomNumberDialog.cs" />
     <Compile Include="Dialogs\RootLuisDialog.cs" />
     <Compile Include="Global.asax.cs">
@@ -137,7 +139,7 @@
     <Compile Include="Models\Enums\OperatingSystems.cs" />
     <Compile Include="Models\Dtos\JokeDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\IJokeService.cs" />
+    <Compile Include="Contracts\IJokeService.cs" />
     <Compile Include="Services\JokeService.cs" />
   </ItemGroup>
   <ItemGroup>
