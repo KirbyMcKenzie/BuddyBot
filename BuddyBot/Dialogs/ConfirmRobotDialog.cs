@@ -33,9 +33,8 @@ namespace BuddyBot.Dialogs
             Thread.Sleep(3000);
             await context.PostAsync("See the computer in the background?");
             Thread.Sleep(2000);
-            await context.PostAsync("I use that to reply to you");
 
-            context.Done("Goodnight");
+            context.Done("I use that to reply to you");
         }
     }
 }
