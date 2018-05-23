@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using BuddyBot.Contracts;
 using BuddyBot.Models.Dtos;
 using Newtonsoft.Json;
 

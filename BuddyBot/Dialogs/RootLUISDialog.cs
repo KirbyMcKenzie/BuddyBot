@@ -8,6 +8,7 @@ using Microsoft.Bot.Builder.Luis;
 using Microsoft.Bot.Builder.Luis.Models;
 using Microsoft.Bot.Connector;
 using BuddyBot.Services;
+using BuddyBot.Contracts;
 
 namespace BuddyBot.Dialogs
 {
@@ -71,22 +72,32 @@ namespace BuddyBot.Dialogs
             context.Wait(MessageReceived);
         }
 
-        [LuisIntent("Joke")]
+        [LuisIntent("Query.Weather")]
+        public async Task QueryWeather(IDialogContext context, LuisResult result)
+        {
+            // TODO - Add weather api
+            await context.PostAsync("It's pretty cold right now");
+
+            context.Wait(MessageReceived);
+        }
+
+        [LuisIntent("Random.HeadsTails")]
+        public async Task HeadsTails(IDialogContext context, LuisResult result)
+        {
+            //TODO - remove dependency 
+            IHeadTailsService headTails = new HeadTailsService();
+            await context.PostAsync(await headTails.GetRandomHeadsTails());
+
+            context.Wait(MessageReceived);
+        }
+
+        [LuisIntent("Random.Joke")]
         public async Task Joke(IDialogContext context, LuisResult result)
         {
             //TODO - remove dependency
             IJokeService joke = new JokeService();
 
             await context.PostAsync(await joke.GetRandomJoke());
-
-            context.Wait(MessageReceived);
-        }
-
-        [LuisIntent("Query.Weather")]
-        public async Task QueryWeather(IDialogContext context, LuisResult result)
-        {
-            // TODO - Add weather api
-            await context.PostAsync("It's pretty cold right now");
 
             context.Wait(MessageReceived);
         }
