@@ -63,7 +63,7 @@ namespace BuddyBot.Dialogs
                 {
                     new CardAction(){ Title = "Generate Random Number", Type=ActionTypes.ImBack, Value="Generate Random Number" },
                     new CardAction(){ Title = "Tell me a joke", Type=ActionTypes.ImBack, Value="Tell me a joke" },
-                    new CardAction(){ Title = "What's the weather doing?", Type=ActionTypes.ImBack, Value="What's the weather doing?" },
+                    new CardAction(){ Title = "Flip a coin", Type=ActionTypes.ImBack, Value="Flip a coing?" },
                 }
             };
 
