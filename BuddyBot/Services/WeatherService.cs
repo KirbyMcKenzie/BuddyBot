@@ -13,7 +13,7 @@ namespace BuddyBot.Services
         public async Task<string> GetWeatherByLocationId(string locationId)
         {
 
-            return "Pretty cold at the mo";
+            return "Pretty cold at the mo jo";
         }
     }
 }

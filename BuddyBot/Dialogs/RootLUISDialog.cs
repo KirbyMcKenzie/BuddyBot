@@ -75,8 +75,10 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Query.Weather")]
         public async Task QueryWeather(IDialogContext context, LuisResult result)
         {
+            IWeatherService weatherService = new WeatherService();
+            
             // TODO - Add weather api
-            await context.PostAsync("It's pretty cold right now");
+            await context.PostAsync(await weatherService.GetWeatherByLocationId("LocationStringHere"));
 
             context.Wait(MessageReceived);
         }
