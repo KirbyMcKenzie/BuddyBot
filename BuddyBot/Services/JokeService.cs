@@ -31,7 +31,7 @@ namespace BuddyBot.Services
                 }
                 return "I'm having problems computing a joke. Please try again later";
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
                 return "I'm having problems computing a joke. Please try again later";
             }
