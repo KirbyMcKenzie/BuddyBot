@@ -1,10 +1,12 @@
 ﻿using BuddyBot.Contracts;
 using BuddyBot.Models.Dtos;
 using Microsoft.Bot.Builder.Luis.Models;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -28,25 +30,30 @@ namespace BuddyBot.Services
         {
 
             string entityResult = null;
+            string country = null;
 
             if (entities.Count > 0 && entities.Count <= 1)
             {
                 foreach (var entity in entities.Where(e => e.Type == "Weather.Location"))
                 {
                     entityResult = entity.Entity;
-                    // TODO - move to seperate generic method, returns location and maps to country
-                    // TODO - prompt user if multiple cities appear
+                    
+                    using (StreamReader r = new StreamReader("./city.list.json"))
+                    {
+                        string json = r.ReadToEnd();
+                         country = ((JObject)JsonConvert.DeserializeObject(json))[entityResult].Value<string>();
+                    }
                 }
             }
             else
             {
-                return "I can only check the weather for 1 location at a time.";
+                return "Please specify one location.";
             }
 
+        //string url = baseUrl + entityResult + ",nz&appid=" + apiKey;
+            string url = baseUrl + entityResult + ","+ country + "&appid=" + apiKey;
 
-        string url = baseUrl + entityResult + ",nz&appid=" + apiKey;
-
-                try
+            try
             {
                 HttpClient client = new HttpClient { BaseAddress = new Uri(url) };
                 client.DefaultRequestHeaders.Accept.Add(
