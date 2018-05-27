@@ -14,11 +14,9 @@ namespace BuddyBot.Services
 {
     public class WeatherService : IWeatherService
     {
-        private readonly IList<EntityRecommendation> _entities;
 
-        public WeatherService(IList<EntityRecommendation> entities)
+        public WeatherService()
         {
-            _entities = entities;
         }
 
         // TODO - Replace key
@@ -26,16 +24,18 @@ namespace BuddyBot.Services
         private string apiKey = ConfigurationManager.AppSettings["openWeatherMap:apiKey"];
 
         // TODO - Tidy this method up
-        public async Task<string> GetWeatherByLocationId(string locationId)
+        public async Task<string> GetWeatherByLocationId(IList<EntityRecommendation> entities)
         {
 
             string entityResult = null;
 
-            if (_entities.Count > 0 && _entities.Count <= 1)
+            if (entities.Count > 0 && entities.Count <= 1)
             {
-                foreach (var entity in _entities.Where(e => e.Type == "Weather.Location"))
+                foreach (var entity in entities.Where(e => e.Type == "Weather.Location"))
                 {
                     entityResult = entity.Entity;
+                    // TODO - move to seperate generic method, returns location and maps to country
+                    // TODO - prompt user if multiple cities appear
                 }
             }
             else

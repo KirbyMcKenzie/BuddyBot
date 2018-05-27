@@ -73,12 +73,15 @@ namespace BuddyBot.Dialogs
             context.Wait(MessageReceived);
         }
 
+        // TODO - refactor method
         [LuisIntent("Weather.GetForecast")]
         public async Task GetWeatherForecast(IDialogContext context, LuisResult result)
         {
-            IWeatherService weatherService = new WeatherService(result.Entities);
+            IWeatherService weatherService = new WeatherService();
 
-            var weatherResult = await weatherService.GetWeatherByLocationId("LocationStringHere");
+
+            
+            var weatherResult = await weatherService.GetWeatherByLocationId(result.Entities);
             await context.PostAsync(weatherResult);
 
             context.Wait(MessageReceived);

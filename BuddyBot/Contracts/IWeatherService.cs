@@ -1,11 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.Bot.Builder.Luis.Models;
 
 namespace BuddyBot.Contracts
 {
     public interface IWeatherService 
     {
-        Task<string> GetWeatherByLocationId(string locationId);
+        Task<string> GetWeatherByLocationId(IList<EntityRecommendation> entities);
        
     }
 }
