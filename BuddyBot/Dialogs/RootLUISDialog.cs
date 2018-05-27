@@ -64,7 +64,7 @@ namespace BuddyBot.Dialogs
                 {
                     new CardAction(){ Title = "Generate Random Number", Type=ActionTypes.ImBack, Value="Generate Random Number" },
                     new CardAction(){ Title = "Tell me a joke", Type=ActionTypes.ImBack, Value="Tell me a joke" },
-                    new CardAction(){ Title = "Flip a coin", Type=ActionTypes.ImBack, Value="Flip a coing?" },
+                    new CardAction(){ Title = "Flip a coin", Type=ActionTypes.ImBack, Value="Flip a coin" },
                 }
             };
 
@@ -80,7 +80,7 @@ namespace BuddyBot.Dialogs
 
             var weatherResult = await weatherService.GetWeatherByLocationId("LocationStringHere");
             // TODO - Add weather api
-            await context.PostAsync($"Weather in Dunedin: {weatherResult}");
+            await context.PostAsync($"{weatherResult}");
 
             context.Wait(MessageReceived);
         }

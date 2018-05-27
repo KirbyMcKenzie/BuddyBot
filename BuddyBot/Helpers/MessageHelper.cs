@@ -19,4 +19,5 @@ namespace BuddyBot.Helpers
             return integersList;
         }
 
+    }
 }

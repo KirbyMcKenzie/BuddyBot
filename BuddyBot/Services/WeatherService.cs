@@ -5,9 +5,11 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -23,20 +25,23 @@ namespace BuddyBot.Services
         }
 
         // TODO - Replace key
-        private const string Url = "http://api.openweathermap.org/data/2.5/weather?q=Dunedin,nz&appid=f3a0bd0c557dfaddaa8c548d23c539f3";
 
-        
+        private const string baseUrl = "http://api.openweathermap.org/data/2.5/weather?q=";
+        private string apiKey = ConfigurationManager.AppSettings["openWeatherMap:apiKey"];
+
+
+
         // TODO - Tidy this method up
         public async Task<string> GetWeatherByLocationId(string locationId)
         {
 
-            var entityWeatherLocationsList = new List<string>();
+            string entityResult = null;
 
             if (_entities.Count > 0 && _entities.Count <= 1)
             {
                 foreach (var entity in _entities.Where(e => e.Type == "Weather.Location"))
                 {
-                    entityWeatherLocationsList.Add(entity.ToString());
+                    entityResult = entity.Entity;
                 }
             }
             else
@@ -45,15 +50,18 @@ namespace BuddyBot.Services
             }
 
 
+        string url = baseUrl + entityResult + ",nz&appid=" + apiKey;
+
+
 
 
                 try
             {
-                HttpClient client = new HttpClient { BaseAddress = new Uri(Url) };
+                HttpClient client = new HttpClient { BaseAddress = new Uri(url) };
                 client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage response = await client.GetAsync(Url);
+                HttpResponseMessage response = await client.GetAsync(url);
                 if (response.IsSuccessStatusCode)
                 {
                     String weatherString = await response.Content.ReadAsStringAsync();
@@ -73,7 +81,7 @@ namespace BuddyBot.Services
 
                     var first = weatherDtos.FirstOrDefault();
 
-                    return first.description;
+                    return $"Weather in {entityResult}: {first.description}";
                     
 
 
