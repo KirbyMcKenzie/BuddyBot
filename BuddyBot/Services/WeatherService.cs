@@ -1,7 +1,6 @@
 ﻿using BuddyBot.Contracts;
 using BuddyBot.Models.Dtos;
 using Microsoft.Bot.Builder.Luis.Models;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -9,9 +8,7 @@ using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace BuddyBot.Services
 {
@@ -25,11 +22,8 @@ namespace BuddyBot.Services
         }
 
         // TODO - Replace key
-
         private const string baseUrl = "http://api.openweathermap.org/data/2.5/weather?q=";
         private string apiKey = ConfigurationManager.AppSettings["openWeatherMap:apiKey"];
-
-
 
         // TODO - Tidy this method up
         public async Task<string> GetWeatherByLocationId(string locationId)
@@ -51,9 +45,6 @@ namespace BuddyBot.Services
 
 
         string url = baseUrl + entityResult + ",nz&appid=" + apiKey;
-
-
-
 
                 try
             {
@@ -82,9 +73,6 @@ namespace BuddyBot.Services
                     var first = weatherDtos.FirstOrDefault();
 
                     return $"Weather in {entityResult}: {first.description}";
-                    
-
-
                 }
                 return "I'm having problems accessing weather reports. Please try again later";
             }
