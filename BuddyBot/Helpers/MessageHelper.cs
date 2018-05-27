@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Bot.Builder.Luis.Models;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace BuddyBot.Helpers
@@ -17,5 +18,5 @@ namespace BuddyBot.Helpers
             }
             return integersList;
         }
-    }
+
 }

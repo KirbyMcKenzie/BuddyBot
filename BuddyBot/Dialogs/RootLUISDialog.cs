@@ -9,6 +9,7 @@ using Microsoft.Bot.Builder.Luis.Models;
 using Microsoft.Bot.Connector;
 using BuddyBot.Services;
 using BuddyBot.Contracts;
+using BuddyBot.Helpers;
 
 namespace BuddyBot.Dialogs
 {
@@ -72,10 +73,10 @@ namespace BuddyBot.Dialogs
             context.Wait(MessageReceived);
         }
 
-        [LuisIntent("Query.Weather")]
-        public async Task QueryWeather(IDialogContext context, LuisResult result)
+        [LuisIntent("Weather.GetForecast")]
+        public async Task GetWeatherForecast(IDialogContext context, LuisResult result)
         {
-            IWeatherService weatherService = new WeatherService();
+            IWeatherService weatherService = new WeatherService(result.Entities);
 
             var weatherResult = await weatherService.GetWeatherByLocationId("LocationStringHere");
             // TODO - Add weather api
