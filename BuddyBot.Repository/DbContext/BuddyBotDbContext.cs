@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BuddyBot.Repository.DbContext
 {
-    class BuddyBotDbContext : Microsoft.EntityFrameworkCore.DbContext
+    public class BuddyBotDbContext : Microsoft.EntityFrameworkCore.DbContext
     {
         public BuddyBotDbContext(DbContextOptions<BuddyBotDbContext> options) : base(options)
         {
@@ -14,10 +14,10 @@ namespace BuddyBot.Repository.DbContext
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<City>().ToTable("Athlete").HasKey(_ => _.Id);
+            modelBuilder.Entity<City>().ToTable("City").HasKey(_ => _.Id);
 
         }
 
-        public DbSet<City> Athletes { get; set; }
+        public DbSet<City> Cities { get; set; }
     }
 }
