@@ -30,19 +30,28 @@ namespace BuddyBot.Services
         {
 
             string entityResult = null;
-            string country = null;
+            IList<string> country = new List<string>();
 
             if (entities.Count > 0 && entities.Count <= 1)
             {
                 foreach (var entity in entities.Where(e => e.Type == "Weather.Location"))
                 {
                     entityResult = entity.Entity;
-                    
-                    using (StreamReader r = new StreamReader("./city.list.json"))
+
+                    try
                     {
-                        string json = r.ReadToEnd();
-                         country = ((JObject)JsonConvert.DeserializeObject(json))[entityResult].Value<string>();
+                        using (StreamReader r = new StreamReader("C:\\Users\\kirby\\Dev\\BuddyBot\\BuddyBot\\city.list.json"))
+                        {
+                            string json = r.ReadToEnd();
+                            country.Add(((JObject)JsonConvert.DeserializeObject(json))[entityResult].Value<string>());
+                        }
                     }
+                    catch (Exception ex)
+                    {
+                        
+                        return ex.Message + "Cannot access weather reports. Please try again later";
+                    }
+                    
                 }
             }
             else
@@ -51,7 +60,7 @@ namespace BuddyBot.Services
             }
 
         //string url = baseUrl + entityResult + ",nz&appid=" + apiKey;
-            string url = baseUrl + entityResult + ","+ country + "&appid=" + apiKey;
+            string url = baseUrl + entityResult + ","+ country[0] + "&appid=" + apiKey;
 
             try
             {
