@@ -11,10 +11,12 @@ namespace BuddyBot.Repository.Models
         public string Country { get; set; }
         public Coordinate Coordinates { get; set; }
 
+    }
+
         public class Coordinate
         {
             public double Longitude { get; set; }
-            public double latitude { get; set; }
+            public double Latitude { get; set; }
         }
-    }
+    
 }

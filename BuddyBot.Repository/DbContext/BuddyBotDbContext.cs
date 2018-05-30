@@ -16,6 +16,9 @@ namespace BuddyBot.Repository.DbContext
         {
             modelBuilder.Entity<City>().ToTable("City").HasKey(_ => _.Id);
 
+            modelBuilder.Entity<Coordinate>()
+            .HasKey(_ => new { _.Latitude, _.Longitude });
+
         }
 
         public DbSet<City> Cities { get; set; }
