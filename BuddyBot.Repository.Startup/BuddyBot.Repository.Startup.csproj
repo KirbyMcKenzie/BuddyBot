@@ -5,4 +5,14 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
+    <ItemGroup>
+    <ProjectReference Include="..\BuddyBot.Repository\BuddyBot.Repository.csproj" />
+  </ItemGroup>
+
+    <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
