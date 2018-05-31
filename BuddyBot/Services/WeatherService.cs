@@ -1,5 +1,6 @@
 ﻿using BuddyBot.Contracts;
 using BuddyBot.Models.Dtos;
+
 using Microsoft.Bot.Builder.Luis.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -37,14 +38,25 @@ namespace BuddyBot.Services
                 foreach (var entity in entities.Where(e => e.Type == "Weather.Location"))
                 {
                     entityResult = entity.Entity;
+                    entityResult.ToUpper();
 
                     try
                     {
-                        using (StreamReader r = new StreamReader("C:\\Users\\kirby\\Dev\\BuddyBot\\BuddyBot\\city.list.json"))
+                        string json = File.ReadAllText(System.Web.Hosting.HostingEnvironment.MapPath("/city.list.json"));
+
+                        IList<JObject> products = JsonConvert.DeserializeObject<List<JObject>>(json);
+
+                        for (int i = 0; i < products.Count; i++)
                         {
-                            string json = r.ReadToEnd();
-                            country.Add(((JObject)JsonConvert.DeserializeObject(json))[entityResult].Value<string>());
+                            string itemTitle = (string)products[i]["name"];
+
+                            if (itemTitle == entityResult.ToUpper())
+                            {
+                                country.Add(itemTitle);
+                            }
+                           
                         }
+
                     }
                     catch (Exception ex)
                     {
@@ -59,7 +71,7 @@ namespace BuddyBot.Services
                 return "Please specify one location.";
             }
 
-        //string url = baseUrl + entityResult + ",nz&appid=" + apiKey;
+        
             string url = baseUrl + entityResult + ","+ country[0] + "&appid=" + apiKey;
 
             try
