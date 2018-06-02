@@ -32,6 +32,7 @@ namespace BuddyBot.Services
         {
 
             string entityResult = null;
+            string entityUpperResult = null;
             IList<string> country = new List<string>();
 
             if (entities.Count > 0 && entities.Count <= 1)
@@ -41,7 +42,7 @@ namespace BuddyBot.Services
                     entityResult = entity.Entity;
 
                     TextInfo myTI = new CultureInfo("en-US", false).TextInfo;
-                    var entityUpperResult = myTI.ToTitleCase(entityResult);
+                    entityUpperResult = myTI.ToTitleCase(entityResult);
 
                     try
                     {
@@ -103,7 +104,7 @@ namespace BuddyBot.Services
 
                     var first = weatherDtos.FirstOrDefault();
 
-                    return $"Weather in {entityResult}: {first.description}";
+                    return $"Weather in {entityUpperResult}: {first.description}";
                 }
                 return "I'm having problems accessing weather reports. Please try again later";
             }
