@@ -7,6 +7,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -38,7 +39,9 @@ namespace BuddyBot.Services
                 foreach (var entity in entities.Where(e => e.Type == "Weather.Location"))
                 {
                     entityResult = entity.Entity;
-                    entityResult.ToUpper();
+
+                    TextInfo myTI = new CultureInfo("en-US", false).TextInfo;
+                    var entityUpperResult = myTI.ToTitleCase(entityResult);
 
                     try
                     {
@@ -50,7 +53,7 @@ namespace BuddyBot.Services
                         {
                             string itemTitle = (string)products[i]["name"];
 
-                            if (itemTitle == entityResult.ToUpper())
+                            if (itemTitle.Contains(entityUpperResult))
                             {
                                 country.Add(itemTitle);
                             }
