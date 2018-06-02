@@ -1,10 +1,14 @@
 ﻿using BuddyBot.Contracts;
 using BuddyBot.Models.Dtos;
+
 using Microsoft.Bot.Builder.Luis.Models;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -28,25 +32,53 @@ namespace BuddyBot.Services
         {
 
             string entityResult = null;
+            string entityUpperResult = null;
+            IList<string> country = new List<string>();
 
             if (entities.Count > 0 && entities.Count <= 1)
             {
                 foreach (var entity in entities.Where(e => e.Type == "Weather.Location"))
                 {
                     entityResult = entity.Entity;
-                    // TODO - move to seperate generic method, returns location and maps to country
-                    // TODO - prompt user if multiple cities appear
+
+                    TextInfo myTI = new CultureInfo("en-US", false).TextInfo;
+                    entityUpperResult = myTI.ToTitleCase(entityResult);
+
+                    try
+                    {
+                        string json = File.ReadAllText(System.Web.Hosting.HostingEnvironment.MapPath("/city.list.json"));
+
+                        IList<JObject> products = JsonConvert.DeserializeObject<List<JObject>>(json);
+
+                        for (int i = 0; i < products.Count; i++)
+                        {
+                            string itemTitle = (string)products[i]["name"];
+
+                            if (itemTitle.Contains(entityUpperResult))
+                            {
+                                country.Add(itemTitle);
+                            }
+                           
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        
+                        return ex.Message + "Cannot access weather reports. Please try again later";
+                    }
+                    
                 }
             }
             else
             {
-                return "I can only check the weather for 1 location at a time.";
+                return "Please specify one location.";
             }
 
+        
+            string url = baseUrl + entityResult + ","+ country[0] + "&appid=" + apiKey;
 
-        string url = baseUrl + entityResult + ",nz&appid=" + apiKey;
-
-                try
+            try
             {
                 HttpClient client = new HttpClient { BaseAddress = new Uri(url) };
                 client.DefaultRequestHeaders.Accept.Add(
@@ -72,7 +104,7 @@ namespace BuddyBot.Services
 
                     var first = weatherDtos.FirstOrDefault();
 
-                    return $"Weather in {entityResult}: {first.description}";
+                    return $"Weather in {entityUpperResult}: {first.description}";
                 }
                 return "I'm having problems accessing weather reports. Please try again later";
             }
