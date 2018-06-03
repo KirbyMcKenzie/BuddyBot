@@ -19,10 +19,6 @@ namespace BuddyBot.Services
     public class WeatherService : IWeatherService
     {
 
-        public WeatherService()
-        {
-        }
-
         // TODO - Replace key
         private const string baseUrl = "http://api.openweathermap.org/data/2.5/weather?q=";
         private string apiKey = ConfigurationManager.AppSettings["openWeatherMap:apiKey"];
@@ -53,10 +49,11 @@ namespace BuddyBot.Services
                         for (int i = 0; i < products.Count; i++)
                         {
                             string itemTitle = (string)products[i]["name"];
+                            string itemCountry = (string)products[i]["country"];
 
                             if (itemTitle.Contains(entityUpperResult))
                             {
-                                country.Add(itemTitle);
+                                country.Add(itemCountry);
                             }
                            
                         }

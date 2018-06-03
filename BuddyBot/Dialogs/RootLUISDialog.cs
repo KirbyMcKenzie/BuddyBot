@@ -77,11 +77,14 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Weather.GetForecast")]
         public async Task GetWeatherForecast(IDialogContext context, LuisResult result)
         {
-            IWeatherService weatherService = new WeatherService();
+            context.Call(new GetForecastDialog(result.Entities), Resume_AfterGetForecastDialog);
+            await Task.Yield();
+        }
 
+        public async Task Resume_AfterGetForecastDialog(IDialogContext context, IAwaitable<string> result)
+        {
+            var weatherResult = await result;
 
-            
-            var weatherResult = await weatherService.GetWeatherByLocationId(result.Entities);
             await context.PostAsync(weatherResult);
 
             context.Wait(MessageReceived);
