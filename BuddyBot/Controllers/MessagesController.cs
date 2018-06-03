@@ -19,7 +19,7 @@ namespace BuddyBot.Controllers
         {
             if (activity.Type == ActivityTypes.Message)
             {
-                await Conversation.SendAsync(activity, () => new RootLuisDialog());
+                await Conversation.SendAsync(activity, () => new RootLuisDialog().DefaultIfException());
             }
             else
             {

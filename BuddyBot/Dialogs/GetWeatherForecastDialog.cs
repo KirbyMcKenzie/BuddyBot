@@ -13,9 +13,11 @@ using Microsoft.Bot.Connector;
 
 namespace BuddyBot.Dialogs
 {
+    [Serializable]
     public class GetWeatherForecastDialog : IDialog<string>
     {
         private readonly IList<EntityRecommendation> _entities;
+        private City _city;
 
         public GetWeatherForecastDialog(IList<EntityRecommendation> entities)
         {
@@ -25,11 +27,7 @@ namespace BuddyBot.Dialogs
 
         public async Task StartAsync(IDialogContext context)
         {
-            await Respond(context);
-        }
 
-        public async Task Respond(IDialogContext context)
-        {
             IWeatherService weatherService = new WeatherService();
 
             var cities = weatherService.GetCitiesFromEntityResults(_entities);
@@ -38,41 +36,43 @@ namespace BuddyBot.Dialogs
 
             await context.PostAsync($"I've found {cityInformation.Count} results for {cities.FirstOrDefault()}");
 
-            List<CardAction> cardOptionsList = new List<CardAction>();
+            //List<CardAction> cardOptionsList = new List<CardAction>();
 
 
-            foreach (var city in cityInformation)
-            {
-                cardOptionsList.Add(new CardAction(ActionTypes.ImBack,
-                    title: $"{city.Name}, {city.Country}",
-                    value: $"{city.Name}, {city.Country}"));
-            };
+            //foreach (var city in cityInformation)
+            //{
+            //    cardOptionsList.Add(new CardAction(ActionTypes.ImBack,
+            //        title: $"{city.Name}, {city.Country}",
+            //        value: $"{city.Name}, {city.Country}"));
+            //};
 
-                HeroCard card = new HeroCard
-                {
-                    Title = $"I found {cityInformation.Count} results for '{cityInformation.FirstOrDefault() ?.Name}'",
-                    Subtitle = "please select your closest location",
-                    Buttons = cardOptionsList
-                };
-
-
-               var message = context.MakeMessage();
-               message.Attachments.Add(card.ToAttachment());
-               await context.PostAsync(message);
-                 context.Wait(MessageRecievedAsync);
+            //    HeroCard card = new HeroCard
+            //    {
+            //        Title = $"I found {cityInformation.Count} results for '{cityInformation.FirstOrDefault() ?.Name}'",
+            //        Subtitle = "please select your closest location",
+            //        Buttons = cardOptionsList
+            //    };
 
 
-            //var weatherResult = await weatherService.GetWeatherByCityInformation(cityInformation[0]);
+            //   var message = context.MakeMessage();
+            //   message.Attachments.Add(card.ToAttachment());
+            //   await context.PostAsync(message);
+
+            context.Wait(this.MessageReceivedAsync);
 
         }
 
-        private async Task MessageRecievedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
+        private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
-            var cityResult = await result;
+            var message = await result;
+            await context.PostAsync("Your answer: " + message);
 
-            context.Done("You said" + cityResult);
-
+            context.Done(message.Text);
         }
+
+
+
+        
 
 
         private static IList<Attachment> GetCardsAttachments()
@@ -84,12 +84,7 @@ namespace BuddyBot.Dialogs
                     "Process events with a serverless code architecture",
                     new CardAction(ActionTypes.PostBack, "Learn more", value: "https://azure.microsoft.com/en-us/services/functions/")),
             };
-
-            
-
         }
-
-        
 
         private static Attachment GetHeroCard(string title , string text, CardAction cardAction)
         {
