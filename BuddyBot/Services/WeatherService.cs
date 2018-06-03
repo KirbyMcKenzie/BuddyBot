@@ -25,72 +25,6 @@ namespace BuddyBot.Services
         private const string baseUrl = "http://api.openweathermap.org/data/2.5/weather?q=";
         private string apiKey = ConfigurationManager.AppSettings["openWeatherMap:apiKey"];
 
-        // TODO - Tidy this method up
-        public async Task<string> GetWeatherByLocationId(IList<EntityRecommendation> entities)
-        {
-
-            string entityResult = null;
-            string entityUpperResult = null;
-            IList<string> country = new List<string>();
-
-            if (entities.Count > 0 && entities.Count <= 1)
-            {
-                foreach (var entity in entities.Where(e => e.Type == "Weather.Location"))
-                {
-                    entityResult = entity.Entity;
-
-                    TextInfo myTI = new CultureInfo("en-US", false).TextInfo;
-                    entityUpperResult = myTI.ToTitleCase(entityResult);
-
-                    
-
-                }
-            }
-            else
-            {
-                return "Please specify one location.";
-            }
-
-
-            string url = baseUrl + entityResult + "," + country[0] + "&appid=" + apiKey;
-
-            try
-            {
-                HttpClient client = new HttpClient {BaseAddress = new Uri(url)};
-                client.DefaultRequestHeaders.Accept.Add(
-                    new MediaTypeWithQualityHeaderValue("application/json"));
-
-                HttpResponseMessage response = await client.GetAsync(url);
-                if (response.IsSuccessStatusCode)
-                {
-                    String weatherString = await response.Content.ReadAsStringAsync();
-
-                    JObject parsedString = JObject.Parse(weatherString);
-
-                    IList<JToken> results = parsedString["weather"].Children().ToList();
-
-                    IList<WeatherDto> weatherDtos = new List<WeatherDto>();
-
-                    foreach (JToken result in results)
-                    {
-                        // JToken.ToObject is a helper method that uses JsonSerializer internally
-                        WeatherDto weatherDto = result.ToObject<WeatherDto>();
-                        weatherDtos.Add(weatherDto);
-                    }
-
-                    var first = weatherDtos.FirstOrDefault();
-
-                    return $"Weather in {entityUpperResult}: {first.description}";
-                }
-
-                return "I'm having problems accessing weather reports. Please try again later";
-            }
-            catch (Exception ex)
-            {
-                return "I'm having problems accessing weather reports. Please try again later";
-            }
-        }
-
         public IList<string> GetCitiesFromEntityResults(IList<EntityRecommendation> entities)
         {
             IList<string> cityList = new List<string>();
@@ -152,6 +86,47 @@ namespace BuddyBot.Services
             }
 
             return cityList;
+        }
+
+        public async Task<string> GetWeatherByCityInformation(City city)
+        {
+            string url = $"{baseUrl}{city.Name},{city.Country}&appid={apiKey}";
+
+            try
+            {
+                HttpClient client = new HttpClient { BaseAddress = new Uri(url) };
+                client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.GetAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    String weatherString = await response.Content.ReadAsStringAsync();
+
+                    JObject parsedString = JObject.Parse(weatherString);
+
+                    IList<JToken> results = parsedString["weather"].Children().ToList();
+
+                    IList<WeatherDto> weatherDtos = new List<WeatherDto>();
+
+                    foreach (JToken result in results)
+                    {
+                        // JToken.ToObject is a helper method that uses JsonSerializer internally
+                        WeatherDto weatherDto = result.ToObject<WeatherDto>();
+                        weatherDtos.Add(weatherDto);
+                    }
+
+                    var first = weatherDtos.FirstOrDefault();
+
+                    return $"Weather in {city.Name}: {first.description}";
+                }
+
+                return "I'm having problems accessing weather reports. Please try again later";
+            }
+            catch (Exception ex)
+            {
+                return "I'm having problems accessing weather reports. Please try again later";
+            }
         }
     }
 }

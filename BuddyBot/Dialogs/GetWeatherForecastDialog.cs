@@ -35,10 +35,11 @@ namespace BuddyBot.Dialogs
 
             IList<City> cityInformation = weatherService.GetDetailedCityInformation(cities);
 
+            // Ask user to claify which city
 
-           // var weatherResult = await weatherService.GetWeatherByLocationId(_entities);
-           // Return weather result
-            context.Done(cityInformation[1].ToString());
+            var weatherResult = await weatherService.GetWeatherByCityInformation(cityInformation[0]);
+
+            context.Done(weatherResult);
         }
     }
 }

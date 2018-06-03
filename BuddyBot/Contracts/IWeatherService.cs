@@ -7,10 +7,10 @@ namespace BuddyBot.Contracts
 {
     public interface IWeatherService 
     {
-        Task<string> GetWeatherByLocationId(IList<EntityRecommendation> entities);
-
         IList<string> GetCitiesFromEntityResults(IList<EntityRecommendation> entities);
 
         IList<City> GetDetailedCityInformation(IList<string> cities);
+
+        Task<string> GetWeatherByCityInformation(City city);
     }
 }
