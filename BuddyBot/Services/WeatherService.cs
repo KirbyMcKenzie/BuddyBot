@@ -5,6 +5,7 @@ using Microsoft.Bot.Builder.Luis.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
@@ -13,6 +14,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using BuddyBot.Models;
 
 namespace BuddyBot.Services
 {
@@ -40,31 +42,8 @@ namespace BuddyBot.Services
                     TextInfo myTI = new CultureInfo("en-US", false).TextInfo;
                     entityUpperResult = myTI.ToTitleCase(entityResult);
 
-                    try
-                    {
-                        string json = File.ReadAllText(System.Web.Hosting.HostingEnvironment.MapPath("/city.list.json"));
-
-                        IList<JObject> products = JsonConvert.DeserializeObject<List<JObject>>(json);
-
-                        for (int i = 0; i < products.Count; i++)
-                        {
-                            string itemTitle = (string)products[i]["name"];
-                            string itemCountry = (string)products[i]["country"];
-
-                            if (itemTitle.Contains(entityUpperResult))
-                            {
-                                country.Add(itemCountry);
-                            }
-                           
-                        }
-
-                    }
-                    catch (Exception ex)
-                    {
-                        
-                        return ex.Message + "Cannot access weather reports. Please try again later";
-                    }
                     
+
                 }
             }
             else
@@ -72,12 +51,12 @@ namespace BuddyBot.Services
                 return "Please specify one location.";
             }
 
-        
-            string url = baseUrl + entityResult + ","+ country[0] + "&appid=" + apiKey;
+
+            string url = baseUrl + entityResult + "," + country[0] + "&appid=" + apiKey;
 
             try
             {
-                HttpClient client = new HttpClient { BaseAddress = new Uri(url) };
+                HttpClient client = new HttpClient {BaseAddress = new Uri(url)};
                 client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -103,12 +82,76 @@ namespace BuddyBot.Services
 
                     return $"Weather in {entityUpperResult}: {first.description}";
                 }
+
                 return "I'm having problems accessing weather reports. Please try again later";
             }
             catch (Exception ex)
             {
                 return "I'm having problems accessing weather reports. Please try again later";
             }
+        }
+
+        public IList<string> GetCitiesFromEntityResults(IList<EntityRecommendation> entities)
+        {
+            IList<string> cityList = new List<string>();
+
+            if (entities.Count > 0 && entities.Count <= 1)
+            {
+                foreach (var entity in entities.Where(e => e.Type == "Weather.Location"))
+                {
+                    var entityResult = entity.Entity;
+
+                    TextInfo cultureInfo = new CultureInfo("en-US", false).TextInfo;
+                    var entityUpperResult = cultureInfo.ToTitleCase(entityResult);
+
+                    cityList.Add(entityUpperResult);
+
+                }
+            }
+
+            return cityList;
+        }
+
+        public IList<City> GetDetailedCityInformation(IList<string> cities)
+        {
+            IList<City> cityList = new List<City>();
+
+            foreach (var city in cities)
+            {
+                try
+                {
+                    string json =
+                        File.ReadAllText(System.Web.Hosting.HostingEnvironment.MapPath("/city.list.json") ?? throw new InvalidOperationException());
+
+                    IList<JObject> products = JsonConvert.DeserializeObject<List<JObject>>(json);
+
+                    for (int i = 0; i < products.Count; i++)
+                    {
+                        string itemId= (string)products[i]["id"];
+                        string itemTitle = (string) products[i]["name"];
+                        string itemCountry = (string) products[i]["country"];
+
+                        if (itemTitle.Contains(city))
+                        {
+                            City cityInformation = new City()
+                            {
+                                Id = itemId,
+                                Name = itemTitle,
+                                Country = itemCountry,
+                            };
+                                cityList.Add(cityInformation);
+                        }
+
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+
+            return cityList;
         }
     }
 }

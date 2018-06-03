@@ -73,11 +73,10 @@ namespace BuddyBot.Dialogs
             context.Wait(MessageReceived);
         }
 
-        // TODO - refactor method
         [LuisIntent("Weather.GetForecast")]
         public async Task GetWeatherForecast(IDialogContext context, LuisResult result)
         {
-            context.Call(new GetForecastDialog(result.Entities), Resume_AfterGetForecastDialog);
+            context.Call(new GetWeatherForecastDialog(result.Entities), Resume_AfterGetForecastDialog);
             await Task.Yield();
         }
 
@@ -94,6 +93,7 @@ namespace BuddyBot.Dialogs
         public async Task HeadsTails(IDialogContext context, LuisResult result)
         {
             //TODO - replace with different responses each time
+            //TODO - move to seperate dialog
             await context.PostAsync("Flipping a coin.. 🤞");
             Thread.Sleep(1000);
             await context.PostAsync("The result is...");
