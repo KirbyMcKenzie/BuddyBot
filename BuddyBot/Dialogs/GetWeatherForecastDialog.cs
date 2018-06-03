@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using BuddyBot.Models;
+using Microsoft.Bot.Connector;
 
 namespace BuddyBot.Dialogs
 {
@@ -35,11 +36,85 @@ namespace BuddyBot.Dialogs
 
             IList<City> cityInformation = weatherService.GetDetailedCityInformation(cities);
 
-            // Ask user to claify which city
+            await context.PostAsync($"I've found {cityInformation.Count} results for {cities.FirstOrDefault()}");
 
-            var weatherResult = await weatherService.GetWeatherByCityInformation(cityInformation[0]);
+            List<CardAction> cardOptionsList = new List<CardAction>();
 
-            context.Done(weatherResult);
+
+            foreach (var city in cityInformation)
+            {
+                cardOptionsList.Add(new CardAction(ActionTypes.ImBack,
+                    title: $"{city.Name}, {city.Country}",
+                    value: $"{city.Name}, {city.Country}"));
+            };
+
+                HeroCard card = new HeroCard
+                {
+                    Title = $"I found {cityInformation.Count} results for '{cityInformation.FirstOrDefault() ?.Name}'",
+                    Subtitle = "please select your closest location",
+                    Buttons = cardOptionsList
+                };
+
+
+               var message = context.MakeMessage();
+               message.Attachments.Add(card.ToAttachment());
+               await context.PostAsync(message);
+                 context.Wait(MessageRecievedAsync);
+
+
+            //var weatherResult = await weatherService.GetWeatherByCityInformation(cityInformation[0]);
+
+        }
+
+        private async Task MessageRecievedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
+        {
+            var cityResult = await result;
+
+            context.Done("You said" + cityResult);
+
+        }
+
+
+        private static IList<Attachment> GetCardsAttachments()
+        {
+            return new List<Attachment>()
+            {
+                GetHeroCard(
+                    "Azure Functions",
+                    "Process events with a serverless code architecture",
+                    new CardAction(ActionTypes.PostBack, "Learn more", value: "https://azure.microsoft.com/en-us/services/functions/")),
+            };
+
+            
+
+        }
+
+        
+
+        private static Attachment GetHeroCard(string title , string text, CardAction cardAction)
+        {
+            var heroCard = new HeroCard
+            {
+                Title = title,
+                Text = text,
+                Buttons = new List<CardAction>() { cardAction },
+            };
+
+            return heroCard.ToAttachment();
+        }
+
+        private static Attachment GetThumbnailCard(string title, string subtitle, string text, CardImage cardImage, CardAction cardAction)
+        {
+            var heroCard = new ThumbnailCard
+            {
+                Title = title,
+                Subtitle = subtitle,
+                Text = text,
+                Images = new List<CardImage>() { cardImage },
+                Buttons = new List<CardAction>() { cardAction },
+            };
+
+            return heroCard.ToAttachment();
         }
     }
 }
