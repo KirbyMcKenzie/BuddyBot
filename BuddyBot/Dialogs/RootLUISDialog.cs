@@ -57,7 +57,6 @@ namespace BuddyBot.Dialogs
                          "However, I'm still learning so be patient! " +
                          "Heres some things I can help you with now. 😀";
 
-            // TODO - move these to dialog
             reply.SuggestedActions = new SuggestedActions
             {
                 Actions = new List<CardAction>()
@@ -73,11 +72,27 @@ namespace BuddyBot.Dialogs
             context.Wait(MessageReceived);
         }
 
-        [LuisIntent("Weather.GetForecast")]
-        public async Task GetWeatherForecast(IDialogContext context, LuisResult result)
+        [LuisIntent("Help")]
+        public async Task Help(IDialogContext context, LuisResult result)
         {
-            context.Call(new GetWeatherForecastDialog(result.Entities), Resume_AfterGetForecastDialog);
-            await Task.Yield();
+            IMessageActivity reply = context.MakeMessage();
+
+            reply.Text = "Here's a few suggestions of things I can do right now 😀";
+
+            reply.SuggestedActions = new SuggestedActions
+            {
+                Actions = new List<CardAction>()
+                {
+                    new CardAction(){ Title = "Generate Random Number", Type=ActionTypes.ImBack, Value="Generate Random Number" },
+                    new CardAction(){ Title = "Tell me a joke", Type=ActionTypes.ImBack, Value="Tell me a joke" },
+                    new CardAction(){ Title = "Flip a coin", Type=ActionTypes.ImBack, Value="Flip a coin" },
+                }
+            };
+
+            await context.PostAsync(reply);
+
+            context.Wait(MessageReceived);
+
         }
 
         public async Task Resume_AfterGetForecastDialog(IDialogContext context, IAwaitable<string> result)
@@ -183,6 +198,13 @@ namespace BuddyBot.Dialogs
         {
             // Todo: Pull entities from Luis
             await context.PostAsync($"I am a bot. My opinion doesn't matter...");
+        }
+
+        [LuisIntent("Weather.GetForecast")]
+        public async Task GetWeatherForecast(IDialogContext context, LuisResult result)
+        {
+            context.Call(new GetWeatherForecastDialog(result.Entities), Resume_AfterGetForecastDialog);
+            await Task.Yield();
         }
     }
 }
