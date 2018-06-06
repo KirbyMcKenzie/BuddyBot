@@ -38,6 +38,7 @@ namespace BuddyBot.Dialogs
             context.Wait(MessageReceived);
         }
 
+        // TODO - refine to different types of praise sentiment
         [LuisIntent("Bot.Praise")]
         public async Task Appreciation(IDialogContext context, LuisResult result)
         {
@@ -48,6 +49,12 @@ namespace BuddyBot.Dialogs
 
         [LuisIntent("Greeting")]
         public async Task Greeting(IDialogContext context, LuisResult result)
+        {
+            await context.PostAsync("Yo");
+        }
+
+        [LuisIntent("GetStarted")]
+        public async Task GetStarted(IDialogContext context, LuisResult result)
         {
             await context.PostAsync("Hi I'm BuddyBot! 🤖");
 
@@ -77,7 +84,7 @@ namespace BuddyBot.Dialogs
         {
             IMessageActivity reply = context.MakeMessage();
 
-            reply.Text = "Here's a few suggestions of things I can do right now 😀";
+            reply.Text = "Here's a few suggestions of things I can do right now. I'm trying my best to learn new things 😀";
 
             reply.SuggestedActions = new SuggestedActions
             {
