@@ -47,7 +47,7 @@ namespace BuddyBot.Dialogs
             context.Wait(MessageReceived);
         }
 
-        [LuisIntent("Greeting")]
+        [LuisIntent("Bot.Greeting")]
         public async Task Greeting(IDialogContext context, LuisResult result)
         {
             await context.PostAsync("Yo");
