@@ -10,11 +10,9 @@ namespace BuddyBot.Services
     public class GreetingService : IGreetingService
     {
         
-
         public async Task<string> GetRandomGreeting()
         {
             IList<string> greetingList = getGreetingList();
-
 
             // add items to the list
             Random r = new Random();
@@ -49,7 +47,6 @@ namespace BuddyBot.Services
             });
 
             return greetingList;
-
         }
     }
 }
