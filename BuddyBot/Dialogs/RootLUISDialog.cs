@@ -50,7 +50,8 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Bot.Greeting")]
         public async Task Greeting(IDialogContext context, LuisResult result)
         {
-            await context.PostAsync("Yo");
+            IGreetingService greeting = new GreetingService();
+            await context.PostAsync(await greeting.GetRandomGreeting());
         }
 
         [LuisIntent("GetStarted")]
