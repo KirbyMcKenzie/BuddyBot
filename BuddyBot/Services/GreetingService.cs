@@ -27,9 +27,11 @@ namespace BuddyBot.Services
         }
 
 
+        // TODO - Pull to db 
+        // TODO - Get users name
         private List<string> getGreetingList()
         {
-
+            
          List<string> greetingList = new List<string>();
 
         greetingList.AddRange(new List<string>
@@ -40,8 +42,8 @@ namespace BuddyBot.Services
                 "Sup m8",
                 "Sup",
                 "What up? 🤖",
-                "Yo 🤖",
-                "What can I do for you? 😃",
+                "Yo",
+                "What can I do for you? 🤖",
                 "How's it?",
                 "G'day M8"
             });
