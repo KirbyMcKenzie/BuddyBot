@@ -36,9 +36,12 @@ namespace BuddyBot.Services
             {
                 "Hey",
                 "Hello",
-                "Hiya",
-                "Yo",
-                "What can I do for you?",
+                "Heya 😁",
+                "Sup m8",
+                "Sup",
+                "What up? 🤖",
+                "Yo 🤖",
+                "What can I do for you? 😃",
                 "How's it?",
                 "G'day M8"
             });
