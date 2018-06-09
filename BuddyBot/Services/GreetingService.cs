@@ -74,16 +74,12 @@ namespace BuddyBot.Services
 
             politeExpressionList.AddRange(new List<string>
             {
-                "Thank you",
-                "Hello",
-                "Heya 😁",
-                "Sup m8",
-                "Sup",
-                "What up? 🤖",
-                "Yo",
-                "What can I do for you? 🤖",
-                "How's it?",
-                "G'day M8"
+                
+                "Cheers",
+                "Cheers 😁",
+                "Thanks 😁",
+                "Thanks M8",
+                "Thank you 😁",
             });
 
             return politeExpressionList;
