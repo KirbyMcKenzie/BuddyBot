@@ -126,13 +126,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Contracts\IGreetingService.cs" />
+    <Compile Include="Contracts\ILanguageService.cs" />
     <Compile Include="Contracts\IWeatherService.cs" />
     <Compile Include="Dialogs\ExceptionHandlerDialog.cs" />
     <Compile Include="Dialogs\GetWeatherForecastDialog.cs" />
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\Dtos\WeatherDto.cs" />
-    <Compile Include="Services\GreetingService.cs" />
+    <Compile Include="Services\LanguageService.cs" />
     <Compile Include="Services\WeatherService.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Dialogs\ConfirmRobotDialog.cs" />

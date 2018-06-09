@@ -43,18 +43,18 @@ namespace BuddyBot.Dialogs
         public async Task Appreciation(IDialogContext context, LuisResult result)
         {
 
-            IGreetingService greeting = new GreetingService();
-            await context.PostAsync(await greeting.GetPoliteExpression());
+            ILanguageService language = new LanguageService();
+            await context.PostAsync(await language.GetPoliteExpression());
 
             context.Wait(MessageReceived);
         }
 
-        // TODO - refine to different types of greeting sentiment
+        // TODO - refine to different types of language sentiment
         [LuisIntent("Bot.Greeting")]
         public async Task Greeting(IDialogContext context, LuisResult result)
         {
-            IGreetingService greeting = new GreetingService();
-            await context.PostAsync(await greeting.GetGreeting());
+            ILanguageService language = new LanguageService();
+            await context.PostAsync(await language.GetGreeting());
         }
 
         [LuisIntent("GetStarted")]

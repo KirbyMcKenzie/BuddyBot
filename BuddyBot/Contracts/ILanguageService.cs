@@ -6,7 +6,7 @@ using System.Web;
 
 namespace BuddyBot.Contracts
 {
-    public interface IGreetingService
+    public interface ILanguageService
     {
         Task<string> GetGreeting();
 

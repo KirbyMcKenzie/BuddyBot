@@ -7,7 +7,7 @@ using BuddyBot.Contracts;
 
 namespace BuddyBot.Services
 {
-    public class GreetingService : IGreetingService
+    public class LanguageService : ILanguageService
     {
         
         public async Task<string> GetGreeting()
