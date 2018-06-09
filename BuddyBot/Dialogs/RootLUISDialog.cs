@@ -42,7 +42,9 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Bot.Praise")]
         public async Task Appreciation(IDialogContext context, LuisResult result)
         {
-            await context.PostAsync("No worries 😀");
+
+            IGreetingService greeting = new GreetingService();
+            await context.PostAsync(await greeting.GetPoliteExpression());
 
             context.Wait(MessageReceived);
         }
@@ -52,7 +54,7 @@ namespace BuddyBot.Dialogs
         public async Task Greeting(IDialogContext context, LuisResult result)
         {
             IGreetingService greeting = new GreetingService();
-            await context.PostAsync(await greeting.GetRandomGreeting());
+            await context.PostAsync(await greeting.GetGreeting());
         }
 
         [LuisIntent("GetStarted")]
