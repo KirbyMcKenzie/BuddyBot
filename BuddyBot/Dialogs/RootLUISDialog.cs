@@ -47,6 +47,7 @@ namespace BuddyBot.Dialogs
             context.Wait(MessageReceived);
         }
 
+        // TODO - refine to different types of greeting sentiment
         [LuisIntent("Bot.Greeting")]
         public async Task Greeting(IDialogContext context, LuisResult result)
         {

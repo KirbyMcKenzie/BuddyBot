@@ -10,7 +10,7 @@ namespace BuddyBot.Services
     public class GreetingService : IGreetingService
     {
         
-        public async Task<string> GetRandomGreeting()
+        public async Task<string> GetGreeting()
         {
             IList<string> greetingList = getGreetingList();
 
@@ -24,9 +24,24 @@ namespace BuddyBot.Services
             return randomString;
         }
 
+        public async Task<string> GetPoliteExpression()
+        {
+            IList<string> politeExpressionList = getPoliteExpressionList();
+
+            // add items to the list
+            Random r = new Random();
+            int index = r.Next(politeExpressionList.Count);
+            string politeExpression = politeExpressionList[index];
+
+            await Task.Yield();
+
+            return politeExpression;
+        }
+
 
         // TODO - Pull to db 
         // TODO - Get users name
+        // TODO - Emoji detection and handler
         private List<string> getGreetingList()
         {
             
@@ -47,6 +62,31 @@ namespace BuddyBot.Services
             });
 
             return greetingList;
+        }
+
+        // TODO - Pull to db 
+        // TODO - Get users name
+        // TODO - Emoji detection and handler
+        private List<string> getPoliteExpressionList()
+        {
+
+            List<string> politeExpressionList = new List<string>();
+
+            politeExpressionList.AddRange(new List<string>
+            {
+                "Thank you",
+                "Hello",
+                "Heya 😁",
+                "Sup m8",
+                "Sup",
+                "What up? 🤖",
+                "Yo",
+                "What can I do for you? 🤖",
+                "How's it?",
+                "G'day M8"
+            });
+
+            return politeExpressionList;
         }
     }
 }

@@ -8,7 +8,9 @@ namespace BuddyBot.Contracts
 {
     public interface IGreetingService
     {
-        Task<string> GetRandomGreeting();
+        Task<string> GetGreeting();
+
+        Task<string> GetPoliteExpression();
 
     }
 }
