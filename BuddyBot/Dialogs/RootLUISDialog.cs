@@ -26,7 +26,7 @@ namespace BuddyBot.Dialogs
         [LuisIntent("None")]
         public async Task None(IDialogContext context, LuisResult result)
         {
-            await context.PostAsync("I'm sorry I don't know what you mean");
+            await context.PostAsync("I'm sorry, I don't know what you mean");
             context.Wait(MessageReceived);
         }
 
@@ -60,7 +60,7 @@ namespace BuddyBot.Dialogs
         [LuisIntent("GetStarted")]
         public async Task GetStarted(IDialogContext context, LuisResult result)
         {
-            await context.PostAsync("Hi I'm BuddyBot! 🤖");
+            await context.PostAsync("Hey I'm BuddyBot! 🤖");
 
             IMessageActivity reply = context.MakeMessage();
 
@@ -73,7 +73,7 @@ namespace BuddyBot.Dialogs
                 Actions = new List<CardAction>()
                 {
                     new CardAction(){ Title = "Generate Random Number", Type=ActionTypes.ImBack, Value="Generate Random Number" },
-                    new CardAction(){ Title = "Tell me a joke", Type=ActionTypes.ImBack, Value="Tell me a joke" },
+                    new CardAction(){ Title = "Tell a joke", Type=ActionTypes.ImBack, Value="Tell a joke" },
                     new CardAction(){ Title = "Flip a coin", Type=ActionTypes.ImBack, Value="Flip a coin" },
                 }
             };
@@ -94,8 +94,8 @@ namespace BuddyBot.Dialogs
             {
                 Actions = new List<CardAction>()
                 {
-                    new CardAction(){ Title = "Generate Random Number", Type=ActionTypes.ImBack, Value="Generate Random Number" },
-                    new CardAction(){ Title = "Tell me a joke", Type=ActionTypes.ImBack, Value="Tell me a joke" },
+                    new CardAction(){ Title = "Generate a random number", Type=ActionTypes.ImBack, Value="Generate a random number" },
+                    new CardAction(){ Title = "Tell a joke", Type=ActionTypes.ImBack, Value="Tell a joke" },
                     new CardAction(){ Title = "Flip a coin", Type=ActionTypes.ImBack, Value="Flip a coin" },
                 }
             };
@@ -163,7 +163,7 @@ namespace BuddyBot.Dialogs
         public async Task QueryHowDoesItWork(IDialogContext context, LuisResult result)
         {
             // TODO - Improve answer
-            await context.PostAsync("I'm built using the Microsoft bot framework.");
+            await context.PostAsync("I'm built using the Microsoft Bot Framework.");
         }
 
         [LuisIntent("Miscellaneous.QueryName")]
