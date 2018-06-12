@@ -49,13 +49,20 @@ namespace BuddyBot.Services
 
         greetingList.AddRange(new List<string>
             {
+                // TODO Get users name and add to string 
+                "Hi hi 😊",
+                "Hi there!",
+                "Hiya",
                 "Hey",
                 "Hello",
                 "Heya 😁",
+                "Howdy!",
                 "Sup m8",
                 "Sup",
                 "What up? 🤖",
+                "What new?",
                 "Yo",
+                "Yo 😎",
                 "What can I do for you? 🤖",
                 "How's it?",
                 "G'day M8"
