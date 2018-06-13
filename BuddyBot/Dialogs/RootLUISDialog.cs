@@ -26,7 +26,8 @@ namespace BuddyBot.Dialogs
         [LuisIntent("None")]
         public async Task None(IDialogContext context, LuisResult result)
         {
-            await context.PostAsync("I'm sorry, I don't know what you mean");
+            await context.PostAsync("I'm sorry, I don't know what you mean. " +
+                                    "You can type 'help' at anytime to get a list of things I can do");
             context.Wait(MessageReceived);
         }
 
