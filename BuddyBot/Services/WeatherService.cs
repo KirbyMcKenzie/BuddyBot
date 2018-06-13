@@ -25,6 +25,8 @@ namespace BuddyBot.Services
         private const string baseUrl = "http://api.openweathermap.org/data/2.5/weather?q=";
         private string apiKey = ConfigurationManager.AppSettings["openWeatherMap:apiKey"];
 
+
+        // TODO - Could turn this into a utility method
         public IList<string> GetCitiesFromEntityResults(IList<EntityRecommendation> entities)
         {
             IList<string> cityList = new List<string>();

@@ -107,15 +107,6 @@ namespace BuddyBot.Dialogs
 
         }
 
-        public async Task Resume_AfterGetForecastDialog(IDialogContext context, IAwaitable<string> result)
-        {
-            var weatherResult = await result;
-
-            await context.PostAsync(weatherResult);
-
-            context.Wait(MessageReceived);
-        }
-
         [LuisIntent("Random.HeadsTails")]
         public async Task HeadsTails(IDialogContext context, LuisResult result)
         {
@@ -198,7 +189,6 @@ namespace BuddyBot.Dialogs
                 
         }
 
-
         [LuisIntent("Miscellaneous.OriginStory")]
         public async Task OriginStory(IDialogContext context, LuisResult result)
         {
@@ -217,6 +207,15 @@ namespace BuddyBot.Dialogs
         {
             context.Call(new GetWeatherForecastDialog(result.Entities), Resume_AfterGetForecastDialog);
             await Task.Yield();
+        }
+
+        public async Task Resume_AfterGetForecastDialog(IDialogContext context, IAwaitable<string> result)
+        {
+            var weatherResult = await result;
+
+            await context.PostAsync(weatherResult);
+
+            context.Wait(MessageReceived);
         }
     }
 }
