@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using Microsoft.Bot.Connector;
 
 namespace BuddyBot.Contracts
 {
@@ -12,5 +13,6 @@ namespace BuddyBot.Contracts
 
         Task<string> GetPoliteExpression();
 
+        Task<string> GetGreetingWithPrompt();
     }
 }

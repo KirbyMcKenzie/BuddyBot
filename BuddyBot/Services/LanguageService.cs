@@ -38,6 +38,43 @@ namespace BuddyBot.Services
             return politeExpression;
         }
 
+        public async Task<string> GetGreetingWithPrompt()
+        {
+            IList<string> greetingList = getGreetingList();
+
+            // add items to the list
+            Random r = new Random();
+            int index = r.Next(greetingList.Count);
+            string randomString = greetingList[index];
+
+            await Task.Yield();
+
+            return randomString;
+        }
+
+        // TODO - Pull to db 
+        // TODO - Get users name
+        // TODO - Emoji detection and handler
+        private List<string> getGreetingWithPromptList()
+        {
+
+            List<string> greetingList = new List<string>();
+
+            greetingList.AddRange(new List<string>
+            {
+                // TODO Get - users name and add to string 
+                // TODO - Add more
+                "Good thanks! you?",
+                "I'm good thanks 😊 how are you?",
+                "It's good, you?",
+                "The sky",
+                "gr8 m8 u?",
+                "Not bad, not bad, what about you?",
+            });
+
+            return greetingList;
+        }
+
 
         // TODO - Pull to db 
         // TODO - Get users name

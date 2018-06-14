@@ -60,6 +60,13 @@ namespace BuddyBot.Dialogs
             await context.PostAsync(await language.GetGreeting());
         }
 
+        [LuisIntent("Bot.GreetingWithPrompt")]
+        public async Task GreetingWithPrompt(IDialogContext context, LuisResult result)
+        {
+            ILanguageService language = new LanguageService();
+            await context.PostAsync(await language.GetGreetingWithPrompt());
+        }
+
         [LuisIntent("GetStarted")]
         public async Task GetStarted(IDialogContext context, LuisResult result)
         {
