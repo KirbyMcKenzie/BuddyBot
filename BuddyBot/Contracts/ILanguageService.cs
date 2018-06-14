@@ -13,6 +13,6 @@ namespace BuddyBot.Contracts
 
         Task<string> GetPoliteExpression();
 
-        Task<string> GetGreetingWithPrompt();
+        Task<string> GetHowsItPrompt();
     }
 }

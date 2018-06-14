@@ -53,18 +53,18 @@ namespace BuddyBot.Dialogs
         }
 
         // TODO - refine to different types of language sentiment
-        [LuisIntent("Bot.Greeting")]
+        [LuisIntent("Greeting")]
         public async Task Greeting(IDialogContext context, LuisResult result)
         {
             ILanguageService language = new LanguageService();
             await context.PostAsync(await language.GetGreeting());
         }
 
-        [LuisIntent("Bot.GreetingWithPrompt")]
-        public async Task GreetingWithPrompt(IDialogContext context, LuisResult result)
+        [LuisIntent("Greeting.HowsItPrompt")]
+        public async Task GreetingHowsItPrompt(IDialogContext context, LuisResult result)
         {
             ILanguageService language = new LanguageService();
-            await context.PostAsync(await language.GetGreetingWithPrompt());
+            await context.PostAsync(await language.GetHowsItPrompt());
         }
 
         [LuisIntent("GetStarted")]

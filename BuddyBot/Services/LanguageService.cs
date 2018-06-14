@@ -38,7 +38,7 @@ namespace BuddyBot.Services
             return politeExpression;
         }
 
-        public async Task<string> GetGreetingWithPrompt()
+        public async Task<string> GetHowsItPrompt()
         {
             IList<string> greetingList = getGreetingList();
 
@@ -55,7 +55,7 @@ namespace BuddyBot.Services
         // TODO - Pull to db 
         // TODO - Get users name
         // TODO - Emoji detection and handler
-        private List<string> getGreetingWithPromptList()
+        private List<string> GetHowsItPromptList()
         {
 
             List<string> greetingList = new List<string>();
@@ -67,7 +67,6 @@ namespace BuddyBot.Services
                 "Good thanks! you?",
                 "I'm good thanks 😊 how are you?",
                 "It's good, you?",
-                "The sky",
                 "gr8 m8 u?",
                 "Not bad, not bad, what about you?",
             });
