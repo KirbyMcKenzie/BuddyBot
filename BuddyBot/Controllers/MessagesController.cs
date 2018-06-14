@@ -23,8 +23,6 @@ namespace BuddyBot.Controllers
                     new ExceptionHandlerDialog<object>(
                         new RootLuisDialog(),
                         displayException: true));
-
-
             }
             else
             {

@@ -21,8 +21,8 @@ namespace BuddyBot.Services
     public class WeatherService : IWeatherService
     {
 
-        private const string baseUrl = "http://api.openweathermap.org/data/2.5/weather?q=";
-        private string apiKey = ConfigurationManager.AppSettings["openWeatherMap:apiKey"];
+        private const string BaseUrl = "http://api.openweathermap.org/data/2.5/weather?q=";
+        private readonly string _apiKey = ConfigurationManager.AppSettings["openWeatherMap:_apiKey"];
 
 
         // TODO - Could turn this into a utility method
@@ -91,7 +91,7 @@ namespace BuddyBot.Services
 
         public async Task<string> GetWeatherByCityInformation(City city)
         {
-            string url = $"{baseUrl}{city.Name},{city.Country}&appid={apiKey}";
+            string url = $"{BaseUrl}{city.Name},{city.Country}&appid={_apiKey}";
 
             try
             {

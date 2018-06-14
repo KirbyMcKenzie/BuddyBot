@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Luis.Models;
 using BuddyBot.Helpers;
+using static System.Threading.Thread;
 
 namespace BuddyBot.Dialogs
 {
@@ -24,7 +25,6 @@ namespace BuddyBot.Dialogs
             await Respond(context);
         }
 
-        //TODO - Check best practise to see if this should be renamed to MessagedRecievedAsync
         public async Task Respond(IDialogContext context)
         {
             var messageNumberList = new List<int>();
@@ -43,7 +43,10 @@ namespace BuddyBot.Dialogs
 
                 var randomNumber = new Random().Next(_min, _max);
 
+                
                 await context.PostAsync($"Picking a random number between {_min} & {_max}... 🎲");
+
+                Sleep(1500);
                 context.Done(randomNumber);
             }
             else
@@ -65,6 +68,8 @@ namespace BuddyBot.Dialogs
             var randomNumber = new Random().Next(_min, _max);
 
             await context.PostAsync($"Generating a random number between {_min} & {_max}... 🎲");
+
+            Sleep(1500);
             context.Done(randomNumber);
         }
     }

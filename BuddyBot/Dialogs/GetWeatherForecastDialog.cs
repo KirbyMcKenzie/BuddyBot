@@ -70,11 +70,7 @@ namespace BuddyBot.Dialogs
             context.Done(message.Text);
         }
 
-
-
-        
-
-
+        // TODO - Move these to helperclass
         private static IList<Attachment> GetCardsAttachments()
         {
             return new List<Attachment>()
