@@ -112,6 +112,9 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Random.HeadsTails")]
         public async Task HeadsTails(IDialogContext context, LuisResult result)
         {
+            //TODO - remove dependency 
+            IHeadTailsService headTails = new HeadTailsService();
+
             //TODO - replace with different responses each time
             //TODO - move to seperate dialog
             await context.PostAsync("Flipping a coin.. 🤞");
@@ -120,8 +123,7 @@ namespace BuddyBot.Dialogs
             await context.PostAsync("The result is...");
             Sleep(Pause.ShortMediumPause);
 
-            //TODO - remove dependency 
-            IHeadTailsService headTails = new HeadTailsService();
+            
             await context.PostAsync(await headTails.GetRandomHeadsTails());
 
             context.Wait(MessageReceived);
