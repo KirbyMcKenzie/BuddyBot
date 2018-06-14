@@ -21,7 +21,6 @@ namespace BuddyBot.Services
     public class WeatherService : IWeatherService
     {
 
-        // TODO - Replace key
         private const string baseUrl = "http://api.openweathermap.org/data/2.5/weather?q=";
         private string apiKey = ConfigurationManager.AppSettings["openWeatherMap:apiKey"];
 
