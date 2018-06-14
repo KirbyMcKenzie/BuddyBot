@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Luis;
@@ -10,6 +9,9 @@ using Microsoft.Bot.Connector;
 using BuddyBot.Services;
 using BuddyBot.Contracts;
 using BuddyBot.Helpers;
+using static System.Threading.Thread;
+using Pause = BuddyBot.Models.ConversationPauseConstants;
+
 
 namespace BuddyBot.Dialogs
 {
@@ -113,9 +115,10 @@ namespace BuddyBot.Dialogs
             //TODO - replace with different responses each time
             //TODO - move to seperate dialog
             await context.PostAsync("Flipping a coin.. 🤞");
-            Thread.Sleep(1000);
+
+            Sleep(Pause.ShortPause);
             await context.PostAsync("The result is...");
-            Thread.Sleep(1500);
+            Sleep(Pause.ShortMediumPause);
 
             //TODO - remove dependency 
             IHeadTailsService headTails = new HeadTailsService();

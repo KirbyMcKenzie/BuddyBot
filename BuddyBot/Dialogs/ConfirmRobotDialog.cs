@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using static System.Threading.Thread;
+using Pause = BuddyBot.Models.ConversationPauseConstants;
 
 namespace BuddyBot.Dialogs
 {
@@ -15,12 +16,12 @@ namespace BuddyBot.Dialogs
         public async Task StartAsync(IDialogContext context)
         {
             
-            await context.PostAsync("I am a Robot.");
+            await context.PostAsync("I am indeed a Robot.");
 
-            Sleep(2500);
+            Sleep(Pause.MediumLongPause);
             await context.PostAsync("Here's a selfie I took recently.");
 
-            Sleep(2500);
+            Sleep(Pause.MediumLongPause);
             IMessageActivity message = context.MakeMessage();
 
             message.Attachments.Add(new Attachment()
@@ -32,10 +33,10 @@ namespace BuddyBot.Dialogs
 
             await context.PostAsync(message);
 
-            Sleep(3000);
+            Sleep(Pause.MediumLongPause);
             await context.PostAsync("See the computer in the background?");
 
-            Sleep(2000);
+            Sleep(Pause.MediumPause);
             context.Done("I use that to reply to you");
         }
     }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Web;
 
-namespace BuddyBot.Models.Enums
+namespace BuddyBot.Models
 {
     /// <summary>
     ///  Constants for use in conjuction with <see cref="Thread.Sleep"/> to maintain

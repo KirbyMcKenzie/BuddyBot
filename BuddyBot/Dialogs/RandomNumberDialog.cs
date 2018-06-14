@@ -6,6 +6,7 @@ using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Luis.Models;
 using BuddyBot.Helpers;
 using static System.Threading.Thread;
+using Pause = BuddyBot.Models.ConversationPauseConstants;
 
 namespace BuddyBot.Dialogs
 {
@@ -46,7 +47,7 @@ namespace BuddyBot.Dialogs
                 
                 await context.PostAsync($"Picking a random number between {_min} & {_max}... 🎲");
 
-                Sleep(1500);
+                Sleep(Pause.ShortMediumPause);
                 context.Done(randomNumber);
             }
             else
@@ -69,7 +70,7 @@ namespace BuddyBot.Dialogs
 
             await context.PostAsync($"Generating a random number between {_min} & {_max}... 🎲");
 
-            Sleep(1500);
+            Sleep(Pause.ShortMediumPause);
             context.Done(randomNumber);
         }
     }
