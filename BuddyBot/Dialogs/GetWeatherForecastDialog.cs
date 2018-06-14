@@ -24,7 +24,6 @@ namespace BuddyBot.Dialogs
             _entities = entities;
         }
 
-
         public async Task StartAsync(IDialogContext context)
         {
 
