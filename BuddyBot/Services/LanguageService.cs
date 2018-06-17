@@ -98,7 +98,6 @@ namespace BuddyBot.Services
                 "Sup m8",
                 "Sup",
                 "What up? 🤖",
-                "What new?",
                 "Yo",
                 "Yo 😎",
                 "What can I do for you? 🤖",
@@ -119,7 +118,6 @@ namespace BuddyBot.Services
 
             politeExpressionList.AddRange(new List<string>
             {
-                
                 "Cheers",
                 "Cheers 😁",
                 "Thanks 😁",

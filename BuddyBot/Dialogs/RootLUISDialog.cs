@@ -71,6 +71,32 @@ namespace BuddyBot.Dialogs
             context.Wait(MessageReceived);
         }
 
+        [LuisIntent("Greeting.HowsItResult.Bad")]
+        public async Task GreetingHowsItResultBad(IDialogContext context, LuisResult result)
+        {
+            await context.PostAsync("I'm sorry to hear that.");
+
+            context.Wait(MessageReceived);
+        }
+
+        [LuisIntent("Greeting.HowsItResult.Good")]
+        public async Task GreetingHowsItResultGood(IDialogContext context, LuisResult result)
+        {
+            await context.PostAsync("Great to hear");
+
+            context.Wait(MessageReceived);
+        }
+
+        [LuisIntent("Greeting.HowsItResult.Neutral")]
+        public async Task GreetingHowsItResultNeutral(IDialogContext context, LuisResult result)
+        {
+            await context.PostAsync("How can I help today?");
+
+            context.Wait(MessageReceived);
+        }
+
+        
+
         [LuisIntent("GetStarted")]
         public async Task GetStarted(IDialogContext context, LuisResult result)
         {
