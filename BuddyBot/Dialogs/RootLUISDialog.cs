@@ -46,8 +46,8 @@ namespace BuddyBot.Dialogs
         public async Task Appreciation(IDialogContext context, LuisResult result)
         {
 
-            ILanguageService language = new LanguageService();
-            await context.PostAsync(await language.GetPoliteExpression());
+            IConversationService conversation = new ConversationService();
+            await context.PostAsync(await conversation.GetPoliteExpression());
 
             context.Wait(MessageReceived);
         }
@@ -56,8 +56,8 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Greeting")]
         public async Task Greeting(IDialogContext context, LuisResult result)
         {
-            ILanguageService language = new LanguageService();
-            await context.PostAsync(await language.GetGreeting());
+            IConversationService conversation = new ConversationService();
+            await context.PostAsync(await conversation.GetGreeting());
 
             context.Wait(MessageReceived);
         }
@@ -65,8 +65,8 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Greeting.HowsItPrompt")]
         public async Task GreetingHowsItPrompt(IDialogContext context, LuisResult result)
         {
-            ILanguageService language = new LanguageService();
-            await context.PostAsync(await language.GetHowsItPrompt());
+            IConversationService conversation = new ConversationService();
+            await context.PostAsync(await conversation.GetHowsItPrompt());
 
             context.Wait(MessageReceived);
         }
@@ -82,8 +82,8 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Greeting.HowsItResult.Good")]
         public async Task GreetingHowsItResultGood(IDialogContext context, LuisResult result)
         {
-            ILanguageService language = new LanguageService();
-            await context.PostAsync(await language.GetHowsItResultGood());
+            IConversationService conversation = new ConversationService();
+            await context.PostAsync(await conversation.GetHowsItResultGood());
 
             context.Wait(MessageReceived);
         }

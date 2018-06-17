@@ -7,7 +7,7 @@ using Microsoft.Bot.Connector;
 
 namespace BuddyBot.Contracts
 {
-    public interface ILanguageService
+    public interface IConversationService
     {
         Task<string> GetGreeting();
 
