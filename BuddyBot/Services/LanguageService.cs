@@ -52,6 +52,21 @@ namespace BuddyBot.Services
             return randomString;
         }
 
+        public async Task<string> GetHowsItResultGood()
+        {
+            IList<string> greetingList = getHowsItResultGoodList();
+
+            // add items to the list
+            Random r = new Random();
+            int index = r.Next(greetingList.Count);
+            string randomString = greetingList[index];
+
+            await Task.Yield();
+
+            return randomString;
+        }
+
+
         // TODO - Pull to db 
         // TODO - Get users name
         // TODO - Emoji detection and handler
@@ -127,5 +142,24 @@ namespace BuddyBot.Services
 
             return politeExpressionList;
         }
+
+        // TODO - Pull to db 
+        // TODO - Get users name
+        // TODO - Emoji detection and handler
+        private List<string> getHowsItResultGoodList()
+        {
+
+            List<string> howsItResultGoodList = new List<string>();
+
+            howsItResultGoodList.AddRange(new List<string>
+            {
+                "That's great 😁",
+                "Good to hear, what can I do for you?",
+                "Thats cool 😎",
+            });
+
+            return howsItResultGoodList;
+        }
+
     }
 }

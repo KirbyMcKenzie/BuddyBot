@@ -14,5 +14,8 @@ namespace BuddyBot.Contracts
         Task<string> GetPoliteExpression();
 
         Task<string> GetHowsItPrompt();
+
+        Task<string> GetHowsItResultGood();
+
     }
 }
