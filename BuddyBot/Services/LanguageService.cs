@@ -112,11 +112,9 @@ namespace BuddyBot.Services
                 "Howdy!",
                 "Sup m8",
                 "Sup",
-                "What up? 🤖",
                 "Yo",
                 "Yo 😎",
                 "What can I do for you? 🤖",
-                "How's it?",
                 "G'day M8"
             });
 

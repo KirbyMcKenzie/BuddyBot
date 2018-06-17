@@ -82,7 +82,8 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Greeting.HowsItResult.Good")]
         public async Task GreetingHowsItResultGood(IDialogContext context, LuisResult result)
         {
-            await context.PostAsync("Great to hear");
+            ILanguageService language = new LanguageService();
+            await context.PostAsync(await language.GetHowsItResultGood());
 
             context.Wait(MessageReceived);
         }
