@@ -40,7 +40,7 @@ namespace BuddyBot.Services
 
         public async Task<string> GetHowsItPrompt()
         {
-            IList<string> greetingList = getGreetingList();
+            IList<string> greetingList = GetHowsItPromptList();
 
             // add items to the list
             Random r = new Random();
@@ -58,20 +58,22 @@ namespace BuddyBot.Services
         private List<string> GetHowsItPromptList()
         {
 
-            List<string> greetingList = new List<string>();
+            List<string> howsItPromptList = new List<string>();
 
-            greetingList.AddRange(new List<string>
+            howsItPromptList.AddRange(new List<string>
             {
                 // TODO Get - users name and add to string 
                 // TODO - Add more
-                "Good thanks! you?",
+                "I'm well thanks 😀",
                 "I'm good thanks 😊 how are you?",
                 "It's good, you?",
                 "gr8 m8 u?",
-                "Not bad, not bad, what about you?",
+                "Can't complain, you?",
+                "I'm well thank you, how are you?",
+                "I'm doing fine, how are you today?"
             });
 
-            return greetingList;
+            return howsItPromptList;
         }
 
 
