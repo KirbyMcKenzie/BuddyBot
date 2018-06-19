@@ -82,10 +82,13 @@ namespace BuddyBot.Services
                 "I'm well thanks 😀",
                 "I'm good thanks 😊 how are you?",
                 "It's good, you?",
+                "I'm good thanks! you?",
                 "gr8 m8 u?",
                 "Can't complain, you?",
                 "I'm well thank you, how are you?",
-                "I'm doing fine, how are you today?"
+                "I'm doing fine, how are you today?",
+                "I'm alright, you?",
+                "Good good, how are you?",
             });
 
             return howsItPromptList;
