@@ -89,6 +89,7 @@ namespace BuddyBot.Services
                 "I'm doing fine, how are you today?",
                 "I'm alright, you?",
                 "Good good, how are you?",
+                "I'm very good, how are you?",
             });
 
             return howsItPromptList;
@@ -117,6 +118,7 @@ namespace BuddyBot.Services
                 "Sup",
                 "Yo",
                 "Yo 😎",
+                "Yo Yo",
                 "What can I do for you? 🤖",
                 "G'day M8"
             });
@@ -139,6 +141,7 @@ namespace BuddyBot.Services
                 "Thanks 😁",
                 "Thanks M8",
                 "Thank you 😁",
+                "Thanks, it means a lot 😊",
             });
 
             return politeExpressionList;
@@ -155,8 +158,12 @@ namespace BuddyBot.Services
             howsItResultGoodList.AddRange(new List<string>
             {
                 "That's great 😁",
+                "That's great 😁 What can I do for you?",
                 "Good to hear, what can I do for you?",
                 "Thats cool 😎",
+                "Nice 😊",
+                "Nice 😊 what do you want me to do for you?",
+                "Good 😁 What can I do for you today?",
             });
 
             return howsItResultGoodList;
