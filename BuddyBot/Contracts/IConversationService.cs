@@ -17,5 +17,7 @@ namespace BuddyBot.Contracts
 
         Task<string> GetHowsItResultGood();
 
+        Task<string> GetHowsItResultBad();
+
     }
 }

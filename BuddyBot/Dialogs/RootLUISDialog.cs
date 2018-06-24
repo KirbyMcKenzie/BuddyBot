@@ -74,7 +74,8 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Greeting.HowsItResult.Bad")]
         public async Task GreetingHowsItResultBad(IDialogContext context, LuisResult result)
         {
-            await context.PostAsync("I'm sorry to hear that.");
+            IConversationService conversation = new ConversationService();
+            await context.PostAsync(await conversation.GetHowsItResultBad());
 
             context.Wait(MessageReceived);
         }
