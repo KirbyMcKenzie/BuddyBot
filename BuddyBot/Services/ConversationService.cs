@@ -191,6 +191,10 @@ namespace BuddyBot.Services
             howsItResultBadList.AddRange(new List<string>
             {
                 "I'm sorry to hear",
+                "Thats no good! 😥 Is there anything I can do for you?",
+                "That sucks 😓",
+                "No good! 😓",
+                
             });
 
             return howsItResultBadList;
