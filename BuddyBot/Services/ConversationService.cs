@@ -66,6 +66,20 @@ namespace BuddyBot.Services
             return randomString;
         }
 
+        public async Task<string> GetHowsItResultBad()
+        {
+            IList<string> greetingList = getHowsItResultBadList();
+
+            // add items to the list
+            Random r = new Random();
+            int index = r.Next(greetingList.Count);
+            string randomString = greetingList[index];
+
+            await Task.Yield();
+
+            return randomString;
+        }
+
 
         // TODO - Pull to db 
         // TODO - Get users name
@@ -160,6 +174,19 @@ namespace BuddyBot.Services
             });
 
             return howsItResultGoodList;
+        }
+
+        private List<string> getHowsItResultBadList()
+        {
+
+            List<string> howsItResultBadList = new List<string>();
+
+            howsItResultBadList.AddRange(new List<string>
+            {
+                "I'm sorry to hear",
+            });
+
+            return howsItResultBadList;
         }
 
     }
