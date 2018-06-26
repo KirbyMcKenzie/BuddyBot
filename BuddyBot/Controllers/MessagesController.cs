@@ -1,9 +1,12 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Autofac;
 using BuddyBot.Dialogs;
 using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Builder.Dialogs.Internals;
 using Microsoft.Bot.Connector;
 
 namespace BuddyBot.Controllers
@@ -19,20 +22,29 @@ namespace BuddyBot.Controllers
         {
             if (activity.Type == ActivityTypes.Message)
             {
-                await Conversation.SendAsync(activity, () =>
-                    new ExceptionHandlerDialog<object>(
-                        new RootLuisDialog(),
-                        displayException: true));
+                try
+                {
+                    using (ILifetimeScope scope = DialogModule.BeginLifetimeScope(Conversation.Container, activity))
+                    {
+                        await Conversation.SendAsync(activity, () => scope.Resolve<RootLuisDialog>());
+                    }
+                }
+                catch (Exception e)
+                {
+                    // TODO - Add Logging, Telemetry
+                    throw;
+                }
             }
             else
             {
-                HandleSystemMessage(activity);
+                await HandleSystemMessage(activity);
             }
             var response = Request.CreateResponse(HttpStatusCode.OK);
             return response;
         }
 
-        private Activity HandleSystemMessage(Activity message)
+        // TODO - Make Async
+        private Task<Activity> HandleSystemMessage(Activity message)
         {
             if (message.Type == ActivityTypes.DeleteUserData)
             {
