@@ -1,0 +1,33 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using Autofac;
+using BuddyBot.Dialogs.Interfaces;
+using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Builder.Dialogs.Internals;
+using Microsoft.Bot.Connector;
+
+namespace BuddyBot.Dialogs.Builders
+{
+    public class DialogBuilder: IDialogBuilder
+    {
+        public ConfirmRobotDialog BuildConfirmRobotDialog(IMessageActivity message, string prompt, List<string> options)
+        {
+            return CreateDialog(message, s => s.Resolve<ConfirmRobotDialog>(TypedParameter.From(prompt)));
+        }
+
+        private T CreateDialog<T>(IMessageActivity message, Func<ILifetimeScope, T> func)
+        {
+            using (var scope = CreateDialogLifetimeScope(message))
+            {
+                return func(scope);
+            }
+        }
+
+        private static ILifetimeScope CreateDialogLifetimeScope(IMessageActivity message)
+        {
+            return DialogModule.BeginLifetimeScope(Conversation.Container, message);
+        }
+    }
+}
