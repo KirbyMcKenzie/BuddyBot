@@ -23,7 +23,7 @@ namespace BuddyBot.Modules
             builder.RegisterType<RootLuisDialog>().AsSelf().InstancePerDependency();
 
             builder.RegisterType<ConfirmRobotDialog>().AsSelf().InstancePerDependency();
-
+            builder.RegisterType<RandomNumberDialog>().AsSelf().InstancePerDependency();
         }
     }
 }
