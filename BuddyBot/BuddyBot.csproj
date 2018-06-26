@@ -132,7 +132,6 @@
     <Compile Include="Contracts\IConversationService.cs" />
     <Compile Include="Contracts\IWeatherService.cs" />
     <Compile Include="Dialogs\Builders\DialogBuilder.cs" />
-    <Compile Include="Dialogs\ExceptionHandlerDialog.cs" />
     <Compile Include="Dialogs\GetWeatherForecastDialog.cs" />
     <Compile Include="Dialogs\Builders\IDialogBuilder.cs" />
     <Compile Include="Models\City.cs" />
