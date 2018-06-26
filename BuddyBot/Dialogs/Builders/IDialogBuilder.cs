@@ -8,6 +8,7 @@ namespace BuddyBot.Dialogs.Interfaces
 {
     public interface IDialogBuilder
     {
-        ConfirmRobotDialog BuildConfirmRobotDialog(IMessageActivity message, string prompt, List<string> options);
+
+        ConfirmRobotDialog BuildConfirmRobotDialog(IMessageActivity message);
     }
 }

@@ -10,11 +10,11 @@ using Microsoft.Bot.Connector;
 
 namespace BuddyBot.Dialogs.Builders
 {
-    public class DialogBuilder: IDialogBuilder
+    public class DialogBuilder : IDialogBuilder
     {
-        public ConfirmRobotDialog BuildConfirmRobotDialog(IMessageActivity message, string prompt, List<string> options)
+        public ConfirmRobotDialog BuildConfirmRobotDialog(IMessageActivity message)
         {
-            return CreateDialog(message, s => s.Resolve<ConfirmRobotDialog>(TypedParameter.From(prompt)));
+            return CreateDialog(message, s => s.Resolve<ConfirmRobotDialog>());
         }
 
         private T CreateDialog<T>(IMessageActivity message, Func<ILifetimeScope, T> func)
