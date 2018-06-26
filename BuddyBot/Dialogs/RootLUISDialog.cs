@@ -8,7 +8,9 @@ using Microsoft.Bot.Builder.Luis.Models;
 using Microsoft.Bot.Connector;
 using BuddyBot.Services;
 using BuddyBot.Contracts;
+using BuddyBot.Dialogs.Interfaces;
 using BuddyBot.Helpers;
+using Microsoft.Bot.Builder.Internals.Fibers;
 using static System.Threading.Thread;
 using Pause = BuddyBot.Models.ConversationPauseConstants;
 
@@ -18,10 +20,13 @@ namespace BuddyBot.Dialogs
     [Serializable]
     public class RootLuisDialog : LuisDialog<object>
     {
-        public RootLuisDialog() : base(new LuisService(new LuisModelAttribute(
+        private readonly IDialogBuilder _dialogBuilder;
+
+        public RootLuisDialog(IDialogBuilder dialogBuilder) : base(new LuisService(new LuisModelAttribute(
             ConfigurationManager.AppSettings["luis:ModelId"],
             ConfigurationManager.AppSettings["luis:SubscriptionId"])))
         {
+            SetField.NotNull(out _dialogBuilder, nameof(dialogBuilder), dialogBuilder);
         }
 
         [LuisIntent("")]
@@ -45,7 +50,6 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Bot.Praise")]
         public async Task Appreciation(IDialogContext context, LuisResult result)
         {
-
             IConversationService conversation = new ConversationService();
             await context.PostAsync(await conversation.GetPoliteExpression());
 
@@ -182,7 +186,8 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Random.Number")]
         public async Task RandomNumber(IDialogContext context, LuisResult result)
         {
-            context.Call(new RandomNumberDialog(result.Entities), Resume_AfterRandomNumberDialog);
+           //context.Call(new RandomNumberDialog(result.Entities), Resume_AfterRandomNumberDialog);
+            context.Call(_dialogBuilder.BuildRandomNumberDialog(GetMessageActivity(context), result.Entities), Resume_AfterRandomNumberDialog);
             await Task.Yield();
         }
 
@@ -211,8 +216,7 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Miscellaneous.ConfirmRobot")]
         public async Task ConfirmRobot(IDialogContext context, LuisResult result)
         {
-            context.Call(new ConfirmRobotDialog(), Resume_ConfirmRobotDialog);
-
+            context.Call(_dialogBuilder.BuildConfirmRobotDialog(GetMessageActivity(context)), Resume_ConfirmRobotDialog);
             await Task.Yield();
         }
 
@@ -249,7 +253,8 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Weather.GetForecast")]
         public async Task GetWeatherForecast(IDialogContext context, LuisResult result)
         {
-            context.Call(new GetWeatherForecastDialog(result.Entities), Resume_AfterGetForecastDialog);
+            //context.Call(new GetWeatherForecastDialog(result.Entities), Resume_AfterGetForecastDialog);
+            context.Call(_dialogBuilder.BuilGetWeatherForecastDialog(GetMessageActivity(context), result.Entities), Resume_AfterGetForecastDialog);
             await Task.Yield();
         }
 
@@ -260,6 +265,11 @@ namespace BuddyBot.Dialogs
             await context.PostAsync(weatherResult);
 
             context.Wait(MessageReceived);
+        }
+
+        private static IMessageActivity GetMessageActivity(IDialogContext context)
+        {
+            return context.Activity.AsMessageActivity();
         }
     }
 }

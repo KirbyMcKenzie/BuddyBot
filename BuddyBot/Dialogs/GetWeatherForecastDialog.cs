@@ -35,27 +35,27 @@ namespace BuddyBot.Dialogs
 
             await context.PostAsync($"I've found {cityInformation.Count} results for {cities.FirstOrDefault()}");
 
-            //List<CardAction> cardOptionsList = new List<CardAction>();
+            List<CardAction> cardOptionsList = new List<CardAction>();
 
 
-            //foreach (var city in cityInformation)
-            //{
-            //    cardOptionsList.Add(new CardAction(ActionTypes.ImBack,
-            //        title: $"{city.Name}, {city.Country}",
-            //        value: $"{city.Name}, {city.Country}"));
-            //};
+            foreach (var city in cityInformation)
+            {
+                cardOptionsList.Add(new CardAction(ActionTypes.ImBack,
+                    title: $"{city.Name}, {city.Country}",
+                    value: $"{city.Name}, {city.Country}"));
+            };
 
-            //    HeroCard card = new HeroCard
-            //    {
-            //        Title = $"I found {cityInformation.Count} results for '{cityInformation.FirstOrDefault() ?.Name}'",
-            //        Subtitle = "please select your closest location",
-            //        Buttons = cardOptionsList
-            //    };
+            HeroCard card = new HeroCard
+            {
+                Title = $"I found {cityInformation.Count} results for '{cityInformation.FirstOrDefault()?.Name}'",
+                Subtitle = "please select your closest location",
+                Buttons = cardOptionsList
+            };
 
 
-            //   var message = context.MakeMessage();
-            //   message.Attachments.Add(card.ToAttachment());
-            //   await context.PostAsync(message);
+            var message = context.MakeMessage();
+            message.Attachments.Add(card.ToAttachment());
+            await context.PostAsync(message);
 
             context.Wait(this.MessageReceivedAsync);
 
