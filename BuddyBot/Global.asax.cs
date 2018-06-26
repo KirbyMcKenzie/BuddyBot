@@ -25,7 +25,7 @@ namespace BuddyBot
             containerBuilder.RegisterModule(new ReflectionSurrogateModule());
             containerBuilder.RegisterModule(new DialogModule());
 
-            containerBuilder.RegisterModule<DialogsModule>();
+            containerBuilder.RegisterModule<ApplicationModule>();
         }
     }
 }

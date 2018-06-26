@@ -10,6 +10,7 @@ using BuddyBot.Services;
 using BuddyBot.Contracts;
 using BuddyBot.Dialogs.Interfaces;
 using BuddyBot.Helpers;
+using Microsoft.Bot.Builder.Internals.Fibers;
 using static System.Threading.Thread;
 using Pause = BuddyBot.Models.ConversationPauseConstants;
 
@@ -25,7 +26,7 @@ namespace BuddyBot.Dialogs
             ConfigurationManager.AppSettings["luis:ModelId"],
             ConfigurationManager.AppSettings["luis:SubscriptionId"])))
         {
-            _dialogBuilder = dialogBuilder;
+            SetField.NotNull(out _dialogBuilder, nameof(dialogBuilder), dialogBuilder);
         }
 
         [LuisIntent("")]

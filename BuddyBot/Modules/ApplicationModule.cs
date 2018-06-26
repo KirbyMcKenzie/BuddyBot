@@ -10,7 +10,7 @@ using Microsoft.Bot.Builder.Internals.Fibers;
 
 namespace BuddyBot.Modules
 {
-    public class DialogsModule : Module
+    public class ApplicationModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
@@ -21,6 +21,8 @@ namespace BuddyBot.Modules
                 .AsImplementedInterfaces().SingleInstance();
 
             builder.RegisterType<RootLuisDialog>().AsSelf().InstancePerDependency();
+
+            builder.RegisterType<ConfirmRobotDialog>().AsSelf().InstancePerDependency();
 
         }
     }
