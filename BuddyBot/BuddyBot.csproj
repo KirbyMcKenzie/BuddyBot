@@ -46,6 +46,9 @@
     <Reference Include="Autofac, Version=4.8.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.4.8.0\lib\net45\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="Autofac.Integration.WebApi, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.WebApi2.4.0.1\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
+    </Reference>
     <Reference Include="Chronic, Version=0.3.2.0, Culture=neutral, PublicKeyToken=3bd1f1ef638b0d3c, processorArchitecture=MSIL">
       <HintPath>$(SolutionDir)\packages\Chronic.Signed.0.3.2\lib\net40\Chronic.dll</HintPath>
     </Reference>
@@ -128,11 +131,14 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Contracts\IConversationService.cs" />
     <Compile Include="Contracts\IWeatherService.cs" />
+    <Compile Include="Dialogs\Builders\DialogBuilder.cs" />
     <Compile Include="Dialogs\ExceptionHandlerDialog.cs" />
     <Compile Include="Dialogs\GetWeatherForecastDialog.cs" />
+    <Compile Include="Dialogs\Builders\IDialogBuilder.cs" />
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\Dtos\WeatherDto.cs" />
     <Compile Include="Models\ConversationPauseConstants.cs" />
+    <Compile Include="Modules\DialogsModule.cs" />
     <Compile Include="Services\ConversationService.cs" />
     <Compile Include="Services\WeatherService.cs" />
     <Compile Include="Controllers\MessagesController.cs" />

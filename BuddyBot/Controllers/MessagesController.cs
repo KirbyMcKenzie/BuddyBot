@@ -37,14 +37,14 @@ namespace BuddyBot.Controllers
             }
             else
             {
-                await HandleSystemMessage(activity);
+                HandleSystemMessage(activity);
             }
             var response = Request.CreateResponse(HttpStatusCode.OK);
             return response;
         }
 
         // TODO - Make Async
-        private Task<Activity> HandleSystemMessage(Activity message)
+        private Activity HandleSystemMessage(Activity message)
         {
             if (message.Type == ActivityTypes.DeleteUserData)
             {
