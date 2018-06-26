@@ -186,8 +186,8 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Random.Number")]
         public async Task RandomNumber(IDialogContext context, LuisResult result)
         {
-           context.Call(new RandomNumberDialog(result.Entities), Resume_AfterRandomNumberDialog);
-            //context.Call(_dialogBuilder.BuildRandomNumberDialog());
+           //context.Call(new RandomNumberDialog(result.Entities), Resume_AfterRandomNumberDialog);
+            context.Call(_dialogBuilder.BuildRandomNumberDialog(GetMessageActivity(context), result.Entities), Resume_AfterRandomNumberDialog);
             await Task.Yield();
         }
 
@@ -253,7 +253,8 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Weather.GetForecast")]
         public async Task GetWeatherForecast(IDialogContext context, LuisResult result)
         {
-            context.Call(new GetWeatherForecastDialog(result.Entities), Resume_AfterGetForecastDialog);
+            //context.Call(new GetWeatherForecastDialog(result.Entities), Resume_AfterGetForecastDialog);
+            context.Call(_dialogBuilder.BuilGetWeatherForecastDialog(GetMessageActivity(context), result.Entities), Resume_AfterGetForecastDialog);
             await Task.Yield();
         }
 

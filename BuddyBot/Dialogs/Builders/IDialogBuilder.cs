@@ -11,9 +11,10 @@ namespace BuddyBot.Dialogs.Interfaces
     {
         ConfirmRobotDialog BuildConfirmRobotDialog(IMessageActivity message);
 
-        GetWeatherForecastDialog BuilGetWeatherForecastDialog(IMessageActivity message, LuisResult result);
+        GetWeatherForecastDialog BuilGetWeatherForecastDialog(IMessageActivity message,
+            IList<EntityRecommendation> result);
 
-        RandomNumberDialog BuildRandomNumberDialog(IMessageActivity message, LuisResult result);
+        RandomNumberDialog BuildRandomNumberDialog(IMessageActivity message, IList<EntityRecommendation> result);
 
         
 

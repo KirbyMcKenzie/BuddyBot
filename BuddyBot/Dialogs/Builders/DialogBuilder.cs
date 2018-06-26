@@ -18,12 +18,13 @@ namespace BuddyBot.Dialogs.Builders
             return CreateDialog(message, s => s.Resolve<ConfirmRobotDialog>());
         }
 
-        public GetWeatherForecastDialog BuilGetWeatherForecastDialog(IMessageActivity message, LuisResult result)
+        public GetWeatherForecastDialog BuilGetWeatherForecastDialog(IMessageActivity message,
+            IList<EntityRecommendation> result)
         {
             return CreateDialog(message, s => s.Resolve<GetWeatherForecastDialog>(TypedParameter.From(result)));
         }
 
-        public RandomNumberDialog BuildRandomNumberDialog(IMessageActivity message, LuisResult result)
+        public RandomNumberDialog BuildRandomNumberDialog(IMessageActivity message, IList<EntityRecommendation> result)
         {
             return CreateDialog(message, s => s.Resolve<RandomNumberDialog>(TypedParameter.From(result)));
         }
