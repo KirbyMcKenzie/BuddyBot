@@ -9,9 +9,13 @@ namespace BuddyBot.Dialogs.Interfaces
 {
     public interface IDialogBuilder
     {
+        ConfirmRobotDialog BuildConfirmRobotDialog(IMessageActivity message);
+
+        GetWeatherForecastDialog BuilGetWeatherForecastDialog(IMessageActivity message, LuisResult result);
+
         RandomNumberDialog BuildRandomNumberDialog(IMessageActivity message, LuisResult result);
 
-        ConfirmRobotDialog BuildConfirmRobotDialog(IMessageActivity message);
+        
 
     }
 }
