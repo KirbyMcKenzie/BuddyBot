@@ -1,5 +1,4 @@
-﻿using BuddyBot.Contracts;
-using BuddyBot.Services;
+﻿using BuddyBot.Services;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Luis.Models;
 using System;
@@ -9,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using BuddyBot.Models;
+using BuddyBot.Services.Contracts;
 using Microsoft.Bot.Connector;
 
 namespace BuddyBot.Dialogs

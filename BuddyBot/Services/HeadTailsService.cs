@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using BuddyBot.Contracts;
+using BuddyBot.Services.Contracts;
 
 namespace BuddyBot.Services
 {
