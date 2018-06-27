@@ -161,8 +161,6 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Random.HeadsTails")]
         public async Task HeadsTails(IDialogContext context, LuisResult result)
         {
-            //TODO - remove dependency 
-            IHeadTailsService headTails = new HeadTailsService();
 
             //TODO - replace with different responses each time
             //TODO - move to seperate dialog
@@ -173,7 +171,7 @@ namespace BuddyBot.Dialogs
             Sleep(Pause.ShortMediumPause);
 
             
-            await context.PostAsync(await headTails.GetRandomHeadsTails());
+            await context.PostAsync(await _headTailsService.GetRandomHeadsTails());
 
             context.Wait(MessageReceived);
         }
@@ -181,10 +179,8 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Random.Joke")]
         public async Task Joke(IDialogContext context, LuisResult result)
         {
-            //TODO - remove dependency
-            IJokeService joke = new JokeService();
 
-            await context.PostAsync(await joke.GetRandomJoke());
+            await context.PostAsync(await _jokeService.GetRandomJoke());
 
             context.Wait(MessageReceived);
         }
@@ -192,7 +188,6 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Random.Number")]
         public async Task RandomNumber(IDialogContext context, LuisResult result)
         {
-           //context.Call(new RandomNumberDialog(result.Entities), Resume_AfterRandomNumberDialog);
             context.Call(_dialogBuilder.BuildRandomNumberDialog(GetMessageActivity(context), result.Entities), Resume_AfterRandomNumberDialog);
             await Task.Yield();
         }
@@ -259,7 +254,6 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Weather.GetForecast")]
         public async Task GetWeatherForecast(IDialogContext context, LuisResult result)
         {
-            //context.Call(new GetWeatherForecastDialog(result.Entities), Resume_AfterGetForecastDialog);
             context.Call(_dialogBuilder.BuilGetWeatherForecastDialog(GetMessageActivity(context), result.Entities), Resume_AfterGetForecastDialog);
             await Task.Yield();
         }
