@@ -23,11 +23,13 @@ namespace BuddyBot.Dialogs
         private readonly IDialogBuilder _dialogBuilder;
         private readonly IConversationService _conversationService;
         private readonly IHeadTailsService _headTailsService;
+        private readonly IJokeService _jokeService;
 
         public RootLuisDialog(
             IDialogBuilder dialogBuilder, 
             IConversationService conversationService,
-            IHeadTailsService headTailsService) 
+            IHeadTailsService headTailsService,
+            IJokeService jokeService) 
             : base(new LuisService(new LuisModelAttribute(
             ConfigurationManager.AppSettings["luis:ModelId"],
             ConfigurationManager.AppSettings["luis:SubscriptionId"])))
@@ -35,6 +37,7 @@ namespace BuddyBot.Dialogs
             SetField.NotNull(out _dialogBuilder, nameof(dialogBuilder), dialogBuilder);
             SetField.NotNull(out _conversationService, nameof(conversationService), conversationService);
             SetField.NotNull(out _headTailsService, nameof(headTailsService), headTailsService);
+            SetField.NotNull(out _jokeService, nameof(jokeService), jokeService);
         }
 
         [LuisIntent("")]

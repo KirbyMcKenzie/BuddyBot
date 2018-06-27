@@ -28,6 +28,10 @@ namespace BuddyBot.Modules
                 .Keyed<IHeadTailsService>(FiberModule.Key_DoNotSerialize)
                 .AsImplementedInterfaces().SingleInstance();
 
+            builder.RegisterType<JokeService>()
+                .Keyed<IJokeService>(FiberModule.Key_DoNotSerialize)
+                .AsImplementedInterfaces().SingleInstance();
+
             // Builders 
             builder.RegisterType<DialogBuilder>()
                 .Keyed<IDialogBuilder>(FiberModule.Key_DoNotSerialize)
