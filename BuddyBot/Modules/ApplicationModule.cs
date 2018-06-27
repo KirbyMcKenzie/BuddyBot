@@ -6,7 +6,10 @@ using Autofac;
 using BuddyBot.Dialogs;
 using BuddyBot.Dialogs.Builders;
 using BuddyBot.Dialogs.Interfaces;
+using BuddyBot.Services;
+using BuddyBot.Services.Contracts;
 using Microsoft.Bot.Builder.Internals.Fibers;
+using Microsoft.Bot.Connector;
 
 namespace BuddyBot.Modules
 {
@@ -18,6 +21,10 @@ namespace BuddyBot.Modules
 
             builder.RegisterType<DialogBuilder>()
                 .Keyed<IDialogBuilder>(FiberModule.Key_DoNotSerialize)
+                .AsImplementedInterfaces().SingleInstance();
+
+            builder.RegisterType<ConversationService>()
+                .Keyed<IConversationService>(FiberModule.Key_DoNotSerialize)
                 .AsImplementedInterfaces().SingleInstance();
 
             builder.RegisterType<RootLuisDialog>().AsSelf().InstancePerDependency();
