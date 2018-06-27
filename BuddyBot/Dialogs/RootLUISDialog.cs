@@ -22,14 +22,19 @@ namespace BuddyBot.Dialogs
     {
         private readonly IDialogBuilder _dialogBuilder;
         private readonly IConversationService _conversationService;
+        private readonly IHeadTailsService _headTailsService;
 
-        public RootLuisDialog(IDialogBuilder dialogBuilder, IConversationService conversationService) 
+        public RootLuisDialog(
+            IDialogBuilder dialogBuilder, 
+            IConversationService conversationService,
+            IHeadTailsService headTailsService) 
             : base(new LuisService(new LuisModelAttribute(
             ConfigurationManager.AppSettings["luis:ModelId"],
             ConfigurationManager.AppSettings["luis:SubscriptionId"])))
         {
             SetField.NotNull(out _dialogBuilder, nameof(dialogBuilder), dialogBuilder);
             SetField.NotNull(out _conversationService, nameof(conversationService), conversationService);
+            SetField.NotNull(out _headTailsService, nameof(headTailsService), headTailsService);
         }
 
         [LuisIntent("")]

@@ -19,16 +19,24 @@ namespace BuddyBot.Modules
         {
             base.Load(builder);
 
-            builder.RegisterType<DialogBuilder>()
-                .Keyed<IDialogBuilder>(FiberModule.Key_DoNotSerialize)
-                .AsImplementedInterfaces().SingleInstance();
-
+            // Services 
             builder.RegisterType<ConversationService>()
                 .Keyed<IConversationService>(FiberModule.Key_DoNotSerialize)
                 .AsImplementedInterfaces().SingleInstance();
 
+            builder.RegisterType<HeadTailsService>()
+                .Keyed<IHeadTailsService>(FiberModule.Key_DoNotSerialize)
+                .AsImplementedInterfaces().SingleInstance();
+
+            // Builders 
+            builder.RegisterType<DialogBuilder>()
+                .Keyed<IDialogBuilder>(FiberModule.Key_DoNotSerialize)
+                .AsImplementedInterfaces().SingleInstance();
+
+            // Root Dialog
             builder.RegisterType<RootLuisDialog>().AsSelf().InstancePerDependency();
 
+            // Child Dialogs
             builder.RegisterType<ConfirmRobotDialog>().AsSelf().InstancePerDependency();
             builder.RegisterType<RandomNumberDialog>().AsSelf().InstancePerDependency();
             builder.RegisterType<GetWeatherForecastDialog>().AsSelf().InstancePerDependency();
