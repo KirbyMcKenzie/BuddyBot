@@ -7,9 +7,9 @@ using Microsoft.Bot.Builder.Luis;
 using Microsoft.Bot.Builder.Luis.Models;
 using Microsoft.Bot.Connector;
 using BuddyBot.Services;
-using BuddyBot.Contracts;
 using BuddyBot.Dialogs.Interfaces;
 using BuddyBot.Helpers;
+using BuddyBot.Services.Contracts;
 using Microsoft.Bot.Builder.Internals.Fibers;
 using static System.Threading.Thread;
 using Pause = BuddyBot.Models.ConversationPauseConstants;
@@ -21,12 +21,23 @@ namespace BuddyBot.Dialogs
     public class RootLuisDialog : LuisDialog<object>
     {
         private readonly IDialogBuilder _dialogBuilder;
+        private readonly IConversationService _conversationService;
+        private readonly IHeadTailsService _headTailsService;
+        private readonly IJokeService _jokeService;
 
-        public RootLuisDialog(IDialogBuilder dialogBuilder) : base(new LuisService(new LuisModelAttribute(
+        public RootLuisDialog(
+            IDialogBuilder dialogBuilder, 
+            IConversationService conversationService,
+            IHeadTailsService headTailsService,
+            IJokeService jokeService) 
+            : base(new LuisService(new LuisModelAttribute(
             ConfigurationManager.AppSettings["luis:ModelId"],
             ConfigurationManager.AppSettings["luis:SubscriptionId"])))
         {
             SetField.NotNull(out _dialogBuilder, nameof(dialogBuilder), dialogBuilder);
+            SetField.NotNull(out _conversationService, nameof(conversationService), conversationService);
+            SetField.NotNull(out _headTailsService, nameof(headTailsService), headTailsService);
+            SetField.NotNull(out _jokeService, nameof(jokeService), jokeService);
         }
 
         [LuisIntent("")]
@@ -50,8 +61,7 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Bot.Praise")]
         public async Task Appreciation(IDialogContext context, LuisResult result)
         {
-            IConversationService conversation = new ConversationService();
-            await context.PostAsync(await conversation.GetPoliteExpression());
+            await context.PostAsync(await _conversationService.GetPoliteExpression());
 
             context.Wait(MessageReceived);
         }
@@ -60,8 +70,7 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Greeting")]
         public async Task Greeting(IDialogContext context, LuisResult result)
         {
-            IConversationService conversation = new ConversationService();
-            await context.PostAsync(await conversation.GetGreeting());
+            await context.PostAsync(await _conversationService.GetGreeting());
 
             context.Wait(MessageReceived);
         }
@@ -69,8 +78,7 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Greeting.HowsItPrompt")]
         public async Task GreetingHowsItPrompt(IDialogContext context, LuisResult result)
         {
-            IConversationService conversation = new ConversationService();
-            await context.PostAsync(await conversation.GetHowsItPrompt());
+            await context.PostAsync(await _conversationService.GetHowsItPrompt());
 
             context.Wait(MessageReceived);
         }
@@ -78,8 +86,7 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Greeting.HowsItResult.Bad")]
         public async Task GreetingHowsItResultBad(IDialogContext context, LuisResult result)
         {
-            IConversationService conversation = new ConversationService();
-            await context.PostAsync(await conversation.GetHowsItResultBad());
+            await context.PostAsync(await _conversationService.GetHowsItResultBad());
 
             context.Wait(MessageReceived);
         }
@@ -87,8 +94,7 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Greeting.HowsItResult.Good")]
         public async Task GreetingHowsItResultGood(IDialogContext context, LuisResult result)
         {
-            IConversationService conversation = new ConversationService();
-            await context.PostAsync(await conversation.GetHowsItResultGood());
+            await context.PostAsync(await _conversationService.GetHowsItResultGood());
 
             context.Wait(MessageReceived);
         }
@@ -155,8 +161,6 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Random.HeadsTails")]
         public async Task HeadsTails(IDialogContext context, LuisResult result)
         {
-            //TODO - remove dependency 
-            IHeadTailsService headTails = new HeadTailsService();
 
             //TODO - replace with different responses each time
             //TODO - move to seperate dialog
@@ -167,7 +171,7 @@ namespace BuddyBot.Dialogs
             Sleep(Pause.ShortMediumPause);
 
             
-            await context.PostAsync(await headTails.GetRandomHeadsTails());
+            await context.PostAsync(await _headTailsService.GetRandomHeadsTails());
 
             context.Wait(MessageReceived);
         }
@@ -175,10 +179,8 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Random.Joke")]
         public async Task Joke(IDialogContext context, LuisResult result)
         {
-            //TODO - remove dependency
-            IJokeService joke = new JokeService();
 
-            await context.PostAsync(await joke.GetRandomJoke());
+            await context.PostAsync(await _jokeService.GetRandomJoke());
 
             context.Wait(MessageReceived);
         }
@@ -186,7 +188,6 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Random.Number")]
         public async Task RandomNumber(IDialogContext context, LuisResult result)
         {
-           //context.Call(new RandomNumberDialog(result.Entities), Resume_AfterRandomNumberDialog);
             context.Call(_dialogBuilder.BuildRandomNumberDialog(GetMessageActivity(context), result.Entities), Resume_AfterRandomNumberDialog);
             await Task.Yield();
         }
@@ -253,7 +254,6 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Weather.GetForecast")]
         public async Task GetWeatherForecast(IDialogContext context, LuisResult result)
         {
-            //context.Call(new GetWeatherForecastDialog(result.Entities), Resume_AfterGetForecastDialog);
             context.Call(_dialogBuilder.BuilGetWeatherForecastDialog(GetMessageActivity(context), result.Entities), Resume_AfterGetForecastDialog);
             await Task.Yield();
         }

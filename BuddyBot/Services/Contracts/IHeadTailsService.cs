@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace BuddyBot.Contracts
+namespace BuddyBot.Services.Contracts
 {
     public interface IHeadTailsService
     {

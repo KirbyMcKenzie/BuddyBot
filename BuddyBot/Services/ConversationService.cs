@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
-using BuddyBot.Contracts;
+using BuddyBot.Services.Contracts;
 
 namespace BuddyBot.Services
 {
@@ -155,7 +155,6 @@ namespace BuddyBot.Services
                 "Thanks 😁",
                 "Thanks M8",
                 "Thank you 😁",
-                "Thanks, it means a lot 😊",
             });
 
             return politeExpressionList;

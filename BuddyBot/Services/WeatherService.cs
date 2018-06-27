@@ -1,5 +1,4 @@
-﻿using BuddyBot.Contracts;
-using BuddyBot.Models.Dtos;
+﻿using BuddyBot.Models.Dtos;
 
 using Microsoft.Bot.Builder.Luis.Models;
 using Newtonsoft.Json;
@@ -15,6 +14,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using BuddyBot.Models;
+using BuddyBot.Services.Contracts;
 
 namespace BuddyBot.Services
 {

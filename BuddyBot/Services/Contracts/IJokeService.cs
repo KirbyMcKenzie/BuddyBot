@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace BuddyBot.Contracts
+namespace BuddyBot.Services.Contracts
 {
     public interface IJokeService
     {

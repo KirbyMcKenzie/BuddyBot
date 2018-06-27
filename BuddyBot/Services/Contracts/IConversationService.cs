@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using Microsoft.Bot.Connector;
+﻿using System.Threading.Tasks;
 
-namespace BuddyBot.Contracts
+namespace BuddyBot.Services.Contracts
 {
     public interface IConversationService
     {

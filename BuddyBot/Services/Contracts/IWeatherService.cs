@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using BuddyBot.Models;
 using Microsoft.Bot.Builder.Luis.Models;
 
-namespace BuddyBot.Contracts
+namespace BuddyBot.Services.Contracts
 {
     public interface IWeatherService 
     {

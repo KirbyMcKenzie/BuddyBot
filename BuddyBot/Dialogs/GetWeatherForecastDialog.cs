@@ -1,5 +1,4 @@
-﻿using BuddyBot.Contracts;
-using BuddyBot.Services;
+﻿using BuddyBot.Services;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Luis.Models;
 using System;
@@ -9,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using BuddyBot.Models;
+using BuddyBot.Services.Contracts;
 using Microsoft.Bot.Connector;
 
 namespace BuddyBot.Dialogs
@@ -16,22 +16,24 @@ namespace BuddyBot.Dialogs
     [Serializable]
     public class GetWeatherForecastDialog : IDialog<string>
     {
+        private readonly IWeatherService _weatherService;
         private readonly IList<EntityRecommendation> _entities;
         private City _city;
 
-        public GetWeatherForecastDialog(IList<EntityRecommendation> entities)
+        public GetWeatherForecastDialog(
+            IWeatherService weatherService,
+            IList<EntityRecommendation> entities)
         {
+            _weatherService = weatherService;
             _entities = entities;
         }
 
         public async Task StartAsync(IDialogContext context)
         {
 
-            IWeatherService weatherService = new WeatherService();
+            var cities = _weatherService.GetCitiesFromEntityResults(_entities);
 
-            var cities = weatherService.GetCitiesFromEntityResults(_entities);
-
-            IList<City> cityInformation = weatherService.GetDetailedCityInformation(cities);
+            IList<City> cityInformation = _weatherService.GetDetailedCityInformation(cities);
 
             await context.PostAsync($"I've found {cityInformation.Count} results for {cities.FirstOrDefault()}");
 
@@ -51,7 +53,6 @@ namespace BuddyBot.Dialogs
                 Subtitle = "please select your closest location",
                 Buttons = cardOptionsList
             };
-
 
             var message = context.MakeMessage();
             message.Attachments.Add(card.ToAttachment());
