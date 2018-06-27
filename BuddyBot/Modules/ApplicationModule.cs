@@ -32,6 +32,10 @@ namespace BuddyBot.Modules
                 .Keyed<IJokeService>(FiberModule.Key_DoNotSerialize)
                 .AsImplementedInterfaces().SingleInstance();
 
+            builder.RegisterType<WeatherService>()
+                .Keyed<IWeatherService>(FiberModule.Key_DoNotSerialize)
+                .AsImplementedInterfaces().SingleInstance();
+
             // Builders 
             builder.RegisterType<DialogBuilder>()
                 .Keyed<IDialogBuilder>(FiberModule.Key_DoNotSerialize)
