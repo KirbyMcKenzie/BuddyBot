@@ -21,12 +21,15 @@ namespace BuddyBot.Dialogs
     public class RootLuisDialog : LuisDialog<object>
     {
         private readonly IDialogBuilder _dialogBuilder;
+        private readonly IConversationService _conversationService;
 
-        public RootLuisDialog(IDialogBuilder dialogBuilder) : base(new LuisService(new LuisModelAttribute(
+        public RootLuisDialog(IDialogBuilder dialogBuilder, IConversationService conversationService) 
+            : base(new LuisService(new LuisModelAttribute(
             ConfigurationManager.AppSettings["luis:ModelId"],
             ConfigurationManager.AppSettings["luis:SubscriptionId"])))
         {
             SetField.NotNull(out _dialogBuilder, nameof(dialogBuilder), dialogBuilder);
+            SetField.NotNull(out _conversationService, nameof(conversationService), conversationService);
         }
 
         [LuisIntent("")]
@@ -50,8 +53,7 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Bot.Praise")]
         public async Task Appreciation(IDialogContext context, LuisResult result)
         {
-            IConversationService conversation = new ConversationService();
-            await context.PostAsync(await conversation.GetPoliteExpression());
+            await context.PostAsync(await _conversationService.GetPoliteExpression());
 
             context.Wait(MessageReceived);
         }
@@ -60,8 +62,7 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Greeting")]
         public async Task Greeting(IDialogContext context, LuisResult result)
         {
-            IConversationService conversation = new ConversationService();
-            await context.PostAsync(await conversation.GetGreeting());
+            await context.PostAsync(await _conversationService.GetGreeting());
 
             context.Wait(MessageReceived);
         }
@@ -69,8 +70,7 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Greeting.HowsItPrompt")]
         public async Task GreetingHowsItPrompt(IDialogContext context, LuisResult result)
         {
-            IConversationService conversation = new ConversationService();
-            await context.PostAsync(await conversation.GetHowsItPrompt());
+            await context.PostAsync(await _conversationService.GetHowsItPrompt());
 
             context.Wait(MessageReceived);
         }
@@ -78,8 +78,7 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Greeting.HowsItResult.Bad")]
         public async Task GreetingHowsItResultBad(IDialogContext context, LuisResult result)
         {
-            IConversationService conversation = new ConversationService();
-            await context.PostAsync(await conversation.GetHowsItResultBad());
+            await context.PostAsync(await _conversationService.GetHowsItResultBad());
 
             context.Wait(MessageReceived);
         }
@@ -87,8 +86,7 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Greeting.HowsItResult.Good")]
         public async Task GreetingHowsItResultGood(IDialogContext context, LuisResult result)
         {
-            IConversationService conversation = new ConversationService();
-            await context.PostAsync(await conversation.GetHowsItResultGood());
+            await context.PostAsync(await _conversationService.GetHowsItResultGood());
 
             context.Wait(MessageReceived);
         }

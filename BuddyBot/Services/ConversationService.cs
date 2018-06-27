@@ -155,7 +155,6 @@ namespace BuddyBot.Services
                 "Thanks 😁",
                 "Thanks M8",
                 "Thank you 😁",
-                "Thanks, it means a lot 😊",
             });
 
             return politeExpressionList;
