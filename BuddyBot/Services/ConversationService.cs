@@ -175,7 +175,6 @@ namespace BuddyBot.Services
                 "Good to hear, what can I do for you?",
                 "Thats cool 😎",
                 "Nice 😊",
-                "Nice 😊 what do you want me to do for you?",
                 "Good 😁 What can I do for you today?",
             });
 
