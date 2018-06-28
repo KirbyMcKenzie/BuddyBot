@@ -129,5 +129,10 @@ namespace BuddyBot.Services
                 return "I'm having problems accessing weather reports. Please try again later";
             }
         }
+
+        public async Task<string> GetWeather(string messageText)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

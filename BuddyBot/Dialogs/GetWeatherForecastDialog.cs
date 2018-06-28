@@ -65,7 +65,7 @@ namespace BuddyBot.Dialogs
         {
             var message = await result;
 
-            _weatherService.GetWeather(message.Text);
+            await _weatherService.GetWeather(message.Text);
 
             context.Done($"The weather in {message.Text} right now is");
         }
