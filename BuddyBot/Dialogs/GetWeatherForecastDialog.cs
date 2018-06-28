@@ -35,18 +35,17 @@ namespace BuddyBot.Dialogs
 
             IList<City> cityInformation = _weatherService.GetDetailedCityInformation(cities);
 
-            await context.PostAsync($"I've found {cityInformation.Count} results for {cities.FirstOrDefault()}");
-
             List<CardAction> cardOptionsList = new List<CardAction>();
 
 
             foreach (var city in cityInformation)
             {
                 cardOptionsList.Add(new CardAction(ActionTypes.ImBack,
-                    title: $"{city.Name}, {city.Country}",
-                    value: $"{city.Name}, {city.Country}"));
+                    title: $"{city.Name},{city.Country}",
+                    value: $"{city.Name},{city.Country}"));
             };
 
+            // TODO - Change type of card
             HeroCard card = new HeroCard
             {
                 Title = $"I found {cityInformation.Count} results for '{cityInformation.FirstOrDefault()?.Name}'",
@@ -65,9 +64,10 @@ namespace BuddyBot.Dialogs
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
             var message = await result;
-            await context.PostAsync("Your answer: " + message);
 
-            context.Done(message.Text);
+            _weatherService.GetWeather(message.Text);
+
+            context.Done($"The weather in {message.Text} right now is");
         }
 
         // TODO - Move these to helperclass

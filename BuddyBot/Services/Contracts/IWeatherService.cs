@@ -12,5 +12,7 @@ namespace BuddyBot.Services.Contracts
         IList<City> GetDetailedCityInformation(IList<string> cities);
 
         Task<string> GetWeatherByCityInformation(City city);
+
+        Task<string> GetWeather(string messageText);
     }
 }
