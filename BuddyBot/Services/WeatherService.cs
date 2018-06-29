@@ -64,7 +64,7 @@ namespace BuddyBot.Services
                         string itemTitle = (string) products[i]["name"];
                         string itemCountry = (string) products[i]["country"];
 
-                        if (itemTitle.Contains(city.Name))
+                        if (itemTitle.Contains(cityName))
                         {
                             city.Id = itemId;
                             city.Name = itemTitle;
@@ -74,7 +74,7 @@ namespace BuddyBot.Services
                     return city;
 
                 }
-                // TODO - do something with this
+                // TODO - Actually do something with exception
                 catch (Exception ex)
                 {
                     return null;
