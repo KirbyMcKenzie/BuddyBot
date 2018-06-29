@@ -43,16 +43,14 @@ namespace BuddyBot.Services
                 }
             }
 
-            return "Please one city to get weather from";
+            return "Please specify one city to get weather from";
 
         }
 
-        public IList<City> GetDetailedCityInformation(IList<string> cities)
+        public City GetDetailedCityInformation(string cityName, string countryCode = null)
         {
-            IList<City> cityList = new List<City>();
+            City city = new City();
 
-            foreach (var city in cities)
-            {
                 try
                 {
                     string json =
@@ -66,27 +64,21 @@ namespace BuddyBot.Services
                         string itemTitle = (string) products[i]["name"];
                         string itemCountry = (string) products[i]["country"];
 
-                        if (itemTitle.Contains(city))
+                        if (itemTitle.Contains(city.Name))
                         {
-                            City cityInformation = new City()
-                            {
-                                Id = itemId,
-                                Name = itemTitle,
-                                Country = itemCountry,
-                            };
-                                cityList.Add(cityInformation);
+                            city.Id = itemId;
+                            city.Name = itemTitle;
+                            city.Country = itemCountry;
                         }
-
                     }
+                    return city;
 
                 }
+                // TODO - do something with this
                 catch (Exception ex)
                 {
                     return null;
                 }
-            }
-
-            return cityList;
         }
 
         public async Task<string> GetWeatherByCityInformation(City city)

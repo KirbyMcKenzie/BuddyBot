@@ -9,7 +9,7 @@ namespace BuddyBot.Services.Contracts
     {
         string GetCityFromEntityResults(IList<EntityRecommendation> entities);
 
-        IList<City> GetDetailedCityInformation(IList<string> cities);
+        City GetDetailedCityInformation(string cityName, string countryCode = null);
 
         Task<string> GetWeatherByCityInformation(City city);
 
