@@ -31,7 +31,7 @@ namespace BuddyBot.Dialogs
         public async Task StartAsync(IDialogContext context)
         {
 
-            var cities = _weatherService.GetCitiesFromEntityResults(_entities);
+            var cities = _weatherService.GetCityFromEntityResults(_entities);
 
             IList<City> cityInformation = _weatherService.GetDetailedCityInformation(cities);
 

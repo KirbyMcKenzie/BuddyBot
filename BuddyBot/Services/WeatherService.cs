@@ -26,9 +26,8 @@ namespace BuddyBot.Services
 
 
         // TODO - Could turn this into a utility method
-        public IList<string> GetCitiesFromEntityResults(IList<EntityRecommendation> entities)
+        public string GetCityFromEntityResults(IList<EntityRecommendation> entities)
         {
-            IList<string> cityList = new List<string>();
 
             if (entities.Count > 0 && entities.Count <= 1)
             {
@@ -39,12 +38,13 @@ namespace BuddyBot.Services
                     TextInfo cultureInfo = new CultureInfo("en-US", false).TextInfo;
                     var entityUpperResult = cultureInfo.ToTitleCase(entityResult);
 
-                    cityList.Add(entityUpperResult);
+                    return entityUpperResult;
 
                 }
             }
 
-            return cityList;
+            return "Please one city to get weather from";
+
         }
 
         public IList<City> GetDetailedCityInformation(IList<string> cities)
