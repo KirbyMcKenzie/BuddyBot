@@ -44,7 +44,7 @@ namespace BuddyBot.Dialogs
 
             var cities = _weatherService.GetCityFromEntityResults(_entities);
 
-            IList<City> cityInformation = _weatherService.GetDetailedCityInformation(cities);
+            IList<City> cityInformation = _weatherService.SearchForCitiesByName(cities);
 
             List<CardAction> cardOptionsList = new List<CardAction>();
 

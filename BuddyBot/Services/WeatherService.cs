@@ -47,9 +47,11 @@ namespace BuddyBot.Services
 
         }
 
-        public City GetDetailedCityInformation(string cityName, string countryCode = null)
+        public IList<City> SearchForCitiesByName(string cityName, string countryCode = null)
         {
             City city = new City();
+
+            IList<City> cityList = new List<City>();
 
                 try
                 {
@@ -70,8 +72,11 @@ namespace BuddyBot.Services
                             city.Name = itemTitle;
                             city.Country = itemCountry;
                         }
+
+                    cityList.Add(city);
                     }
-                    return city;
+
+                return cityList;
 
                 }
                 // TODO - Actually do something with exception
