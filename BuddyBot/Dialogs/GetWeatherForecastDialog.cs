@@ -20,6 +20,17 @@ namespace BuddyBot.Dialogs
         private readonly IList<EntityRecommendation> _entities;
         private City _city;
 
+        // TODO - WeatherDialog - Extract entities from user intent
+        // TODO - WeatherDialog - Check if pre-saved weather location matches entity city
+        // TODO - WeatherDialog - If weather matches entity city, get weather by pre-saved weather id
+        // TODO - WeatherDialog - If new location, scan json file for cities from entity input and prompt user for input
+        // TODO - WeatherDialog - User chooses their nearest city preference
+        // TODO - WeatherDialog - Extract City name and Country Code from message and query OpenWeatherMap api
+
+        // TODO - WeatherDialog - Ask to save preference
+        
+
+
         public GetWeatherForecastDialog(
             IWeatherService weatherService,
             IList<EntityRecommendation> entities)
@@ -70,7 +81,7 @@ namespace BuddyBot.Dialogs
             context.Done($"The weather in {message.Text} right now is");
         }
 
-        // TODO - Move these to helperclass
+        // TODO - Move these to helper class
         private static IList<Attachment> GetCardsAttachments()
         {
             return new List<Attachment>()
