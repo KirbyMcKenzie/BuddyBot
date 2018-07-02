@@ -49,45 +49,45 @@ namespace BuddyBot.Services
 
         public IList<City> SearchForCitiesByName(string cityName, string countryCode = null)
         {
-            City city = new City();
 
             IList<City> cityList = new List<City>();
 
-                try
+            try
+            {
+                string json =
+                    File.ReadAllText(System.Web.Hosting.HostingEnvironment.MapPath("/city.list.json")
+                    ?? throw new InvalidOperationException());
+
+                IList<JObject> products = JsonConvert.DeserializeObject<List<JObject>>(json);
+
+                for (int i = 0; i < products.Count; i++)
                 {
-                    string json =
-                        File.ReadAllText(System.Web.Hosting.HostingEnvironment.MapPath("/city.list.json") 
-                        ?? throw new InvalidOperationException());
+                    string itemId = (string)products[i]["id"];
+                    string itemTitle = (string)products[i]["name"];
+                    string itemCountry = (string)products[i]["country"];
 
-                    IList<JObject> products = JsonConvert.DeserializeObject<List<JObject>>(json);
-
-                    for (int i = 0; i < products.Count; i++)
+                    if (itemTitle.Contains(cityName))
                     {
-                        string itemId= (string)products[i]["id"];
-                        string itemTitle = (string) products[i]["name"];
-                        string itemCountry = (string) products[i]["country"];
-
-                        if (itemTitle.Contains(cityName))
+                        City cityInformation = new City()
                         {
-                            city.Id = itemId;
-                            city.Name = itemTitle;
-                            city.Country = itemCountry;
-                        }
+                            Id = itemId,
+                            Name = itemTitle,
+                            Country = itemCountry,
+                        };
 
-                    cityList.Add(city);
+                        cityList.Add(cityInformation);
                     }
 
-                return cityList;
-
                 }
-                // TODO - Actually do something with exception
-                catch (Exception ex)
-                {
-                    return null;
-                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            return cityList;
         }
 
-        public async Task<string> GetWeather(City city)
+    public async Task<string> GetWeather(City city)
         {
             string url = $"{BaseUrl}{city.Name},{city.Country}&appid={_apiKey}";
 
