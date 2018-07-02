@@ -11,8 +11,9 @@ namespace BuddyBot.Services.Contracts
 
         IList<City> SearchForCitiesByName(string cityName, string countryCode = null);
 
-        Task<string> GetWeatherByCityInformation(City city);
+        Task<string> GetWeather(City city);
 
-        Task<string> GetWeather(string messageText);
+        Task<string> ExtractCityFromString(string message);
+
     }
 }

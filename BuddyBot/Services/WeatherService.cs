@@ -56,7 +56,8 @@ namespace BuddyBot.Services
                 try
                 {
                     string json =
-                        File.ReadAllText(System.Web.Hosting.HostingEnvironment.MapPath("/city.list.json") ?? throw new InvalidOperationException());
+                        File.ReadAllText(System.Web.Hosting.HostingEnvironment.MapPath("/city.list.json") 
+                        ?? throw new InvalidOperationException());
 
                     IList<JObject> products = JsonConvert.DeserializeObject<List<JObject>>(json);
 
@@ -86,7 +87,7 @@ namespace BuddyBot.Services
                 }
         }
 
-        public async Task<string> GetWeatherByCityInformation(City city)
+        public async Task<string> GetWeather(City city)
         {
             string url = $"{BaseUrl}{city.Name},{city.Country}&appid={_apiKey}";
 
@@ -127,7 +128,7 @@ namespace BuddyBot.Services
             }
         }
 
-        public async Task<string> GetWeather(string messageText)
+        public Task<string> ExtractCityFromString(string message)
         {
             throw new NotImplementedException();
         }
