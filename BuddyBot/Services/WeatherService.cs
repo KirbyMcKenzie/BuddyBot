@@ -128,19 +128,21 @@ namespace BuddyBot.Services
             }
         }
 
-        public Task<City> ExtractCityFromMessagePrompt(string messagePrompt)
+        public City ExtractCityFromMessagePrompt(string messagePrompt)
         {
             var spacePosition = messagePrompt.IndexOf(' ');
 
+            var cityName = messagePrompt.Substring(0, spacePosition - 1);
+            var cityCountry = messagePrompt.Substring(messagePrompt.IndexOf(' ') + 1);
+
             City city = new City()
             {
-                // TODO - finish this
-                Name = messagePrompt.Substring(0, spacePosition - 1),
-                Country = messagePrompt.Substring(1, spacePosition - 1),
+                Name = cityName,
+                Country = cityCountry
             };
             
 
-            return Task.FromResult(city);
+            return city;
 
         }
     }

@@ -52,8 +52,8 @@ namespace BuddyBot.Dialogs
             foreach (var city in cityInformation)
             {
                 cardOptionsList.Add(new CardAction(ActionTypes.ImBack,
-                    title: $"{city.Name},{city.Country}",
-                    value: $"{city.Name},{city.Country}"));
+                    title: $"{city.Name}, {city.Country}",
+                    value: $"{city.Name}, {city.Country}"));
             };
 
             // TODO - Change type of card
@@ -76,7 +76,7 @@ namespace BuddyBot.Dialogs
         {
             var message = await result;
 
-            City city = await _weatherService.ExtractCityFromMessagePrompt(message.Text);
+            City city =  _weatherService.ExtractCityFromMessagePrompt(message.Text);
 
             await _weatherService.GetWeather(city);
 
