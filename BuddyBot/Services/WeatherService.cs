@@ -22,7 +22,7 @@ namespace BuddyBot.Services
     {
 
         private const string BaseUrl = "http://api.openweathermap.org/data/2.5/weather?q=";
-        private readonly string _apiKey = ConfigurationManager.AppSettings["openWeatherMap:_apiKey"];
+        private readonly string _apiKey = ConfigurationManager.AppSettings["openWeatherMap:apiKey"];
 
 
         // TODO - Could turn this into a utility method
