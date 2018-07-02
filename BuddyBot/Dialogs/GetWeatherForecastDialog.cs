@@ -76,11 +76,9 @@ namespace BuddyBot.Dialogs
         {
             var message = await result;
 
-            City city = _weatherService.ExtractCityFromString(message);
+            City city = await _weatherService.ExtractCityFromMessagePrompt(message.Text);
 
-
-
-            await _weatherService.GetWeather(city.Name, city.Country);
+            await _weatherService.GetWeather(city);
 
             context.Done($"The weather in {message.Text} right now is");
         }

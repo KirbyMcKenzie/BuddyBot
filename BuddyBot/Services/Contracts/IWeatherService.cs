@@ -13,7 +13,7 @@ namespace BuddyBot.Services.Contracts
 
         Task<string> GetWeather(City city);
 
-        Task<string> ExtractCityFromString(string message);
+        Task<City> ExtractCityFromMessagePrompt(string message);
 
     }
 }
