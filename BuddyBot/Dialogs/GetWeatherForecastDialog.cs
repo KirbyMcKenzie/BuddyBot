@@ -78,9 +78,9 @@ namespace BuddyBot.Dialogs
 
             City city =  _weatherService.ExtractCityFromMessagePrompt(message.Text);
 
-            await _weatherService.GetWeather(city);
+            var weatherForecast = await _weatherService.GetWeather(city);
 
-            context.Done($"The weather in {message.Text} right now is");
+            context.Done($"The weather in {message.Text} right now is {weatherForecast}");
         }
 
         // TODO - Move these to helper class

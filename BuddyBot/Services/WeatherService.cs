@@ -133,7 +133,7 @@ namespace BuddyBot.Services
             var spacePosition = messagePrompt.IndexOf(' ');
 
             var cityName = messagePrompt.Substring(0, spacePosition - 1);
-            var cityCountry = messagePrompt.Substring(messagePrompt.IndexOf(' ') + 1);
+            var cityCountry = messagePrompt.Substring(messagePrompt.IndexOf(',') + 2);
 
             City city = new City()
             {
