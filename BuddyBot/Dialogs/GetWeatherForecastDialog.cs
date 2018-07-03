@@ -18,7 +18,6 @@ namespace BuddyBot.Dialogs
     {
         private readonly IWeatherService _weatherService;
         private readonly IList<EntityRecommendation> _entities;
-        private City _city;
 
         // TODO - WeatherDialog - Check if pre-saved weather location matches entity city
         // TODO - WeatherDialog - If weather matches entity city, get weather by pre-saved weather id
@@ -35,14 +34,14 @@ namespace BuddyBot.Dialogs
         public async Task StartAsync(IDialogContext context)
         {
 
-            var cities = _weatherService.GetCityFromEntityResults(_entities);
+            string cities = _weatherService.GetCityFromEntityResults(_entities);
 
-            IList<City> cityInformation = _weatherService.SearchForCitiesByName(cities);
+            IList<City> cityResultList = _weatherService.SearchForCitiesByName(cities);
 
             List<CardAction> cardOptionsList = new List<CardAction>();
 
 
-            foreach (var city in cityInformation)
+            foreach (var city in cityResultList)
             {
                 cardOptionsList.Add(new CardAction(ActionTypes.ImBack,
                     title: $"{city.Name}, {city.Country}",
@@ -53,7 +52,7 @@ namespace BuddyBot.Dialogs
             // TODO - Think about limiting amount of cards displayed, see more button? 
             HeroCard card = new HeroCard
             {
-                Title = $"I found {cityInformation.Count} results for '{cityInformation.FirstOrDefault()?.Name}'",
+                Title = $"I found {cityResultList.Count} results for '{cityResultList.FirstOrDefault()?.Name}'",
                 Subtitle = "please select your closest location",
                 Buttons = cardOptionsList
             };
@@ -75,44 +74,6 @@ namespace BuddyBot.Dialogs
             var weatherForecast = await _weatherService.GetWeather(city);
 
             context.Done($"The weather in {message.Text} right now is {weatherForecast}");
-        }
-
-        // TODO - Move these to helper class
-        private static IList<Attachment> GetCardsAttachments()
-        {
-            return new List<Attachment>()
-            {
-                GetHeroCard(
-                    "Azure Functions",
-                    "Process events with a serverless code architecture",
-                    new CardAction(ActionTypes.PostBack, "Learn more", value: "https://azure.microsoft.com/en-us/services/functions/")),
-            };
-        }
-
-        private static Attachment GetHeroCard(string title , string text, CardAction cardAction)
-        {
-            var heroCard = new HeroCard
-            {
-                Title = title,
-                Text = text,
-                Buttons = new List<CardAction>() { cardAction },
-            };
-
-            return heroCard.ToAttachment();
-        }
-
-        private static Attachment GetThumbnailCard(string title, string subtitle, string text, CardImage cardImage, CardAction cardAction)
-        {
-            var heroCard = new ThumbnailCard
-            {
-                Title = title,
-                Subtitle = subtitle,
-                Text = text,
-                Images = new List<CardImage>() { cardImage },
-                Buttons = new List<CardAction>() { cardAction },
-            };
-
-            return heroCard.ToAttachment();
         }
     }
 }
