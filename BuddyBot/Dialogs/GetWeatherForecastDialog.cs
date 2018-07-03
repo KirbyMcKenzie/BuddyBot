@@ -20,6 +20,10 @@ namespace BuddyBot.Dialogs
         private readonly IList<EntityRecommendation> _entities;
         private City _city;
 
+        // TODO - WeatherDialog - Check if pre-saved weather location matches entity city
+        // TODO - WeatherDialog - If weather matches entity city, get weather by pre-saved weather id
+        // TODO - WeatherDialog - Ask to save preference
+
         public GetWeatherForecastDialog(
             IWeatherService weatherService,
             IList<EntityRecommendation> entities)
@@ -31,11 +35,9 @@ namespace BuddyBot.Dialogs
         public async Task StartAsync(IDialogContext context)
         {
 
-            var cities = _weatherService.GetCitiesFromEntityResults(_entities);
+            var cities = _weatherService.GetCityFromEntityResults(_entities);
 
-            IList<City> cityInformation = _weatherService.GetDetailedCityInformation(cities);
-
-            await context.PostAsync($"I've found {cityInformation.Count} results for {cities.FirstOrDefault()}");
+            IList<City> cityInformation = _weatherService.SearchForCitiesByName(cities);
 
             List<CardAction> cardOptionsList = new List<CardAction>();
 
@@ -47,6 +49,8 @@ namespace BuddyBot.Dialogs
                     value: $"{city.Name}, {city.Country}"));
             };
 
+            // TODO - Change type of card
+            // TODO - Think about limiting amount of cards displayed, see more button? 
             HeroCard card = new HeroCard
             {
                 Title = $"I found {cityInformation.Count} results for '{cityInformation.FirstOrDefault()?.Name}'",
@@ -65,12 +69,15 @@ namespace BuddyBot.Dialogs
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
             var message = await result;
-            await context.PostAsync("Your answer: " + message);
 
-            context.Done(message.Text);
+            City city =  _weatherService.ExtractCityFromMessagePrompt(message.Text);
+
+            var weatherForecast = await _weatherService.GetWeather(city);
+
+            context.Done($"The weather in {message.Text} right now is {weatherForecast}");
         }
 
-        // TODO - Move these to helperclass
+        // TODO - Move these to helper class
         private static IList<Attachment> GetCardsAttachments()
         {
             return new List<Attachment>()

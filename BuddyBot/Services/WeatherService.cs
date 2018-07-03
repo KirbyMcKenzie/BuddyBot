@@ -21,14 +21,15 @@ namespace BuddyBot.Services
     public class WeatherService : IWeatherService
     {
 
+        // TODO - Move to config file
         private const string BaseUrl = "http://api.openweathermap.org/data/2.5/weather?q=";
-        private readonly string _apiKey = ConfigurationManager.AppSettings["openWeatherMap:_apiKey"];
+        private readonly string _apiKey = ConfigurationManager.AppSettings["openWeatherMap:apiKey"];
 
 
         // TODO - Could turn this into a utility method
-        public IList<string> GetCitiesFromEntityResults(IList<EntityRecommendation> entities)
+        // TODO - Get CountryCode out of entities
+        public string GetCityFromEntityResults(IList<EntityRecommendation> entities)
         {
-            IList<string> cityList = new List<string>();
 
             if (entities.Count > 0 && entities.Count <= 1)
             {
@@ -39,57 +40,58 @@ namespace BuddyBot.Services
                     TextInfo cultureInfo = new CultureInfo("en-US", false).TextInfo;
                     var entityUpperResult = cultureInfo.ToTitleCase(entityResult);
 
-                    cityList.Add(entityUpperResult);
+                    return entityUpperResult;
 
                 }
             }
 
-            return cityList;
+            return "Please specify one city to get weather from";
+
         }
 
-        public IList<City> GetDetailedCityInformation(IList<string> cities)
+        // TODO - Incorporate countrycode into serach 
+        public IList<City> SearchForCitiesByName(string cityName, string countryCode = null)
         {
+
             IList<City> cityList = new List<City>();
 
-            foreach (var city in cities)
+            try
             {
-                try
+                string json =
+                    File.ReadAllText(System.Web.Hosting.HostingEnvironment.MapPath("/city.list.json")
+                    ?? throw new InvalidOperationException());
+
+                IList<JObject> products = JsonConvert.DeserializeObject<List<JObject>>(json);
+
+                for (int i = 0; i < products.Count; i++)
                 {
-                    string json =
-                        File.ReadAllText(System.Web.Hosting.HostingEnvironment.MapPath("/city.list.json") ?? throw new InvalidOperationException());
+                    string itemId = (string)products[i]["id"];
+                    string itemTitle = (string)products[i]["name"];
+                    string itemCountry = (string)products[i]["country"];
 
-                    IList<JObject> products = JsonConvert.DeserializeObject<List<JObject>>(json);
-
-                    for (int i = 0; i < products.Count; i++)
+                    if (itemTitle.Contains(cityName))
                     {
-                        string itemId= (string)products[i]["id"];
-                        string itemTitle = (string) products[i]["name"];
-                        string itemCountry = (string) products[i]["country"];
-
-                        if (itemTitle.Contains(city))
+                        City cityInformation = new City()
                         {
-                            City cityInformation = new City()
-                            {
-                                Id = itemId,
-                                Name = itemTitle,
-                                Country = itemCountry,
-                            };
-                                cityList.Add(cityInformation);
-                        }
+                            Id = itemId,
+                            Name = itemTitle,
+                            Country = itemCountry,
+                        };
 
+                        cityList.Add(cityInformation);
                     }
 
                 }
-                catch (Exception ex)
-                {
-                    return null;
-                }
             }
-
+            catch (Exception ex)
+            {
+                return null;
+            }
             return cityList;
         }
-
-        public async Task<string> GetWeatherByCityInformation(City city)
+    
+    // TODO - Clean up this method
+    public async Task<string> GetWeather(City city)
         {
             string url = $"{BaseUrl}{city.Name},{city.Country}&appid={_apiKey}";
 
@@ -119,7 +121,9 @@ namespace BuddyBot.Services
 
                     var first = weatherDtos.FirstOrDefault();
 
-                    return $"Weather in {city.Name}: {first.description}";
+                    // TODO - Find out the different weaterh responses and map to nice descriptions
+                    // TODO - Get the temp
+                    return $"{first.description}";
                 }
 
                 return "I'm having problems accessing weather reports. Please try again later";
@@ -128,6 +132,25 @@ namespace BuddyBot.Services
             {
                 return "I'm having problems accessing weather reports. Please try again later";
             }
+        }
+
+        // TODO - Consider moving to helper/utility class
+        public City ExtractCityFromMessagePrompt(string messagePrompt)
+        {
+            var spacePosition = messagePrompt.IndexOf(' ');
+
+            var cityName = messagePrompt.Substring(0, spacePosition - 1);
+            var cityCountry = messagePrompt.Substring(messagePrompt.IndexOf(',') + 2);
+
+            City city = new City()
+            {
+                Name = cityName,
+                Country = cityCountry
+            };
+            
+
+            return city;
+
         }
     }
 }
