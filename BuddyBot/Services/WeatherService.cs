@@ -117,7 +117,7 @@ namespace BuddyBot.Services
 
                     var first = weatherDtos.FirstOrDefault();
 
-                    return $"Weather in {city.Name}: {first.description}";
+                    return $"{first.description}";
                 }
 
                 return "I'm having problems accessing weather reports. Please try again later";
