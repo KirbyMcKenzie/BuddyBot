@@ -20,16 +20,9 @@ namespace BuddyBot.Dialogs
         private readonly IList<EntityRecommendation> _entities;
         private City _city;
 
-        // TODO - WeatherDialog - Extract entities from user intent
         // TODO - WeatherDialog - Check if pre-saved weather location matches entity city
         // TODO - WeatherDialog - If weather matches entity city, get weather by pre-saved weather id
-        // TODO - WeatherDialog - If new location, scan json file for cities from entity input and prompt user for input
-        // TODO - WeatherDialog - User chooses their nearest city preference
-        // TODO - WeatherDialog - Extract City name and Country Code from message and query OpenWeatherMap api
-
         // TODO - WeatherDialog - Ask to save preference
-        
-
 
         public GetWeatherForecastDialog(
             IWeatherService weatherService,
@@ -57,6 +50,7 @@ namespace BuddyBot.Dialogs
             };
 
             // TODO - Change type of card
+            // TODO - Think about limiting amount of cards displayed, see more button? 
             HeroCard card = new HeroCard
             {
                 Title = $"I found {cityInformation.Count} results for '{cityInformation.FirstOrDefault()?.Name}'",

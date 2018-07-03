@@ -21,11 +21,13 @@ namespace BuddyBot.Services
     public class WeatherService : IWeatherService
     {
 
+        // TODO - Move to config file
         private const string BaseUrl = "http://api.openweathermap.org/data/2.5/weather?q=";
         private readonly string _apiKey = ConfigurationManager.AppSettings["openWeatherMap:apiKey"];
 
 
         // TODO - Could turn this into a utility method
+        // TODO - Get CountryCode out of entities
         public string GetCityFromEntityResults(IList<EntityRecommendation> entities)
         {
 
@@ -47,6 +49,7 @@ namespace BuddyBot.Services
 
         }
 
+        // TODO - Incorporate countrycode into serach 
         public IList<City> SearchForCitiesByName(string cityName, string countryCode = null)
         {
 
@@ -86,7 +89,8 @@ namespace BuddyBot.Services
             }
             return cityList;
         }
-
+    
+    // TODO - Clean up this method
     public async Task<string> GetWeather(City city)
         {
             string url = $"{BaseUrl}{city.Name},{city.Country}&appid={_apiKey}";
@@ -117,6 +121,8 @@ namespace BuddyBot.Services
 
                     var first = weatherDtos.FirstOrDefault();
 
+                    // TODO - Find out the different weaterh responses and map to nice descriptions
+                    // TODO - Get the temp
                     return $"{first.description}";
                 }
 
@@ -128,6 +134,7 @@ namespace BuddyBot.Services
             }
         }
 
+        // TODO - Consider moving to helper/utility class
         public City ExtractCityFromMessagePrompt(string messagePrompt)
         {
             var spacePosition = messagePrompt.IndexOf(' ');
