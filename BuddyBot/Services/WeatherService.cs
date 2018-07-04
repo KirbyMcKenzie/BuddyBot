@@ -92,47 +92,43 @@ namespace BuddyBot.Services
     // TODO - Clean up this method
     public async Task<string> GetWeather(City city)
         {
-            string url = $"{_baseUrl}{city.Name},{city.Country}&appid={_apiKey}";
+            string requestUri = $"{_baseUrl}{city.Name},{city.Country}&appid={_apiKey}";
 
             try
             {
-                HttpClient client = new HttpClient { BaseAddress = new Uri(url) };
+                HttpClient client = new HttpClient { BaseAddress = new Uri(requestUri) };
                 client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage response = await client.GetAsync(url);
+                HttpResponseMessage response = await client.GetAsync(requestUri);
                 if (response.IsSuccessStatusCode)
                 {
                     String weatherString = await response.Content.ReadAsStringAsync();
 
                     JObject parsedString = JObject.Parse(weatherString);
 
-                    IList<JToken> results = parsedString["weather"].Children().ToList();
-
-                    IList<WeatherDto> weatherDtos = new List<WeatherDto>();
-
-                    foreach (JToken result in results)
-                    {
-                        // JToken.ToObject is a helper method that uses JsonSerializer internally
-                        WeatherDto weatherDto = result.ToObject<WeatherDto>();
-                        weatherDtos.Add(weatherDto);
-                    }
-
-                    var first = weatherDtos.FirstOrDefault();
+                    JToken result = parsedString["weather"].FirstOrDefault();
 
                     // TODO - Find out the different weaterh responses and map to nice descriptions
                     // TODO - Get the temp
-                    return $"{first.description}";
+                    if (result != null)
+                    {
+                        WeatherDto weatherResult = result.ToObject<WeatherDto>();
+
+                        return weatherResult.description;
+                    }
                 }
 
                 return "I'm having problems accessing weather reports. Please try again later";
             }
             catch (Exception ex)
             {
+
                 return "I'm having problems accessing weather reports. Please try again later";
             }
         }
 
+        // TODO - Names like "New York, US" is not parsing correctly
         // TODO - Consider moving to helper/utility class
         public City ExtractCityFromMessagePrompt(string messagePrompt)
         {
@@ -146,10 +142,8 @@ namespace BuddyBot.Services
                 Name = cityName,
                 Country = cityCountry
             };
-            
 
             return city;
-
         }
     }
 }
