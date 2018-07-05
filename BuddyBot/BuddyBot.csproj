@@ -150,7 +150,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\MessageHelper.cs" />
+    <Compile Include="Helpers\MessageHelpers.cs" />
     <Compile Include="Models\Enums\OperatingSystems.cs" />
     <Compile Include="Models\Dtos\JokeDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

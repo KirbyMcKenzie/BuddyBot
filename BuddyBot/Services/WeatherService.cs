@@ -24,30 +24,6 @@ namespace BuddyBot.Services
         private readonly string _baseUrl = ConfigurationManager.AppSettings["openWeatherMap:url"];
         private readonly string _apiKey = ConfigurationManager.AppSettings["openWeatherMap:apiKey"];
 
-
-        // TODO - Could turn this into a utility method
-        // TODO - Get CountryCode out of entities
-        public string ExtractEntityFromMessage(string entityToExtract, IList<EntityRecommendation> entities)
-        {
-
-            if (entities.Count > 0 && entities.Count <= 1)
-            {
-                foreach (var entity in entities.Where(e => e.Type == entityToExtract))
-                {
-                    var entityResult = entity.Entity;
-
-                    TextInfo cultureInfo = new CultureInfo("en-US", false).TextInfo;
-                    var entityUpperResult = cultureInfo.ToTitleCase(entityResult);
-
-                    return entityUpperResult;
-
-                }
-            }
-
-            return "Please specify one city to get weather from";
-
-        }
-
         // TODO - Incorporate countrycode into serach 
         public IList<City> SearchForCitiesByName(string cityName, string countryCode = null)
         {

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using BuddyBot.Helpers;
 using BuddyBot.Models;
 using BuddyBot.Services.Contracts;
 using Microsoft.Bot.Connector;
@@ -34,7 +35,8 @@ namespace BuddyBot.Dialogs
         public async Task StartAsync(IDialogContext context)
         {
             // TODO - Rename entity name in luis
-            string cityName = _weatherService.ExtractEntityFromMessage("Weather.Location", _entities);
+            // TODO - What to do if luis cannot find entities (Get preferred?)
+            string cityName = MessageHelpers.ExtractEntityFromMessage("Weather.Location", _entities);
 
             IList<City> cityResultList = _weatherService.SearchForCitiesByName(cityName);
 
