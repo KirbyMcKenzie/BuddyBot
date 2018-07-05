@@ -50,8 +50,7 @@ namespace BuddyBot.Dialogs
 
             if (cardOptionsList.Count <= 0)
             {
-                // TODO - Make message more detailed
-                context.Done($"I couldn't find any results for '{cities}'.");
+                context.Done($"I'm sorry, I couldn't find any results for '{cities}'. Make sure everything is spelt correctly and try again 😊");
 
                 return;
             }
