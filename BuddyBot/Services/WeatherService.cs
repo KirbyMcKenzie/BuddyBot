@@ -27,12 +27,12 @@ namespace BuddyBot.Services
 
         // TODO - Could turn this into a utility method
         // TODO - Get CountryCode out of entities
-        public string GetCityFromEntityResults(IList<EntityRecommendation> entities)
+        public string ExtractEntityFromMessage(string entityToExtract, IList<EntityRecommendation> entities)
         {
 
             if (entities.Count > 0 && entities.Count <= 1)
             {
-                foreach (var entity in entities.Where(e => e.Type == "Weather.Location"))
+                foreach (var entity in entities.Where(e => e.Type == entityToExtract))
                 {
                     var entityResult = entity.Entity;
 
