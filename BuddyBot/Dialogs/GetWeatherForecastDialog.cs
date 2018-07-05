@@ -48,6 +48,14 @@ namespace BuddyBot.Dialogs
                     value: $"{city.Name}, {city.Country}"));
             };
 
+            if (cardOptionsList.Count <= 0)
+            {
+                // TODO - Make message more detailed
+                context.Done($"I couldn't find any results for '{cities}'.");
+
+                return;
+            }
+
             // TODO - Change type of card
             // TODO - Think about limiting amount of cards displayed, see more button? 
             HeroCard card = new HeroCard
