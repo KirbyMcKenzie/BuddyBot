@@ -22,7 +22,6 @@ namespace BuddyBot.Helpers
             return integersList;
         }
 
-        // TODO - Get CountryCode out of entities
         public static string ExtractEntityFromMessage(string entityToExtract, IList<EntityRecommendation> entities)
         {
 

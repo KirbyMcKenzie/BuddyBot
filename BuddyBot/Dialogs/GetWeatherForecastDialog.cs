@@ -37,6 +37,8 @@ namespace BuddyBot.Dialogs
             // TODO - Rename entity name in luis
             // TODO - What to do if luis cannot find entities (Get preferred?)
             string cityName = MessageHelpers.ExtractEntityFromMessage("Weather.Location", _entities);
+            string countryCode = MessageHelpers.ExtractEntityFromMessage("City.CountryCode", _entities);
+            string countryName = MessageHelpers.ExtractEntityFromMessage("City.CountryName", _entities);
 
             IList<City> cityResultList = _weatherService.SearchForCitiesByName(cityName);
 
