@@ -130,6 +130,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Dialogs\Builders\RichCardAttachmentBuilder.cs" />
+    <Compile Include="Models\Enums\TextCaseType.cs" />
     <Compile Include="Services\Contracts\IConversationService.cs" />
     <Compile Include="Services\Contracts\IWeatherService.cs" />
     <Compile Include="Dialogs\Builders\DialogBuilder.cs" />

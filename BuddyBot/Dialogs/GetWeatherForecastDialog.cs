@@ -11,6 +11,7 @@ using BuddyBot.Helpers;
 using BuddyBot.Models;
 using BuddyBot.Services.Contracts;
 using Microsoft.Bot.Connector;
+using BuddyBot.Models.Enums;
 
 namespace BuddyBot.Dialogs
 {
@@ -36,7 +37,7 @@ namespace BuddyBot.Dialogs
         {
             // TODO - What to do if luis cannot find entities (Get preferred?)
 
-            string cityName = MessageHelpers.ExtractEntityFromMessage("City.Name", _entities);
+            string cityName = MessageHelpers.ExtractEntityFromMessage("City.Name", _entities, TextCaseType.TitleCase);
             string countryCode = MessageHelpers.ExtractEntityFromMessage("City.CountryCode", _entities);
             string countryName = MessageHelpers.ExtractEntityFromMessage("City.CountryName", _entities);
 
