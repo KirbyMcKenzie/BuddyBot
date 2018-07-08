@@ -34,9 +34,9 @@ namespace BuddyBot.Dialogs
 
         public async Task StartAsync(IDialogContext context)
         {
-            // TODO - Rename entity name in luis
             // TODO - What to do if luis cannot find entities (Get preferred?)
-            string cityName = MessageHelpers.ExtractEntityFromMessage("Weather.Name", _entities);
+
+            string cityName = MessageHelpers.ExtractEntityFromMessage("City.Name", _entities);
             string countryCode = MessageHelpers.ExtractEntityFromMessage("City.CountryCode", _entities);
             string countryName = MessageHelpers.ExtractEntityFromMessage("City.CountryName", _entities);
 
@@ -53,7 +53,7 @@ namespace BuddyBot.Dialogs
 
             if (cardOptionsList.Count <= 0)
             {
-                context.Done($"I'm sorry, I couldn't find any results for '{cityName}'. Make sure everything is spelt correctly and try again 😊");
+                context.Done($"I'm sorry, I couldn't find any results for '{cityName}'. Make sure you've spelt everything correctly and try again 😊");
 
                 return;
             }

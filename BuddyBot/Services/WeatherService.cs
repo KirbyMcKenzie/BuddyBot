@@ -25,7 +25,7 @@ namespace BuddyBot.Services
         private readonly string _apiKey = ConfigurationManager.AppSettings["openWeatherMap:apiKey"];
 
         // TODO - Incorporate countrycode into serach 
-        public IList<City> SearchCities(string cityName, string countryCode = null, string countryName = null)
+        public IList<City> SearchForCities(string cityName, string countryCode = null, string countryName = null)
         {
 
             IList<City> cityList = new List<City>();
@@ -44,7 +44,21 @@ namespace BuddyBot.Services
                     string itemTitle = (string)products[i]["name"];
                     string itemCountry = (string)products[i]["country"];
 
-                    if (itemTitle.Contains(cityName))
+                    if(countryCode != null)
+                    {
+                        if (itemTitle.Contains(cityName) && itemCountry.Contains(countryCode))
+                        {
+                            City cityInformation = new City()
+                            {
+                                Id = itemId,
+                                Name = itemTitle,
+                                Country = itemCountry,
+                            };
+
+                            cityList.Add(cityInformation);
+                        }
+                    }
+                    else if (itemTitle.Contains(cityName))
                     {
                         City cityInformation = new City()
                         {
@@ -55,7 +69,6 @@ namespace BuddyBot.Services
 
                         cityList.Add(cityInformation);
                     }
-
                 }
             }
             catch (Exception ex)
