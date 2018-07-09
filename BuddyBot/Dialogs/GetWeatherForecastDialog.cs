@@ -102,8 +102,6 @@ namespace BuddyBot.Dialogs
                     value: $"{city.Name}, {city.Country}"));
             }
 
-           
-
             return cardOptionsList;
         }
     }
