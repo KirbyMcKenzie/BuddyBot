@@ -117,7 +117,6 @@ namespace BuddyBot.Services
             }
         }
 
-        // TODO - Names like "New York, US" is not parsing correctly
         // TODO - Consider moving to helper/utility class
         public City ExtractCityFromMessagePrompt(string messagePrompt)
         {

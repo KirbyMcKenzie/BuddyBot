@@ -1,10 +1,8 @@
-﻿using BuddyBot.Services;
-using Microsoft.Bot.Builder.Dialogs;
+﻿using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Luis.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -41,30 +39,29 @@ namespace BuddyBot.Dialogs
             string countryCode = MessageHelpers.ExtractEntityFromMessage("City.CountryCode", _entities, TextCaseType.UpperCase);
             string countryName = MessageHelpers.ExtractEntityFromMessage("City.CountryName", _entities);
 
-            IList<City> cityResultList = _weatherService.SearchForCities(cityName, countryCode, countryName);
+            IList<City> citySearchResults = _weatherService.SearchForCities(cityName, countryCode, countryName);
 
-            if (cityResultList != null && cityResultList.Count <= 0)
+            if (citySearchResults != null && citySearchResults.Count <= 0)
             {
 
                 context.Done($"I'm sorry, I couldn't find any results for '{cityName}'. " +
                              $"Make sure you've spelt everything correctly and try again 😊");
 
-            } else if (cityResultList.Count == 1)
+            } else if (citySearchResults.Count == 1)
             {
 
-                var weatherForecast = await _weatherService.GetWeather(cityResultList.FirstOrDefault());
+                var weatherForecast = await _weatherService.GetWeather(citySearchResults.FirstOrDefault());
                 context.Done($"The weather in {cityName} right now is {weatherForecast}");
 
-            } else if (cityResultList.Count >= 2)
+            } else if (citySearchResults.Count >= 2)
             {
-
                 // TODO - Change type of card
                 // TODO - Think about limiting amount of cards displayed, see more button? 
-                List<CardAction> cityCardActionList = CreateCardActionList(cityResultList);
+                List<CardAction> cityCardActionList = CreateCardActionList(citySearchResults);
 
                 HeroCard card = new HeroCard
                 {
-                    Title = $"I found {cityResultList.Count} results for '{cityName}'",
+                    Title = $"I found {citySearchResults.Count} results for '{cityName}'",
                     Subtitle = "please select your closest location",
                     Buttons = cityCardActionList
                 };
@@ -77,7 +74,6 @@ namespace BuddyBot.Dialogs
                 context.Wait(this.MessageReceivedAsync);
 
             }
-
         }
 
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
