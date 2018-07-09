@@ -27,6 +27,17 @@ namespace BuddyBot.Services
         // TODO - Incorporate countrycode into serach 
         public IList<City> SearchForCities(string cityName, string countryCode = null, string countryName = null)
         {
+            if (countryName != null)
+            {
+                var regionFullNames = CultureInfo
+                        .GetCultures(CultureTypes.SpecificCultures)
+                        .Select(x => new RegionInfo(x.LCID));
+
+                 countryCode = regionFullNames.FirstOrDefault(
+                     region => region.EnglishName.Contains(countryName)
+                 )?.ToString();
+
+            }
 
             IList<City> cityList = new List<City>();
 
