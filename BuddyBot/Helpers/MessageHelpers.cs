@@ -30,7 +30,7 @@ namespace BuddyBot.Helpers
         /// <param name="entities">Mandatory. List of Luis Entities from user input</param>
         /// <param name="TextCaseType">Optional. String output casing. E.g. "TitleCase", "Uppercase"</param>
         /// <returns></returns>
-        public static string ExtractEntityFromMessage(string entityToExtract, IList<EntityRecommendation> entities, TextCaseType TextCaseType = null)
+        public static string ExtractEntityFromMessage(string entityToExtract, IList<EntityRecommendation> entities, TextCaseType TextCaseType = TextCaseType.TitleCase)
         {
 
                 foreach (var entity in entities.Where(e => e.Type == entityToExtract))
