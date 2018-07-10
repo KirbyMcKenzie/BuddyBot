@@ -7,7 +7,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -15,6 +14,8 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using BuddyBot.Models;
 using BuddyBot.Services.Contracts;
+using BuddyBot.Helpers;
+
 
 namespace BuddyBot.Services
 {
@@ -29,14 +30,7 @@ namespace BuddyBot.Services
         {
             if (countryName != null)
             {
-                var regionFullNames = CultureInfo
-                        .GetCultures(CultureTypes.SpecificCultures)
-                        .Select(x => new RegionInfo(x.LCID));
-
-                 countryCode = regionFullNames.FirstOrDefault(
-                     region => region.EnglishName.Contains(countryName)
-                 )?.ToString();
-
+                countryCode = GlobalizationHelpers.GetCountryCode(countryName);
             }
 
             IList<City> cityList = new List<City>();
@@ -86,10 +80,12 @@ namespace BuddyBot.Services
             {
                 return null;
             }
-            return cityList;
+            
         }
-    
-    // TODO - Clean up this method
+
+        
+
+        // TODO - Clean up this method
     public async Task<string> GetWeather(City city)
         {
             string requestUri = $"{_baseUrl}{city.Name},{city.Country}&appid={_apiKey}";
