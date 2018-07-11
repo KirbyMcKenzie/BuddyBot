@@ -10,7 +10,6 @@ namespace BuddyBot.Helpers
     {
         public static string GetCountryCode(string countryName)
         {
-            
             IEnumerable<RegionInfo> regionFullNames = CultureInfo
                 .GetCultures(CultureTypes.SpecificCultures)
                 .Select(x => new RegionInfo(x.LCID));

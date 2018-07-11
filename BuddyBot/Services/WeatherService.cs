@@ -16,7 +16,6 @@ using BuddyBot.Models;
 using BuddyBot.Services.Contracts;
 using BuddyBot.Helpers;
 
-
 namespace BuddyBot.Services
 {
     public class WeatherService : IWeatherService
@@ -28,19 +27,19 @@ namespace BuddyBot.Services
         // TODO - Incorporate countrycode into serach 
         public IList<City> SearchForCities(string cityName, string countryCode = null, string countryName = null)
         {
+            IList<City> cityList = new List<City>();
+
             if (countryName != null)
             {
                 countryCode = GlobalizationHelpers.GetCountryCode(countryName);
             }
-
-            IList<City> cityList = new List<City>();
 
             try
             {
                 string json =
                     File.ReadAllText(System.Web.Hosting.HostingEnvironment.MapPath("/city.list.json")
                     ?? throw new InvalidOperationException());
-
+                
                 IList<JObject> products = JsonConvert.DeserializeObject<List<JObject>>(json);
 
                 for (int i = 0; i < products.Count; i++)
@@ -65,14 +64,14 @@ namespace BuddyBot.Services
                     }
                     else if (itemTitle.Contains(cityName))
                     {
-                        City cityInformation = new City()
+                        City city = new City()
                         {
                             Id = itemId,
                             Name = itemTitle,
                             Country = itemCountry,
                         };
 
-                        cityList.Add(cityInformation);
+                        cityList.Add(city);
                     }
                 }
             }
@@ -80,10 +79,9 @@ namespace BuddyBot.Services
             {
                 return null;
             }
-            
-        }
 
-        
+            return cityList;
+        }
 
         // TODO - Clean up this method
     public async Task<string> GetWeather(City city)
