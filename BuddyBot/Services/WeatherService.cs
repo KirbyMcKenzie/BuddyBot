@@ -24,7 +24,6 @@ namespace BuddyBot.Services
         private readonly string _baseUrl = ConfigurationManager.AppSettings["openWeatherMap:url"];
         private readonly string _apiKey = ConfigurationManager.AppSettings["openWeatherMap:apiKey"];
 
-        // TODO - Incorporate countrycode into serach 
         public IList<City> SearchForCities(string cityName, string countryCode = null, string countryName = null)
         {
             IList<City> cityList = new List<City>();
