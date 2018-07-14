@@ -5,9 +5,8 @@ using System.Web;
 
 namespace BuddyBot.Models.Enums
 {
-    public enum Temperatures
+    public enum Temperature
     {
-        Kelvin,
         Celsius,
         Fahrenheit
     }

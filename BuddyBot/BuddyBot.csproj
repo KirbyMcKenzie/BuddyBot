@@ -131,6 +131,7 @@
     <Compile Include="Dialogs\Builders\RichCardAttachmentBuilder.cs" />
     <Compile Include="Helpers\GlobalizationHelpers.cs" />
     <Compile Include="Models\Dtos\MainWeatherDto.cs" />
+    <Compile Include="Models\Enums\Temperature.cs" />
     <Compile Include="Models\Enums\TextCaseType.cs" />
     <Compile Include="Services\Contracts\IConversationService.cs" />
     <Compile Include="Services\Contracts\IWeatherService.cs" />
@@ -153,7 +154,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\MessageHelpers.cs" />
-    <Compile Include="Models\Enums\OperatingSystems.cs" />
     <Compile Include="Models\Dtos\JokeDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Contracts\IJokeService.cs" />

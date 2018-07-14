@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using BuddyBot.Models;
 using BuddyBot.Services.Contracts;
 using BuddyBot.Helpers;
+using BuddyBot.Models.Enums;
 
 namespace BuddyBot.Services
 {
@@ -114,9 +115,10 @@ namespace BuddyBot.Services
                         // TODO - Convert temperture using entity e.g. "Weather in Auckland in fahrenheit" 
                         // TODO - Map weather to a better description
 
-                        string convertedTempertureString = ConvertTemperture(mainWeatherResult.temp, "celsius");
+                        string convertedTempertureString = ConvertTemperture(mainWeatherResult.temp, Temperature.Celsius);
 
-                        return $"{mainWeatherResult.temp.ToString()} kelvin.. looking {weatherResult.description}";
+                        // TODO - override enum toString if possible
+                        return $"{convertedTempertureString} {Temperature.Celsius.ToString()} looking {weatherResult.description}";
 
                     }
                 }
@@ -127,6 +129,17 @@ namespace BuddyBot.Services
             {
 
                 return "I'm having problems accessing weather reports. Please try again later";
+            }
+        }
+
+        private string ConvertTemperture(double temp, Temperature temperatureToConvert)
+        {
+            switch (temperatureToConvert)
+            {
+                case Temperature.Fahrenheit:
+                    return (temp - 273.15 + 32).ToString(); //change
+                default:
+                    return (temp - 273.15).ToString(); //change
             }
         }
 
