@@ -114,6 +114,8 @@ namespace BuddyBot.Services
                         // TODO - Convert temperture using entity e.g. "Weather in Auckland in fahrenheit" 
                         // TODO - Map weather to a better description
 
+                        string convertedTempertureString = ConvertTemperture(mainWeatherResult.temp, "celsius");
+
                         return $"{mainWeatherResult.temp.ToString()} kelvin.. looking {weatherResult.description}";
 
                     }
