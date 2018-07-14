@@ -101,16 +101,16 @@ namespace BuddyBot.Services
                     JObject parsedString = JObject.Parse(weatherString);
 
                     JToken weatherJsonResult = parsedString["weather"].FirstOrDefault();
-                    JToken mainJsonResult = parsedString["main"].FirstOrDefault();
+                    JToken mainJsonResult = parsedString["main"].Last().Parent;
 
                     // TODO - Find out the different weaterh responses and map to nice descriptions
                     // TODO - Get the temp
-                    if (weatherJsonResult != null)
-                    {
-                        WeatherDto weatherResult = weatherJsonResult.ToObject<WeatherDto>();
+                    //if (weatherJsonResult != null)
+                    //{
+                    //    WeatherDto weatherResult = weatherJsonResult.ToObject<WeatherDto>();
 
-                        return weatherResult.description;
-                    }
+                    //    return weatherResult.description;
+                    //}
 
                     if (mainJsonResult != null)
                     {
