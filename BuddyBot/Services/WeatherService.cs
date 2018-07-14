@@ -103,20 +103,19 @@ namespace BuddyBot.Services
                     JToken weatherJsonResult = parsedString["weather"].FirstOrDefault();
                     JToken mainJsonResult = parsedString["main"].Last().Parent;
 
-                    // TODO - Find out the different weaterh responses and map to nice descriptions
+                    // TODO - Find out the different weater responses and map to nice descriptions
                     // TODO - Get the temp
-                    //if (weatherJsonResult != null)
-                    //{
-                    //    WeatherDto weatherResult = weatherJsonResult.ToObject<WeatherDto>();
-
-                    //    return weatherResult.description;
-                    //}
-
-                    if (mainJsonResult != null)
+                    if (weatherJsonResult != null && mainJsonResult != null)
                     {
+                        WeatherDto weatherResult = weatherJsonResult.ToObject<WeatherDto>();
                         MainWeatherDto mainWeatherResult = mainJsonResult.ToObject<MainWeatherDto>();
 
-                        return mainWeatherResult.temp.ToString();
+                        // TODO - Convert temperture to celius
+                        // TODO - Convert temperture using entity e.g. "Weather in Auckland in fahrenheit" 
+                        // TODO - Map weather to a better description
+
+                        return $"{mainWeatherResult.temp.ToString()} kelvin.. looking {weatherResult.description}";
+
                     }
                 }
 
