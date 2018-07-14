@@ -115,11 +115,11 @@ namespace BuddyBot.Services
                         // TODO - Convert temperture using entity e.g. "Weather in Auckland in fahrenheit" 
                         // TODO - Map weather to a better description
 
-                        string convertedTempertureString = ConvertTemperture(mainWeatherResult.temp, Temperature.Celsius);
+                        double convertedTemperture = ConvertTemperture(mainWeatherResult.temp, Temperature.Celsius);
 
                         // TODO - override enum toString if possible
-                        return $"{convertedTempertureString} {Temperature.Celsius.ToString()} looking {weatherResult.description}";
-
+                        return $"{convertedTemperture.ToString()} degrees " +
+                               $"{Temperature.Celsius.ToString().ToLower()} with {weatherResult.description}";
                     }
                 }
 
@@ -132,14 +132,14 @@ namespace BuddyBot.Services
             }
         }
 
-        private string ConvertTemperture(double temp, Temperature temperatureToConvert)
+        private double ConvertTemperture(double temp, Temperature temperatureToConvert)
         {
             switch (temperatureToConvert)
             {
                 case Temperature.Fahrenheit:
-                    return (temp - 273.15 + 32).ToString(); //change
+                    return Math.Round((temp - 273.15 + 32),1);
                 default:
-                    return (temp - 273.15).ToString(); //change
+                    return Math.Round((temp - 273.15),1); 
             }
         }
 

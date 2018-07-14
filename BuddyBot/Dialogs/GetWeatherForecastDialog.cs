@@ -84,7 +84,7 @@ namespace BuddyBot.Dialogs
 
             var weatherForecast = await _weatherService.GetWeather(city);
 
-            context.Done($"The weather in {message.Text} right now is {weatherForecast}");
+            context.Done($"Currently the weather in {message.Text} is {weatherForecast}");
         }
 
         private List<CardAction> CreateCardActionList(IList<City> cityResultList)
