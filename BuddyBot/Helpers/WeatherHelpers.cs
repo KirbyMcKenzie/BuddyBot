@@ -8,7 +8,7 @@ namespace BuddyBot.Helpers
 {
     public class WeatherHelpers
     {
-        public double ConvertTemperture(double temp, Temperature temperatureToConvert)
+        public static double ConvertTemperture(double temp, Temperature temperatureToConvert)
         {
             switch (temperatureToConvert)
             {

@@ -83,8 +83,6 @@ namespace BuddyBot.Services
             return cityList;
         }
 
-        // TODO - Clean up this method
-        // TODO - look at returning rich card
     public async Task<string> GetWeather(City city)
         {
             string requestUri = $"{_baseUrl}{city.Name},{city.Country}&appid={_apiKey}";
@@ -96,17 +94,16 @@ namespace BuddyBot.Services
                     new MediaTypeWithQualityHeaderValue("application/json"));
 
                 HttpResponseMessage response = await client.GetAsync(requestUri);
+
                 if (response.IsSuccessStatusCode)
                 {
-                    String responseJsonString = await response.Content.ReadAsStringAsync();
 
+                    String responseJsonString = await response.Content.ReadAsStringAsync();
                     JObject parsedJsonReponseString = JObject.Parse(responseJsonString);
 
                     JToken weatherDescriptionJsonResult = parsedJsonReponseString["weather"].FirstOrDefault();
                     JToken weatherTemperturesJsonResult = parsedJsonReponseString["main"].Last().Parent;
 
-                    // TODO - Find out the different weater responses and map to nice descriptions
-                    // TODO - Get the temp
                     if (weatherDescriptionJsonResult != null && weatherTemperturesJsonResult != null)
                     {
                         WeatherDescriptionDto weatherDescriptionResult = weatherDescriptionJsonResult.ToObject<WeatherDescriptionDto>();
@@ -132,21 +129,7 @@ namespace BuddyBot.Services
             }
         }
 
-        
-
         // TODO - Consider moving to helper/utility class
-        public City ExtractCityFromMessagePrompt(string messagePrompt)
-        {
-            var cityName = messagePrompt.Substring(0, messagePrompt.IndexOf(','));
-            var cityCountry = messagePrompt.Substring(messagePrompt.IndexOf(',') + 2);
-
-            City city = new City()
-            {
-                Name = cityName,
-                Country = cityCountry
-            };
-
-            return city;
-        }
+        
     }
 }

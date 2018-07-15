@@ -130,7 +130,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Dialogs\Builders\RichCardAttachmentBuilder.cs" />
     <Compile Include="Helpers\GlobalizationHelpers.cs" />
-    <Compile Include="Models\Dtos\MainWeatherDto.cs" />
+    <Compile Include="Helpers\WeatherHelpers.cs" />
+    <Compile Include="Models\Dtos\WeatherTemperatureDto.cs" />
     <Compile Include="Models\Enums\Temperature.cs" />
     <Compile Include="Models\Enums\TextCaseType.cs" />
     <Compile Include="Services\Contracts\IConversationService.cs" />
@@ -139,7 +140,7 @@
     <Compile Include="Dialogs\GetWeatherForecastDialog.cs" />
     <Compile Include="Dialogs\Builders\IDialogBuilder.cs" />
     <Compile Include="Models\City.cs" />
-    <Compile Include="Models\Dtos\WeatherDto.cs" />
+    <Compile Include="Models\Dtos\WeatherDescriptionDto.cs" />
     <Compile Include="Models\ConversationPauseConstants.cs" />
     <Compile Include="Modules\ApplicationModule.cs" />
     <Compile Include="Services\ConversationService.cs" />

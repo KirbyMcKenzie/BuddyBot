@@ -41,19 +41,20 @@ namespace BuddyBot.Dialogs
 
             IList<City> citySearchResults = _weatherService.SearchForCities(cityName, countryCode, countryName);
 
+            // TODO - Asset citySearchResults is not null once
             if (citySearchResults != null && citySearchResults.Count <= 0)
             {
 
                 context.Done($"I'm sorry, I couldn't find any results for '{cityName}'. " +
                              $"Make sure you've spelt everything correctly and try again 😊");
 
-            } else if (citySearchResults.Count == 1)
+            } else if (citySearchResults != null && citySearchResults.Count == 1)
             {
 
                 var weatherForecast = await _weatherService.GetWeather(citySearchResults.FirstOrDefault());
                 context.Done($"The weather in {cityName} right now is {weatherForecast}");
 
-            } else if (citySearchResults.Count >= 2)
+            } else if (citySearchResults != null && citySearchResults.Count >= 2)
             {
                 // TODO - Change type of card
                 // TODO - Think about limiting amount of cards displayed, see more button? 
@@ -80,7 +81,7 @@ namespace BuddyBot.Dialogs
         {
             var message = await result;
 
-            City city =  _weatherService.ExtractCityFromMessagePrompt(message.Text);
+            City city =  MessageHelpers.ExtractCityFromMessagePrompt(message.Text);
 
             var weatherForecast = await _weatherService.GetWeather(city);
 

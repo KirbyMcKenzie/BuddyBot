@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
+using BuddyBot.Models;
 
 namespace BuddyBot.Helpers
 {
@@ -57,6 +58,20 @@ namespace BuddyBot.Helpers
                 }
 
             return null;
+        }
+
+        public static City ExtractCityFromMessagePrompt(string messagePrompt)
+        {
+            var cityName = messagePrompt.Substring(0, messagePrompt.IndexOf(','));
+            var cityCountry = messagePrompt.Substring(messagePrompt.IndexOf(',') + 2);
+
+            City city = new City()
+            {
+                Name = cityName,
+                Country = cityCountry
+            };
+
+            return city;
         }
     }
 }

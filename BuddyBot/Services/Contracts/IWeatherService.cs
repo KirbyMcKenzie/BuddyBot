@@ -11,7 +11,5 @@ namespace BuddyBot.Services.Contracts
 
         Task<string> GetWeather(City city);
 
-        City ExtractCityFromMessagePrompt(string message);
-
     }
 }
