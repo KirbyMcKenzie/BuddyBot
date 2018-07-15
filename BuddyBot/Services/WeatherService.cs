@@ -84,6 +84,7 @@ namespace BuddyBot.Services
         }
 
         // TODO - Clean up this method
+        // TODO - look at returning rich card
     public async Task<string> GetWeather(City city)
         {
             string requestUri = $"{_baseUrl}{city.Name},{city.Country}&appid={_apiKey}";
@@ -101,17 +102,16 @@ namespace BuddyBot.Services
 
                     JObject parsedString = JObject.Parse(weatherString);
 
-                    JToken weatherJsonResult = parsedString["weather"].FirstOrDefault();
-                    JToken mainJsonResult = parsedString["main"].Last().Parent;
+                    JToken weatherDescriptionJsonResult = parsedString["weather"].FirstOrDefault();
+                    JToken weatherTemperturesJsonResult = parsedString["main"].Last().Parent;
 
                     // TODO - Find out the different weater responses and map to nice descriptions
                     // TODO - Get the temp
-                    if (weatherJsonResult != null && mainJsonResult != null)
+                    if (weatherDescriptionJsonResult != null && weatherTemperturesJsonResult != null)
                     {
-                        WeatherDto weatherResult = weatherJsonResult.ToObject<WeatherDto>();
-                        MainWeatherDto mainWeatherResult = mainJsonResult.ToObject<MainWeatherDto>();
+                        WeatherDescriptionDto weatherDescriptionResult = weatherDescriptionJsonResult.ToObject<WeatherDescriptionDto>();
+                        MainWeatherDto mainWeatherResult = weatherTemperturesJsonResult.ToObject<MainWeatherDto>();
 
-                        // TODO - Convert temperture to celius
                         // TODO - Convert temperture using entity e.g. "Weather in Auckland in fahrenheit" 
                         // TODO - Map weather to a better description
 
@@ -119,7 +119,7 @@ namespace BuddyBot.Services
 
                         // TODO - override enum toString if possible
                         return $"{convertedTemperture.ToString()} degrees " +
-                               $"{Temperature.Celsius.ToString().ToLower()} with {weatherResult.description}";
+                               $"{Temperature.Celsius.ToString().ToLower()} with {weatherDescriptionResult.description}";
                     }
                 }
 
