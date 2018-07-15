@@ -98,24 +98,24 @@ namespace BuddyBot.Services
                 HttpResponseMessage response = await client.GetAsync(requestUri);
                 if (response.IsSuccessStatusCode)
                 {
-                    String weatherString = await response.Content.ReadAsStringAsync();
+                    String responseJsonString = await response.Content.ReadAsStringAsync();
 
-                    JObject parsedString = JObject.Parse(weatherString);
+                    JObject parsedJsonReponseString = JObject.Parse(responseJsonString);
 
-                    JToken weatherDescriptionJsonResult = parsedString["weather"].FirstOrDefault();
-                    JToken weatherTemperturesJsonResult = parsedString["main"].Last().Parent;
+                    JToken weatherDescriptionJsonResult = parsedJsonReponseString["weather"].FirstOrDefault();
+                    JToken weatherTemperturesJsonResult = parsedJsonReponseString["main"].Last().Parent;
 
                     // TODO - Find out the different weater responses and map to nice descriptions
                     // TODO - Get the temp
                     if (weatherDescriptionJsonResult != null && weatherTemperturesJsonResult != null)
                     {
                         WeatherDescriptionDto weatherDescriptionResult = weatherDescriptionJsonResult.ToObject<WeatherDescriptionDto>();
-                        MainWeatherDto mainWeatherResult = weatherTemperturesJsonResult.ToObject<MainWeatherDto>();
+                        WeatherTemperatureDto weatherTemperatureResult = weatherTemperturesJsonResult.ToObject<WeatherTemperatureDto>();
 
                         // TODO - Convert temperture using entity e.g. "Weather in Auckland in fahrenheit" 
                         // TODO - Map weather to a better description
 
-                        double convertedTemperture = ConvertTemperture(mainWeatherResult.temp, Temperature.Celsius);
+                        double convertedTemperture = WeatherHelpers.ConvertTemperture(weatherTemperatureResult.temp, Temperature.Celsius);
 
                         // TODO - override enum toString if possible
                         return $"{convertedTemperture.ToString()} degrees " +
@@ -132,16 +132,7 @@ namespace BuddyBot.Services
             }
         }
 
-        private double ConvertTemperture(double temp, Temperature temperatureToConvert)
-        {
-            switch (temperatureToConvert)
-            {
-                case Temperature.Fahrenheit:
-                    return Math.Round((temp - 273.15 + 32),1);
-                default:
-                    return Math.Round((temp - 273.15),1); 
-            }
-        }
+        
 
         // TODO - Consider moving to helper/utility class
         public City ExtractCityFromMessagePrompt(string messagePrompt)
