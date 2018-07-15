@@ -15,6 +15,7 @@ namespace BuddyBot.Repository.DbContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<City>().ToTable("City").HasKey(_ => _.Id);
+            modelBuilder.Entity<WeatherConditionResponse>().ToTable("WeatherConditionResponse").HasKey(_ => _.Id);
 
             modelBuilder.Entity<Coordinate>()
             .HasKey(_ => new { _.Latitude, _.Longitude });
@@ -22,5 +23,6 @@ namespace BuddyBot.Repository.DbContext
         }
 
         public DbSet<City> Cities { get; set; }
+        public DbSet<WeatherConditionResponse> WeatherConditionResponses{ get; set; }
     }
 }
