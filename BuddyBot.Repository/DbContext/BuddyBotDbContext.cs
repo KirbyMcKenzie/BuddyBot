@@ -15,7 +15,17 @@ namespace BuddyBot.Repository.DbContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<City>().ToTable("City").HasKey(_ => _.Id);
+
             modelBuilder.Entity<WeatherConditionResponse>().ToTable("WeatherConditionResponse").HasKey(_ => _.Id);
+
+            modelBuilder.Entity<WeatherConditionResponse>().HasData(new WeatherConditionResponse
+            {
+                Id = 200,
+                Condition = "Rain",
+                Group = "Thunda",
+                MappedConditionResponse = "Rain "
+            });
+
 
             modelBuilder.Entity<Coordinate>()
             .HasKey(_ => new { _.Latitude, _.Longitude });
