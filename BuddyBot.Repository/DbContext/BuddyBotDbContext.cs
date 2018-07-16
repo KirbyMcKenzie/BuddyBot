@@ -21,14 +21,14 @@ namespace BuddyBot.Repository.DbContext
             modelBuilder.Entity<City>()
                 .ToTable("City").HasKey(_ => _.Id);
 
-            modelBuilder.Entity<WeatherConditionResponse>()
-                .ToTable("WeatherConditionResponse").HasKey(_ => _.Id);
-
             modelBuilder.Entity<Coordinate>()
                 .HasKey(_ => new { _.Latitude, _.Longitude });
 
+            modelBuilder.Entity<WeatherConditionResponse>()
+                .ToTable("WeatherConditionResponse").HasKey(_ => _.Id);
+
             // Seed
-            WeatherConditionResponse[] weatherConditionResponses = dbSeeder.GetWeatherConditionResponses();
+            WeatherConditionResponse[] weatherConditionResponses = dbSeeder.BuildWeatherConditionResponses();
             modelBuilder.Entity<WeatherConditionResponse>().HasData(weatherConditionResponses);
 
         }

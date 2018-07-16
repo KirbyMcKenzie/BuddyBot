@@ -1,96 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using BuddyBot.Repository.Models;
+﻿using BuddyBot.Repository.Models;
+using System;
 
 namespace BuddyBot.Repository.DbContext
 {
     public class DatabaseSeeder
     {
-        public WeatherConditionResponse[] GetWeatherConditionResponses()
+        public WeatherConditionResponse[] BuildWeatherConditionResponses()
         {
-            WeatherConditionResponse[] weatherConditionResponseList = 
+            WeatherConditionResponse[] weatherConditionResponseList =
             {
-                new WeatherConditionResponse()
-                {
-                    Id = 200,
-                    Condition = "thunderstorm with light rain",
-                    Group = "Thunderstorm",
-                    MappedConditionResponse = "thunderstorm with light rain"
-                },
-                new WeatherConditionResponse()
-                {
-                    Id = 201,
-                    Condition = "thunderstorm with rain",
-                    Group = "Thunderstorm",
-                    MappedConditionResponse = "thunderstorm with rain"
-                },
-                new WeatherConditionResponse()
-                {
-                    Id = 202,
-                    Condition = "thunderstorm with heavy rain",
-                    Group = "Thunderstorm",
-                    MappedConditionResponse = "thunderstorm with heavy rain"
-                },
-                new WeatherConditionResponse()
-                {
-                    Id = 210,
-                    Condition = "light thunderstorm",
-                    Group = "Thunderstorm",
-                    MappedConditionResponse = "light thunderstorm"
-                },
-                new WeatherConditionResponse()
-                {
-                    Id = 211,
-                    Condition = "thunderstorm",
-                    Group = "Thunderstorm",
-                    MappedConditionResponse = "thunderstorm"
-                },
-                new WeatherConditionResponse()
-                {
-                    Id = 212,
-                    Condition = "heavy thunderstorm",
-                    Group = "Thunderstorm",
-                    MappedConditionResponse = "heavy thunderstorm"
-                },
-                new WeatherConditionResponse()
-                {
-                    Id = 221,
-                    Condition = "ragged thunderstorm",
-                    Group = "Thunderstorm",
-                    MappedConditionResponse = "ragged thunderstorm"
-                },
-                new WeatherConditionResponse()
-                {
-                    Id = 230,
-                    Condition = "",
-                    Group = "",
-                    MappedConditionResponse = ""
-                },
-                new WeatherConditionResponse()
-                {
-                    Id = 231,
-                    Condition = "",
-                    Group = "",
-                    MappedConditionResponse = ""
-                },
-                new WeatherConditionResponse()
-                {
-                    Id = 323,
-                    Condition = "",
-                    Group = "",
-                    MappedConditionResponse = ""
-                },
-                new WeatherConditionResponse()
-                {
-                    Id = 0,
-                    Condition = "",
-                    Group = "",
-                    MappedConditionResponse = ""
-                },
+                // Group 2xx: Thunderstorm
+                BuildWeatherConditionReport(200,"thunderstorm with light rain","Thunderstorm","thunderstorm with light rain"),
+                BuildWeatherConditionReport(201,"thunderstorm with rain","Thunderstorm","thunderstorm with rain"),
+                BuildWeatherConditionReport(202,"thunderstorm with heavy rain","Thunderstorm","thunderstorm with heavy rain"),
+                BuildWeatherConditionReport(210,"light thunderstorm","Thunderstorm","light thunderstorm"),
+                BuildWeatherConditionReport(211,"thunderstorm","Thunderstorm","thunderstorm"),
+                BuildWeatherConditionReport(212,"heavy thunderstorm","Thunderstorm","heavy thunderstorm"),
+                BuildWeatherConditionReport(221,"ragged thunderstorm","Thunderstorm","ragged thunderstorm"),
+                BuildWeatherConditionReport(230,"thunderstorm with light drizzle","Thunderstorm","thunderstorm with light drizzle"),
+                BuildWeatherConditionReport(231,"thunderstorm with drizzle","Thunderstorm","thunderstorm with drizzle"),
+                BuildWeatherConditionReport(232,"thunderstorm with heavy drizzle","Thunderstorm","thunderstorm with heavy drizzle"),
+                //Group 3xx: Drizzle
+                BuildWeatherConditionReport(300,"light intensity drizzle","Drizzle","light intensity drizzle"),
+                BuildWeatherConditionReport(301,"drizzle","Drizzle","drizzle"),
+                BuildWeatherConditionReport(302,"heavy intensity drizzle","Drizzle","heavy intensity drizzle"),
+                BuildWeatherConditionReport(310,"light intensity drizzle rain","Drizzle","light intensity drizzle rain"),
+                BuildWeatherConditionReport(311,"drizzle rain","Drizzle","drizzle rain"),
+                BuildWeatherConditionReport(312,"heavy intensity drizzle rain","Drizzle","heavy intensity drizzle rain"),
+                BuildWeatherConditionReport(313,"shower rain and drizzle","Drizzle","shower rain and drizzle"),
+                // TODO - finish this off
             };
 
             return weatherConditionResponseList;
+        }
+
+        private WeatherConditionResponse BuildWeatherConditionReport(int id, string condition, string group, string response)
+        {
+            return new WeatherConditionResponse()
+            {
+                Id = id,
+                Condition = condition,
+                Group = group,
+                 MappedConditionResponse = response
+            };
         }
     }
 }
