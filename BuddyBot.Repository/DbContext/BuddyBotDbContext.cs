@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using BuddyBot.Repository.Models;
@@ -14,18 +15,15 @@ namespace BuddyBot.Repository.DbContext
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            DatabaseSeeder dbSeeder = new DatabaseSeeder();
+
             modelBuilder.Entity<City>().ToTable("City").HasKey(_ => _.Id);
 
             modelBuilder.Entity<WeatherConditionResponse>().ToTable("WeatherConditionResponse").HasKey(_ => _.Id);
 
-            modelBuilder.Entity<WeatherConditionResponse>().HasData(new WeatherConditionResponse
-            {
-                Id = 200,
-                Condition = "Rain",
-                Group = "Thunda",
-                MappedConditionResponse = "Rain "
-            });
+            WeatherConditionResponse[] weatherConditionResponses = dbSeeder.GetWeatherConditionResponses();
 
+            modelBuilder.Entity<WeatherConditionResponse>().HasData(weatherConditionResponses);
 
             modelBuilder.Entity<Coordinate>()
             .HasKey(_ => new { _.Latitude, _.Longitude });

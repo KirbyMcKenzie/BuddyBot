@@ -15,15 +15,13 @@ namespace BuddyBot.Repository.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("ProductVersion", "2.0.3-rtm-10026")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("BuddyBot.Repository.Models.City", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<double?>("CoordinatesLatitude");
 
@@ -54,8 +52,7 @@ namespace BuddyBot.Repository.Migrations
             modelBuilder.Entity("BuddyBot.Repository.Models.WeatherConditionResponse", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Condition");
 
@@ -66,10 +63,6 @@ namespace BuddyBot.Repository.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("WeatherConditionResponse");
-
-                    b.HasData(
-                        new { Id = 200, Condition = "Rain", Group = "Thunda", MappedConditionResponse = "Rain " }
-                    );
                 });
 
             modelBuilder.Entity("BuddyBot.Repository.Models.City", b =>
