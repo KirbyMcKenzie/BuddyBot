@@ -17,16 +17,20 @@ namespace BuddyBot.Repository.DbContext
         {
             DatabaseSeeder dbSeeder = new DatabaseSeeder();
 
-            modelBuilder.Entity<City>().ToTable("City").HasKey(_ => _.Id);
+            // Build
+            modelBuilder.Entity<City>()
+                .ToTable("City").HasKey(_ => _.Id);
 
-            modelBuilder.Entity<WeatherConditionResponse>().ToTable("WeatherConditionResponse").HasKey(_ => _.Id);
-
-            WeatherConditionResponse[] weatherConditionResponses = dbSeeder.GetWeatherConditionResponses();
-
-            modelBuilder.Entity<WeatherConditionResponse>().HasData(weatherConditionResponses);
+            modelBuilder.Entity<WeatherConditionResponse>()
+                .ToTable("WeatherConditionResponse").HasKey(_ => _.Id);
 
             modelBuilder.Entity<Coordinate>()
-            .HasKey(_ => new { _.Latitude, _.Longitude });
+                .HasKey(_ => new { _.Latitude, _.Longitude });
+
+            // Seed
+            WeatherConditionResponse[] weatherConditionResponses = dbSeeder.GetWeatherConditionResponses();
+            modelBuilder.Entity<WeatherConditionResponse>().HasData(weatherConditionResponses);
+
 
         }
 
