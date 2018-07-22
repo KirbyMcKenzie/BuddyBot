@@ -24,6 +24,7 @@ namespace BuddyBot.Services
 
         private readonly string _baseUrl = ConfigurationManager.AppSettings["openWeatherMap:url"];
         private readonly string _apiKey = ConfigurationManager.AppSettings["openWeatherMap:apiKey"];
+        
 
         public IList<City> SearchForCities(string cityName, string countryCode = null, string countryName = null)
         {
@@ -113,6 +114,7 @@ namespace BuddyBot.Services
                         // TODO - Map weather to a better description
 
                         double convertedTemperture = WeatherHelpers.ConvertTemperture(weatherTemperatureResult.temp, Temperature.Celsius);
+
 
                         // TODO - override enum toString if possible
                         return $"{convertedTemperture.ToString()} degrees " +

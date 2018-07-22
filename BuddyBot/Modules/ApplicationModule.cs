@@ -6,6 +6,8 @@ using Autofac;
 using BuddyBot.Dialogs;
 using BuddyBot.Dialogs.Builders;
 using BuddyBot.Dialogs.Interfaces;
+using BuddyBot.Repository.DataAccess;
+using BuddyBot.Repository.DataAccess.Contracts;
 using BuddyBot.Services;
 using BuddyBot.Services.Contracts;
 using Microsoft.Bot.Builder.Internals.Fibers;
@@ -18,6 +20,11 @@ namespace BuddyBot.Modules
         protected override void Load(ContainerBuilder builder)
         {
             base.Load(builder);
+
+            // Data Access
+            builder.RegisterType<WeatherConditionResponseReader>()
+                .Keyed<IWeatherConditionResponseReader>(FiberModule.Key_DoNotSerialize)
+                .AsImplementedInterfaces().SingleInstance();
 
             // Services 
             builder.RegisterType<ConversationService>()
