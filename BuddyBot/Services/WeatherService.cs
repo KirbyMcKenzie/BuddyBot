@@ -16,15 +16,20 @@ using BuddyBot.Models;
 using BuddyBot.Services.Contracts;
 using BuddyBot.Helpers;
 using BuddyBot.Models.Enums;
+using BuddyBot.Repository.DataAccess.Contracts;
 
 namespace BuddyBot.Services
 {
     public class WeatherService : IWeatherService
     {
-
+        private readonly IWeatherConditionResponseReader _weatherConditionResponseReader;
         private readonly string _baseUrl = ConfigurationManager.AppSettings["openWeatherMap:url"];
         private readonly string _apiKey = ConfigurationManager.AppSettings["openWeatherMap:apiKey"];
-        
+
+        public WeatherService(IWeatherConditionResponseReader weatherConditionResponseReader)
+        {
+            _weatherConditionResponseReader = weatherConditionResponseReader;
+        }
 
         public IList<City> SearchForCities(string cityName, string countryCode = null, string countryName = null)
         {
@@ -115,10 +120,14 @@ namespace BuddyBot.Services
 
                         double convertedTemperture = WeatherHelpers.ConvertTemperture(weatherTemperatureResult.temp, Temperature.Celsius);
 
+                        // TODO - refactor
+                        var mappedConitionReponse = await _weatherConditionResponseReader
+                            .GetResponseByCondition(weatherDescriptionResult.description);
+
 
                         // TODO - override enum toString if possible
                         return $"{convertedTemperture.ToString()} degrees " +
-                               $"{Temperature.Celsius.ToString().ToLower()} with {weatherDescriptionResult.description}";
+                               $"{Temperature.Celsius.ToString().ToLower()} with {mappedConitionReponse.MappedConditionResponse}";
                     }
                 }
 

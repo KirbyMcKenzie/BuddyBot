@@ -29,7 +29,7 @@ namespace BuddyBot.Controllers
                         await Conversation.SendAsync(activity, () => scope.Resolve<RootLuisDialog>());
                     }
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
                     // TODO - Add Logging, Telemetry
                     throw;
