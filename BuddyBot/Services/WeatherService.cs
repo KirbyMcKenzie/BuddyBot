@@ -1,6 +1,4 @@
 ﻿using BuddyBot.Models.Dtos;
-
-using Microsoft.Bot.Builder.Luis.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -139,8 +137,5 @@ namespace BuddyBot.Services
                 return "I'm having problems accessing weather reports. Please try again later";
             }
         }
-
-        // TODO - Consider moving to helper/utility class
-        
     }
 }
