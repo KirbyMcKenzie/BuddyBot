@@ -21,6 +21,7 @@ namespace BuddyBot.Services
     public class WeatherService : IWeatherService
     {
         private readonly IWeatherConditionResponseReader _weatherConditionResponseReader;
+
         private readonly string _baseUrl = ConfigurationManager.AppSettings["openWeatherMap:url"];
         private readonly string _apiKey = ConfigurationManager.AppSettings["openWeatherMap:apiKey"];
 

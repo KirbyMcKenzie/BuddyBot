@@ -19,7 +19,7 @@ namespace BuddyBot.Repository.DbContext
 
             var config = builder.Build();
 
-            var connectionString = config.GetConnectionString("DefaultConnection");
+            var connectionString = config.GetConnectionString("Default");
 
             var optionsBuilder = new DbContextOptionsBuilder<BuddyBotDbContext>();
             optionsBuilder.UseSqlServer(connectionString);
