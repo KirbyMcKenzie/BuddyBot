@@ -24,10 +24,10 @@ namespace BuddyBot.Modules
             base.Load(builder);
 
             // Data Access
-            //builder.RegisterType<BuddyBotDbContext>().As<BuddyBotDbContext>().InstancePerLifetimeScope();
 
-            builder.RegisterType<WeatherConditionResponseReader>()
-                .Keyed<IWeatherConditionResponseReader>(FiberModule.Key_DoNotSerialize)
+            builder.RegisterType<BuddyBotDbContext>().InstancePerLifetimeScope();
+
+            builder.RegisterType<WeatherConditionResponseReader>().As<IWeatherConditionResponseReader>()
                 .AsImplementedInterfaces().SingleInstance();
 
             // Services 
