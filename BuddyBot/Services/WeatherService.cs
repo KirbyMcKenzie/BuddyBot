@@ -41,6 +41,7 @@ namespace BuddyBot.Services
 
             try
             {
+                //TODO - Add to DB or move to blob storage
                 string json =
                     File.ReadAllText(System.Web.Hosting.HostingEnvironment.MapPath("/city.list.json")
                     ?? throw new InvalidOperationException());
@@ -115,16 +116,13 @@ namespace BuddyBot.Services
                         WeatherTemperatureDto weatherTemperatureResult = weatherTemperturesJsonResult.ToObject<WeatherTemperatureDto>();
 
                         // TODO - Convert temperture using entity e.g. "Weather in Auckland in fahrenheit" 
-                        // TODO - Map weather to a better description
 
                         double convertedTemperture = WeatherHelpers.ConvertTemperture(weatherTemperatureResult.temp, Temperature.Celsius);
 
-                        // TODO - refactor
                         var mappedConitionReponse = await _weatherConditionResponseReader
                             .GetResponseByCondition(weatherDescriptionResult.description);
 
-
-                        // TODO - override enum toString if possible
+                        // TODO - map temp to icon
                         return $"{convertedTemperture.ToString()} degrees " +
                                $"{Temperature.Celsius.ToString().ToLower()} with {mappedConitionReponse.MappedConditionResponse}";
                     }
