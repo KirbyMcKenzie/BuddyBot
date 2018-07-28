@@ -61,7 +61,7 @@ namespace BuddyBot.Dialogs
         {
             var message = await result;
 
-            var messageNumberList = MessageHelper.ExtractIntegersFromMessage(message);
+            var messageNumberList = MessageHelpers.ExtractIntegersFromMessage(message);
 
             _min = messageNumberList.Min();
             _max = messageNumberList.Max();

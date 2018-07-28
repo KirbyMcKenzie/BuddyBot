@@ -1,66 +1,52 @@
 ﻿using BuddyBot.Models.Dtos;
-
-using Microsoft.Bot.Builder.Luis.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using BuddyBot.Extensions;
 using BuddyBot.Models;
 using BuddyBot.Services.Contracts;
+using BuddyBot.Helpers;
+using BuddyBot.Models.Enums;
+using BuddyBot.Repository.DataAccess.Contracts;
 
 namespace BuddyBot.Services
 {
     public class WeatherService : IWeatherService
     {
+        private readonly IWeatherConditionResponseReader _weatherConditionResponseReader;
 
-        // TODO - Move to config file
-        private const string BaseUrl = "http://api.openweathermap.org/data/2.5/weather?q=";
+        private readonly string _baseUrl = ConfigurationManager.AppSettings["openWeatherMap:url"];
         private readonly string _apiKey = ConfigurationManager.AppSettings["openWeatherMap:apiKey"];
 
-
-        // TODO - Could turn this into a utility method
-        // TODO - Get CountryCode out of entities
-        public string GetCityFromEntityResults(IList<EntityRecommendation> entities)
+        public WeatherService(IWeatherConditionResponseReader weatherConditionResponseReader)
         {
-
-            if (entities.Count > 0 && entities.Count <= 1)
-            {
-                foreach (var entity in entities.Where(e => e.Type == "Weather.Location"))
-                {
-                    var entityResult = entity.Entity;
-
-                    TextInfo cultureInfo = new CultureInfo("en-US", false).TextInfo;
-                    var entityUpperResult = cultureInfo.ToTitleCase(entityResult);
-
-                    return entityUpperResult;
-
-                }
-            }
-
-            return "Please specify one city to get weather from";
-
+            _weatherConditionResponseReader = weatherConditionResponseReader;
         }
 
-        // TODO - Incorporate countrycode into serach 
-        public IList<City> SearchForCitiesByName(string cityName, string countryCode = null)
+        public IList<City> SearchForCities(string cityName, string countryCode = null, string countryName = null)
         {
-
             IList<City> cityList = new List<City>();
+
+            if (countryName != null)
+            {
+                countryCode = GlobalizationHelpers.GetCountryCode(countryName);
+            }
 
             try
             {
+                //TODO - Add to DB or move to blob storage
                 string json =
                     File.ReadAllText(System.Web.Hosting.HostingEnvironment.MapPath("/city.list.json")
                     ?? throw new InvalidOperationException());
-
+                
                 IList<JObject> products = JsonConvert.DeserializeObject<List<JObject>>(json);
 
                 for (int i = 0; i < products.Count; i++)
@@ -69,88 +55,87 @@ namespace BuddyBot.Services
                     string itemTitle = (string)products[i]["name"];
                     string itemCountry = (string)products[i]["country"];
 
-                    if (itemTitle.Contains(cityName))
+                    if(countryCode != null)
                     {
-                        City cityInformation = new City()
+                        if (itemTitle.Contains(cityName) && itemCountry.Contains(countryCode))
+                        {
+                            City cityInformation = new City()
+                            {
+                                Id = itemId,
+                                Name = itemTitle,
+                                Country = itemCountry,
+                            };
+
+                            cityList.Add(cityInformation);
+                        }
+                    }
+                    else if (itemTitle.Contains(cityName))
+                    {
+                        City city = new City()
                         {
                             Id = itemId,
                             Name = itemTitle,
                             Country = itemCountry,
                         };
 
-                        cityList.Add(cityInformation);
+                        cityList.Add(city);
                     }
-
                 }
             }
             catch (Exception ex)
             {
                 return null;
             }
+
             return cityList;
         }
-    
-    // TODO - Clean up this method
+
     public async Task<string> GetWeather(City city)
         {
-            string url = $"{BaseUrl}{city.Name},{city.Country}&appid={_apiKey}";
+            string requestUri = $"{_baseUrl}{city.Name},{city.Country}&appid={_apiKey}";
 
             try
             {
-                HttpClient client = new HttpClient { BaseAddress = new Uri(url) };
+                HttpClient client = new HttpClient { BaseAddress = new Uri(requestUri) };
                 client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage response = await client.GetAsync(url);
+                HttpResponseMessage response = await client.GetAsync(requestUri);
+
                 if (response.IsSuccessStatusCode)
                 {
-                    String weatherString = await response.Content.ReadAsStringAsync();
 
-                    JObject parsedString = JObject.Parse(weatherString);
+                    String responseJsonString = await response.Content.ReadAsStringAsync();
+                    JObject parsedJsonReponseString = JObject.Parse(responseJsonString);
 
-                    IList<JToken> results = parsedString["weather"].Children().ToList();
+                    JToken weatherDescriptionJsonResult = parsedJsonReponseString["weather"].FirstOrDefault();
+                    JToken weatherTemperturesJsonResult = parsedJsonReponseString["main"].Last().Parent;
 
-                    IList<WeatherDto> weatherDtos = new List<WeatherDto>();
-
-                    foreach (JToken result in results)
+                    if (weatherDescriptionJsonResult != null && weatherTemperturesJsonResult != null)
                     {
-                        // JToken.ToObject is a helper method that uses JsonSerializer internally
-                        WeatherDto weatherDto = result.ToObject<WeatherDto>();
-                        weatherDtos.Add(weatherDto);
+                        WeatherDescriptionDto weatherDescriptionResult = weatherDescriptionJsonResult.ToObject<WeatherDescriptionDto>();
+                        WeatherTemperatureDto weatherTemperatureResult = weatherTemperturesJsonResult.ToObject<WeatherTemperatureDto>();
+
+                        // TODO - Convert temperture using entity e.g. "Weather in Auckland in fahrenheit" 
+
+                        double convertedTemperture = WeatherHelpers.ConvertTemperture(weatherTemperatureResult.temp, Temperature.Celsius);
+
+                        var mappedConitionReponse = await _weatherConditionResponseReader
+                            .GetResponseByCondition(weatherDescriptionResult.description);
+
+                        // TODO - map temp to icon
+                        return $"{convertedTemperture}{Temperature.Celsius.DisplayName()} " +
+                               $"with {mappedConitionReponse.MappedConditionResponse}";
                     }
-
-                    var first = weatherDtos.FirstOrDefault();
-
-                    // TODO - Find out the different weaterh responses and map to nice descriptions
-                    // TODO - Get the temp
-                    return $"{first.description}";
                 }
 
                 return "I'm having problems accessing weather reports. Please try again later";
             }
             catch (Exception ex)
             {
+
                 return "I'm having problems accessing weather reports. Please try again later";
             }
-        }
-
-        // TODO - Consider moving to helper/utility class
-        public City ExtractCityFromMessagePrompt(string messagePrompt)
-        {
-            var spacePosition = messagePrompt.IndexOf(' ');
-
-            var cityName = messagePrompt.Substring(0, spacePosition - 1);
-            var cityCountry = messagePrompt.Substring(messagePrompt.IndexOf(',') + 2);
-
-            City city = new City()
-            {
-                Name = cityName,
-                Country = cityCountry
-            };
-            
-
-            return city;
-
         }
     }
 }

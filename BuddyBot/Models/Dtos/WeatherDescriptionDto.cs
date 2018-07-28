@@ -5,7 +5,7 @@ using System.Web;
 
 namespace BuddyBot.Models.Dtos
 {
-    public class WeatherDto
+    public class WeatherDescriptionDto
     {
         public string  id { get; set; }
         public string  main { get; set; }

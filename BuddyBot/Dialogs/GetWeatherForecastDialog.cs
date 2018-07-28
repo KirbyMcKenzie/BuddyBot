@@ -1,5 +1,4 @@
-﻿using BuddyBot.Services;
-using Microsoft.Bot.Builder.Dialogs;
+﻿using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Luis.Models;
 using System;
 using System.Collections;
@@ -7,9 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using BuddyBot.Helpers;
 using BuddyBot.Models;
 using BuddyBot.Services.Contracts;
 using Microsoft.Bot.Connector;
+using BuddyBot.Models.Enums;
 
 namespace BuddyBot.Dialogs
 {
@@ -18,7 +19,6 @@ namespace BuddyBot.Dialogs
     {
         private readonly IWeatherService _weatherService;
         private readonly IList<EntityRecommendation> _entities;
-        private City _city;
 
         // TODO - WeatherDialog - Check if pre-saved weather location matches entity city
         // TODO - WeatherDialog - If weather matches entity city, get weather by pre-saved weather id
@@ -34,85 +34,72 @@ namespace BuddyBot.Dialogs
 
         public async Task StartAsync(IDialogContext context)
         {
+            // TODO - What to do if luis cannot find entities (Get preferred?)
+            string cityName = MessageHelpers.ExtractEntityFromMessage("City.Name", _entities);
+            string countryCode = MessageHelpers.ExtractEntityFromMessage("City.CountryCode", _entities, TextCaseType.UpperCase);
+            string countryName = MessageHelpers.ExtractEntityFromMessage("City.CountryName", _entities);
 
-            var cities = _weatherService.GetCityFromEntityResults(_entities);
+            IList<City> citySearchResults = _weatherService.SearchForCities(cityName, countryCode, countryName);
 
-            IList<City> cityInformation = _weatherService.SearchForCitiesByName(cities);
-
-            List<CardAction> cardOptionsList = new List<CardAction>();
-
-
-            foreach (var city in cityInformation)
+            // TODO - Asset citySearchResults is not null once
+            if (citySearchResults != null && citySearchResults.Count <= 0)
             {
-                cardOptionsList.Add(new CardAction(ActionTypes.ImBack,
-                    title: $"{city.Name}, {city.Country}",
-                    value: $"{city.Name}, {city.Country}"));
-            };
 
-            // TODO - Change type of card
-            // TODO - Think about limiting amount of cards displayed, see more button? 
-            HeroCard card = new HeroCard
+                context.Done($"I'm sorry, I couldn't find any results for '{cityName}'. " +
+                             $"Make sure you've spelt everything correctly and try again 😊");
+
+            } else if (citySearchResults != null && citySearchResults.Count == 1)
             {
-                Title = $"I found {cityInformation.Count} results for '{cityInformation.FirstOrDefault()?.Name}'",
-                Subtitle = "please select your closest location",
-                Buttons = cardOptionsList
-            };
 
-            var message = context.MakeMessage();
-            message.Attachments.Add(card.ToAttachment());
-            await context.PostAsync(message);
+                var weatherForecast = await _weatherService.GetWeather(citySearchResults.FirstOrDefault());
+                context.Done($"The weather in {cityName} right now is {weatherForecast}");
 
-            context.Wait(this.MessageReceivedAsync);
+            } else if (citySearchResults != null && citySearchResults.Count >= 2)
+            {
+                // TODO - Change type of card
+                // TODO - Think about limiting amount of cards displayed, see more button? 
+                List<CardAction> cityCardActionList = CreateCardActionList(citySearchResults);
 
+                HeroCard card = new HeroCard
+                {
+                    Title = $"I found {citySearchResults.Count} results for '{cityName}'",
+                    Subtitle = "please select your closest location",
+                    Buttons = cityCardActionList
+                };
+
+                var message = context.MakeMessage();
+                message.Attachments.Add(card.ToAttachment());
+
+                await context.PostAsync(message);
+
+                context.Wait(this.MessageReceivedAsync);
+
+            }
         }
 
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
             var message = await result;
 
-            City city =  _weatherService.ExtractCityFromMessagePrompt(message.Text);
+            City city =  MessageHelpers.ExtractCityFromMessagePrompt(message.Text);
 
             var weatherForecast = await _weatherService.GetWeather(city);
 
-            context.Done($"The weather in {message.Text} right now is {weatherForecast}");
+            context.Done($"Currently the weather in {message.Text} is {weatherForecast}");
         }
 
-        // TODO - Move these to helper class
-        private static IList<Attachment> GetCardsAttachments()
+        private List<CardAction> CreateCardActionList(IList<City> cityResultList)
         {
-            return new List<Attachment>()
+            List<CardAction> cardOptionsList = new List<CardAction>();
+
+            foreach (var city in cityResultList)
             {
-                GetHeroCard(
-                    "Azure Functions",
-                    "Process events with a serverless code architecture",
-                    new CardAction(ActionTypes.PostBack, "Learn more", value: "https://azure.microsoft.com/en-us/services/functions/")),
-            };
-        }
+                cardOptionsList.Add(new CardAction(ActionTypes.ImBack,
+                    title: $"{city.Name}, {city.Country}",
+                    value: $"{city.Name}, {city.Country}"));
+            }
 
-        private static Attachment GetHeroCard(string title , string text, CardAction cardAction)
-        {
-            var heroCard = new HeroCard
-            {
-                Title = title,
-                Text = text,
-                Buttons = new List<CardAction>() { cardAction },
-            };
-
-            return heroCard.ToAttachment();
-        }
-
-        private static Attachment GetThumbnailCard(string title, string subtitle, string text, CardImage cardImage, CardAction cardAction)
-        {
-            var heroCard = new ThumbnailCard
-            {
-                Title = title,
-                Subtitle = subtitle,
-                Text = text,
-                Images = new List<CardImage>() { cardImage },
-                Buttons = new List<CardAction>() { cardAction },
-            };
-
-            return heroCard.ToAttachment();
+            return cardOptionsList;
         }
     }
 }
