@@ -16,7 +16,9 @@ namespace BuddyBot.Dialogs.Interfaces
 
         RandomNumberDialog BuildRandomNumberDialog(IMessageActivity message, IList<EntityRecommendation> result);
 
-        
+        BasicPersonalityChatBotDialog BuildBasicPersonalityChatBotDialog(IMessageActivity message, IList<EntityRecommendation> result);
+
+
 
     }
 }

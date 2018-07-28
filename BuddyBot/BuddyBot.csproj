@@ -50,13 +50,19 @@
       <HintPath>..\packages\Autofac.WebApi2.4.0.1\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
     </Reference>
     <Reference Include="Chronic, Version=0.3.2.0, Culture=neutral, PublicKeyToken=3bd1f1ef638b0d3c, processorArchitecture=MSIL">
-      <HintPath>$(SolutionDir)\packages\Chronic.Signed.0.3.2\lib\net40\Chronic.dll</HintPath>
+      <HintPath>..\packages\Chronic.Signed.0.3.2\lib\net40\Chronic.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bot.Builder, Version=3.15.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bot.Builder.3.15.0\lib\net46\Microsoft.Bot.Builder.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bot.Builder.Autofac, Version=3.15.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bot.Builder.3.15.0\lib\net46\Microsoft.Bot.Builder.Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bot.Builder.PersonalityChat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bot.Builder.PersonalityChat.3.0.0-alpha-m1.0\lib\net46\Microsoft.Bot.Builder.PersonalityChat.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bot.Builder.PersonalityChat.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bot.Builder.PersonalityChat.Core.1.0.0-alpha-m1.0\lib\net46\Microsoft.Bot.Builder.PersonalityChat.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bot.Connector, Version=3.15.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bot.Connector.3.15.0\lib\net46\Microsoft.Bot.Connector.dll</HintPath>
@@ -66,7 +72,7 @@
       <HintPath>..\packages\Microsoft.IdentityModel.Logging.5.2.2\lib\net451\Microsoft.IdentityModel.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.IdentityModel.Protocol.Extensions, Version=1.0.40306.1554, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>$(SolutionDir)\packages\Microsoft.IdentityModel.Protocol.Extensions.1.0.4.403061554\lib\net45\Microsoft.IdentityModel.Protocol.Extensions.dll</HintPath>
+      <HintPath>..\packages\Microsoft.IdentityModel.Protocol.Extensions.1.0.4.403061554\lib\net45\Microsoft.IdentityModel.Protocol.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.IdentityModel.Protocols, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.IdentityModel.Protocols.5.2.2\lib\net451\Microsoft.IdentityModel.Protocols.dll</HintPath>
@@ -129,6 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Dialogs\BasicPersonalityChatBotDialog.cs" />
     <Compile Include="Services\Contracts\IConversationService.cs" />
     <Compile Include="Services\Contracts\IWeatherService.cs" />
     <Compile Include="Dialogs\Builders\DialogBuilder.cs" />
@@ -157,10 +164,8 @@
     <Compile Include="Services\JokeService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="city.list.json" />
+    <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\BuddyBot - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

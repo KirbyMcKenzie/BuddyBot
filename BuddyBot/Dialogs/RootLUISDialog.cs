@@ -40,12 +40,29 @@ namespace BuddyBot.Dialogs
             SetField.NotNull(out _jokeService, nameof(jokeService), jokeService);
         }
 
+        //[LuisIntent("")]
+        //[LuisIntent("None")]
+        //public async Task None(IDialogContext context, LuisResult result)
+        //{
+        //    await context.PostAsync("I'm sorry, I don't know what you mean. " +
+        //                            "You can type 'help' at anytime to get a list of things I can do");
+        //    context.Wait(MessageReceived);
+        //}
+
         [LuisIntent("")]
         [LuisIntent("None")]
         public async Task None(IDialogContext context, LuisResult result)
         {
-            await context.PostAsync("I'm sorry, I don't know what you mean. " +
-                                    "You can type 'help' at anytime to get a list of things I can do");
+            context.Call(_dialogBuilder.BuildBasicPersonalityChatBotDialog(GetMessageActivity(context), result.Entities), Resume_AfterBasicPersonalityChatBotDialog);
+            await Task.Yield();
+        }
+
+        public async Task Resume_AfterBasicPersonalityChatBotDialog(IDialogContext context, IAwaitable<object> result)
+        {
+            var personalityResult = await result;
+
+            await context.PostAsync(personalityResult.ToString());
+
             context.Wait(MessageReceived);
         }
 
