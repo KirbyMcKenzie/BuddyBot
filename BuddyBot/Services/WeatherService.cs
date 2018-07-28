@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using BuddyBot.Extensions;
 using BuddyBot.Models;
 using BuddyBot.Services.Contracts;
 using BuddyBot.Helpers;
@@ -123,8 +124,8 @@ namespace BuddyBot.Services
                             .GetResponseByCondition(weatherDescriptionResult.description);
 
                         // TODO - map temp to icon
-                        return $"{convertedTemperture.ToString()} degrees " +
-                               $"{Temperature.Celsius.ToString().ToLower()} with {mappedConitionReponse.MappedConditionResponse}";
+                        return $"{convertedTemperture}{Temperature.Celsius.DisplayName()} " +
+                               $"with {mappedConitionReponse.MappedConditionResponse}";
                     }
                 }
 

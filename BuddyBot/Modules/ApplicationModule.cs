@@ -27,7 +27,8 @@ namespace BuddyBot.Modules
 
             builder.RegisterType<BuddyBotDbContext>().InstancePerLifetimeScope();
 
-            builder.RegisterType<WeatherConditionResponseReader>().As<IWeatherConditionResponseReader>()
+            builder.RegisterType<WeatherConditionResponseReader>()
+                .As<IWeatherConditionResponseReader>()
                 .AsImplementedInterfaces().SingleInstance();
 
             // Services 

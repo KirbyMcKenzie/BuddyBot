@@ -221,6 +221,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Dialogs\Builders\RichCardAttachmentBuilder.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Helpers\GlobalizationHelpers.cs" />
     <Compile Include="Helpers\WeatherHelpers.cs" />
     <Compile Include="Models\Dtos\WeatherTemperatureDto.cs" />
