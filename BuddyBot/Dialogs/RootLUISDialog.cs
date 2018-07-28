@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Luis;
@@ -53,13 +54,14 @@ namespace BuddyBot.Dialogs
         [LuisIntent("None")]
         public async Task None(IDialogContext context, LuisResult result)
         {
-            context.Call(_dialogBuilder.BuildBasicPersonalityChatBotDialog(GetMessageActivity(context), result.Entities), Resume_AfterBasicPersonalityChatBotDialog);
-            await Task.Yield();
+            await context.Forward(new BasicPersonalityChatBotDialog(), afterBasicP, new Activity { Text = result.Query }, CancellationToken.None);
         }
 
-        public async Task Resume_AfterBasicPersonalityChatBotDialog(IDialogContext context, IAwaitable<object> result)
+        private async Task afterBasicP(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
-            await Task.Yield();
+            var message = "";
+            //await context.PostAsync(message); 
+
         }
 
         [LuisIntent("Bot.Abuse")]

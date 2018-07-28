@@ -11,7 +11,7 @@ using Microsoft.Bot.Connector;
 namespace BuddyBot.Dialogs
 {
     [Serializable]
-    public class BasicPersonalityChatBotDialog : PersonalityChatDialog<object>, IDialog<object>
+    public class BasicPersonalityChatBotDialog : PersonalityChatDialog<object> 
     {
         public BasicPersonalityChatBotDialog()
         {
@@ -22,15 +22,9 @@ namespace BuddyBot.Dialogs
             };
 
             this.SetPersonalityChatDialogOptions(personalityChatDialogOptions);
+
         }
 
-        
-
-        public async Task StartAsync(IDialogContext context)
-        {
-            PersonalityChatDialog<object> personalityChatDialog = this;
-            context.Done(new ResumeAfter<IMessageActivity>(personalityChatDialog.MessageReceivedAsync));
-        }
 
     }
 }
