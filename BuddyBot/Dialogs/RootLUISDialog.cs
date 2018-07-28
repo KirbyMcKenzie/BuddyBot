@@ -59,11 +59,7 @@ namespace BuddyBot.Dialogs
 
         public async Task Resume_AfterBasicPersonalityChatBotDialog(IDialogContext context, IAwaitable<object> result)
         {
-            var personalityResult = await result;
-
-            await context.PostAsync(personalityResult.ToString());
-
-            context.Wait(MessageReceived);
+            await Task.Yield();
         }
 
         [LuisIntent("Bot.Abuse")]
