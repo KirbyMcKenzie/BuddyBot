@@ -26,10 +26,11 @@ namespace BuddyBot.Controllers
                 {
                     using (ILifetimeScope scope = DialogModule.BeginLifetimeScope(Conversation.Container, activity))
                     {
-                        await Conversation.SendAsync(activity, () => scope.Resolve<RootLuisDialog>());
+                        var internalScope = scope;
+                        await Conversation.SendAsync(activity, () => internalScope.Resolve<RootLuisDialog>());
                     }
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
                     // TODO - Add Logging, Telemetry
                     throw;

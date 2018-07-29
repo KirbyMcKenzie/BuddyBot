@@ -7,13 +7,9 @@ namespace BuddyBot.Services.Contracts
 {
     public interface IWeatherService 
     {
-        string GetCityFromEntityResults(IList<EntityRecommendation> entities);
-
-        IList<City> SearchForCitiesByName(string cityName, string countryCode = null);
+        IList<City> SearchForCities(string cityName, string countryCode = null, string countryName = null);
 
         Task<string> GetWeather(City city);
-
-        City ExtractCityFromMessagePrompt(string message);
 
     }
 }
