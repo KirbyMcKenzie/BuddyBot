@@ -41,27 +41,24 @@ namespace BuddyBot.Dialogs
             SetField.NotNull(out _jokeService, nameof(jokeService), jokeService);
         }
 
-        //[LuisIntent("")]
-        //[LuisIntent("None")]
-        //public async Task None(IDialogContext context, LuisResult result)
-        //{
-        //    await context.PostAsync("I'm sorry, I don't know what you mean. " +
-        //                            "You can type 'help' at anytime to get a list of things I can do");
-        //    context.Wait(MessageReceived);
-        //}
-
         [LuisIntent("")]
         [LuisIntent("None")]
         public async Task None(IDialogContext context, LuisResult result)
         {
-            await context.Forward(new BasicPersonalityChatBotDialog(), afterBasicP, new Activity { Text = result.Query }, CancellationToken.None);
+            await context.PostAsync("I'm sorry, I don't know what you mean. " +
+                                    "You can type 'help' at anytime to get a list of things I can do");
+            context.Wait(MessageReceived);
         }
 
-        private async Task afterBasicP(IDialogContext context, IAwaitable<IMessageActivity> result)
+        [LuisIntent("Chit-Chat")]
+        public async Task Chitchat(IDialogContext context, LuisResult result)
         {
-            var message = "";
-            //await context.PostAsync(message); 
+            await context.Forward(new BasicPersonalityChatBotDialog(), Resume_AfterChitchat, new Activity { Text = result.Query }, CancellationToken.None);
+        }
 
+        private async Task Resume_AfterChitchat(IDialogContext context, IAwaitable<IMessageActivity> result)
+        {
+            await Task.Yield();
         }
 
         [LuisIntent("Bot.Abuse")]
