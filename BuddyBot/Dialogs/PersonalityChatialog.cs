@@ -11,20 +11,19 @@ using Microsoft.Bot.Connector;
 namespace BuddyBot.Dialogs
 {
     [Serializable]
-    public class BasicPersonalityChatBotDialog : PersonalityChatDialog<object> 
+    public class PersonalityChatialog : PersonalityChatDialog<object> 
     {
-        public BasicPersonalityChatBotDialog()
+        public PersonalityChatialog()
         {
-            PersonalityChatDialogOptions personalityChatDialogOptions = new PersonalityChatDialogOptions()
+
+            PersonalityChatDialogOptions personalityChatDialogOptions = new PersonalityChatDialogOptions(botPersona: PersonalityChatPersona.Humorous)
             {
                 RespondOnlyIfChat = false,
-                ScenarioThresholdScore = 0.2f
+                ScenarioThresholdScore = 0.2f,
             };
 
             this.SetPersonalityChatDialogOptions(personalityChatDialogOptions);
 
         }
-
-
     }
 }
