@@ -11,9 +11,9 @@ using Microsoft.Bot.Connector;
 namespace BuddyBot.Dialogs
 {
     [Serializable]
-    public class PersonalityChatialog : PersonalityChatDialog<object> 
+    public class PersonalityChatDialog : PersonalityChatDialog<object> 
     {
-        public PersonalityChatialog()
+        public PersonalityChatDialog()
         {
 
             PersonalityChatDialogOptions personalityChatDialogOptions = new PersonalityChatDialogOptions(botPersona: PersonalityChatPersona.Humorous)
