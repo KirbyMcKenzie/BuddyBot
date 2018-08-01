@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Luis;
@@ -49,24 +50,18 @@ namespace BuddyBot.Dialogs
             context.Wait(MessageReceived);
         }
 
-        [LuisIntent("Bot.Abuse")]
-        public async Task BotAbuse(IDialogContext context, LuisResult result)
+        [LuisIntent("Chit-Chat")]
+        public async Task Chitchat(IDialogContext context, LuisResult result)
         {
-            await context.PostAsync("I'm sorry, I'm still learning 😖");
-
-            context.Wait(MessageReceived);
+            await context.Forward(new PersonalityChatDialog(), Resume_AfterChitchat, new Activity { Text = result.Query }, CancellationToken.None);
         }
 
-        // TODO - refine to different types of praise sentiment
-        [LuisIntent("Bot.Praise")]
-        public async Task Appreciation(IDialogContext context, LuisResult result)
+        private async Task Resume_AfterChitchat(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
-            await context.PostAsync(await _conversationService.GetPoliteExpression());
-
-            context.Wait(MessageReceived);
+            await Task.Yield();
         }
 
-        // TODO - refine to different types of language sentiment
+       
         [LuisIntent("Greeting")]
         public async Task Greeting(IDialogContext context, LuisResult result)
         {
@@ -74,40 +69,6 @@ namespace BuddyBot.Dialogs
 
             context.Wait(MessageReceived);
         }
-
-        [LuisIntent("Greeting.HowsItPrompt")]
-        public async Task GreetingHowsItPrompt(IDialogContext context, LuisResult result)
-        {
-            await context.PostAsync(await _conversationService.GetHowsItPrompt());
-
-            context.Wait(MessageReceived);
-        }
-
-        [LuisIntent("Greeting.HowsItResult.Bad")]
-        public async Task GreetingHowsItResultBad(IDialogContext context, LuisResult result)
-        {
-            await context.PostAsync(await _conversationService.GetHowsItResultBad());
-
-            context.Wait(MessageReceived);
-        }
-
-        [LuisIntent("Greeting.HowsItResult.Good")]
-        public async Task GreetingHowsItResultGood(IDialogContext context, LuisResult result)
-        {
-            await context.PostAsync(await _conversationService.GetHowsItResultGood());
-
-            context.Wait(MessageReceived);
-        }
-
-        [LuisIntent("Greeting.HowsItResult.Neutral")]
-        public async Task GreetingHowsItResultNeutral(IDialogContext context, LuisResult result)
-        {
-            await context.PostAsync("How can I help today?");
-
-            context.Wait(MessageReceived);
-        }
-
-        
 
         [LuisIntent("GetStarted")]
         public async Task GetStarted(IDialogContext context, LuisResult result)
@@ -201,13 +162,6 @@ namespace BuddyBot.Dialogs
             context.Wait(MessageReceived);
         }
 
-        [LuisIntent("Miscellaneous.QueryHowDoesItWork")]
-        public async Task QueryHowDoesItWork(IDialogContext context, LuisResult result)
-        {
-            // TODO - Improve answer
-            await context.PostAsync("I'm built using the Microsoft Bot Framework.");
-        }
-
         [LuisIntent("Miscellaneous.QueryName")]
         public async Task QueryName(IDialogContext context, LuisResult result)
         {
@@ -228,27 +182,6 @@ namespace BuddyBot.Dialogs
             await context.PostAsync($"{message}");
 
             context.Wait(MessageReceived);
-        }
-
-        [LuisIntent("Miscellaneous.Creator")]
-        public async Task Creator(IDialogContext context, LuisResult result)
-        {
-            await context.PostAsync("My creator is Kirby McKenzie.");
-            await context.PostAsync("You can view his github here: https://github.com/KirbyMcKenzie");
-                
-        }
-
-        [LuisIntent("Miscellaneous.OriginStory")]
-        public async Task OriginStory(IDialogContext context, LuisResult result)
-        {
-            await context.PostAsync("I was born in a Bitcoin mine deep within mainland China.");
-        }
-
-        [LuisIntent("Miscellaneous.OpinionOfNotablePerson")]
-        public async Task OpinionOfNotablePerson(IDialogContext context, LuisResult result)
-        {
-            // Todo: Pull entities from Luis
-            await context.PostAsync($"I am a bot. My opinion doesn't matter...");
         }
 
         [LuisIntent("Weather.GetForecast")]

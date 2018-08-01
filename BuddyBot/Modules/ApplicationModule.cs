@@ -60,6 +60,7 @@ namespace BuddyBot.Modules
             builder.RegisterType<ConfirmRobotDialog>().AsSelf().InstancePerDependency();
             builder.RegisterType<RandomNumberDialog>().AsSelf().InstancePerDependency();
             builder.RegisterType<GetWeatherForecastDialog>().AsSelf().InstancePerDependency();
+            builder.RegisterType<PersonalityChatDialog>().AsSelf().InstancePerDependency();
         }
     }
 }

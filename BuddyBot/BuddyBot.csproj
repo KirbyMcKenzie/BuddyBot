@@ -59,6 +59,12 @@
     <Reference Include="Microsoft.Bot.Builder.Autofac, Version=3.15.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bot.Builder.3.15.0\lib\net46\Microsoft.Bot.Builder.Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Bot.Builder.PersonalityChat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bot.Builder.PersonalityChat.3.0.0-alpha-m1.0\lib\net46\Microsoft.Bot.Builder.PersonalityChat.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bot.Builder.PersonalityChat.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bot.Builder.PersonalityChat.Core.1.0.0-alpha-m1.0\lib\net46\Microsoft.Bot.Builder.PersonalityChat.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bot.Connector, Version=3.15.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bot.Connector.3.15.0\lib\net46\Microsoft.Bot.Connector.dll</HintPath>
     </Reference>
@@ -227,6 +233,7 @@
     <Compile Include="Models\Dtos\WeatherTemperatureDto.cs" />
     <Compile Include="Models\Enums\Temperature.cs" />
     <Compile Include="Models\Enums\TextCaseType.cs" />
+    <Compile Include="Dialogs\PersonalityChatDialog.cs" />
     <Compile Include="Services\Contracts\IConversationService.cs" />
     <Compile Include="Services\Contracts\IWeatherService.cs" />
     <Compile Include="Dialogs\Builders\DialogBuilder.cs" />
@@ -266,7 +273,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BuddyBot.Repository\BuddyBot.Repository.csproj">
-      <Project>{C171AD1D-58B1-4D42-8CBD-B95D5567E61A}</Project>
+      <Project>{c171ad1d-58b1-4d42-8cbd-b95d5567e61a}</Project>
       <Name>BuddyBot.Repository</Name>
     </ProjectReference>
   </ItemGroup>
