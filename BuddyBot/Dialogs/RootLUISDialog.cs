@@ -70,6 +70,9 @@ namespace BuddyBot.Dialogs
         {
             await context.PostAsync(await _conversationService.GetGreeting());
 
+
+            await context.PostAsync($"Your ID is: {context.Activity.From.Id}");
+
             context.Wait(MessageReceived);
         }
 
