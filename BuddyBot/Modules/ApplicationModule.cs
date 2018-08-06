@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using Autofac;
@@ -11,6 +12,8 @@ using BuddyBot.Repository.DataAccess.Contracts;
 using BuddyBot.Repository.DbContext;
 using BuddyBot.Services;
 using BuddyBot.Services.Contracts;
+using Microsoft.Bot.Builder.Azure;
+using Microsoft.Bot.Builder.Dialogs.Internals;
 using Microsoft.Bot.Builder.Internals.Fibers;
 using Microsoft.Bot.Connector;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +25,23 @@ namespace BuddyBot.Modules
         protected override void Load(ContainerBuilder builder)
         {
             base.Load(builder);
+
+            // Data Storage
+            // TODO - Move to settings
+            var store = new TableBotDataStore(ConfigurationManager.ConnectionStrings["StorageConnectionString"].ConnectionString);
+
+            builder.Register(c => store)
+                .Keyed<IBotDataStore<BotData>>(AzureModule.Key_DataStore)
+                .AsSelf()
+                .SingleInstance();
+
+            builder.Register(c => new CachingBotDataStore(store,
+                    CachingBotDataStoreConsistencyPolicy
+                        .ETagBasedConsistency))
+                .As<IBotDataStore<BotData>>()
+                .AsSelf()
+                .InstancePerLifetimeScope();
+
 
             // Data Access
 
