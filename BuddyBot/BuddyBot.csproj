@@ -292,6 +292,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Contracts\IJokeService.cs" />
     <Compile Include="Services\JokeService.cs" />
+    <Compile Include="Settings\AzureStorageSettings.cs" />
+    <Compile Include="Settings\IAzureStorageSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="city.list.json" />
