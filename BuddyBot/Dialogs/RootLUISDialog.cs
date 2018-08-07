@@ -99,7 +99,17 @@ namespace BuddyBot.Dialogs
 
             await context.PostAsync(reply);
 
-            context.Wait(MessageReceived);
+            context.Call(_dialogBuilder.BuildNameDialog(GetMessageActivity(context)), Resume_AfterNameDialog);
+            await Task.Yield();
+        }
+
+        private async Task Resume_AfterNameDialog(IDialogContext context, IAwaitable<string> result)
+        {
+            // 11. Extract the value returned by the NameDialog when context.Done(...) is called within the NameDialog.
+            string name = await result;
+
+            await context.PostAsync($"I've got your name saved as {name}.");
+
         }
 
         [LuisIntent("Help")]
