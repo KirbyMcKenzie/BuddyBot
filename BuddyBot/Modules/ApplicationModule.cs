@@ -12,6 +12,7 @@ using BuddyBot.Repository.DataAccess.Contracts;
 using BuddyBot.Repository.DbContext;
 using BuddyBot.Services;
 using BuddyBot.Services.Contracts;
+using BuddyBot.Settings;
 using Microsoft.Bot.Builder.Azure;
 using Microsoft.Bot.Builder.Dialogs.Internals;
 using Microsoft.Bot.Builder.Internals.Fibers;
@@ -26,22 +27,37 @@ namespace BuddyBot.Modules
         {
             base.Load(builder);
 
-            // Data Storage
-            // TODO - Move to settings
-            var store = new TableBotDataStore(ConfigurationManager.ConnectionStrings["StorageConnectionString"].ConnectionString);
+            AzureStorageSettings azureStorageSettings = new AzureStorageSettings();
+            builder.Register(c => azureStorageSettings).As<IAzureStorageSettings>().SingleInstance();
 
-            builder.Register(c => store)
+            // Data Storage
+            string serviceName = "noncached";
+            builder.Register(c =>
+                {
+                    IAzureStorageSettings settings = c.Resolve<IAzureStorageSettings>();
+                    IBotDataStore<BotData> store;
+                    if (string.IsNullOrWhiteSpace(settings.ConnectionString))
+                    {
+
+                        store = new InMemoryDataStore();
+                    }
+                    else
+                    {
+                        store = new TableBotDataStore(settings.ConnectionString);
+                    }
+                    return store;
+                })
+                .Named(serviceName, typeof(IBotDataStore<BotData>))
                 .Keyed<IBotDataStore<BotData>>(AzureModule.Key_DataStore)
                 .AsSelf()
                 .SingleInstance();
 
-            builder.Register(c => new CachingBotDataStore(store,
-                    CachingBotDataStoreConsistencyPolicy
-                        .ETagBasedConsistency))
+            builder.Register(c =>
+                    new CachingBotDataStore(c.ResolveNamed<IBotDataStore<BotData>>(serviceName),
+                        CachingBotDataStoreConsistencyPolicy.ETagBasedConsistency))
                 .As<IBotDataStore<BotData>>()
                 .AsSelf()
                 .InstancePerLifetimeScope();
-
 
             // Data Access
 
