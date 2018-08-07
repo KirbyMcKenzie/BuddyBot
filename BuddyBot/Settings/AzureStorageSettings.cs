@@ -13,8 +13,8 @@ namespace BuddyBot.Settings
 
         public AzureStorageSettings()
         {
-            ConnectionString = ConfigurationManager.AppSettings["StorageConnectionString"];
-            UserPreferencesDataTableName = ConfigurationManager.AppSettings["UserPreferencesDataTableName"];
+            ConnectionString = ConfigurationManager.AppSettings["azureStorage:connectionString"];
+            UserPreferencesDataTableName = ConfigurationManager.AppSettings["azureStorage:userPreferencesDataTableName"];
         }
     }
 
