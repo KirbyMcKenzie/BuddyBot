@@ -9,6 +9,6 @@ namespace BuddyBot.Services.Contracts
     public interface IBotDataService
     {
         void SetPreferredName(IBotData botData, string name);
-        string GetPrerredName(IBotData botData);
+        string GetPreferredName(IBotData botData);
     }
 }

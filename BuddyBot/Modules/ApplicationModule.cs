@@ -67,7 +67,12 @@ namespace BuddyBot.Modules
                 .As<IWeatherConditionResponseReader>()
                 .AsImplementedInterfaces().SingleInstance();
 
-            // Services 
+            // Services
+            builder.RegisterType<BotDataService>()
+                .Keyed<IBotDataService>(FiberModule.Key_DoNotSerialize)
+                .AsImplementedInterfaces()
+                .InstancePerLifetimeScope();
+
             builder.RegisterType<ConversationService>()
                 .Keyed<IConversationService>(FiberModule.Key_DoNotSerialize)
                 .AsImplementedInterfaces().SingleInstance();

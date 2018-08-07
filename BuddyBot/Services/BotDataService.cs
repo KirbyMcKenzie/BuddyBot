@@ -15,7 +15,7 @@ namespace BuddyBot.Services
            botData.SetValue(DataStoreKey.PreferredFirstName, name); 
         }
 
-        public string GetPrerredName(IBotData botData)
+        public string GetPreferredName(IBotData botData)
         {
             return botData.GetValueOrDefault<string>(DataStoreKey.PreferredFirstName);
         }
