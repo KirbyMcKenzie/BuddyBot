@@ -135,6 +135,8 @@ namespace BuddyBot.Services
                     $"Sup {name}",
                     $"What can I do for you {name}? 🤖",
                     $"Hey {name}! 😁",
+                    $"Hey {name}, how are you today?",
+                    $"Whats up, {name}?",
                 });
             }
 
@@ -148,7 +150,10 @@ namespace BuddyBot.Services
                 "Sup m8",
                 "Yo 😎",
                 "Yoooo",
-                "G'day M8"
+                "G'day M8",
+                "What can I do for you today?",
+                "Hows it going?",
+                "Hey, how are you today?",
             });
 
             
