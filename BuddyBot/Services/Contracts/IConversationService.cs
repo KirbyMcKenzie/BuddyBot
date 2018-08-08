@@ -6,13 +6,5 @@ namespace BuddyBot.Services.Contracts
     {
         Task<string> GetGreeting(string name = null);
 
-        Task<string> GetPoliteExpression();
-
-        Task<string> GetHowsItPrompt();
-
-        Task<string> GetHowsItResultGood();
-
-        Task<string> GetHowsItResultBad();
-
     }
 }
