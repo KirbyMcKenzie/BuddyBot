@@ -4,7 +4,7 @@ namespace BuddyBot.Services.Contracts
 {
     public interface IConversationService
     {
-        Task<string> GetGreeting();
+        Task<string> GetGreeting(string name = null);
 
         Task<string> GetPoliteExpression();
 

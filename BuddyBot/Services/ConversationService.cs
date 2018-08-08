@@ -10,9 +10,18 @@ namespace BuddyBot.Services
     public class ConversationService : IConversationService
     {
         
-        public async Task<string> GetGreeting()
+        public async Task<string> GetGreeting(string name = null)
         {
-            IList<string> greetingList = getGreetingList();
+            IList<string> greetingList = null;
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                greetingList = getGreetingList(name);
+            }
+            else
+            {
+                greetingList = getGreetingList();
+            }
 
             // add items to the list
             Random r = new Random();
@@ -111,31 +120,38 @@ namespace BuddyBot.Services
 
 
         // TODO - Pull to db 
-        // TODO - Get users name
-        // TODO - Emoji detection and handler
-        private List<string> getGreetingList()
+        private List<string> getGreetingList(string name = null)
         {
             
          List<string> greetingList = new List<string>();
 
-        greetingList.AddRange(new List<string>
+            if (!string.IsNullOrEmpty(name))
             {
-                // TODO Get users name and add to string 
-                "Hi hi 😊",
+                greetingList.AddRange(new List<string>
+                {
+                    $"Hows it going, {name}",
+                    $"Hiya {name}",
+                    $"Hey {name}",
+                    $"Sup {name}",
+                    $"What can I do for you {name}? 🤖",
+                    $"Hey {name}! 😁",
+                });
+            }
+
+            greetingList.AddRange(new List<string>
+            {
                 "Hi there!",
                 "Hiya",
-                "Hey",
                 "Hello",
                 "Heya 😁",
                 "Howdy!",
                 "Sup m8",
-                "Sup",
-                "Yo",
                 "Yo 😎",
-                "Yo Yo",
-                "What can I do for you? 🤖",
+                "Yoooo",
                 "G'day M8"
             });
+
+            
 
             return greetingList;
         }
