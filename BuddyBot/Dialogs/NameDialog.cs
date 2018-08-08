@@ -30,14 +30,12 @@ namespace BuddyBot.Dialogs
                 return Task.CompletedTask;
             }
 
-            // 6. Try extract name from a channel (eg. Facebook will return the user name)
             string fromName = context.Activity.From.Name;
 
             _suggestedName = fromName.Split(' ').First();
 
             if (_suggestedName.ToLower().Contains("user"))
             {
-                // 7. Webchat has no name, default is "user". Request real name from the user.
                 PromptDialog.Text(context, ResumeAfterNameFilled, "What should I call you?", "Sorry I didn't get that - try again! What should I call you?");
                 return Task.CompletedTask;
             }
@@ -48,13 +46,10 @@ namespace BuddyBot.Dialogs
 
         private async Task ResumeAfterNameFilled(IDialogContext context, IAwaitable<string> result)
         {
-            // 8. Wait for the name 
             string filledName = await result;
 
-            // 9. Save the name in bot data store
             _botDataService.SetPreferredName(context, filledName);
 
-            // 10. End the dialog, and return the filledName to caller dialog (DemoDialog).
             context.Done(filledName);
         }
 
