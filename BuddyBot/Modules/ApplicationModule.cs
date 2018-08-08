@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using Autofac;
@@ -11,6 +12,9 @@ using BuddyBot.Repository.DataAccess.Contracts;
 using BuddyBot.Repository.DbContext;
 using BuddyBot.Services;
 using BuddyBot.Services.Contracts;
+using BuddyBot.Settings;
+using Microsoft.Bot.Builder.Azure;
+using Microsoft.Bot.Builder.Dialogs.Internals;
 using Microsoft.Bot.Builder.Internals.Fibers;
 using Microsoft.Bot.Connector;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +27,38 @@ namespace BuddyBot.Modules
         {
             base.Load(builder);
 
+            AzureStorageSettings azureStorageSettings = new AzureStorageSettings();
+            builder.Register(c => azureStorageSettings).As<IAzureStorageSettings>().SingleInstance();
+
+            // Data Storage
+            string serviceName = "noncached";
+            builder.Register(c =>
+                {
+                    IAzureStorageSettings settings = c.Resolve<IAzureStorageSettings>();
+                    IBotDataStore<BotData> store;
+                    if (string.IsNullOrWhiteSpace(settings.ConnectionString))
+                    {
+
+                        store = new InMemoryDataStore();
+                    }
+                    else
+                    {
+                        store = new TableBotDataStore(settings.ConnectionString);
+                    }
+                    return store;
+                })
+                .Named(serviceName, typeof(IBotDataStore<BotData>))
+                .Keyed<IBotDataStore<BotData>>(AzureModule.Key_DataStore)
+                .AsSelf()
+                .SingleInstance();
+
+            builder.Register(c =>
+                    new CachingBotDataStore(c.ResolveNamed<IBotDataStore<BotData>>(serviceName),
+                        CachingBotDataStoreConsistencyPolicy.ETagBasedConsistency))
+                .As<IBotDataStore<BotData>>()
+                .AsSelf()
+                .InstancePerLifetimeScope();
+
             // Data Access
 
             builder.RegisterType<BuddyBotDbContext>().InstancePerLifetimeScope();
@@ -31,7 +67,12 @@ namespace BuddyBot.Modules
                 .As<IWeatherConditionResponseReader>()
                 .AsImplementedInterfaces().SingleInstance();
 
-            // Services 
+            // Services
+            builder.RegisterType<BotDataService>()
+                .Keyed<IBotDataService>(FiberModule.Key_DoNotSerialize)
+                .AsImplementedInterfaces()
+                .InstancePerLifetimeScope();
+
             builder.RegisterType<ConversationService>()
                 .Keyed<IConversationService>(FiberModule.Key_DoNotSerialize)
                 .AsImplementedInterfaces().SingleInstance();
@@ -61,6 +102,7 @@ namespace BuddyBot.Modules
             builder.RegisterType<RandomNumberDialog>().AsSelf().InstancePerDependency();
             builder.RegisterType<GetWeatherForecastDialog>().AsSelf().InstancePerDependency();
             builder.RegisterType<PersonalityChatDialog>().AsSelf().InstancePerDependency();
+            builder.RegisterType<NameDialog>().AsSelf().InstancePerDependency();
         }
     }
 }
