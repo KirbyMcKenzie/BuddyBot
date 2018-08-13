@@ -14,7 +14,7 @@ namespace BuddyBot.Dialogs
     [Serializable]
     public class PersonalityChatDialog : PersonalityChatDialog<object> 
     {
-        private readonly PersonalityChatDialogOptions _personalityChatDialogOptions = new PersonalityChatDialogOptions(botPersona: PersonalityChatPersona.Humorous)
+        private readonly PersonalityChatDialogOptions _personalityChatDialogOptions = new PersonalityChatDialogOptions()
         {
             RespondOnlyIfChat = false,
             ScenarioThresholdScore = 0.2f,
@@ -26,7 +26,6 @@ namespace BuddyBot.Dialogs
             var scenarioResponses = File.ReadAllLines(System.Web.Hosting.HostingEnvironment.MapPath("/Scenario_Responses_Friendly.tsv")
                              ?? throw new InvalidOperationException());
 
-            //var scenarioResponses = File.ReadAllLines(@"Resources\scenarioResponseMapping.txt");
             var scenarioResponsesMapping = new Dictionary<string, List<string>>();
 
             foreach (var scenarioResponse in scenarioResponses)
@@ -42,10 +41,12 @@ namespace BuddyBot.Dialogs
                 scenarioResponsesMapping[scenario].Add(response);
             }
 
-            PersonalityChatDialogOptions PersonalityChatDialogOptions = new PersonalityChatDialogOptions(scenarioResponsesMapping: scenarioResponsesMapping);
+            var personalityChatDialogOptions = new PersonalityChatDialogOptions(
+                scenarioResponsesMapping: scenarioResponsesMapping,
+                scenarioThresholdScore: _personalityChatDialogOptions.ScenarioThresholdScore,
+                respondOnlyIfChat: _personalityChatDialogOptions.RespondOnlyIfChat);
 
-            this.SetPersonalityChatDialogOptions(PersonalityChatDialogOptions);
-            //this.SetPersonalityChatDialogOptions(_personalityChatDialogOptions);
+            this.SetPersonalityChatDialogOptions(personalityChatDialogOptions);
         }
 
         public override string GetResponse(PersonalityChatResults personalityChatResults)
