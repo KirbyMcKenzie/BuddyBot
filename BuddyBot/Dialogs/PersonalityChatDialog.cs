@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -21,7 +22,30 @@ namespace BuddyBot.Dialogs
 
         public PersonalityChatDialog()
         {
-            this.SetPersonalityChatDialogOptions(_personalityChatDialogOptions);
+
+            var scenarioResponses = File.ReadAllLines(System.Web.Hosting.HostingEnvironment.MapPath("/Scenario_Responses_Friendly.tsv")
+                             ?? throw new InvalidOperationException());
+
+            //var scenarioResponses = File.ReadAllLines(@"Resources\scenarioResponseMapping.txt");
+            var scenarioResponsesMapping = new Dictionary<string, List<string>>();
+
+            foreach (var scenarioResponse in scenarioResponses)
+            {
+                string scenario = scenarioResponse.Split('\t')[0];
+                string response = scenarioResponse.Split('\t')[1];
+
+                if (!scenarioResponsesMapping.ContainsKey(scenario))
+                {
+                    scenarioResponsesMapping[scenario] = new List<string>();
+                }
+
+                scenarioResponsesMapping[scenario].Add(response);
+            }
+
+            PersonalityChatDialogOptions PersonalityChatDialogOptions = new PersonalityChatDialogOptions(scenarioResponsesMapping: scenarioResponsesMapping);
+
+            this.SetPersonalityChatDialogOptions(PersonalityChatDialogOptions);
+            //this.SetPersonalityChatDialogOptions(_personalityChatDialogOptions);
         }
 
         public override string GetResponse(PersonalityChatResults personalityChatResults)

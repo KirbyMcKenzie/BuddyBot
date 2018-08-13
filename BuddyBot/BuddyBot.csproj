@@ -307,6 +307,7 @@
     <Content Include="city.list.json" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\BuddyBot - Web Deploy.pubxml" />
+    <Content Include="Scenario_Responses_Friendly.tsv" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
