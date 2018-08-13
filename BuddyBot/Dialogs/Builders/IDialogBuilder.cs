@@ -20,6 +20,8 @@ namespace BuddyBot.Dialogs.Interfaces
 
         NameDialog BuildNameDialog(IMessageActivity message);
 
+        BotPersonaDialog BuildPeronBotPersonaDialog(IMessageActivity message);
+
 
     }
 }

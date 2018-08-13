@@ -112,6 +112,7 @@ namespace BuddyBot.Dialogs
 
             await context.PostAsync($"I've got your name saved as {name}.");
 
+            // TODO - move this
             PromptDialog.Confirm(context, Resume_AfterPersonaChangePrompt, $"Since we're here, would you like to change my personality traits?", $"Sorry I don't understand - try again! Would you like to change my personality traits?=?");
 
         }
@@ -127,11 +128,21 @@ namespace BuddyBot.Dialogs
                     context.Wait(MessageReceived);
                     break;
                 default:
-                    context.Call(_dialogBuilder.BuildConfirmRobotDialog(GetMessageActivity(context)), Resume_AfterNameDialog);
+                    context.Call(_dialogBuilder.BuildPeronBotPersonaDialog(GetMessageActivity(context)), Resume_AfterBotPersonaDialog);
                     await Task.Yield();
                     break;
             }
 
+        }
+
+        private async Task Resume_AfterBotPersonaDialog(IDialogContext context, IAwaitable<string> result)
+        {
+
+            string persona = await result;
+
+            await context.PostAsync($"Okay, my personality will now be {persona}.");
+
+            context.Wait(MessageReceived);
         }
 
         [LuisIntent("Help")]

@@ -39,6 +39,11 @@ namespace BuddyBot.Dialogs.Builders
             return CreateDialog(message, s => s.Resolve<NameDialog>());
         }
 
+        public BotPersonaDialog BuildPeronBotPersonaDialog(IMessageActivity message)
+        {
+            return CreateDialog(message, s => s.Resolve<BotPersonaDialog>());
+        }
+
         private T CreateDialog<T>(IMessageActivity message, Func<ILifetimeScope, T> func)
         {
             using (var scope = CreateDialogLifetimeScope(message))
