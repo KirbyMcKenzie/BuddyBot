@@ -26,7 +26,7 @@ namespace BuddyBot.Dialogs
             string name = _botDataService.GetPreferredName(context);
             if (!string.IsNullOrWhiteSpace(name))
             {
-                context.Done(name);
+                PromptDialog.Confirm(context, ResumeAfterConfirmation, $"Do you want me to keep calling you {name}?", $"Sorry I don't understand - try again! Should I call you {_suggestedName}?");
                 return Task.CompletedTask;
             }
 
@@ -60,13 +60,21 @@ namespace BuddyBot.Dialogs
             switch (confirmation)
             {
                 case true:
-                    _botDataService.SetPreferredName(context, _suggestedName);
-                    context.Done(_suggestedName);
+                    context.Done(_botDataService.GetPreferredName(context));
                     break;
                 default:
                     PromptDialog.Text(context, ResumeAfterNameFilled, "Okay, what should I call you?", "Sorry I didn't get that - try again! What should I call you?");
                     break;
             }
+        }
+
+        private async Task ResumeAfterNameChangedPrompt(IDialogContext context, IAwaitable<string> result)
+        {
+            string filledName = await result;
+
+            _botDataService.SetPreferredName(context, filledName);
+
+            context.Done(filledName);
         }
     }
 }
