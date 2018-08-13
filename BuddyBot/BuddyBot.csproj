@@ -309,6 +309,8 @@
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\BuddyBot - Web Deploy.pubxml" />
     <Content Include="Scenario_Responses_Friendly.tsv" />
+    <Content Include="Scenario_Responses_Professional.tsv" />
+    <Content Include="Scenario_Responses_Humorous.tsv" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

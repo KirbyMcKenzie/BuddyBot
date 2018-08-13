@@ -4,7 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using BuddyBot.Services.Contracts;
+using Microsoft.Azure.Documents.SystemFunctions;
 using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Builder.Internals.Fibers;
 using Microsoft.Bot.Builder.PersonalityChat.Core;
 using Microsoft.Bot.Builder.PersonalityChat;
 using Microsoft.Bot.Connector;
@@ -12,18 +15,24 @@ using Microsoft.Bot.Connector;
 namespace BuddyBot.Dialogs
 {
     [Serializable]
-    public class PersonalityChatDialog : PersonalityChatDialog<object> 
+    public class PersonalityChatDialog : PersonalityChatDialog<object>
     {
+        private IBotDataService _botDataService;
+
         private readonly PersonalityChatDialogOptions _personalityChatDialogOptions = new PersonalityChatDialogOptions()
         {
             RespondOnlyIfChat = false,
             ScenarioThresholdScore = 0.2f,
         };
 
-        public PersonalityChatDialog()
+        public PersonalityChatDialog(IBotDataService botDataService, IDialogContext context)
         {
+            SetField.NotNull(out _botDataService, nameof(botDataService), botDataService);
 
-            var scenarioResponses = File.ReadAllLines(System.Web.Hosting.HostingEnvironment.MapPath("/Scenario_Responses_Friendly.tsv")
+            // TODO - null check
+            var preferredBotPersona = _botDataService.GetPreferredBotPersona(context);
+
+            var scenarioResponses = File.ReadAllLines(System.Web.Hosting.HostingEnvironment.MapPath($"/Scenario_Responses_{preferredBotPersona}.tsv")
                              ?? throw new InvalidOperationException());
 
             var scenarioResponsesMapping = new Dictionary<string, List<string>>();

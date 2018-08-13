@@ -40,12 +40,13 @@ namespace BuddyBot.Dialogs
             switch (confirmation)
             {
                 case true:
-                    context.Done(_botDataService.GetPreferredBotPersona(context));
-                    break;
-                default:
                     PromptDialog.Choice(context, ResumeAfterPersonaFilled,
                         Enum.GetValues(typeof(PersonalityChatPersona)).Cast<PersonalityChatPersona>(),
-                        "What would you like my personality to be like?");
+                        "What would you like my personality to be?");
+                    
+                    break;
+                default:
+                    context.Done(_botDataService.GetPreferredBotPersona(context));
                     break;
             }
         }
