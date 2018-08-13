@@ -8,6 +8,9 @@ namespace BuddyBot.Models
     public enum DataStoreKey
     {
         [DataStoreEntry("Preferred name", DataStore.User)]
-        PreferredFirstName
+        PreferredFirstName,
+
+        [DataStoreEntry("Preferred persona", DataStore.User)]
+        PreferredBotPersona
     }
 }
