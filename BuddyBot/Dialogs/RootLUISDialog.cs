@@ -107,9 +107,30 @@ namespace BuddyBot.Dialogs
 
         private async Task Resume_AfterNameDialog(IDialogContext context, IAwaitable<string> result)
         {
+
             string name = await result;
 
             await context.PostAsync($"I've got your name saved as {name}.");
+
+            PromptDialog.Confirm(context, Resume_AfterPersonaChangePrompt, $"Since we're here, would you like to change my personality traits?", $"Sorry I don't understand - try again! Would you like to change my personality traits?=?");
+
+        }
+
+        private async Task Resume_AfterPersonaChangePrompt(IDialogContext context, IAwaitable<bool> result)
+        {
+            bool confirmation = await result;
+
+            switch (confirmation)
+            {
+                case true:
+                    await context.PostAsync("Okay we're done. Anything I can do for you?");
+                    context.Wait(MessageReceived);
+                    break;
+                default:
+                    context.Call(_dialogBuilder.BuildConfirmRobotDialog(GetMessageActivity(context)), Resume_AfterNameDialog);
+                    await Task.Yield();
+                    break;
+            }
 
         }
 
