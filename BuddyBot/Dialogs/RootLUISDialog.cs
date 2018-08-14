@@ -101,7 +101,7 @@ namespace BuddyBot.Dialogs
 
             await context.PostAsync(reply);
 
-            context.Call(_dialogBuilder.BuildNameDialog(GetMessageActivity(context)), Resume_AfterNameDialog);
+            context.Call(_dialogBuilder.BuildNameDialog(GetMessageActivity(context), result.Entities), Resume_AfterNameDialog);
             await Task.Yield();
         }
 
@@ -124,7 +124,7 @@ namespace BuddyBot.Dialogs
             switch (confirmation)
             {
                 case true:
-                    context.Call(_dialogBuilder.BuildPeronBotPersonaDialog(GetMessageActivity(context)), Resume_AfterBotPersonaDialog);
+                    context.Call(_dialogBuilder.BuildBotPersonaDialog(GetMessageActivity(context)), Resume_AfterBotPersonaDialog);
                     await Task.Yield();
                     
                     break;
@@ -232,6 +232,20 @@ namespace BuddyBot.Dialogs
             await context.PostAsync($"{message}");
 
             context.Wait(MessageReceived);
+        }
+
+        [LuisIntent("User.UpdatePreferredName")]
+        public async Task UpdatePreferredName(IDialogContext context, LuisResult result)
+        {
+            context.Call(_dialogBuilder.BuildNameDialog(GetMessageActivity(context), result.Entities), Resume_AfterNameDialog);
+            await Task.Yield();
+        }
+
+        [LuisIntent("User.UpdatePreferredBotPersona")]
+        public async Task UpdatePreferredBotPersona(IDialogContext context, LuisResult result)
+        {
+            context.Call(_dialogBuilder.BuildBotPersonaDialog(GetMessageActivity(context)), Resume_AfterBotPersonaDialog);
+            await Task.Yield();
         }
 
         [LuisIntent("Weather.GetForecast")]

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -38,14 +39,14 @@ namespace BuddyBot.Controllers
             }
             else
             {
-                HandleSystemMessage(activity);
+                await HandleSystemMessage(activity);
             }
             var response = Request.CreateResponse(HttpStatusCode.OK);
             return response;
         }
 
         // TODO - Make Async
-        private Activity HandleSystemMessage(Activity message)
+        private async Task<Activity> HandleSystemMessage(Activity message)
         {
             if (message.Type == ActivityTypes.DeleteUserData)
             {
@@ -57,6 +58,23 @@ namespace BuddyBot.Controllers
                 // Handle conversation state changes, like members being added and removed
                 // Use Activity.MembersAdded and Activity.MembersRemoved and Activity.Action for info
                 // Not available in all channels
+                
+                // TODO - ConversationUpdate - Come back to
+                //IConversationUpdateActivity update = message;
+                //using (var scope = DialogModule.BeginLifetimeScope(Conversation.Container, message))
+                //{
+                //    if (update.MembersAdded.Any())
+                //    {
+                //        foreach (var newMember in update.MembersAdded)
+                //        {
+                //            if (newMember.Id != message.Recipient.Id)
+                //            {
+                //                var internalScope = scope;
+                //                await Conversation.SendAsync(message, () => internalScope.Resolve<ConfirmRobotDialog>());
+                //            }
+                //        }
+                //    }
+                //}
             }
             else if (message.Type == ActivityTypes.ContactRelationUpdate)
             {

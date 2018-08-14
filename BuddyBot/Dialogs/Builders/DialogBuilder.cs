@@ -34,12 +34,12 @@ namespace BuddyBot.Dialogs.Builders
             return CreateDialog(message, s => s.Resolve<PersonalityChatDialog>(TypedParameter.From(result)));
         }
 
-        public NameDialog BuildNameDialog(IMessageActivity message)
+        public NameDialog BuildNameDialog(IMessageActivity message, IList<EntityRecommendation> result)
         {
             return CreateDialog(message, s => s.Resolve<NameDialog>());
         }
 
-        public BotPersonaDialog BuildPeronBotPersonaDialog(IMessageActivity message)
+        public BotPersonaDialog BuildBotPersonaDialog(IMessageActivity message)
         {
             return CreateDialog(message, s => s.Resolve<BotPersonaDialog>());
         }
