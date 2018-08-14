@@ -141,7 +141,7 @@ namespace BuddyBot.Dialogs
 
             string persona = await result;
 
-            await context.PostAsync($"Okay, my personality will now be {persona}.");
+            await context.PostAsync($"Okay, my personality is set to {persona}.");
 
             context.Wait(MessageReceived);
         }

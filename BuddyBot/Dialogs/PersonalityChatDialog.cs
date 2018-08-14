@@ -17,7 +17,7 @@ namespace BuddyBot.Dialogs
     [Serializable]
     public class PersonalityChatDialog : PersonalityChatDialog<object>
     {
-        private IBotDataService _botDataService;
+        private readonly IBotDataService _botDataService;
 
         private readonly PersonalityChatDialogOptions _personalityChatDialogOptions = new PersonalityChatDialogOptions()
         {

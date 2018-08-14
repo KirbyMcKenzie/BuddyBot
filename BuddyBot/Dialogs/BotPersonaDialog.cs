@@ -46,7 +46,7 @@ namespace BuddyBot.Dialogs
                     
                     break;
                 default:
-                    context.Done(_botDataService.GetPreferredBotPersona(context));
+                    context.Done(_botDataService.GetPreferredBotPersona(context).ToString());
                     break;
             }
         }
