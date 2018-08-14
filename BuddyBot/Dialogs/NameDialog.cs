@@ -16,6 +16,7 @@ namespace BuddyBot.Dialogs
     public class NameDialog : IDialog<string>
     {
         private string _suggestedName;
+        private string _preferredNameFromMessage;
         private readonly IBotDataService _botDataService;
         private readonly IList<EntityRecommendation> _entities;
 
@@ -27,12 +28,12 @@ namespace BuddyBot.Dialogs
 
         public Task StartAsync(IDialogContext context)
         {
-            string preferredNameFromMessage = MessageHelpers.ExtractEntityFromMessage("User.PreferredName", _entities);
+            _preferredNameFromMessage = MessageHelpers.ExtractEntityFromMessage("User.PreferredName", _entities);
             string name = _botDataService.GetPreferredName(context);
 
-            if (!string.IsNullOrWhiteSpace(preferredNameFromMessage))
+            if (!string.IsNullOrWhiteSpace(_preferredNameFromMessage))
             {
-                PromptDialog.Confirm(context, ResumeAfterConfirmation, $"So you'd like me to call you {preferredNameFromMessage} from now on?", $"Sorry I don't understand - try again! Should I call you {_suggestedName}?");
+                PromptDialog.Confirm(context, ResumeAfterPreferredNameConfirmation, $"So you'd like me to call you {_preferredNameFromMessage} from now on?", $"Sorry I don't understand - try again! Should I call you {_preferredNameFromMessage}?");
                 return Task.CompletedTask;
             }
 
@@ -54,6 +55,15 @@ namespace BuddyBot.Dialogs
 
             PromptDialog.Confirm(context, ResumeAfterConfirmation, $"Should I call you {_suggestedName}?", $"Sorry I don't understand - try again! Should I call you {_suggestedName}?");
             return Task.CompletedTask;
+        }
+
+        private async Task ResumeAfterPreferredNameConfirmation(IDialogContext context, IAwaitable<bool> result)
+        {
+            _botDataService.SetPreferredName(context, _preferredNameFromMessage);
+            context.Done(_preferredNameFromMessage);
+
+            await Task.Yield();
+
         }
 
         private async Task ResumeAfterNameFilled(IDialogContext context, IAwaitable<string> result)
@@ -80,13 +90,5 @@ namespace BuddyBot.Dialogs
             }
         }
 
-        private async Task ResumeAfterNameChangedPrompt(IDialogContext context, IAwaitable<string> result)
-        {
-            string filledName = await result;
-
-            _botDataService.SetPreferredName(context, filledName);
-
-            context.Done(filledName);
-        }
     }
 }
