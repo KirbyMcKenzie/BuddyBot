@@ -39,9 +39,9 @@ namespace BuddyBot.Dialogs.Builders
             return CreateDialog(message, s => s.Resolve<NameDialog>(TypedParameter.From(result)));
         }
 
-        public BotPersonaDialog BuildBotPersonaDialog(IMessageActivity message)
+        public BotPersonaDialog BuildBotPersonaDialog(IMessageActivity message, IList<EntityRecommendation> result)
         {
-            return CreateDialog(message, s => s.Resolve<BotPersonaDialog>());
+            return CreateDialog(message, s => s.Resolve<BotPersonaDialog>(TypedParameter.From(result)));
         }
 
         private T CreateDialog<T>(IMessageActivity message, Func<ILifetimeScope, T> func)

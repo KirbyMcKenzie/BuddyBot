@@ -244,7 +244,7 @@ namespace BuddyBot.Dialogs
         [LuisIntent("User.UpdatePreferredBotPersona")]
         public async Task UpdatePreferredBotPersona(IDialogContext context, LuisResult result)
         {
-            context.Call(_dialogBuilder.BuildBotPersonaDialog(GetMessageActivity(context)), Resume_AfterBotPersonaDialog);
+            context.Call(_dialogBuilder.BuildBotPersonaDialog(GetMessageActivity(context), result.Entities), Resume_AfterBotPersonaDialog);
             await Task.Yield();
         }
 

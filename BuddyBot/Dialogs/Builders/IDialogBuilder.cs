@@ -20,7 +20,7 @@ namespace BuddyBot.Dialogs.Interfaces
 
         NameDialog BuildNameDialog(IMessageActivity message, IList<EntityRecommendation> result);
 
-        BotPersonaDialog BuildBotPersonaDialog(IMessageActivity message);
+        BotPersonaDialog BuildBotPersonaDialog(IMessageActivity message, IList<EntityRecommendation> result>);
 
 
     }
