@@ -111,30 +111,27 @@ namespace BuddyBot.Dialogs
             string name = await result;
 
             await context.PostAsync($"I've got your name saved as {name}.");
-
-            // TODO - move this
-            PromptDialog.Confirm(context, Resume_AfterPersonaChangePrompt, $"Since we're here, would you like to change my personality traits?", $"Sorry I don't understand - try again! Would you like to change my personality traits?=?");
-
+           
         }
 
-        private async Task Resume_AfterPersonaChangePrompt(IDialogContext context, IAwaitable<bool> result)
-        {
-            bool confirmation = await result;
+        //private async Task Resume_AfterPersonaChangePrompt(IDialogContext context, IAwaitable<bool> result)
+        //{
+        //    bool confirmation = await result;
 
-            switch (confirmation)
-            {
-                case true:
-                    context.Call(_dialogBuilder.BuildBotPersonaDialog(GetMessageActivity(context)), Resume_AfterBotPersonaDialog);
-                    await Task.Yield();
+        //    switch (confirmation)
+        //    {
+        //        case true:
+        //            context.Call(_dialogBuilder.BuildBotPersonaDialog(GetMessageActivity(context), ), Resume_AfterBotPersonaDialog);
+        //            await Task.Yield();
                     
-                    break;
-                default:
-                    await context.PostAsync("Okay we're done. Anything I can do for you?");
-                    context.Wait(MessageReceived);
-                    break;
-            }
+        //            break;
+        //        default:
+        //            await context.PostAsync("Okay we're done. Anything I can do for you?");
+        //            context.Wait(MessageReceived);
+        //            break;
+        //    }
 
-        }
+        //}
 
         private async Task Resume_AfterBotPersonaDialog(IDialogContext context, IAwaitable<string> result)
         {

@@ -57,6 +57,7 @@ namespace BuddyBot.Dialogs
             return Task.CompletedTask;
         }
 
+        // TODO - check true/false
         private async Task ResumeAfterPreferredNameConfirmation(IDialogContext context, IAwaitable<bool> result)
         {
             _botDataService.SetPreferredName(context, _preferredNameFromMessage);
