@@ -6,5 +6,7 @@ namespace BuddyBot.Services.Contracts
     {
         Task<string> GetGreeting(string name = null);
 
+        string GetHowCanIHelpPhrase();
+
     }
 }

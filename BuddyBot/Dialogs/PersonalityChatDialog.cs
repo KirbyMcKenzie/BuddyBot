@@ -79,7 +79,9 @@ namespace BuddyBot.Dialogs
                 }
                 else
                 {
-                    response = "Enough chit-chat! What do you want?";
+                    // Personality-Chat could not find an appropriate response
+                    // so return a generic 'How can I help' response
+                    response = _conversationService.GetHowCanIHelpPhrase();
                 }
             }
             
