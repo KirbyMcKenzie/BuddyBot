@@ -18,6 +18,7 @@ namespace BuddyBot.Dialogs
     public class PersonalityChatDialog : PersonalityChatDialog<object>
     {
         private readonly IBotDataService _botDataService;
+        private readonly IConversationService _conversationService;
 
         private readonly PersonalityChatDialogOptions _personalityChatDialogOptions = new PersonalityChatDialogOptions()
         {
@@ -25,9 +26,10 @@ namespace BuddyBot.Dialogs
             ScenarioThresholdScore = 0.2f,
         };
 
-        public PersonalityChatDialog(IBotDataService botDataService, IDialogContext context)
+        public PersonalityChatDialog(IBotDataService botDataService, IConversationService conversationService, IDialogContext context)
         {
             SetField.NotNull(out _botDataService, nameof(botDataService), botDataService);
+            SetField.NotNull(out _conversationService, nameof(conversationService), conversationService);
 
             // TODO - null check
             var preferredBotPersona = _botDataService.GetPreferredBotPersona(context);
