@@ -56,7 +56,7 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Chit-Chat")]
         public async Task Chitchat(IDialogContext context, LuisResult result)
         {
-            await context.Forward(new PersonalityChatDialog(), Resume_AfterChitchat, new Activity {Text = result.Query},
+            await context.Forward(new PersonalityChatDialog(_botDataService, _conversationService, context), Resume_AfterChitchat, new Activity {Text = result.Query},
                 CancellationToken.None);
 
             
@@ -101,16 +101,46 @@ namespace BuddyBot.Dialogs
 
             await context.PostAsync(reply);
 
-            context.Call(_dialogBuilder.BuildNameDialog(GetMessageActivity(context)), Resume_AfterNameDialog);
+            context.Call(_dialogBuilder.BuildNameDialog(GetMessageActivity(context), result.Entities), Resume_AfterNameDialog);
             await Task.Yield();
         }
 
         private async Task Resume_AfterNameDialog(IDialogContext context, IAwaitable<string> result)
         {
+
             string name = await result;
 
             await context.PostAsync($"I've got your name saved as {name}.");
+           
+        }
 
+        //private async Task Resume_AfterPersonaChangePrompt(IDialogContext context, IAwaitable<bool> result)
+        //{
+        //    bool confirmation = await result;
+
+        //    switch (confirmation)
+        //    {
+        //        case true:
+        //            context.Call(_dialogBuilder.BuildBotPersonaDialog(GetMessageActivity(context), ), Resume_AfterBotPersonaDialog);
+        //            await Task.Yield();
+                    
+        //            break;
+        //        default:
+        //            await context.PostAsync("Okay we're done. Anything I can do for you?");
+        //            context.Wait(MessageReceived);
+        //            break;
+        //    }
+
+        //}
+
+        private async Task Resume_AfterBotPersonaDialog(IDialogContext context, IAwaitable<string> result)
+        {
+
+            string persona = await result;
+
+            await context.PostAsync($"Okay, my personality is set to {persona}.");
+
+            context.Wait(MessageReceived);
         }
 
         [LuisIntent("Help")]
@@ -199,6 +229,20 @@ namespace BuddyBot.Dialogs
             await context.PostAsync($"{message}");
 
             context.Wait(MessageReceived);
+        }
+
+        [LuisIntent("User.UpdatePreferredName")]
+        public async Task UpdatePreferredName(IDialogContext context, LuisResult result)
+        {
+            context.Call(_dialogBuilder.BuildNameDialog(GetMessageActivity(context), result.Entities), Resume_AfterNameDialog);
+            await Task.Yield();
+        }
+
+        [LuisIntent("User.UpdatePreferredBotPersona")]
+        public async Task UpdatePreferredBotPersona(IDialogContext context, LuisResult result)
+        {
+            context.Call(_dialogBuilder.BuildBotPersonaDialog(GetMessageActivity(context), result.Entities), Resume_AfterBotPersonaDialog);
+            await Task.Yield();
         }
 
         [LuisIntent("Weather.GetForecast")]

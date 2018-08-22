@@ -259,6 +259,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Dialogs\BotPersonaDialog.cs" />
     <Compile Include="Dialogs\Builders\RichCardAttachmentBuilder.cs" />
     <Compile Include="Dialogs\NameDialog.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
@@ -307,6 +308,9 @@
     <Content Include="city.list.json" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\BuddyBot - Web Deploy.pubxml" />
+    <Content Include="Scenario_Responses_Friendly.tsv" />
+    <Content Include="Scenario_Responses_Professional.tsv" />
+    <Content Include="Scenario_Responses_Humorous.tsv" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

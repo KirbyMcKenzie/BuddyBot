@@ -103,6 +103,7 @@ namespace BuddyBot.Modules
             builder.RegisterType<GetWeatherForecastDialog>().AsSelf().InstancePerDependency();
             builder.RegisterType<PersonalityChatDialog>().AsSelf().InstancePerDependency();
             builder.RegisterType<NameDialog>().AsSelf().InstancePerDependency();
+            builder.RegisterType<BotPersonaDialog>().AsSelf().InstancePerDependency();
         }
     }
 }

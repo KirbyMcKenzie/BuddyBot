@@ -18,7 +18,9 @@ namespace BuddyBot.Dialogs.Interfaces
 
         PersonalityChatDialog BuildBasicPersonalityChatBotDialog(IMessageActivity message, IList<EntityRecommendation> result);
 
-        NameDialog BuildNameDialog(IMessageActivity message);
+        NameDialog BuildNameDialog(IMessageActivity message, IList<EntityRecommendation> result);
+
+        BotPersonaDialog BuildBotPersonaDialog(IMessageActivity message, IList<EntityRecommendation> result);
 
 
     }

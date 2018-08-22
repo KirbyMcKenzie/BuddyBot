@@ -24,6 +24,36 @@ namespace BuddyBot.Services
             return randomString;
         }
 
+        public async Task<string> GetHowCanIHelpPhrase()
+        {
+            IList<string> howCanIHelpPhraseList = GetHowCanIHelpPhraseList();
+
+            // add items to the list
+            Random r = new Random();
+            int index = r.Next(howCanIHelpPhraseList.Count);
+            string randomString = howCanIHelpPhraseList[index];
+
+            await Task.Yield();
+
+            return randomString;
+        }
+
+        private IList<string> GetHowCanIHelpPhraseList()
+        {
+            List<string> canIHelpPhraseList = new List<string>();
+
+
+            canIHelpPhraseList.AddRange(new List<string>
+            {
+                "What can I do for you today?",
+                "Okay, is there anything I can do for you today?",
+                "Can I help with anything else?",
+                "Let's move on. What can I help with?",
+            });
+
+            return canIHelpPhraseList;
+        }
+
         // TODO - Pull to db 
         private List<string> getGreetingList(string name = null)
         {
