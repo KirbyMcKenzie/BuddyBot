@@ -81,7 +81,7 @@ namespace BuddyBot.Dialogs
                 {
                     // Personality-Chat could not find an appropriate response
                     // so return a generic 'How can I help' response
-                    response = _conversationService.GetHowCanIHelpPhrase();
+                    response = _conversationService.GetHowCanIHelpPhrase().GetAwaiter().GetResult();
                 }
             }
             
