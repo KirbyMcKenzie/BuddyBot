@@ -265,6 +265,7 @@
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Helpers\GlobalizationHelpers.cs" />
     <Compile Include="Helpers\WeatherHelpers.cs" />
+    <Compile Include="Logging\ActivityLogger.cs" />
     <Compile Include="Models\DataStore.cs" />
     <Compile Include="Models\DataStoreEntryAttribute.cs" />
     <Compile Include="Models\DataStoreKey.cs" />
