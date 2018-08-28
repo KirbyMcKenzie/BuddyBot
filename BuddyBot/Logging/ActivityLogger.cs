@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using BuddyBot.Settings;
 using Microsoft.Azure;
 using Microsoft.WindowsAzure.Storage;
 using Serilog;
@@ -14,13 +15,20 @@ namespace BuddyBot.Logging
 {
     public class ActivityLogger: IActivityLogger
     {
+        private readonly IAzureStorageSettings _azureStorageSettings;
+
+        public ActivityLogger(IAzureStorageSettings azureStorageSettings)
+        {
+            _azureStorageSettings = azureStorageSettings;
+        }
 
         public async Task LogAsync(IActivity activity)
         {
-            var storage = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting("azureStorage:connectionString"));
+
+            var storage = CloudStorageAccount.Parse(_azureStorageSettings.ConnectionString);
 
             var log = new LoggerConfiguration()
-                .WriteTo.AzureTableStorage(storage)
+                .WriteTo.AzureTableStorageWithProperties(storage, storageTableName: _azureStorageSettings.LoggingTableName)
                 .MinimumLevel.Debug()
                 .CreateLogger();
 

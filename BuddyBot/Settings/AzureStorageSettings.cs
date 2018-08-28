@@ -11,10 +11,13 @@ namespace BuddyBot.Settings
         public string ConnectionString { get; }
         public string UserPreferencesDataTableName { get; }
 
+        public string LoggingTableName{ get; }
+
         public AzureStorageSettings()
         {
             ConnectionString = ConfigurationManager.AppSettings["azureStorage:connectionString"];
             UserPreferencesDataTableName = ConfigurationManager.AppSettings["azureStorage:userPreferencesDataTableName"];
+            LoggingTableName = ConfigurationManager.AppSettings["azureStorage:loggingTableName"];
         }
     }
 

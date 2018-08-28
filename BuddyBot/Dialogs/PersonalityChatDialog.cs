@@ -80,7 +80,8 @@ namespace BuddyBot.Dialogs
                 else
                 {
                     // Personality-Chat could not find an appropriate response
-                    // so return a generic 'How can I help' response
+                    // so return a generic 'How can I help' response.
+                    // TODO - this isnt returning values all of a sudden
                     response = _conversationService.GetHowCanIHelpPhrase().GetAwaiter().GetResult();
                 }
             }
