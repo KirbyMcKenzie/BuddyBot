@@ -24,7 +24,7 @@ namespace BuddyBot.Services
             return randomString;
         }
 
-        public async Task<string> GetHowCanIHelpPhrase()
+        public string GetHowCanIHelpPhrase()
         {
             IList<string> howCanIHelpPhraseList = GetHowCanIHelpPhraseList();
 
@@ -32,8 +32,6 @@ namespace BuddyBot.Services
             Random r = new Random();
             int index = r.Next(howCanIHelpPhraseList.Count);
             string randomString = howCanIHelpPhraseList[index];
-
-            await Task.Yield();
 
             return randomString;
         }

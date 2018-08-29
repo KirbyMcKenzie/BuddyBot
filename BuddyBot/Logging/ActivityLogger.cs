@@ -25,6 +25,7 @@ namespace BuddyBot.Logging
         public async Task LogAsync(IActivity activity)
         {
 
+            // TODO - move this
             var storage = CloudStorageAccount.Parse(_azureStorageSettings.ConnectionString);
 
             var log = new LoggerConfiguration()

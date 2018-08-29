@@ -60,6 +60,8 @@ namespace BuddyBot.Dialogs
             this.SetPersonalityChatDialogOptions(personalityChatDialogOptions);
         }
 
+        
+
         public override string GetResponse(PersonalityChatResults personalityChatResults)
         {
             var matchedScenarios = personalityChatResults?.ScenarioList;
@@ -81,8 +83,8 @@ namespace BuddyBot.Dialogs
                 {
                     // Personality-Chat could not find an appropriate response
                     // so return a generic 'How can I help' response.
-                    // TODO - this isnt returning values all of a sudden
-                    response = _conversationService.GetHowCanIHelpPhrase().GetAwaiter().GetResult();
+                    response = _conversationService.GetHowCanIHelpPhrase();
+
                 }
             }
             
