@@ -7,6 +7,7 @@ using Autofac;
 using BuddyBot.Dialogs;
 using BuddyBot.Dialogs.Builders;
 using BuddyBot.Dialogs.Interfaces;
+using BuddyBot.Logging;
 using BuddyBot.Repository.DataAccess;
 using BuddyBot.Repository.DataAccess.Contracts;
 using BuddyBot.Repository.DbContext;
@@ -15,6 +16,7 @@ using BuddyBot.Services.Contracts;
 using BuddyBot.Settings;
 using Microsoft.Bot.Builder.Azure;
 using Microsoft.Bot.Builder.Dialogs.Internals;
+using Microsoft.Bot.Builder.History;
 using Microsoft.Bot.Builder.Internals.Fibers;
 using Microsoft.Bot.Connector;
 using Microsoft.EntityFrameworkCore;
@@ -58,6 +60,9 @@ namespace BuddyBot.Modules
                 .As<IBotDataStore<BotData>>()
                 .AsSelf()
                 .InstancePerLifetimeScope();
+
+            // Message Interceptor
+            builder.RegisterType<ActivityLogger>().AsImplementedInterfaces().InstancePerDependency();
 
             // Data Access
 

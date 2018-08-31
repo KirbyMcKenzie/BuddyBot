@@ -10,5 +10,6 @@ namespace BuddyBot.Settings
     {
         string ConnectionString { get; }
         string UserPreferencesDataTableName { get; }
+        string LoggingTableName { get; }
     }
 }
