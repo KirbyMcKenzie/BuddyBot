@@ -85,7 +85,8 @@ namespace BuddyBot.Services
             }
             catch (Exception ex)
             {
-                return null;
+                Log.Error(ex, $"An unexpected error occurred, error details: {ex.Message}");
+                throw;
             }
 
             return cityList;
@@ -129,12 +130,12 @@ namespace BuddyBot.Services
                                $"with {mappedConitionReponse.MappedConditionResponse}";
                     }
                 }
-
+                // TODO - do something else with this
                 return "I'm having problems accessing weather reports. Please try again later";
             }
             catch (Exception ex)
             {
-                Log.Error(ex, $"An unexpected error occured in {nameof(WeatherService)}, {ex.Message}");
+                Log.Error(ex, $"An unexpected error occurred, error details: {ex.Message}");
                 throw;
             }
         }
