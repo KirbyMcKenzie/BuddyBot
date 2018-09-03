@@ -46,7 +46,6 @@ namespace BuddyBot
                 .WriteTo.AzureTableStorageWithProperties(storage, storageTableName: azureStorageSettings.LoggingTableName)
                 .MinimumLevel.Debug()
                 .CreateLogger();
-            
         }
 
         private void Update(ContainerBuilder containerBuilder)

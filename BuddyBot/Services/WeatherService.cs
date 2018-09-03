@@ -16,6 +16,7 @@ using BuddyBot.Services.Contracts;
 using BuddyBot.Helpers;
 using BuddyBot.Models.Enums;
 using BuddyBot.Repository.DataAccess.Contracts;
+using Serilog;
 
 namespace BuddyBot.Services
 {
@@ -133,7 +134,7 @@ namespace BuddyBot.Services
             }
             catch (Exception ex)
             {
-
+                Log.Error(ex, $"An unexpected error occured in {nameof(WeatherService)}, {ex.Message}");
                 throw;
             }
         }
