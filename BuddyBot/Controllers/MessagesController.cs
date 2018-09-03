@@ -9,6 +9,7 @@ using BuddyBot.Dialogs;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Dialogs.Internals;
 using Microsoft.Bot.Connector;
+using Serilog;
 
 namespace BuddyBot.Controllers
 {
@@ -34,7 +35,9 @@ namespace BuddyBot.Controllers
                 catch (Exception ex)
                 {
                     // TODO - Add Logging, Telemetry
+                    Log.Error(ex, "An unexpected error occured.");
                     throw;
+
                 }
             }
             else

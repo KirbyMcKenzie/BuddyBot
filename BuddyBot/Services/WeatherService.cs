@@ -134,7 +134,7 @@ namespace BuddyBot.Services
             catch (Exception ex)
             {
 
-                return "I'm having problems accessing weather reports. Please try again later";
+                throw;
             }
         }
     }
