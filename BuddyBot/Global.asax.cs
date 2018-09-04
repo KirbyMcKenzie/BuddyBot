@@ -33,7 +33,6 @@ namespace BuddyBot
 
             ConfigureLogging();
 
-
         }
 
         private void ConfigureLogging()
