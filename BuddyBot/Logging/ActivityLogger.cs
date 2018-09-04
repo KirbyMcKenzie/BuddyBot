@@ -16,6 +16,7 @@ namespace BuddyBot.Logging
     public class ActivityLogger: IActivityLogger
     {
         private readonly IAzureStorageSettings _azureStorageSettings;
+        
 
         public ActivityLogger(IAzureStorageSettings azureStorageSettings)
         {
