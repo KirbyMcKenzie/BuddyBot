@@ -7,8 +7,8 @@ namespace BuddyBot.Repository.Models
 {
     public class ChatHistoryEntity: TableEntity
     {
-        public Guid From { get; set; }
-        public Guid Recipient { get; set; }
+        public string From { get; set; }
+        public string Recipient { get; set; }
         public string Message { get; set; }
 
     }

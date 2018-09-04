@@ -6,6 +6,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using BuddyBot.Repository.DataAccess.Contracts;
+using BuddyBot.Repository.Models;
 using BuddyBot.Settings;
 using Microsoft.Azure;
 using Microsoft.WindowsAzure.Storage;
@@ -16,11 +18,13 @@ namespace BuddyBot.Logging
     public class ActivityLogger: IActivityLogger
     {
         private readonly IAzureStorageSettings _azureStorageSettings;
-        
+        private readonly IChatHistoryWriter _chatHistoryWriter;
 
-        public ActivityLogger(IAzureStorageSettings azureStorageSettings)
+
+        public ActivityLogger(IAzureStorageSettings azureStorageSettings, IChatHistoryWriter chatHistoryWriter )
         {
             _azureStorageSettings = azureStorageSettings;
+            _chatHistoryWriter = chatHistoryWriter;
         }
 
         public async Task LogAsync(IActivity activity)
@@ -40,7 +44,15 @@ namespace BuddyBot.Logging
                 log.Information($"From:{activity.From.Id} - To:{activity.Recipient.Id} - Message:{activity.AsMessageActivity().Text}");
             }
 
-            await Task.Yield();
+            ChatHistoryEntity chatHistoryEntity = new ChatHistoryEntity
+            {
+                From = activity.From.Id,
+                Recipient = activity.Recipient.Id,
+                Message = activity.AsMessageActivity().Text
+            };
+
+            await _chatHistoryWriter.SaveMessage(chatHistoryEntity);
+
         }
     }
 }
