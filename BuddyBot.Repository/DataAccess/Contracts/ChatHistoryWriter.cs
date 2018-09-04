@@ -26,6 +26,8 @@ namespace BuddyBot.Repository.DataAccess.Contracts
             // Create the CloudTable object that represents the "people" table.
             CloudTable table = tableClient.GetTableReference(repositorySettings.ChatHistoryTableName);
 
+            // Create the table if it doesn't exist.
+            table.CreateIfNotExists();
 
             // Create the TableOperation object that inserts the chat history entity.
             TableOperation insertOperation = TableOperation.Insert(chatHistoryEntity);
