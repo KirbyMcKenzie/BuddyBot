@@ -5,6 +5,6 @@ namespace BuddyBot.Services.Contracts
 {
     public interface IJokeService
     {
-        Task<String> GetRandomJoke();
+        Task<string> GetRandomJoke();
     }
 }
