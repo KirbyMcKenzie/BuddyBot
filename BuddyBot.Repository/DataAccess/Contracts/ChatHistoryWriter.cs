@@ -18,13 +18,13 @@ namespace BuddyBot.Repository.DataAccess.Contracts
 
             // Retrieve the storage account from the connection string.
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
-                repositorySettings.LoggingTableName);
+                repositorySettings.ConnectionString);
 
             // Create the table client.
             CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
 
             // Create the CloudTable object that represents the "people" table.
-            CloudTable table = tableClient.GetTableReference("people");
+            CloudTable table = tableClient.GetTableReference(repositorySettings.ChatHistoryTableName);
 
 
             // Create the TableOperation object that inserts the chat history entity.

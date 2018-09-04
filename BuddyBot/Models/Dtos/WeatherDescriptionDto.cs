@@ -12,6 +12,5 @@ namespace BuddyBot.Models.Dtos
         public string description { get; set; }
 
     }
-
     
 }

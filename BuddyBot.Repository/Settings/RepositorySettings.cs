@@ -10,11 +10,13 @@ namespace BuddyBot.Repository.Settings
     // TODO  Add interface
     public class RepositorySettings
     {
-        public string LoggingTableName { get; }
+        public string ChatHistoryTableName { get; }
+        public string ConnectionString { get; }
 
         public RepositorySettings()
         {
-            LoggingTableName = ConfigurationManager.AppSettings["azureStorage:loggingTableName"];
+            ChatHistoryTableName = ConfigurationManager.AppSettings["azureStorage:conversationHistory"];
+            ConnectionString = ConfigurationManager.AppSettings["azureStorage:connectionString"];
         }
 
 
