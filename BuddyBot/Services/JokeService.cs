@@ -12,10 +12,9 @@ namespace BuddyBot.Services
     {
         private const string Url = "https://icanhazdadjoke.com/";
 
-        public async Task<String> GetRandomJoke()
+        public async Task<string> GetRandomJoke()
         {
-            try
-            {
+            
                 HttpClient client = new HttpClient { BaseAddress = new Uri(Url) };
                 client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
@@ -29,12 +28,8 @@ namespace BuddyBot.Services
 
                     return jokeDto.Joke;
                 }
+
                 return "I'm having problems computing a joke. Please try again later";
-            }
-            catch (Exception ex)
-            {
-                return "I'm having problems computing a joke. Please try again later";
-            }
         }
     }
 }

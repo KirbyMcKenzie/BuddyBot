@@ -72,6 +72,10 @@ namespace BuddyBot.Modules
                 .As<IWeatherConditionResponseReader>()
                 .AsImplementedInterfaces().SingleInstance();
 
+            builder.RegisterType<ChatHistoryWriter>()
+                .As<IChatHistoryWriter>()
+                .AsImplementedInterfaces().SingleInstance();
+
             // Services
             builder.RegisterType<BotDataService>()
                 .Keyed<IBotDataService>(FiberModule.Key_DoNotSerialize)

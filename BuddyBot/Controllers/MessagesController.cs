@@ -9,6 +9,8 @@ using BuddyBot.Dialogs;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Dialogs.Internals;
 using Microsoft.Bot.Connector;
+using Microsoft.Rest;
+using Serilog;
 
 namespace BuddyBot.Controllers
 {
@@ -31,9 +33,10 @@ namespace BuddyBot.Controllers
                         await Conversation.SendAsync(activity, () => internalScope.Resolve<RootLuisDialog>());
                     }
                 }
+               
                 catch (Exception ex)
                 {
-                    // TODO - Add Logging, Telemetry
+                   Log.Error(ex, $"An unexpected error occurred, error details: {ex.Message}");
                     throw;
                 }
             }

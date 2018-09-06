@@ -17,16 +17,8 @@ namespace BuddyBot.Repository.DataAccess
 
         protected async Task<bool> SaveChangesAsync()
         {
-            try
-            {
                 await _context.SaveChangesAsync();
                 return true;
-            }
-            catch (Exception ex)
-            {
-                // TODO - logging
-                return false;
-            }
         } 
     }
 
