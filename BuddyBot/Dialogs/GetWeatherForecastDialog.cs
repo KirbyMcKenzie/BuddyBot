@@ -60,19 +60,22 @@ namespace BuddyBot.Dialogs
                 // TODO - Think about limiting amount of cards displayed, see more button? 
                 List<CardAction> cityCardActionList = CreateCardActionList(citySearchResults);
 
-                HeroCard card = new HeroCard
-                {
-                    Title = $"I found {citySearchResults.Count} results for '{cityName}'",
-                    Subtitle = "please select your closest location",
-                    Buttons = cityCardActionList
-                };
+                //HeroCard card = new HeroCard
+                //{
+                //    Title = $"I found {citySearchResults.Count} results for '{cityName}'",
+                //    Subtitle = "please select your closest location",
+                //    Buttons = cityCardActionList
+                //};
 
-                var message = context.MakeMessage();
-                message.Attachments.Add(card.ToAttachment());
+                //var message = context.MakeMessage();
+                //message.Attachments.Add(card.ToAttachment());
 
-                await context.PostAsync(message);
+                //await context.PostAsync(message);
 
-                context.Wait(this.MessageReceivedAsync);
+                //context.Wait(this.MessageReceivedAsync);
+
+
+                PromptDialog.Choice<List<CardAction>>(context, MessageReceivedAsync, cityCardActionList);
 
             }
         }
