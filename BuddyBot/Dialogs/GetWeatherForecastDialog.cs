@@ -11,6 +11,8 @@ using BuddyBot.Models;
 using BuddyBot.Services.Contracts;
 using Microsoft.Bot.Connector;
 using BuddyBot.Models.Enums;
+using Microsoft.Azure.Documents.SystemFunctions;
+using Microsoft.Bot.Builder.Dialogs.Internals;
 
 namespace BuddyBot.Dialogs
 {
@@ -19,30 +21,40 @@ namespace BuddyBot.Dialogs
     {
         private readonly IWeatherService _weatherService;
         private readonly IList<EntityRecommendation> _entities;
+        private readonly IBotDataService _botDataService;
 
         // TODO - WeatherDialog - Check if pre-saved weather location matches entity city
         // TODO - WeatherDialog - If weather matches entity city, get weather by pre-saved weather id
         // TODO - WeatherDialog - Ask to save preference
 
         public GetWeatherForecastDialog(
-            IWeatherService weatherService,
+            IWeatherService weatherService,IBotDataService botDataService,
             IList<EntityRecommendation> entities)
         {
             _weatherService = weatherService;
             _entities = entities;
+            _botDataService = botDataService;
         }
 
         public Task StartAsync(IDialogContext context)
         {
-            // TODO - What to do if luis cannot find entities (Get preferred?)
             string cityName = MessageHelpers.ExtractEntityFromMessage("City.Name", _entities);
             string countryCode = MessageHelpers.ExtractEntityFromMessage("City.CountryCode", _entities, TextCaseType.UpperCase);
             string countryName = MessageHelpers.ExtractEntityFromMessage("City.CountryName", _entities);
 
             if (string.IsNullOrEmpty(cityName))
             {
-                PromptDialog.Text(context,  ResumeAfterSpecifyCityNamePrompt, "What's the name of the city you want the forecast for?", "I can't understand you. Tell me the name of the city you want the forecast for");
-                return Task.CompletedTask;
+                City preferredCity = _botDataService.GetPreferredWeatherLocation(context);
+
+                if (preferredCity.IsNull())
+                {
+                    PromptDialog.Text(context, ResumeAfterSpecifyCityNamePrompt, "What's the name of the city you want the forecast for?", "I can't understand you. Tell me the name of the city you want the forecast for");
+                    return Task.CompletedTask;
+                }
+
+                var weatherForecast = _weatherService.GetWeather(preferredCity);
+                context.Done($"Currently the weather in {preferredCity.Name} is {weatherForecast}");
+
             }
 
             IList<City> citySearchResults = _weatherService.SearchForCities(cityName, countryCode, countryName);
