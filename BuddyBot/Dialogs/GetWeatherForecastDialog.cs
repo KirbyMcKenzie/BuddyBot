@@ -39,31 +39,35 @@ namespace BuddyBot.Dialogs
             string countryCode = MessageHelpers.ExtractEntityFromMessage("City.CountryCode", _entities, TextCaseType.UpperCase);
             string countryName = MessageHelpers.ExtractEntityFromMessage("City.CountryName", _entities);
 
-            if (cityName == null)
+            if (string.IsNullOrEmpty(cityName))
             {
-                PromptDialog.Text(context,  Resume, "What's the name of the city you want the forecast for?", "Please try that again");
+                PromptDialog.Text(context,  ResumeAfterSpecifyCityNamePrompt, "What's the name of the city you want the forecast for?", "I can't understand you. Tell me the name of the city you want the forecast for");
                 return Task.CompletedTask;
             }
 
             IList<City> citySearchResults = _weatherService.SearchForCities(cityName, countryCode, countryName);
 
-            // TODO - Asset citySearchResults is not null once
+            return GetWeather(context, cityName, citySearchResults);
+        }
+
+        // TODO - rename method 
+        private Task GetWeather(IDialogContext context, string cityName, IList<City> citySearchResults)
+        {
+
             if (citySearchResults != null && citySearchResults.Count <= 0)
             {
-
                 context.Done($"I'm sorry, I couldn't find any results for '{cityName}'. " +
                              $"Make sure you've spelt everything correctly and try again 😊");
                 return Task.CompletedTask;
-
-            } else if (citySearchResults != null && citySearchResults.Count == 1)
+            }
+            else if (citySearchResults != null && citySearchResults.Count == 1)
             {
-
                 //var weatherForecast = await _weatherService.GetWeather(citySearchResults.FirstOrDefault());
                 //context.Done($"The weather in {cityName} right now is {weatherForecast}");
                 context.Done($"The weather in {cityName} right now is");
                 return Task.CompletedTask;
-
-            } else if (citySearchResults != null && citySearchResults.Count >= 2)
+            }
+            else if (citySearchResults != null && citySearchResults.Count >= 2)
             {
                 // TODO - Change type of card
                 // TODO - Think about limiting amount of cards displayed, see more button? 
@@ -83,18 +87,19 @@ namespace BuddyBot.Dialogs
 
                 context.Wait(this.MessageReceivedAsync);
                 return Task.CompletedTask;
-
             }
+
             return Task.CompletedTask;
         }
 
-        private async Task Resume(IDialogContext context, IAwaitable<string> result)
+        private async Task ResumeAfterSpecifyCityNamePrompt(IDialogContext context, IAwaitable<string> result)
         {
-            var message = await result;
+            // TODO remove punctuation from result e.g. "Dunedin..."
+            var cityName = await result;
 
-            await context.PostAsync($"Alright listen up motherfucker {message}");
+            IList<City> citySearchResults = _weatherService.SearchForCities(cityName);
 
-            context.Done("Finishing dialog");
+            await  GetWeather(context, cityName, citySearchResults);
         }
 
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
