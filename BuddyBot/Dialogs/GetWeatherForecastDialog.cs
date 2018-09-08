@@ -32,12 +32,18 @@ namespace BuddyBot.Dialogs
             _entities = entities;
         }
 
-        public async Task StartAsync(IDialogContext context)
+        public Task StartAsync(IDialogContext context)
         {
             // TODO - What to do if luis cannot find entities (Get preferred?)
             string cityName = MessageHelpers.ExtractEntityFromMessage("City.Name", _entities);
             string countryCode = MessageHelpers.ExtractEntityFromMessage("City.CountryCode", _entities, TextCaseType.UpperCase);
             string countryName = MessageHelpers.ExtractEntityFromMessage("City.CountryName", _entities);
+
+            if (cityName == null)
+            {
+                PromptDialog.Text(context,  Resume, "What's the name of the city you want the forecast for?", "Please try that again");
+                return Task.CompletedTask;
+            }
 
             IList<City> citySearchResults = _weatherService.SearchForCities(cityName, countryCode, countryName);
 
@@ -47,12 +53,15 @@ namespace BuddyBot.Dialogs
 
                 context.Done($"I'm sorry, I couldn't find any results for '{cityName}'. " +
                              $"Make sure you've spelt everything correctly and try again 😊");
+                return Task.CompletedTask;
 
             } else if (citySearchResults != null && citySearchResults.Count == 1)
             {
 
-                var weatherForecast = await _weatherService.GetWeather(citySearchResults.FirstOrDefault());
-                context.Done($"The weather in {cityName} right now is {weatherForecast}");
+                //var weatherForecast = await _weatherService.GetWeather(citySearchResults.FirstOrDefault());
+                //context.Done($"The weather in {cityName} right now is {weatherForecast}");
+                context.Done($"The weather in {cityName} right now is");
+                return Task.CompletedTask;
 
             } else if (citySearchResults != null && citySearchResults.Count >= 2)
             {
@@ -60,24 +69,32 @@ namespace BuddyBot.Dialogs
                 // TODO - Think about limiting amount of cards displayed, see more button? 
                 List<CardAction> cityCardActionList = CreateCardActionList(citySearchResults);
 
-                //HeroCard card = new HeroCard
-                //{
-                //    Title = $"I found {citySearchResults.Count} results for '{cityName}'",
-                //    Subtitle = "please select your closest location",
-                //    Buttons = cityCardActionList
-                //};
+                HeroCard card = new HeroCard
+                {
+                    Title = $"I found {citySearchResults.Count} results for '{cityName}'",
+                    Subtitle = "please select your closest location",
+                    Buttons = cityCardActionList
+                };
 
-                //var message = context.MakeMessage();
-                //message.Attachments.Add(card.ToAttachment());
+                var message = context.MakeMessage();
+                message.Attachments.Add(card.ToAttachment());
 
-                //await context.PostAsync(message);
+                context.PostAsync(message);
 
-                //context.Wait(this.MessageReceivedAsync);
-
-
-                PromptDialog.Choice<List<CardAction>>(context, MessageReceivedAsync, cityCardActionList);
+                context.Wait(this.MessageReceivedAsync);
+                return Task.CompletedTask;
 
             }
+            return Task.CompletedTask;
+        }
+
+        private async Task Resume(IDialogContext context, IAwaitable<string> result)
+        {
+            var message = await result;
+
+            await context.PostAsync($"Alright listen up motherfucker {message}");
+
+            context.Done("Finishing dialog");
         }
 
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
