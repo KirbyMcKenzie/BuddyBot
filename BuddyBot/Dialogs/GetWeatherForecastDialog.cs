@@ -46,7 +46,7 @@ namespace BuddyBot.Dialogs
             {
                 City preferredCity = _botDataService.GetPreferredWeatherLocation(context);
 
-                if (preferredCity.IsNull())
+                if (preferredCity == null)
                 {
                     PromptDialog.Text(context, ResumeAfterSpecifyCityNamePrompt, "What's the name of the city you want the forecast for?", "I can't understand you. Tell me the name of the city you want the forecast for");
                     return Task.CompletedTask;

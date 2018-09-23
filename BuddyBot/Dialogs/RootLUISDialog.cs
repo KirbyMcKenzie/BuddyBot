@@ -239,6 +239,13 @@ namespace BuddyBot.Dialogs
             await Task.Yield();
         }
 
+        [LuisIntent("User.UpdatePreferredWeatherLocation")]
+        public async Task UpdatePreferredWeatherLocation(IDialogContext context, LuisResult result)
+        {
+            context.Call(_dialogBuilder.BuildPreferredWeatherLocationDialog(GetMessageActivity(context), result.Entities), Resume_AfterNameDialog);
+            await Task.Yield();
+        }
+
 
         [LuisIntent("Weather.GetForecast")]
         public async Task GetWeatherForecast(IDialogContext context, LuisResult result)

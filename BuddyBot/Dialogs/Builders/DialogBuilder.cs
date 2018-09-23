@@ -44,6 +44,11 @@ namespace BuddyBot.Dialogs.Builders
             return CreateDialog(message, s => s.Resolve<BotPersonaDialog>(TypedParameter.From(result)));
         }
 
+        public PreferredWeatherLocationDialog BuildPreferredWeatherLocationDialog(IMessageActivity message, IList<EntityRecommendation> result)
+        {
+            return CreateDialog(message, s => s.Resolve<PreferredWeatherLocationDialog>(TypedParameter.From(result)));
+        }
+
         private T CreateDialog<T>(IMessageActivity message, Func<ILifetimeScope, T> func)
         {
             using (var scope = CreateDialogLifetimeScope(message))
