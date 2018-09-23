@@ -57,7 +57,7 @@ namespace BuddyBot.Dialogs
 
             }
 
-            IList<City> citySearchResults = _weatherService.SearchForCities(cityName, countryCode, countryName);
+            IList<City> citySearchResults = MessageHelpers.SearchForCities(cityName, countryCode, countryName);
 
             return ConfirmWeatherLocation(context, cityName, citySearchResults);
         }
@@ -108,7 +108,7 @@ namespace BuddyBot.Dialogs
             // TODO remove punctuation from result e.g. "Dunedin..."
             var cityName = await result;
 
-            IList<City> citySearchResults = _weatherService.SearchForCities(cityName);
+            IList<City> citySearchResults = MessageHelpers.SearchForCities(cityName);
 
             await  ConfirmWeatherLocation(context, cityName, citySearchResults);
         }
