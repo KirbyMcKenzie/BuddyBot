@@ -59,11 +59,11 @@ namespace BuddyBot.Dialogs
 
             IList<City> citySearchResults = _weatherService.SearchForCities(cityName, countryCode, countryName);
 
-            return GetWeather(context, cityName, citySearchResults);
+            return ConfirmWeatherLocation(context, cityName, citySearchResults);
         }
 
         // TODO - rename method 
-        private Task GetWeather(IDialogContext context, string cityName, IList<City> citySearchResults)
+        private Task ConfirmWeatherLocation(IDialogContext context, string cityName, IList<City> citySearchResults)
         {
 
             if (citySearchResults != null && citySearchResults.Count <= 0)
@@ -74,9 +74,8 @@ namespace BuddyBot.Dialogs
             }
             else if (citySearchResults != null && citySearchResults.Count == 1)
             {
-                //var weatherForecast = await _weatherService.GetWeather(citySearchResults.FirstOrDefault());
-                //context.Done($"The weather in {cityName} right now is {weatherForecast}");
-                context.Done($"The weather in {cityName} right now is");
+                var weatherForecast = _weatherService.GetWeather(citySearchResults.FirstOrDefault());
+                context.Done($"The weather in {cityName} right now is {weatherForecast}");
                 return Task.CompletedTask;
             }
             else if (citySearchResults != null && citySearchResults.Count >= 2)
@@ -111,7 +110,7 @@ namespace BuddyBot.Dialogs
 
             IList<City> citySearchResults = _weatherService.SearchForCities(cityName);
 
-            await  GetWeather(context, cityName, citySearchResults);
+            await  ConfirmWeatherLocation(context, cityName, citySearchResults);
         }
 
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
