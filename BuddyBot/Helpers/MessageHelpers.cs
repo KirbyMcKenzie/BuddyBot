@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using BuddyBot.Models;
+using Microsoft.Bot.Connector;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -127,6 +128,11 @@ namespace BuddyBot.Helpers
                 }
             }
             return cityList;
+        }
+
+        public static City GetCityById(string cityId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -42,8 +42,6 @@ namespace BuddyBot.Dialogs
             //    return Task.CompletedTask;
             //}
 
-            context.PostAsync($"Your current city is saved to: {savedPreferredCity.Name}");
-
             PromptDialog.Text(context, ResumeAfterPreferredLocationPrompt, "What's the name of the city you'd like the weather for?", "Sorry I didn't get that - try again! What should I call you?");
             return Task.CompletedTask;
 
@@ -95,18 +93,17 @@ namespace BuddyBot.Dialogs
                 context.Wait(this.MessageReceivedAsync);
             }
 
-            context.Done(cityName);
         }
 
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
-            var message = await result;
+            IMessageActivity cityId = await result;
 
-            City city = MessageHelpers.ExtractCityFromMessagePrompt(message.Text);
+            City preferredCity = MessageHelpers.GetCityById(cityId.Text);
 
-            _botDataService.setPreferredWeatherLocation(context, city);
+            _botDataService.setPreferredWeatherLocation(context, preferredCity);
 
-            context.Done(city.Name);
+            context.Done(preferredCity.Name);
         }
 
         private async Task ResumeAfterConfirmation(IDialogContext context, IAwaitable<bool> result)
@@ -133,7 +130,8 @@ namespace BuddyBot.Dialogs
             {
                 cardOptionsList.Add(new CardAction(ActionTypes.ImBack,
                     title: $"{city.Name}, {city.Country}",
-                    value: $"{city.Name}, {city.Country}"));
+                    value: $"{city.Id}"));
+
             }
 
             return cardOptionsList;
