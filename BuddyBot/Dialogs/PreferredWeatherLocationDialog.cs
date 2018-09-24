@@ -42,7 +42,7 @@ namespace BuddyBot.Dialogs
             //    return Task.CompletedTask;
             //}
 
-            PromptDialog.Text(context, ResumeAfterPreferredLocationPrompt, "What's the name of the city you'd like the weather for?", "Sorry I didn't get that - try again! What should I call you?");
+            PromptDialog.Text(context, ResumeAfterPromptForPreferredLocation, "What's the name of the city you'd like the weather for?", "Sorry I didn't get that - try again! What should I call you?");
             return Task.CompletedTask;
 
         }
@@ -62,7 +62,7 @@ namespace BuddyBot.Dialogs
             await Task.Yield();
         }
 
-        private async Task ResumeAfterPreferredLocationPrompt(IDialogContext context, IAwaitable<string> result)
+        private async Task ResumeAfterPromptForPreferredLocation(IDialogContext context, IAwaitable<string> result)
         {
             string cityName = await result;
 
@@ -116,7 +116,7 @@ namespace BuddyBot.Dialogs
                     context.Done(_botDataService.GetPreferredWeatherLocation(context));
                     break;
                 default:
-                    PromptDialog.Text(context, ResumeAfterPreferredLocationPrompt, "Okay, what should I call you?", "Sorry I didn't get that - try again! What should I call you?");
+                    PromptDialog.Text(context, ResumeAfterPromptForPreferredLocation, "Okay, what should I call you?", "Sorry I didn't get that - try again! What should I call you?");
                     break;
             }
         }

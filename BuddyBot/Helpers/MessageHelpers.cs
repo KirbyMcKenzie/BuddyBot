@@ -132,7 +132,30 @@ namespace BuddyBot.Helpers
 
         public static City GetCityById(string cityId)
         {
-            throw new NotImplementedException();
+            string json =
+                File.ReadAllText(System.Web.Hosting.HostingEnvironment.MapPath("/city.list.json")
+                                 ?? throw new InvalidOperationException());
+
+            IList<JObject> products = JsonConvert.DeserializeObject<List<JObject>>(json);
+
+            for (int i = 0; i < products.Count; i++)
+            {
+                string itemId = (string) products[i]["id"];
+                string itemTitle = (string) products[i]["name"];
+                string itemCountry = (string) products[i]["country"];
+
+                    if (itemId.Contains(cityId))
+                    {
+                        return new City()
+                        {
+                            Id = itemId,
+                            Name = itemTitle,
+                            Country = itemCountry,
+                        };
+                    }
+            }
+            return null;
         }
+
     }
 }
