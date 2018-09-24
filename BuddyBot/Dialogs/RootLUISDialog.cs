@@ -61,13 +61,12 @@ namespace BuddyBot.Dialogs
             
         }
 
-
         private async Task Resume_AfterChitchat(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
             await Task.Yield();
         }
 
-       
+
         [LuisIntent("Greeting")]
         public async Task Greeting(IDialogContext context, LuisResult result)
         {
@@ -105,12 +104,6 @@ namespace BuddyBot.Dialogs
             context.Call(_dialogBuilder.BuildNameDialog(GetMessageActivity(context), result.Entities), Resume_AfterNameDialog);
             await Task.Yield();
         }
-
-
-        
-        
-
-        
 
 
         [LuisIntent("Help")]
@@ -242,6 +235,7 @@ namespace BuddyBot.Dialogs
             context.Wait(MessageReceived);
         }
 
+
         [LuisIntent("Weather.GetForecast")]
         public async Task GetWeatherForecast(IDialogContext context, LuisResult result)
         {
@@ -257,6 +251,7 @@ namespace BuddyBot.Dialogs
 
             context.Wait(MessageReceived);
         }
+
 
         [LuisIntent("User.UpdatePreferredWeatherLocation")]
         public async Task UpdatePreferredWeatherLocation(IDialogContext context, LuisResult result)
