@@ -15,7 +15,6 @@ namespace BuddyBot.Dialogs
 {
     public class PreferredWeatherLocationDialog : IDialog<string>
     {
-        private string _preferredLocationFromMessage;
         private readonly IBotDataService _botDataService;
         private readonly IList<EntityRecommendation> _entities;
 
@@ -36,13 +35,13 @@ namespace BuddyBot.Dialogs
             //    return Task.CompletedTask;
             //}
 
-            //if (!string.IsNullOrWhiteSpace(savedPreferredCity.Name))
-            //{
-            //    PromptDialog.Confirm(context, ResumeAfterConfirmation, $"Your saved weather location is {savedPreferredCity.Name}, would you like to change it?", $"Sorry I don't understand - try again! Where is your preferred weather location?");
-            //    return Task.CompletedTask;
-            //}
+            if (!string.IsNullOrWhiteSpace(savedPreferredCity.Name))
+            {
+                PromptDialog.Confirm(context, ResumeAfterConfirmation, $"Your saved weather location is {savedPreferredCity.Name}, {savedPreferredCity.Country}, would you like to change it?", $"Sorry I don't understand - try again! Where is your preferred weather location?");
+                return Task.CompletedTask;
+            }
 
-            PromptDialog.Text(context, ResumeAfterPromptForPreferredLocation, "What's the name of the city you'd like the weather for?", "Sorry I didn't get that - try again! What should I call you?");
+            PromptDialog.Text(context, ResumeAfterPromptForPreferredLocation, "What's the name of the city you'd like the weather for?", "Sorry I didn't get that - try again! What's the name of your preferred weather location?");
             return Task.CompletedTask;
 
         }
@@ -113,10 +112,10 @@ namespace BuddyBot.Dialogs
             switch (confirmation)
             {
                 case true:
-                    context.Done(_botDataService.GetPreferredWeatherLocation(context));
+                    PromptDialog.Text(context, ResumeAfterPromptForPreferredLocation, "What's the name of the city you'd like the weather for?", "Sorry I didn't get that - try again! What's the name of your preferred weather location?");
                     break;
                 default:
-                    PromptDialog.Text(context, ResumeAfterPromptForPreferredLocation, "Okay, what should I call you?", "Sorry I didn't get that - try again! What should I call you?");
+                    context.Done(_botDataService.GetPreferredWeatherLocation(context).Name);
                     break;
             }
         }
