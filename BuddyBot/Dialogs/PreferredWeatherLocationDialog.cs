@@ -37,7 +37,7 @@ namespace BuddyBot.Dialogs
 
             if (!string.IsNullOrWhiteSpace(savedPreferredCity.Name))
             {
-                PromptDialog.Confirm(context, ResumeAfterConfirmation, $"Your saved weather location is {savedPreferredCity.Name}, {savedPreferredCity.Country}, would you like to change it?", $"Sorry I don't understand - try again! Where is your preferred weather location?");
+                PromptDialog.Confirm(context, ResumeAfterConfirmation, $"Your saved weather location is {savedPreferredCity.Name}, {savedPreferredCity.Country}, would you like to change it?", $"Sorry I don't understand - try again! Would you like to change your preferred weather location?");
                 return Task.CompletedTask;
             }
 
@@ -46,20 +46,6 @@ namespace BuddyBot.Dialogs
 
         }
 
-        private async Task ResumeAfterPreferredCityConfirmation(IDialogContext context, IAwaitable<bool> result)
-        {
-            City city = new City()
-            {
-                Id = "453453",
-                Name = "Dunedin",
-                Country = "New Zealand"
-            };
-
-            _botDataService.setPreferredWeatherLocation(context, city);
-            context.Done(city);
-
-            await Task.Yield();
-        }
 
         private async Task ResumeAfterPromptForPreferredLocation(IDialogContext context, IAwaitable<string> result)
         {
@@ -129,7 +115,7 @@ namespace BuddyBot.Dialogs
             {
                 cardOptionsList.Add(new CardAction(ActionTypes.ImBack,
                     title: $"{city.Name}, {city.Country}",
-                    value: $"{city.Id}"));
+                    value: $"{city.Name}, {city.Country}, {city.Id}"));
 
             }
 
