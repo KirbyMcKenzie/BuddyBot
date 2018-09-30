@@ -17,6 +17,7 @@ namespace BuddyBot.Dialogs
     {
         private readonly IBotDataService _botDataService;
         private readonly IList<EntityRecommendation> _entities;
+        private string _extractedCityFromMessage;
 
         public PreferredWeatherLocationDialog(IBotDataService botDataService, IList<EntityRecommendation> entities)
         {
@@ -26,14 +27,14 @@ namespace BuddyBot.Dialogs
 
         public Task StartAsync(IDialogContext context)
         {
-            //_preferredLocationFromMessage = MessageHelpers.ExtractEntityFromMessage("City.Name", _entities);
+            _extractedCityFromMessage = MessageHelpers.ExtractEntityFromMessage("City.Name", _entities);
             City savedPreferredCity= _botDataService.GetPreferredWeatherLocation(context);
 
-            //if (!string.IsNullOrWhiteSpace(_preferredLocationFromMessage))
-            //{
-            //    PromptDialog.Confirm(context, ResumeAfterPreferredCityConfirmation, $"So you'd like to change your preferred weather location to {_preferredLocationFromMessage}?", $"Sorry I don't understand - try again! So you'd like to change your preferred weather location to {_preferredLocationFromMessage}");
-            //    return Task.CompletedTask;
-            //}
+             if (!string.IsNullOrWhiteSpace(_extractedCityFromMessage))
+            {
+                PromptDialog.Confirm(context, ResumeAfterPreferredCityConfirmation, $"So you'd like to change your preferred weather location to {_extractedCityFromMessage}?", $"Sorry I don't understand - try again! So you'd like to change your preferred weather location to {_extractedCityFromMessage}");
+                return Task.CompletedTask;
+            }
 
             if (!string.IsNullOrWhiteSpace(savedPreferredCity.Name))
             {
@@ -44,6 +45,21 @@ namespace BuddyBot.Dialogs
             PromptDialog.Text(context, ResumeAfterPromptForPreferredLocation, "What's the name of the city you'd like the weather for?", "Sorry I didn't get that - try again! What's the name of your preferred weather location?");
             return Task.CompletedTask;
 
+        }
+
+        private async Task ResumeAfterPreferredCityConfirmation(IDialogContext context, IAwaitable<bool> result)
+        {
+            bool confirmation = await result;
+
+            switch (confirmation)
+            {
+                case true:
+                    await ResumeAfterPromptForPreferredLocation(context, new AwaitableFromItem<string>(_extractedCityFromMessage));
+                    break;
+                default:
+                    context.Done(_botDataService.GetPreferredWeatherLocation(context).Name);
+                    break;
+            }
         }
 
 
