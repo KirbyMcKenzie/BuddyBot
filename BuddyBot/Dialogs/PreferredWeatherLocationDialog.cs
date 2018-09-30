@@ -100,7 +100,10 @@ namespace BuddyBot.Dialogs
         {
             IMessageActivity cityId = await result;
 
-            City preferredCity = MessageHelpers.GetCityById(cityId.Text);
+
+            string extractedId = MessageHelpers.ExtractIdFromMessage(cityId.Text);
+
+            City preferredCity = MessageHelpers.GetCityById(extractedId);
 
             _botDataService.setPreferredWeatherLocation(context, preferredCity);
 

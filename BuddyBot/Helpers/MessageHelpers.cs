@@ -157,5 +157,10 @@ namespace BuddyBot.Helpers
             return null;
         }
 
+        // TODO - revisit this method
+        public static string ExtractIdFromMessage(string messagePrompt)
+        {
+            return messagePrompt.Substring(messagePrompt.LastIndexOf(',') + 1, messagePrompt.Length);
+        }
     }
 }
