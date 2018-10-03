@@ -36,47 +36,49 @@ namespace BuddyBot.Dialogs
             _botDataService = botDataService;
         }
 
-        public Task StartAsync(IDialogContext context)
+        public async Task StartAsync(IDialogContext context)
         {
             string cityName = MessageHelpers.ExtractEntityFromMessage("City.Name", _entities);
             string countryCode = MessageHelpers.ExtractEntityFromMessage("City.CountryCode", _entities, TextCaseType.UpperCase);
             string countryName = MessageHelpers.ExtractEntityFromMessage("City.CountryName", _entities);
 
+            City preferredCity = _botDataService.GetPreferredWeatherLocation(context);
+
             if (string.IsNullOrEmpty(cityName))
             {
-                City preferredCity = _botDataService.GetPreferredWeatherLocation(context);
 
                 if (preferredCity == null)
                 {
                     PromptDialog.Text(context, ResumeAfterSpecifyCityNamePrompt, "What's the name of the city you want the forecast for?", "I can't understand you. Tell me the name of the city you want the forecast for");
-                    return Task.CompletedTask;
+                    
                 }
 
-                var weatherForecast = _weatherService.GetWeather(preferredCity);
+                var weatherForecast = await _weatherService.GetWeather(preferredCity);
                 context.Done($"Currently the weather in {preferredCity.Name} is {weatherForecast}");
 
             }
+            else
+            {
+                IList<City> citySearchResults = MessageHelpers.SearchForCities(cityName, countryCode, countryName);
+                await ConfirmWeatherLocation(context, cityName, citySearchResults);
+            }
 
-            IList<City> citySearchResults = MessageHelpers.SearchForCities(cityName, countryCode, countryName);
 
-            return ConfirmWeatherLocation(context, cityName, citySearchResults);
         }
 
         // TODO - rename method 
-        private Task ConfirmWeatherLocation(IDialogContext context, string cityName, IList<City> citySearchResults)
+        private async Task ConfirmWeatherLocation(IDialogContext context, string cityName, IList<City> citySearchResults)
         {
 
             if (citySearchResults != null && citySearchResults.Count <= 0)
             {
                 context.Done($"I'm sorry, I couldn't find any results for '{cityName}'. " +
                              $"Make sure you've spelt everything correctly and try again 😊");
-                return Task.CompletedTask;
             }
             else if (citySearchResults != null && citySearchResults.Count == 1)
             {
                 var weatherForecast = _weatherService.GetWeather(citySearchResults.FirstOrDefault());
                 context.Done($"The weather in {cityName} right now is {weatherForecast}");
-                return Task.CompletedTask;
             }
             else if (citySearchResults != null && citySearchResults.Count >= 2)
             {
@@ -94,13 +96,10 @@ namespace BuddyBot.Dialogs
                 var message = context.MakeMessage();
                 message.Attachments.Add(card.ToAttachment());
 
-                context.PostAsync(message);
+                await context.PostAsync(message);
 
                 context.Wait(this.MessageReceivedAsync);
-                return Task.CompletedTask;
             }
-
-            return Task.CompletedTask;
         }
 
         private async Task ResumeAfterSpecifyCityNamePrompt(IDialogContext context, IAwaitable<string> result)
