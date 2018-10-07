@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using BuddyBot.Helpers;
@@ -61,9 +62,8 @@ namespace BuddyBot.Dialogs
             {
                 IList<City> citySearchResults = MessageHelpers.SearchForCities(cityName, countryCode, countryName);
                 await ConfirmWeatherLocation(context, cityName, citySearchResults);
+                
             }
-
-
         }
 
         // TODO - rename method 
@@ -77,7 +77,7 @@ namespace BuddyBot.Dialogs
             }
             else if (citySearchResults != null && citySearchResults.Count == 1)
             {
-                var weatherForecast = _weatherService.GetWeather(citySearchResults.FirstOrDefault());
+                var weatherForecast = await _weatherService.GetWeather(citySearchResults.FirstOrDefault());
                 context.Done($"The weather in {cityName} right now is {weatherForecast}");
             }
             else if (citySearchResults != null && citySearchResults.Count >= 2)
@@ -106,6 +106,9 @@ namespace BuddyBot.Dialogs
         {
             // TODO remove punctuation from result e.g. "Dunedin..."
             var cityName = await result;
+
+            cityName = Regex.Replace(cityName, @"[\W_]", string.Empty);
+
 
             IList<City> citySearchResults = MessageHelpers.SearchForCities(cityName);
 

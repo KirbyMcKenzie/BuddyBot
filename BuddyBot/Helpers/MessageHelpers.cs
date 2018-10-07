@@ -65,6 +65,7 @@ namespace BuddyBot.Helpers
             return null;
         }
 
+
         public static City ExtractCityFromMessagePrompt(string messagePrompt)
         {
             var cityName = messagePrompt.Substring(0, messagePrompt.IndexOf(','));
@@ -161,5 +162,6 @@ namespace BuddyBot.Helpers
         {
             return messagePrompt.Substring(messagePrompt.LastIndexOf(',') + 1).Replace(" ", string.Empty);
         }
+
     }
 }
