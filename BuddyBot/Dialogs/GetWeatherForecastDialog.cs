@@ -53,25 +53,26 @@ namespace BuddyBot.Dialogs
                     PromptDialog.Text(context, ResumeAfterSpecifyCityNamePrompt, "What's the name of the city you want the forecast for?", "I can't understand you. Tell me the name of the city you want the forecast for");
                     
                 }
-
-                var weatherForecast = await _weatherService.GetWeather(preferredCity);
-                context.Done($"Currently the weather in {preferredCity.Name} is {weatherForecast}");
-
+                else
+                {
+                    var weatherForecast = await _weatherService.GetWeather(preferredCity);
+                    context.Done($"Currently the weather in {preferredCity.Name} is {weatherForecast}");
+                }
             }
             else
             {
                 IList<City> citySearchResults = MessageHelpers.SearchForCities(cityName, countryCode, countryName);
-                await ConfirmWeatherLocation(context, cityName, citySearchResults);
+                await ResumeAfterCitySearch(context, cityName, citySearchResults);
                 
             }
         }
 
-        // TODO - rename method 
-        private async Task ConfirmWeatherLocation(IDialogContext context, string cityName, IList<City> citySearchResults)
+        private async Task ResumeAfterCitySearch(IDialogContext context, string cityName, IList<City> citySearchResults)
         {
 
             if (citySearchResults != null && citySearchResults.Count <= 0)
             {
+
                 context.Done($"I'm sorry, I couldn't find any results for '{cityName}'. " +
                              $"Make sure you've spelt everything correctly and try again 😊");
             }
@@ -104,15 +105,12 @@ namespace BuddyBot.Dialogs
 
         private async Task ResumeAfterSpecifyCityNamePrompt(IDialogContext context, IAwaitable<string> result)
         {
-            // TODO remove punctuation from result e.g. "Dunedin..."
             var cityName = await result;
-
             cityName = Regex.Replace(cityName, @"[\W_]", string.Empty);
-
 
             IList<City> citySearchResults = MessageHelpers.SearchForCities(cityName);
 
-            await  ConfirmWeatherLocation(context, cityName, citySearchResults);
+            await  ResumeAfterCitySearch(context, cityName, citySearchResults);
         }
 
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
