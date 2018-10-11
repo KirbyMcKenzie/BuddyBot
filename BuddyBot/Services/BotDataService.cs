@@ -11,14 +11,20 @@ namespace BuddyBot.Services
 {
     public class BotDataService : IBotDataService
     {
+
+        public string GetPreferredName(IBotData botData)
+        {
+            return botData.GetValueOrDefault<string>(DataStoreKey.PreferredFirstName);
+        }
+
         public void SetPreferredName(IBotData botData, string name)
         {
            botData.SetValue(DataStoreKey.PreferredFirstName, name); 
         }
 
-        public string GetPreferredName(IBotData botData)
+        public PersonalityChatPersona GetPreferredBotPersona(IBotData botData)
         {
-            return botData.GetValueOrDefault<string>(DataStoreKey.PreferredFirstName);
+            return botData.GetValueOrDefault<PersonalityChatPersona>(DataStoreKey.PreferredBotPersona);
         }
 
         public void SetPreferredBotPersona(IBotData botData, PersonalityChatPersona persona)
@@ -26,9 +32,16 @@ namespace BuddyBot.Services
             botData.SetValue(DataStoreKey.PreferredBotPersona, persona);
         }
 
-        public PersonalityChatPersona GetPreferredBotPersona(IBotData botData)
+        public City GetPreferredWeatherLocation(IBotData botData)
         {
-            return botData.GetValueOrDefault<PersonalityChatPersona>(DataStoreKey.PreferredBotPersona);
+            return botData.GetValueOrDefault<City>(DataStoreKey.PreferredWeatherLocation);
         }
+
+        public void setPreferredWeatherLocation(IBotData botData, City city)
+        {
+            botData.SetValue(DataStoreKey.PreferredWeatherLocation, city);
+        }
+
+        
     }
 }

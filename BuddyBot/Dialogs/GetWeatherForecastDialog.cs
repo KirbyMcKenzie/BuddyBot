@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using BuddyBot.Helpers;
@@ -11,6 +12,8 @@ using BuddyBot.Models;
 using BuddyBot.Services.Contracts;
 using Microsoft.Bot.Connector;
 using BuddyBot.Models.Enums;
+using Microsoft.Azure.Documents.SystemFunctions;
+using Microsoft.Bot.Builder.Dialogs.Internals;
 
 namespace BuddyBot.Dialogs
 {
@@ -19,42 +22,66 @@ namespace BuddyBot.Dialogs
     {
         private readonly IWeatherService _weatherService;
         private readonly IList<EntityRecommendation> _entities;
+        private readonly IBotDataService _botDataService;
 
         // TODO - WeatherDialog - Check if pre-saved weather location matches entity city
         // TODO - WeatherDialog - If weather matches entity city, get weather by pre-saved weather id
         // TODO - WeatherDialog - Ask to save preference
 
         public GetWeatherForecastDialog(
-            IWeatherService weatherService,
+            IWeatherService weatherService,IBotDataService botDataService,
             IList<EntityRecommendation> entities)
         {
             _weatherService = weatherService;
             _entities = entities;
+            _botDataService = botDataService;
         }
 
         public async Task StartAsync(IDialogContext context)
         {
-            // TODO - What to do if luis cannot find entities (Get preferred?)
             string cityName = MessageHelpers.ExtractEntityFromMessage("City.Name", _entities);
             string countryCode = MessageHelpers.ExtractEntityFromMessage("City.CountryCode", _entities, TextCaseType.UpperCase);
             string countryName = MessageHelpers.ExtractEntityFromMessage("City.CountryName", _entities);
 
-            IList<City> citySearchResults = _weatherService.SearchForCities(cityName, countryCode, countryName);
+            City preferredCity = _botDataService.GetPreferredWeatherLocation(context);
 
-            // TODO - Asset citySearchResults is not null once
+            if (string.IsNullOrEmpty(cityName))
+            {
+
+                if (preferredCity == null)
+                {
+                    PromptDialog.Text(context, ResumeAfterSpecifyCityNamePrompt, "What's the name of the city you want the forecast for?", "I can't understand you. Tell me the name of the city you want the forecast for");
+                    
+                }
+                else
+                {
+                    var weatherForecast = await _weatherService.GetWeather(preferredCity);
+                    context.Done($"Currently the weather in {preferredCity.Name} is {weatherForecast}");
+                }
+            }
+            else
+            {
+                IList<City> citySearchResults = MessageHelpers.SearchForCities(cityName, countryCode, countryName);
+                await ResumeAfterCitySearch(context, cityName, citySearchResults);
+                
+            }
+        }
+
+        private async Task ResumeAfterCitySearch(IDialogContext context, string cityName, IList<City> citySearchResults)
+        {
+
             if (citySearchResults != null && citySearchResults.Count <= 0)
             {
 
                 context.Done($"I'm sorry, I couldn't find any results for '{cityName}'. " +
                              $"Make sure you've spelt everything correctly and try again 😊");
-
-            } else if (citySearchResults != null && citySearchResults.Count == 1)
+            }
+            else if (citySearchResults != null && citySearchResults.Count == 1)
             {
-
                 var weatherForecast = await _weatherService.GetWeather(citySearchResults.FirstOrDefault());
                 context.Done($"The weather in {cityName} right now is {weatherForecast}");
-
-            } else if (citySearchResults != null && citySearchResults.Count >= 2)
+            }
+            else if (citySearchResults != null && citySearchResults.Count >= 2)
             {
                 // TODO - Change type of card
                 // TODO - Think about limiting amount of cards displayed, see more button? 
@@ -72,12 +99,21 @@ namespace BuddyBot.Dialogs
 
                 await context.PostAsync(message);
 
-                context.Wait(this.MessageReceivedAsync);
-
+                context.Wait(this.ResumeAfterHeroCardCitySelect);
             }
         }
 
-        private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
+        private async Task ResumeAfterSpecifyCityNamePrompt(IDialogContext context, IAwaitable<string> result)
+        {
+            var cityName = await result;
+            cityName = Regex.Replace(cityName, @"[\W_]", string.Empty);
+
+            IList<City> citySearchResults = MessageHelpers.SearchForCities(cityName);
+
+            await  ResumeAfterCitySearch(context, cityName, citySearchResults);
+        }
+
+        private async Task ResumeAfterHeroCardCitySelect(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
             var message = await result;
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using BuddyBot.Models;
 using Microsoft.Bot.Builder.Dialogs.Internals;
 using Microsoft.Bot.Builder.PersonalityChat.Core;
 
@@ -9,11 +10,18 @@ namespace BuddyBot.Services.Contracts
 {
     public interface IBotDataService
     {
-        void SetPreferredName(IBotData botData, string name);
+        // Name 
         string GetPreferredName(IBotData botData);
+        void SetPreferredName(IBotData botData, string name);
 
+        // Persona
+        PersonalityChatPersona GetPreferredBotPersona(IBotData botData);
         void SetPreferredBotPersona(IBotData botData, PersonalityChatPersona persona);
 
-        PersonalityChatPersona GetPreferredBotPersona(IBotData botData);
+        // Weather
+        City GetPreferredWeatherLocation(IBotData botData);
+        void setPreferredWeatherLocation(IBotData botData, City city);
+
+
     }
 }
