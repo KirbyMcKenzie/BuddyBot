@@ -99,7 +99,7 @@ namespace BuddyBot.Dialogs
 
                 await context.PostAsync(message);
 
-                context.Wait(this.MessageReceivedAsync);
+                context.Wait(this.ResumeAfterHeroCardCitySelect);
             }
         }
 
@@ -113,7 +113,7 @@ namespace BuddyBot.Dialogs
             await  ResumeAfterCitySearch(context, cityName, citySearchResults);
         }
 
-        private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
+        private async Task ResumeAfterHeroCardCitySelect(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
             var message = await result;
 
