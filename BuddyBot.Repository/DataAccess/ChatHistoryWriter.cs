@@ -15,6 +15,9 @@ namespace BuddyBot.Repository.DataAccess
 
         public async Task SaveMessage(ChatHistoryEntity chatHistoryEntity)
         {
+
+           
+
             RepositorySettings repositorySettings = new RepositorySettings();
 
             // Retrieve the storage account from the connection string.

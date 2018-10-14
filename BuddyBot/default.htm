@@ -3,9 +3,44 @@
 <head>
     <title>BuddyBot</title>
     <meta charset="utf-8" />
+
+    <link href="https://cdn.rawgit.com/develohpanda/Bot-Hackfest/master/botchat.css" rel="stylesheet" />
+
+    <style>
+        #BotChatGoesHere {
+            border: 1px solid #333;
+            float: left;
+            height: 600px;
+            position: relative;
+            width: 768px;
+        }
+    </style>
+
 </head>
+
+
 <body style="font-family:'Segoe UI'">
     <h1>BuddyBot</h1>
     <p>An intelligent personal assistant bot to assist with your everyday needs</p>
+
+    <div id="BotChatGoesHere"></div>
+
+    <script src="https://cdn.rawgit.com/develohpanda/Bot-Hackfest/master/botchat.js"></script>
+
+    <script>
+        // Navigate to your WebAppBot in Azure, and create a new DirectLine (not WebChat) channel. Copy one of the secret keys here (https://github.com/develohpanda/Bot-Hackfest#configure-directline-channel-and-webchat).
+        var secret = 'GWLuPsYNedU.cwA.khE.I3LeUlKURhomRrIo2FoLPM7amVzG594CvWOczgxpC30';
+
+        if (secret !== '') {
+            BotChat.App({
+                botConnection: new BotChat.DirectLine({ secret }),
+                persistUser: true,
+                user: { id: "id", name: "User" }, // This id is irrelevant, as the id will be generated or extracted from localstorage for a returning user, because the persistUser property is true.
+                resize: 'detect'
+            }, document.getElementById("BotChatGoesHere"));
+        }
+    </script>
 </body>
+
+
 </html>
