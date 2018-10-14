@@ -49,6 +49,11 @@ namespace BuddyBot.Dialogs.Builders
             return CreateDialog(message, s => s.Resolve<PreferredWeatherLocationDialog>(TypedParameter.From(result)));
         }
 
+        public DeleteUserDataDialog BuildDeleteUserDataDialog(IMessageActivity message)
+        {
+            return CreateDialog(message, s => s.Resolve<DeleteUserDataDialog>());
+        }
+
         private T CreateDialog<T>(IMessageActivity message, Func<ILifetimeScope, T> func)
         {
             using (var scope = CreateDialogLifetimeScope(message))
@@ -61,5 +66,7 @@ namespace BuddyBot.Dialogs.Builders
         {
             return DialogModule.BeginLifetimeScope(Conversation.Container, message);
         }
+
+        
     }
 }

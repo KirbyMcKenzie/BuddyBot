@@ -285,6 +285,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Dialogs\BotPersonaDialog.cs" />
     <Compile Include="Dialogs\Builders\RichCardAttachmentBuilder.cs" />
+    <Compile Include="Dialogs\DeleteUserDataDialog.cs" />
     <Compile Include="Dialogs\NameDialog.cs" />
     <Compile Include="Dialogs\PreferredWeatherLocationDialog.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />

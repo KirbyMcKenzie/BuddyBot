@@ -24,6 +24,8 @@ namespace BuddyBot.Dialogs.Interfaces
 
         PreferredWeatherLocationDialog BuildPreferredWeatherLocationDialog(IMessageActivity message, IList<EntityRecommendation> result);
 
+        DeleteUserDataDialog BuildDeleteUserDataDialog(IMessageActivity message);
+
 
     }
 }
