@@ -114,6 +114,8 @@ namespace BuddyBot.Modules
             builder.RegisterType<NameDialog>().AsSelf().InstancePerDependency();
             builder.RegisterType<BotPersonaDialog>().AsSelf().InstancePerDependency();
             builder.RegisterType<PreferredWeatherLocationDialog>().AsSelf().InstancePerDependency();
+            builder.RegisterType<DeleteUserDataDialog>().AsSelf().InstancePerDependency();
+
         }
     }
 }

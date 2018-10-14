@@ -44,9 +44,9 @@ namespace BuddyBot.Services
 
         public void DeleteUserData(IBotData botData)
         {
-            SetPreferredName(botData, null);
+            SetPreferredName(botData, String.Empty);
             SetPreferredBotPersona(botData, PersonalityChatPersona.Friendly);
-            setPreferredWeatherLocation(botData, null);
+            setPreferredWeatherLocation(botData, new City());
 
         }
     }

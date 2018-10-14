@@ -48,7 +48,7 @@ namespace BuddyBot.Dialogs
             if (string.IsNullOrEmpty(cityName))
             {
 
-                if (preferredCity == null)
+                if (preferredCity == null || preferredCity.Name == null)
                 {
                     PromptDialog.Text(context, ResumeAfterSpecifyCityNamePrompt, "What's the name of the city you want the forecast for?", "I can't understand you. Tell me the name of the city you want the forecast for");
                     
