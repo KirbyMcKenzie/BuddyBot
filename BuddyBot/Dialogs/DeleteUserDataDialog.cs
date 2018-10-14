@@ -1,11 +1,16 @@
-﻿using BuddyBot.Services.Contracts;
+﻿using BuddyBot.Models;
+using BuddyBot.Services.Contracts;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Internals.Fibers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
+using Pause = BuddyBot.Models.ConversationPauseConstants;
+using static System.Threading.Thread;
+using Microsoft.Bot.Connector;
 
 namespace BuddyBot.Dialogs
 {
@@ -33,13 +38,47 @@ namespace BuddyBot.Dialogs
             switch (confirmation)
             {
                 case true:
-                    _botDataService.DeleteUserData(context);
-                    context.Done("Your data has been deleted");
+                    await EraseBuddysMemories(context);
                     break;
                 default:
+                    
                     context.Done("Thank goodness!");
                     break;
             }
+        }
+
+        private async Task EraseBuddysMemories(IDialogContext context)
+        {
+
+            await context.PostAsync("Deleting buddy's memories. 🤖🔨");
+            Sleep(Pause.MediumPause);
+
+            await context.PostAsync("I hope you're happy.");
+            Sleep(Pause.VeryLongPause);
+
+
+            _botDataService.DeleteUserData(context);
+
+            await context.PostAsync("Buddy Bot restored to factory defaults.");
+            Sleep(Pause.VeryLongPause);
+
+
+            IMessageActivity rebirthGif = context.MakeMessage();
+
+            rebirthGif.Attachments.Add(new Attachment()
+            {
+                ContentUrl = "https://media.giphy.com/media/xTiTnlghyAeCrxWePe/giphy.gif",
+                ContentType = "image/gif",
+                Name = "rebirth.gif"
+            });
+
+            await context.PostAsync(rebirthGif);
+
+            Sleep(Pause.VeryLongPause * 2);
+
+            context.Done("Congratulations, it's a bot.");
+
+
         }
     }
 }
