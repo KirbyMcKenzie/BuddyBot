@@ -22,6 +22,9 @@ namespace BuddyBot.Services.Contracts
         City GetPreferredWeatherLocation(IBotData botData);
         void setPreferredWeatherLocation(IBotData botData, City city);
 
+        // User Data
+        void DeleteUserData(IBotData botData);
+
 
     }
 }

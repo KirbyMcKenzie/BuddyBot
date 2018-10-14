@@ -42,6 +42,12 @@ namespace BuddyBot.Services
             botData.SetValue(DataStoreKey.PreferredWeatherLocation, city);
         }
 
-        
+        public void DeleteUserData(IBotData botData)
+        {
+            SetPreferredName(botData, null);
+            SetPreferredBotPersona(botData, PersonalityChatPersona.Friendly);
+            setPreferredWeatherLocation(botData, null);
+
+        }
     }
 }
