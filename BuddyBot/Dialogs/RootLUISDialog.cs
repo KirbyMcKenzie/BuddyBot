@@ -72,11 +72,7 @@ namespace BuddyBot.Dialogs
         {
             string name =  _botDataService.GetPreferredName(context);
 
-            Log.Information("Greeting method called.");
-
             await context.PostAsync(await _conversationService.GetGreeting(name));
-
-            Log.Information("Greeting method finished");
 
             context.Wait(MessageReceived);
         }
