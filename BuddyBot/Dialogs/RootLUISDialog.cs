@@ -85,7 +85,6 @@ namespace BuddyBot.Dialogs
             context.Call(_dialogBuilder.BuildGetStartedDialog(GetMessageActivity(context)), Resume_AfterGetStartedDialog);
             await Task.Yield();
         }
-
         
 
         [LuisIntent("Help")]
