@@ -31,6 +31,7 @@ namespace BuddyBot.Dialogs
             await context.PostAsync("Let's get you set up 🛠");
 
 
+            // TODO - Replace with real entities or null out
              IList<EntityRecommendation> entityRecommendation = new List<EntityRecommendation>();
 
             context.Call(_dialogBuilder.BuildNameDialog(context.Activity.AsMessageActivity(), entityRecommendation), Resume_AfterNameDialog);
@@ -64,8 +65,23 @@ namespace BuddyBot.Dialogs
         {
             var activity = await result;
 
-            // TODO: Put logic for handling user message here
-            context.Done(activity);
+            await context.PostAsync($"{activity}! what a great name");
+
+            await context.PostAsync("Next we need to set my personality. Pick one from the list below");
+
+            // TODO - Replace with real entities or null out
+            IList<EntityRecommendation> entityRecommendation = new List<EntityRecommendation>();
+
+            context.Call(_dialogBuilder.BuildBotPersonaDialog(context.Activity.AsMessageActivity(), entityRecommendation), Resume_AfterBotPersonaDialog);
+            await Task.CompletedTask;
+           
+        }
+
+        private async Task Resume_AfterBotPersonaDialog(IDialogContext context, IAwaitable<string> result)
+        {
+            var activity = await result;
+
+            context.Done("How about no");
         }
 
         // TODO - may not be needed

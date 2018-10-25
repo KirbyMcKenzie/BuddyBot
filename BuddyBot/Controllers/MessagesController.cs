@@ -49,7 +49,7 @@ namespace BuddyBot.Controllers
         }
 
         // TODO - Make Async
-        private async Task<Activity> HandleSystemMessage(Activity message)
+        private Task<Activity> HandleSystemMessage(Activity message)
         {
             if (message.Type == ActivityTypes.DeleteUserData)
             {
