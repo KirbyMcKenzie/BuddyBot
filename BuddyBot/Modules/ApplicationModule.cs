@@ -16,10 +16,8 @@ using BuddyBot.Services.Contracts;
 using BuddyBot.Settings;
 using Microsoft.Bot.Builder.Azure;
 using Microsoft.Bot.Builder.Dialogs.Internals;
-using Microsoft.Bot.Builder.History;
 using Microsoft.Bot.Builder.Internals.Fibers;
 using Microsoft.Bot.Connector;
-using Microsoft.EntityFrameworkCore;
 
 namespace BuddyBot.Modules
 {
@@ -115,6 +113,7 @@ namespace BuddyBot.Modules
             builder.RegisterType<BotPersonaDialog>().AsSelf().InstancePerDependency();
             builder.RegisterType<PreferredWeatherLocationDialog>().AsSelf().InstancePerDependency();
             builder.RegisterType<DeleteUserDataDialog>().AsSelf().InstancePerDependency();
+            builder.RegisterType<GetStartedDialog>().AsSelf().InstancePerDependency();
 
         }
     }

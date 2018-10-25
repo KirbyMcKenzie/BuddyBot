@@ -84,11 +84,6 @@ namespace BuddyBot.Dialogs
 
             context.Call(_dialogBuilder.BuildGetStartedDialog(GetMessageActivity(context)), Resume_AfterGetStartedDialog);
             await Task.Yield();
-
-
-            
-            //context.Call(_dialogBuilder.BuildNameDialog(GetMessageActivity(context), result.Entities), Resume_AfterNameDialog);
-            //await Task.Yield();
         }
 
         
