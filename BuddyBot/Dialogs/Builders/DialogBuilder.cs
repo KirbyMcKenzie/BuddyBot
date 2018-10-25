@@ -54,6 +54,11 @@ namespace BuddyBot.Dialogs.Builders
             return CreateDialog(message, s => s.Resolve<DeleteUserDataDialog>());
         }
 
+        public GetStartedDialog BuildGetStartedDialog(IMessageActivity message)
+        {
+            return CreateDialog(message, s => s.Resolve<GetStartedDialog>());
+        }
+
         private T CreateDialog<T>(IMessageActivity message, Func<ILifetimeScope, T> func)
         {
             using (var scope = CreateDialogLifetimeScope(message))

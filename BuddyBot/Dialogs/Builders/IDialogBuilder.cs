@@ -26,6 +26,8 @@ namespace BuddyBot.Dialogs.Interfaces
 
         DeleteUserDataDialog BuildDeleteUserDataDialog(IMessageActivity message);
 
+        GetStartedDialog BuildGetStartedDialog(IMessageActivity message);
+
 
     }
 }

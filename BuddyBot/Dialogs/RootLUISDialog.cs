@@ -81,30 +81,17 @@ namespace BuddyBot.Dialogs
         [LuisIntent("GetStarted")]
         public async Task GetStarted(IDialogContext context, LuisResult result)
         {
-            await context.PostAsync("Hey I'm BuddyBot! 🤖");
 
-            IMessageActivity reply = context.MakeMessage();
-
-            reply.Text = "I'm here to help you with whatever you need. " +
-                         "However, I'm still learning so be patient! " +
-                         "Heres some things I can help you with now. 😀";
-
-            reply.SuggestedActions = new SuggestedActions
-            {
-                Actions = new List<CardAction>()
-                {
-                    new CardAction(){ Title = "Generate Random Number", Type=ActionTypes.ImBack, Value="Generate Random Number" },
-                    new CardAction(){ Title = "Tell a joke", Type=ActionTypes.ImBack, Value="Tell a joke" },
-                    new CardAction(){ Title = "Flip a coin", Type=ActionTypes.ImBack, Value="Flip a coin" },
-                }
-            };
-
-            await context.PostAsync(reply);
-
-            context.Call(_dialogBuilder.BuildNameDialog(GetMessageActivity(context), result.Entities), Resume_AfterNameDialog);
+            context.Call(_dialogBuilder.BuildGetStartedDialog(GetMessageActivity(context)), Resume_AfterGetStartedDialog);
             await Task.Yield();
+
+
+            
+            //context.Call(_dialogBuilder.BuildNameDialog(GetMessageActivity(context), result.Entities), Resume_AfterNameDialog);
+            //await Task.Yield();
         }
 
+        
 
         [LuisIntent("Help")]
         public async Task Help(IDialogContext context, LuisResult result)
@@ -195,6 +182,14 @@ namespace BuddyBot.Dialogs
         private async Task Resume_ConfirmRobotDialog(IDialogContext context, IAwaitable<string> result)
         {
 
+            var message = await result;
+            await context.PostAsync($"{message}");
+
+            context.Wait(MessageReceived);
+        }
+
+        private async Task Resume_AfterGetStartedDialog(IDialogContext context, IAwaitable<string> result)
+        {
             var message = await result;
             await context.PostAsync($"{message}");
 
