@@ -81,16 +81,21 @@ namespace BuddyBot.Dialogs
         {
             var activity = await result;
 
-            context.Done("How about no");
+            await context.PostAsync($"Okay, my personality is set to be {activity}");
+
+            // TODO - Replace with real entities or null out
+            IList<EntityRecommendation> entityRecommendation = new List<EntityRecommendation>();
+
+            context.Call(_dialogBuilder.BuildPreferredWeatherLocationDialog(context.Activity.AsMessageActivity(), entityRecommendation), Resume_AfterPreferredWeatherDialog);
+
+            await Task.CompletedTask;
+
         }
 
-        // TODO - may not be needed
-        //private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<object> result)
-        //{
-        //    var activity = await result as IMessageActivity;
-
-        //    // TODO: Put logic for handling user message here
-        //    context.Done("How about no");
-        //}
+        private Task Resume_AfterPreferredWeatherDialog(IDialogContext context, IAwaitable<string> result)
+        {
+            context.Done("How about no");
+            return Task.CompletedTask;
+        }
     }
 }
