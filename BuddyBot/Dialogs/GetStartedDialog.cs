@@ -37,27 +37,7 @@ namespace BuddyBot.Dialogs
             context.Call(_dialogBuilder.BuildNameDialog(context.Activity.AsMessageActivity(), entityRecommendation), Resume_AfterNameDialog);
             await Task.CompletedTask;
 
-            // TODO - check for already saved user data
-            //IMessageActivity reply = context.MakeMessage();
-
-            //reply.Text = "I'm here to help you with whatever you need. " +
-            //             "However, I'm still learning so be patient! " +
-            //             "Heres some things I can help you with now. 😀";
-
-            //reply.SuggestedActions = new SuggestedActions
-            //{
-            //    Actions = new List<CardAction>()
-            //    {
-            //        new CardAction(){ Title = "Generate Random Number", Type=ActionTypes.ImBack, Value="Generate Random Number" },
-            //        new CardAction(){ Title = "Tell a joke", Type=ActionTypes.ImBack, Value="Tell a joke" },
-            //        new CardAction(){ Title = "Flip a coin", Type=ActionTypes.ImBack, Value="Flip a coin" },
-            //    }
-            //};
-
-            //await context.PostAsync(reply);
-
-
-            //context.Wait(MessageReceivedAsync);
+            
 
         }
 
@@ -92,10 +72,33 @@ namespace BuddyBot.Dialogs
 
         }
 
-        private Task Resume_AfterPreferredWeatherDialog(IDialogContext context, IAwaitable<string> result)
+        private async Task Resume_AfterPreferredWeatherDialog(IDialogContext context, IAwaitable<object> result)
         {
-            context.Done("How about no");
-            return Task.CompletedTask;
+
+            await context.PostAsync("Looks like you're all set up.");
+
+
+           IMessageActivity reply = context.MakeMessage();
+
+            reply.Text = "I'm here to help you with whatever you need. " +
+                         "However, I'm still learning so be patient! " +
+                         "Heres some things I can help you with now. 😀";
+
+            reply.SuggestedActions = new SuggestedActions
+            {
+                Actions = new List<CardAction>()
+                {
+                    new CardAction(){ Title = "Generate Random Number", Type=ActionTypes.ImBack, Value="Generate Random Number" },
+                    new CardAction(){ Title = "Tell a joke", Type=ActionTypes.ImBack, Value="Tell a joke" },
+                    new CardAction(){ Title = "Flip a coin", Type=ActionTypes.ImBack, Value="Flip a coin" },
+                }
+            };
+
+            await context.PostAsync(reply);
+
+
+            context.Done("😁");
+            await Task.CompletedTask;
         }
     }
 }
