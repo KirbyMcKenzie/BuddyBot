@@ -12,7 +12,7 @@ using Microsoft.Bot.Connector;
 namespace BuddyBot.Dialogs
 {
     [Serializable]
-    public class GetStartedDialog : IDialog<string>
+    public class GetStartedDialog : IDialog<IMessageActivity>
     {
         IBotDataService _botDataService;
         IDialogBuilder _dialogBuilder;
@@ -72,10 +72,10 @@ namespace BuddyBot.Dialogs
 
         }
 
-        private async Task Resume_AfterPreferredWeatherDialog(IDialogContext context, IAwaitable<object> result)
+        private async Task Resume_AfterPreferredWeatherDialog(IDialogContext context, IAwaitable<string> result)
         {
 
-            await context.PostAsync("Looks like you're all set up.");
+            await context.PostAsync("Looks like you're all set up!");
 
 
            IMessageActivity reply = context.MakeMessage();
@@ -94,10 +94,8 @@ namespace BuddyBot.Dialogs
                 }
             };
 
-            await context.PostAsync(reply);
 
-
-            context.Done("😁");
+            context.Done(reply);
             await Task.CompletedTask;
         }
     }

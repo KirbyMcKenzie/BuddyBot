@@ -182,10 +182,11 @@ namespace BuddyBot.Dialogs
             context.Wait(MessageReceived);
         }
 
-        private async Task Resume_AfterGetStartedDialog(IDialogContext context, IAwaitable<string> result)
+        private async Task Resume_AfterGetStartedDialog(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
             var message = await result;
-            await context.PostAsync($"{message}");
+
+            await context.PostAsync(message);
 
             context.Wait(MessageReceived);
         }
