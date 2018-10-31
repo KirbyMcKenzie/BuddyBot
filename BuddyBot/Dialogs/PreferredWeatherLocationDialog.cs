@@ -36,13 +36,13 @@ namespace BuddyBot.Dialogs
                 return Task.CompletedTask;
             }
 
-            if (!string.IsNullOrWhiteSpace(savedPreferredCity.Name))
+            if (savedPreferredCity != null)
             {
                 PromptDialog.Confirm(context, ResumeAfterConfirmation, $"Your saved weather location is {savedPreferredCity.Name}, {savedPreferredCity.Country}, would you like to change it?", $"Sorry I don't understand - try again! Would you like to change your preferred weather location?");
                 return Task.CompletedTask;
             }
 
-            PromptDialog.Text(context, ResumeAfterPromptForPreferredLocation, "What's the name of the city you'd like the weather for?", "Sorry I didn't get that - try again! What's the name of your preferred weather location?");
+            PromptDialog.Text(context, ResumeAfterPromptForPreferredLocation, "What's the name of your preferred weather location?", "Sorry I didn't get that - try again! What's the name of your preferred weather location?");
             return Task.CompletedTask;
 
         }
