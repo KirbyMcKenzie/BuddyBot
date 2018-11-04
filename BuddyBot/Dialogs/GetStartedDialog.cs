@@ -8,6 +8,8 @@ using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Internals.Fibers;
 using Microsoft.Bot.Builder.Luis.Models;
 using Microsoft.Bot.Connector;
+using static System.Threading.Thread;
+using Pause = BuddyBot.Models.ConversationPauseConstants;
 
 namespace BuddyBot.Dialogs
 {
@@ -28,15 +30,18 @@ namespace BuddyBot.Dialogs
 
             await context.PostAsync("Hey I'm BuddyBot! 🤖");
 
-            await context.PostAsync("Let's get you set up 🛠");
+            Sleep(Pause.MediumPause);
+
+            await context.PostAsync("Let's get you all set up 🛠");
+
+            Sleep(Pause.MediumLongPause);
 
 
             // TODO - Replace with real entities or null out
-             IList<EntityRecommendation> entityRecommendation = new List<EntityRecommendation>();
+            IList<EntityRecommendation> entityRecommendation = new List<EntityRecommendation>();
 
             context.Call(_dialogBuilder.BuildNameDialog(context.Activity.AsMessageActivity(), entityRecommendation), Resume_AfterNameDialog);
             await Task.CompletedTask;
-
             
 
         }
@@ -45,7 +50,11 @@ namespace BuddyBot.Dialogs
         {
             var activity = await result;
 
+            Sleep(Pause.MediumLongPause);
+
             await context.PostAsync($"{activity}! what a great name");
+
+            Sleep(Pause.ShortMediumPause);
 
             await context.PostAsync("Next we need to set my personality. Pick one from the list below");
 
@@ -61,6 +70,8 @@ namespace BuddyBot.Dialogs
         {
             var activity = await result;
 
+            Sleep(Pause.MediumPause);
+
             await context.PostAsync($"Okay, my personality is set to be {activity}");
 
             // TODO - Replace with real entities or null out
@@ -74,6 +85,8 @@ namespace BuddyBot.Dialogs
 
         private async Task Resume_AfterPreferredWeatherDialog(IDialogContext context, IAwaitable<string> result)
         {
+
+            Sleep(Pause.ShortMediumPause);
 
             await context.PostAsync("Looks like you're all set up!");
 
