@@ -54,13 +54,13 @@ namespace BuddyBot.Dialogs
             Sleep(Pause.MediumPause);
 
             await context.PostAsync("I hope you're happy.");
-            Sleep(Pause.VeryLongPause);
+            Sleep(Pause.LongerPause);
 
 
             _botDataService.DeleteUserData(context);
 
             await context.PostAsync("Buddy Bot restored to factory defaults.");
-            Sleep(Pause.VeryLongPause);
+            Sleep(Pause.LongerPause);
 
 
             IMessageActivity rebirthGif = context.MakeMessage();
@@ -74,7 +74,7 @@ namespace BuddyBot.Dialogs
 
             await context.PostAsync(rebirthGif);
 
-            Sleep(Pause.VeryLongPause * 2);
+            Sleep(Pause.LongerPause * 2);
 
             context.Done("Congratulations, it's a bot.");
 

@@ -18,6 +18,8 @@ namespace BuddyBot.Models
         public const int MediumPause = 2000;
         public const int MediumLongPause = 2500;
         public const int LongPause = 3000;
-        public const int VeryLongPause = 3500;
+        public const int LongerPause = 3500;
+        public const int ExtraLongPause  = 4000;
+        public const int VeryLongPause = 4500;
     }
 }

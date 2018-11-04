@@ -29,12 +29,13 @@ namespace BuddyBot.Dialogs
         {
 
             await context.PostAsync("Hey I'm BuddyBot! 🤖");
-
             Sleep(Pause.MediumPause);
 
             await context.PostAsync("Let's get you all set up 🛠");
-
             Sleep(Pause.MediumLongPause);
+
+            await context.PostAsync("The first step is your name");
+            Sleep(Pause.MediumPause);
 
 
             // TODO - Replace with real entities or null out
@@ -51,12 +52,14 @@ namespace BuddyBot.Dialogs
             var activity = await result;
 
             Sleep(Pause.MediumLongPause);
-
             await context.PostAsync($"{activity}! what a great name");
-
             Sleep(Pause.ShortMediumPause);
 
-            await context.PostAsync("Next we need to set my personality. Pick one from the list below");
+            await context.PostAsync("Next we need to set my personality. My style, tone and attitute " +
+                                    "are dictated by my personality settings. Pick what works best with you");
+
+            Sleep(Pause.VeryLongPause);
+            
 
             // TODO - Replace with real entities or null out
             IList<EntityRecommendation> entityRecommendation = new List<EntityRecommendation>();
@@ -71,8 +74,8 @@ namespace BuddyBot.Dialogs
             var activity = await result;
 
             Sleep(Pause.MediumPause);
-
             await context.PostAsync($"Okay, my personality is set to be {activity}");
+            Sleep(Pause.ShortMediumPause);
 
             // TODO - Replace with real entities or null out
             IList<EntityRecommendation> entityRecommendation = new List<EntityRecommendation>();
