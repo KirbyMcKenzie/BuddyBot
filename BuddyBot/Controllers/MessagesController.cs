@@ -27,6 +27,13 @@ namespace BuddyBot.Controllers
             {
                 try
                 {
+                    // TODO - Make length of typing random
+                    // Sends typing indicator to user
+                    var connector = new ConnectorClient(new Uri(activity.ServiceUrl));
+                    Activity isTypingReply = activity.CreateReply();
+                    isTypingReply.Type = ActivityTypes.Typing;
+                    await connector.Conversations.ReplyToActivityAsync(isTypingReply);
+
                     using (ILifetimeScope scope = DialogModule.BeginLifetimeScope(Conversation.Container, activity))
                     {
                         var internalScope = scope;

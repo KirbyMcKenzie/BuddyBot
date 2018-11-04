@@ -55,10 +55,19 @@ namespace BuddyBot.Dialogs
             await context.PostAsync($"{activity}! what a great name");
             Sleep(Pause.ShortMediumPause);
 
+            // TODO - Move this to messages controller
+            var typingMsg = context.MakeMessage();
+            typingMsg.Type = ActivityTypes.Typing;
+            typingMsg.Text = null;
+            await context.PostAsync(typingMsg);
+            Sleep(Pause.LongerPause);
+
+
             await context.PostAsync("Next we need to set my personality. My style, tone and attitute " +
                                     "are dictated by my personality settings. Pick what works best with you");
 
             Sleep(Pause.VeryLongPause);
+
             
 
             // TODO - Replace with real entities or null out
