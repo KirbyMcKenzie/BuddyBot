@@ -17,7 +17,7 @@ namespace BuddyBot.Dialogs
     public class GetStartedDialog : IDialog<IMessageActivity>
     {
         IBotDataService _botDataService;
-        IDialogBuilder _dialogBuilder;
+        readonly IDialogBuilder _dialogBuilder;
 
         public GetStartedDialog(IBotDataService botDataService, IDialogBuilder dialogBuilder)
         {
@@ -30,6 +30,8 @@ namespace BuddyBot.Dialogs
 
             await context.PostAsync("Hey I'm BuddyBot! 🤖");
             Sleep(Pause.MediumPause);
+
+            
 
             await context.PostAsync("Let's get you all set up 🛠");
             Sleep(Pause.MediumLongPause);
@@ -55,7 +57,7 @@ namespace BuddyBot.Dialogs
             await context.PostAsync($"{activity}! what a great name");
             Sleep(Pause.ShortMediumPause);
 
-            // TODO - Move this to messages controller
+            // TODO - Wrap this with Pauses 
             var typingMsg = context.MakeMessage();
             typingMsg.Type = ActivityTypes.Typing;
             typingMsg.Text = null;
@@ -65,7 +67,6 @@ namespace BuddyBot.Dialogs
 
             await context.PostAsync("Next we need to set my personality. My style, tone and attitute " +
                                     "are dictated by my personality settings. Pick what works best with you");
-
             Sleep(Pause.VeryLongPause);
 
             

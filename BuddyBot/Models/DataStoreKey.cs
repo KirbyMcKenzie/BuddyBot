@@ -12,7 +12,11 @@ namespace BuddyBot.Models
 
         [DataStoreEntry("Preferred persona", DataStore.User)]
         PreferredBotPersona,
+
         [DataStoreEntry("Preferred weather location", DataStore.User)]
-        PreferredWeatherLocation
+        PreferredWeatherLocation,
+
+        [DataStoreEntry("New User", DataStore.User)]
+        IsNewUser
     }
 }

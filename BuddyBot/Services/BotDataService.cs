@@ -49,5 +49,15 @@ namespace BuddyBot.Services
             setPreferredWeatherLocation(botData, new City());
 
         }
+
+        public bool GetIsNewUser(IBotData botData)
+        {
+            return botData.GetValueOrDefault<bool>(DataStoreKey.IsNewUser);
+        }
+
+        public void SetIsNewUser(IBotData botData, bool isNewUser)
+        {
+            botData.SetValue(DataStoreKey.IsNewUser, isNewUser);
+        }
     }
 }
