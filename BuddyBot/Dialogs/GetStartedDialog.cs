@@ -31,6 +31,7 @@ namespace BuddyBot.Dialogs
             await context.PostAsync("Hey I'm BuddyBot! 🤖");
             Sleep(Pause.MediumPause);
 
+            // TODO - Rename to something like CompletedGetStarted
             if (_botDataService.IsNewUser(context))
             {
                 await context.PostAsync("Let's get you all set up 🛠");
