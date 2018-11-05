@@ -31,21 +31,25 @@ namespace BuddyBot.Dialogs
             await context.PostAsync("Hey I'm BuddyBot! 🤖");
             Sleep(Pause.MediumPause);
 
-            
+            if (_botDataService.IsNewUser(context))
+            {
+                await context.PostAsync("Let's get you all set up 🛠");
+                Sleep(Pause.MediumLongPause);
 
-            await context.PostAsync("Let's get you all set up 🛠");
-            Sleep(Pause.MediumLongPause);
-
-            await context.PostAsync("The first step is your name");
-            Sleep(Pause.MediumPause);
+                await context.PostAsync("The first step is your name");
+                Sleep(Pause.MediumPause);
 
 
-            // TODO - Replace with real entities or null out
-            IList<EntityRecommendation> entityRecommendation = new List<EntityRecommendation>();
+                // TODO - Replace with real entities or null out
+                IList<EntityRecommendation> entityRecommendation = new List<EntityRecommendation>();
 
-            context.Call(_dialogBuilder.BuildNameDialog(context.Activity.AsMessageActivity(), entityRecommendation), Resume_AfterNameDialog);
-            await Task.CompletedTask;
-            
+                context.Call(_dialogBuilder.BuildNameDialog(context.Activity.AsMessageActivity(), entityRecommendation), Resume_AfterNameDialog);
+                await Task.CompletedTask;
+
+            }
+
+            await Resume_AfterPreferredWeatherDialog(context, null);
+
 
         }
 

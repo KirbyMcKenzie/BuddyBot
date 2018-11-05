@@ -50,7 +50,7 @@ namespace BuddyBot.Services
 
         }
 
-        public bool GetIsNewUser(IBotData botData)
+        public bool IsNewUser(IBotData botData)
         {
             return botData.GetValueOrDefault<bool>(DataStoreKey.IsNewUser);
         }

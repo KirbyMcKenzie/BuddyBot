@@ -26,7 +26,7 @@ namespace BuddyBot.Services.Contracts
         void DeleteUserData(IBotData botData);
 
         // New User
-        bool GetIsNewUser(IBotData botData);
+        bool IsNewUser(IBotData botData);
         void SetIsNewUser(IBotData botData, bool isNewUser);
 
 
