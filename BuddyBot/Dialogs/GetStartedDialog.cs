@@ -32,7 +32,8 @@ namespace BuddyBot.Dialogs
             Sleep(Pause.MediumPause);
 
             // TODO - Rename to something like CompletedGetStarted
-            if (_botDataService.IsNewUser(context))
+            //if (_botDataService.IsNewUser(context))
+            if(true)
             {
                 await context.PostAsync("Let's get you all set up 🛠");
                 Sleep(Pause.MediumLongPause);
@@ -48,8 +49,13 @@ namespace BuddyBot.Dialogs
                 await Task.CompletedTask;
 
             }
+            else
+            {
+                await Resume_AfterPreferredWeatherDialog(context, null);
+                await Task.CompletedTask;
+            }
 
-            await Resume_AfterPreferredWeatherDialog(context, null);
+            
 
 
         }
@@ -96,15 +102,7 @@ namespace BuddyBot.Dialogs
             IList<EntityRecommendation> entityRecommendation = new List<EntityRecommendation>();
 
             context.Call(_dialogBuilder.BuildPreferredWeatherLocationDialog(context.Activity.AsMessageActivity(), entityRecommendation), Resume_AfterPreferredWeatherDialog);
-
-            Sleep(Pause.ShortMediumPause);
-
-            await context.PostAsync("Looks like you're all set up!");
-
-
-            _botDataService.SetIsNewUser(context, true);
-
-
+           
             await Task.CompletedTask;
 
         }
@@ -112,8 +110,20 @@ namespace BuddyBot.Dialogs
         private async Task Resume_AfterPreferredWeatherDialog(IDialogContext context, IAwaitable<string> result)
         {
 
+            Sleep(Pause.ShortMediumPause);
+            await context.PostAsync("Looks like you're all set up!");
             
-           IMessageActivity reply = context.MakeMessage();
+            _botDataService.SetIsNewUser(context, false);
+
+            await FinishAsync(context, null);
+
+
+        }
+
+        private async Task FinishAsync(IDialogContext context, object o)
+        {
+
+            IMessageActivity reply = context.MakeMessage();
 
             reply.Text = "I'm here to help you with whatever you need. " +
                          "However, I'm still learning so be patient! " +
