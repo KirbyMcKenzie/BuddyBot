@@ -47,6 +47,7 @@ namespace BuddyBot.Services
             SetPreferredName(botData, String.Empty);
             SetPreferredBotPersona(botData, PersonalityChatPersona.Friendly);
             setPreferredWeatherLocation(botData, new City());
+            SetIsNewUser(botData, true);
 
         }
 

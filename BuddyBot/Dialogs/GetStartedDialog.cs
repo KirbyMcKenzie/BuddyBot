@@ -32,8 +32,8 @@ namespace BuddyBot.Dialogs
             Sleep(Pause.MediumPause);
 
             // TODO - Rename to something like CompletedGetStarted
-            //if (_botDataService.IsNewUser(context))
-            if(true)
+            if (_botDataService.IsNewUser(context))
+            //if(true)
             {
                 await context.PostAsync("Let's get you all set up 🛠");
                 Sleep(Pause.MediumLongPause);
@@ -51,7 +51,7 @@ namespace BuddyBot.Dialogs
             }
             else
             {
-                await Resume_AfterPreferredWeatherDialog(context, null);
+                await FinishAsync(context);
                 await Task.CompletedTask;
             }
 
@@ -115,12 +115,12 @@ namespace BuddyBot.Dialogs
             
             _botDataService.SetIsNewUser(context, false);
 
-            await FinishAsync(context, null);
+            await FinishAsync(context);
 
 
         }
 
-        private async Task FinishAsync(IDialogContext context, object o)
+        private async Task FinishAsync(IDialogContext context)
         {
 
             IMessageActivity reply = context.MakeMessage();
