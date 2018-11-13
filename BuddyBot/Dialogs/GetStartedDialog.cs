@@ -54,10 +54,6 @@ namespace BuddyBot.Dialogs
                 await FinishAsync(context);
                 await Task.CompletedTask;
             }
-
-            
-
-
         }
 
         private async Task Resume_AfterNameDialog(IDialogContext context, IAwaitable<string> result)
@@ -134,6 +130,7 @@ namespace BuddyBot.Dialogs
                 Actions = new List<CardAction>()
                 {
                     new CardAction(){ Title = "Generate Random Number", Type=ActionTypes.ImBack, Value="Generate Random Number" },
+                    new CardAction(){ Title = "Weather Forecast", Type=ActionTypes.ImBack, Value="Weather Forecast" },
                     new CardAction(){ Title = "Tell a joke", Type=ActionTypes.ImBack, Value="Tell a joke" },
                     new CardAction(){ Title = "Flip a coin", Type=ActionTypes.ImBack, Value="Flip a coin" },
                 }
