@@ -21,22 +21,25 @@ namespace BuddyBot.Dialogs
         public BotPersonaDialog(IBotDataService botDataService, IList<EntityRecommendation> entities)
         {
             SetField.NotNull(out _botDataService, nameof(botDataService), botDataService);
-            SetField.NotNull(out _entities, nameof(entities), entities);
+            _entities = entities;
         }
 
         public Task StartAsync(IDialogContext context)
         {
-            PersonalityChatPersona persona = _botDataService.GetPreferredBotPersona(context);
-            _preferredBotPersona = MessageHelpers.ExtractEntityFromMessage("User.PreferredBotPersona", _entities);
 
+            PersonalityChatPersona persona = _botDataService.GetPreferredBotPersona(context);
+
+
+            if (_entities != null)
+            {
+                _preferredBotPersona = MessageHelpers.ExtractEntityFromMessage("User.PreferredBotPersona", _entities);
+            }
 
             if (!string.IsNullOrWhiteSpace(_preferredBotPersona))
             {
                 PromptDialog.Confirm(context, ResumeAfterPreferredPersonaConfirmation, $"So you'd like me to change my personality to {_preferredBotPersona}?", $"Sorry I don't understand - try again! Should I change my personality to {_preferredBotPersona}?");
                 return Task.CompletedTask;
             }
-
-
 
             if (!string.IsNullOrWhiteSpace(persona.ToString()))
             {

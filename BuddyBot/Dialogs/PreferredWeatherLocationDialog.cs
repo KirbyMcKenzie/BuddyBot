@@ -8,6 +8,7 @@ using System.Web;
 using BuddyBot.Helpers;
 using BuddyBot.Models;
 using BuddyBot.Services.Contracts;
+using Microsoft.Bot.Builder.Internals.Fibers;
 using Microsoft.Bot.Builder.Luis.Models;
 using Microsoft.Bot.Connector;
 
@@ -21,14 +22,19 @@ namespace BuddyBot.Dialogs
 
         public PreferredWeatherLocationDialog(IBotDataService botDataService, IList<EntityRecommendation> entities)
         {
-            _botDataService = botDataService;
+            SetField.NotNull(out _botDataService, nameof(botDataService), botDataService);
             _entities = entities;
         }
 
         public Task StartAsync(IDialogContext context)
         {
-            _extractedCityFromMessage = MessageHelpers.ExtractEntityFromMessage("City.Name", _entities);
+           
             City savedPreferredCity= _botDataService.GetPreferredWeatherLocation(context);
+
+            if (_entities != null)
+            {
+                _extractedCityFromMessage = MessageHelpers.ExtractEntityFromMessage("City.Name", _entities);
+            }
 
              if (!string.IsNullOrWhiteSpace(_extractedCityFromMessage))
             {

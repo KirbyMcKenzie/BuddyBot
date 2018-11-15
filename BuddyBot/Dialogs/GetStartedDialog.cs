@@ -42,10 +42,7 @@ namespace BuddyBot.Dialogs
                 Sleep(Pause.MediumPause);
 
 
-                // TODO - Replace with real entities or null out
-                IList<EntityRecommendation> entityRecommendation = new List<EntityRecommendation>();
-
-                context.Call(_dialogBuilder.BuildNameDialog(context.Activity.AsMessageActivity(), entityRecommendation), Resume_AfterNameDialog);
+                context.Call(_dialogBuilder.BuildNameDialog(context.Activity.AsMessageActivity(), null), Resume_AfterNameDialog);
                 await Task.CompletedTask;
 
             }
@@ -68,12 +65,8 @@ namespace BuddyBot.Dialogs
                                     "are dictated by my personality settings. Pick what works best with you");
             Sleep(Pause.VeryLongPause);
 
-            
 
-            // TODO - Replace with real entities or null out
-            IList<EntityRecommendation> entityRecommendation = new List<EntityRecommendation>();
-
-            context.Call(_dialogBuilder.BuildBotPersonaDialog(context.Activity.AsMessageActivity(), entityRecommendation), Resume_AfterBotPersonaDialog);
+            context.Call(_dialogBuilder.BuildBotPersonaDialog(context.Activity.AsMessageActivity(), null), Resume_AfterBotPersonaDialog);
             await Task.CompletedTask;
            
         }
@@ -86,10 +79,7 @@ namespace BuddyBot.Dialogs
             await context.PostAsync($"Okay, my personality is set to be {activity}");
             Sleep(Pause.ShortMediumPause);
 
-            // TODO - Replace with real entities or null out
-            IList<EntityRecommendation> entityRecommendation = new List<EntityRecommendation>();
-
-            context.Call(_dialogBuilder.BuildPreferredWeatherLocationDialog(context.Activity.AsMessageActivity(), entityRecommendation), Resume_AfterPreferredWeatherDialog);
+            context.Call(_dialogBuilder.BuildPreferredWeatherLocationDialog(context.Activity.AsMessageActivity(), null), Resume_AfterPreferredWeatherDialog);
            
             await Task.CompletedTask;
 
