@@ -6,7 +6,6 @@ using System.Web;
 using Autofac;
 using BuddyBot.Dialogs;
 using BuddyBot.Dialogs.Builders;
-using BuddyBot.Dialogs.Interfaces;
 using BuddyBot.Logging;
 using BuddyBot.Repository.DataAccess;
 using BuddyBot.Repository.DataAccess.Contracts;

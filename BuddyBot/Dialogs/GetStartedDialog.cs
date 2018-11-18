@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using BuddyBot.Dialogs.Interfaces;
+using BuddyBot.Dialogs.Builders;
 using BuddyBot.Services.Contracts;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Internals.Fibers;
 using Microsoft.Bot.Builder.Luis.Models;
+using Microsoft.Bot.Builder.PersonalityChat.Core;
 using Microsoft.Bot.Connector;
 using static System.Threading.Thread;
 using Pause = BuddyBot.Models.ConversationPauseConstants;
@@ -66,7 +67,7 @@ namespace BuddyBot.Dialogs
             Sleep(Pause.VeryLongPause);
 
 
-            context.Call(_dialogBuilder.BuildBotPersonaDialog(context.Activity.AsMessageActivity(), null), Resume_AfterBotPersonaDialog);
+            context.Call(_dialogBuilder.BuildBotPersonaDialog(context.Activity.AsMessageActivity(), PersonalityChatPersona.Humorous), Resume_AfterBotPersonaDialog);
             await Task.CompletedTask;
            
         }

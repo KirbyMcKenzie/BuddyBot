@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Autofac;
-using BuddyBot.Dialogs.Interfaces;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Dialogs.Internals;
 using Microsoft.Bot.Builder.Luis.Models;
+using Microsoft.Bot.Builder.PersonalityChat.Core;
 using Microsoft.Bot.Connector;
 
 namespace BuddyBot.Dialogs.Builders
@@ -18,8 +18,7 @@ namespace BuddyBot.Dialogs.Builders
             return CreateDialog(message, s => s.Resolve<ConfirmRobotDialog>());
         }
 
-        public GetWeatherForecastDialog BuilGetWeatherForecastDialog(IMessageActivity message,
-            IList<EntityRecommendation> result)
+        public GetWeatherForecastDialog BuilGetWeatherForecastDialog(IMessageActivity message,IList<EntityRecommendation> result)
         {
             return CreateDialog(message, s => s.Resolve<GetWeatherForecastDialog>(TypedParameter.From(result)));
         }
@@ -42,6 +41,11 @@ namespace BuddyBot.Dialogs.Builders
         public BotPersonaDialog BuildBotPersonaDialog(IMessageActivity message, IList<EntityRecommendation> result)
         {
             return CreateDialog(message, s => s.Resolve<BotPersonaDialog>(TypedParameter.From(result)));
+        }
+
+        public BotPersonaDialog BuildBotPersonaDialog(IMessageActivity message, PersonalityChatPersona botPersona)
+        {
+            return CreateDialog(message, s => s.Resolve<BotPersonaDialog>(TypedParameter.From(botPersona)));
         }
 
         public PreferredWeatherLocationDialog BuildPreferredWeatherLocationDialog(IMessageActivity message, IList<EntityRecommendation> result)
