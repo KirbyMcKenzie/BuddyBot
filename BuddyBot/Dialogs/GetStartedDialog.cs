@@ -80,7 +80,7 @@ namespace BuddyBot.Dialogs
             await context.PostAsync($"Okay, my personality is set to be {activity}");
             Sleep(Pause.ShortMediumPause);
 
-            context.Call(_dialogBuilder.BuildPreferredWeatherLocationDialog(context.Activity.AsMessageActivity(), null), Resume_AfterPreferredWeatherDialog);
+            context.Call(_dialogBuilder.BuildPreferredWeatherLocationDialog(context.Activity.AsMessageActivity()), Resume_AfterPreferredWeatherDialog);
            
             await Task.CompletedTask;
 
@@ -95,7 +95,6 @@ namespace BuddyBot.Dialogs
             _botDataService.SetIsNewUser(context, false);
 
             await FinishAsync(context);
-
 
         }
 
@@ -119,7 +118,6 @@ namespace BuddyBot.Dialogs
 
                 }
             };
-
 
             context.Done(reply);
             await Task.CompletedTask;

@@ -33,6 +33,11 @@ namespace BuddyBot.Dialogs.Builders
             return CreateDialog(message, s => s.Resolve<PersonalityChatDialog>(TypedParameter.From(result)));
         }
 
+        public NameDialog BuildNameDialog(IMessageActivity message)
+        {
+            return CreateDialog(message, s => s.Resolve<NameDialog>());
+        }
+
         public NameDialog BuildNameDialog(IMessageActivity message, IList<EntityRecommendation> result)
         {
             return CreateDialog(message, s => s.Resolve<NameDialog>(TypedParameter.From(result)));
@@ -46,6 +51,11 @@ namespace BuddyBot.Dialogs.Builders
         public BotPersonaDialog BuildBotPersonaDialog(IMessageActivity message, PersonalityChatPersona botPersona)
         {
             return CreateDialog(message, s => s.Resolve<BotPersonaDialog>(TypedParameter.From(botPersona)));
+        }
+
+        public PreferredWeatherLocationDialog BuildPreferredWeatherLocationDialog(IMessageActivity message)
+        {
+            return CreateDialog(message, s => s.Resolve<PreferredWeatherLocationDialog>());
         }
 
         public PreferredWeatherLocationDialog BuildPreferredWeatherLocationDialog(IMessageActivity message, IList<EntityRecommendation> result)

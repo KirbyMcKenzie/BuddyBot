@@ -9,31 +9,27 @@ namespace BuddyBot.Dialogs.Builders
     {
         ConfirmRobotDialog BuildConfirmRobotDialog(IMessageActivity message);
 
-        // Weather
         GetWeatherForecastDialog BuilGetWeatherForecastDialog(IMessageActivity message,
             IList<EntityRecommendation> result);
 
-        // Random Number
         RandomNumberDialog BuildRandomNumberDialog(IMessageActivity message, IList<EntityRecommendation> result);
 
-        // Personality Chat
         PersonalityChatDialog BuildBasicPersonalityChatBotDialog(IMessageActivity message, IList<EntityRecommendation> result);
 
-        // Preferred Name 
-        NameDialog BuildNameDialog(IMessageActivity message, IList<EntityRecommendation> result);
+        NameDialog BuildNameDialog(IMessageActivity message);
 
-        // Preferred Bot Personality
-        BotPersonaDialog BuildBotPersonaDialog(IMessageActivity message, IList<EntityRecommendation> result);
+        NameDialog BuildNameDialog(IMessageActivity message, IList<EntityRecommendation> result);
 
         BotPersonaDialog BuildBotPersonaDialog(IMessageActivity message, PersonalityChatPersona botPersona);
 
-        // Preferred Weather Location 
+        BotPersonaDialog BuildBotPersonaDialog(IMessageActivity message, IList<EntityRecommendation> result);
+
+        PreferredWeatherLocationDialog BuildPreferredWeatherLocationDialog(IMessageActivity message);
+
         PreferredWeatherLocationDialog BuildPreferredWeatherLocationDialog(IMessageActivity message, IList<EntityRecommendation> result);
 
-        // Delete User Data
         DeleteUserDataDialog BuildDeleteUserDataDialog(IMessageActivity message);
 
-        // Get Started
         GetStartedDialog BuildGetStartedDialog(IMessageActivity message);
 
 
