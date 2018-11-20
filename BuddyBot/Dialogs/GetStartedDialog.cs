@@ -43,7 +43,7 @@ namespace BuddyBot.Dialogs
                 Sleep(Pause.MediumPause);
 
 
-                context.Call(_dialogBuilder.BuildNameDialog(context.Activity.AsMessageActivity(), null), Resume_AfterNameDialog);
+                context.Call(_dialogBuilder.BuildNameDialog(context.Activity.AsMessageActivity()), Resume_AfterNameDialog);
                 await Task.CompletedTask;
 
             }
@@ -67,8 +67,54 @@ namespace BuddyBot.Dialogs
             Sleep(Pause.VeryLongPause);
 
 
-            context.Call(_dialogBuilder.BuildBotPersonaDialog(context.Activity.AsMessageActivity(), PersonalityChatPersona.Humorous), Resume_AfterBotPersonaDialog);
-            await Task.CompletedTask;
+            Activity message = new Activity();
+
+            IMessageActivity replyToConversation = context.MakeMessage();
+
+            //Activity replyToConversation = message.CreateReply("Should go to conversation, in carousel format");
+            replyToConversation.AttachmentLayout = AttachmentLayoutTypes.Carousel;
+            replyToConversation.Attachments = new List<Attachment>();
+
+            Dictionary<string, string> cardContentList = new Dictionary<string, string>();
+            cardContentList.Add("PigLatin", "https://<ImageUrl1>");
+            cardContentList.Add("Pork Shoulder", "https://<ImageUrl2>");
+            cardContentList.Add("Bacon", "https://<ImageUrl3>");
+
+            foreach (KeyValuePair<string, string> cardContent in cardContentList)
+            {
+                List<CardImage> cardImages = new List<CardImage>();
+                cardImages.Add(new CardImage(url: cardContent.Value));
+
+                List<CardAction> cardButtons = new List<CardAction>();
+
+                CardAction plButton = new CardAction()
+                {
+                    Value = $"https://en.wikipedia.org/wiki/{cardContent.Key}",
+                    Type = "openUrl",
+                    Title = "WikiPedia Page"
+                };
+
+                cardButtons.Add(plButton);
+
+                HeroCard plCard = new HeroCard()
+                {
+                    Title = $"I'm a hero card about {cardContent.Key}",
+                    Subtitle = $"{cardContent.Key} Wikipedia Page",
+                    Images = cardImages,
+                    Buttons = cardButtons
+                };
+
+                Attachment plAttachment = plCard.ToAttachment();
+                replyToConversation.Attachments.Add(plAttachment);
+            }
+
+
+            await context.PostAsync(replyToConversation);
+
+
+
+            //context.Call(_dialogBuilder.BuildBotPersonaDialog(context.Activity.AsMessageActivity(), PersonalityChatPersona.Humorous), Resume_AfterBotPersonaDialog);
+            //await Task.CompletedTask;
            
         }
 
