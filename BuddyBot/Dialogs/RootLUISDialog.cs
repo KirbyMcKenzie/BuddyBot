@@ -15,6 +15,7 @@ using Microsoft.Bot.Builder.Internals.Fibers;
 using static System.Threading.Thread;
 using Pause = BuddyBot.Models.ConversationPauseConstants;
 using Serilog;
+using BuddyBot.Models.Enums;
 
 namespace BuddyBot.Dialogs
 {
@@ -211,7 +212,7 @@ namespace BuddyBot.Dialogs
         [LuisIntent("User.UpdatePreferredBotPersona")]
         public async Task UpdatePreferredBotPersona(IDialogContext context, LuisResult result)
         {
-            context.Call(_dialogBuilder.BuildBotPersonaDialog(GetMessageActivity(context), result.Entities), Resume_AfterBotPersonaDialog);
+            context.Call(_dialogBuilder.BuildBotPersonaDialog(GetMessageActivity(context), result.Entities, PersonalityChatPersona.None), Resume_AfterBotPersonaDialog);
             await Task.Yield();
         }
 

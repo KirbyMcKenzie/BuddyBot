@@ -19,18 +19,13 @@ namespace BuddyBot.Dialogs
         private string _preferredBotPersona;
         private PersonalityChatPersona _heroCardSelectionPersona;
 
-        public BotPersonaDialog(IBotDataService botDataService, IList<EntityRecommendation> entities)
+        public BotPersonaDialog(IBotDataService botDataService, IList<EntityRecommendation> entities, 
+            PersonalityChatPersona heroCardSelectionPersona)
         {
             SetField.NotNull(out _botDataService, nameof(botDataService), botDataService);
             _entities = entities;
-        }
-
-        public BotPersonaDialog(IBotDataService botDataService, PersonalityChatPersona heroCardSelectionPersona)
-        {
-            SetField.NotNull(out _botDataService, nameof(botDataService), botDataService);
             _heroCardSelectionPersona = heroCardSelectionPersona;
         }
-
 
         public Task StartAsync(IDialogContext context)
         {

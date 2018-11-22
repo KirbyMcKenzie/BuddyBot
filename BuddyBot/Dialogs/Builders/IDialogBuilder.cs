@@ -20,9 +20,7 @@ namespace BuddyBot.Dialogs.Builders
 
         NameDialog BuildNameDialog(IMessageActivity message, IList<EntityRecommendation> result);
 
-        BotPersonaDialog BuildBotPersonaDialog(IMessageActivity message, PersonalityChatPersona botPersona);
-
-        BotPersonaDialog BuildBotPersonaDialog(IMessageActivity message, IList<EntityRecommendation> result);
+        BotPersonaDialog BuildBotPersonaDialog(IMessageActivity message, IList<EntityRecommendation> result, PersonalityChatPersona botPersona);
 
         PreferredWeatherLocationDialog BuildPreferredWeatherLocationDialog(IMessageActivity message);
 

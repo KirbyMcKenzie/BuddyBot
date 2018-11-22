@@ -126,7 +126,7 @@ namespace BuddyBot.Dialogs
 
             PersonalityChatPersona personaChoice = (PersonalityChatPersona) Enum.Parse(typeof(PersonalityChatPersona), activity.Text);
 
-            context.Call(_dialogBuilder.BuildBotPersonaDialog(context.Activity.AsMessageActivity(), personaChoice), Resume_AfterBotPersonaDialog);
+            context.Call(_dialogBuilder.BuildBotPersonaDialog(context.Activity.AsMessageActivity(), null, personaChoice), Resume_AfterBotPersonaDialog);
             await Task.CompletedTask;
 
         }
