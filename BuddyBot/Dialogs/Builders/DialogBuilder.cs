@@ -43,6 +43,7 @@ namespace BuddyBot.Dialogs.Builders
             return CreateDialog(message, s => s.Resolve<NameDialog>(TypedParameter.From(result)));
         }
 
+        // TODO - Look at overloading here
         public BotPersonaDialog BuildBotPersonaDialog(IMessageActivity message, IList<EntityRecommendation> result, PersonalityChatPersona persona)
         {
             return CreateDialog(message, s => s.Resolve<BotPersonaDialog>(TypedParameter.From(result), TypedParameter.From(persona)));
