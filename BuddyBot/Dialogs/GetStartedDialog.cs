@@ -76,9 +76,9 @@ namespace BuddyBot.Dialogs
             replyToConversation.AttachmentLayout = AttachmentLayoutTypes.Carousel;
             replyToConversation.Attachments = new List<Attachment>();
 
-            PersonalityChoiceHeroCard friendlyHeroCard = new PersonalityChoiceHeroCard(PersonalityChatPersona.Friendly, "Friendly", "I think we should be friends!", "");
-            PersonalityChoiceHeroCard professionalHeroCard = new PersonalityChoiceHeroCard(PersonalityChatPersona.Professional, "Professional", "I'm concise and helpful.", "");
-            PersonalityChoiceHeroCard HumorousHeroCard = new PersonalityChoiceHeroCard(PersonalityChatPersona.Humorous, "Humorous", "The authentic Buddy experience.", "");
+            PersonalityChoiceHeroCard friendlyHeroCard = new PersonalityChoiceHeroCard(PersonalityChatPersona.Friendly, "Friendly", "I think we should be friends!", "https://www.popsci.com/sites/popsci.com/files/styles/1000_1x_/public/images/2014/11/robot-friend-popular-science.jpg?itok=BjNu0I7B");
+            PersonalityChoiceHeroCard professionalHeroCard = new PersonalityChoiceHeroCard(PersonalityChatPersona.Professional, "Professional", "I'm concise and helpful.", "https://images.complex.com/complex/image/upload/c_limit,w_680/fl_lossy,pg_1,q_auto/robot-butler_fpiory.jpg");
+            PersonalityChoiceHeroCard HumorousHeroCard = new PersonalityChoiceHeroCard(PersonalityChatPersona.Humorous, "Humorous", "The authentic Buddy experience.", "https://3c1703fe8d.site.internapcdn.net/newman/gfx/news/hires/2009/achildrobotw.jpg");
 
             List<PersonalityChoiceHeroCard> heroCardList = new List<PersonalityChoiceHeroCard>
             {
@@ -96,8 +96,8 @@ namespace BuddyBot.Dialogs
 
                 CardAction plButton = new CardAction()
                 {
-                    Value = $"{heroCard.ImageUrl}",
-                    Type = "openUrl",
+                    Value = $"{heroCard.PersonalityType}",
+                    Type = "imBack",
                     Title = "Confirm"
                 };
 
@@ -115,15 +115,22 @@ namespace BuddyBot.Dialogs
                 replyToConversation.Attachments.Add(plAttachment);
             }
 
-
             await context.PostAsync(replyToConversation);
 
+            context.Wait(Resume_AfterBotPersonaChoice);
 
-
-            //context.Call(_dialogBuilder.BuildBotPersonaDialog(context.Activity.AsMessageActivity(), PersonalityChatPersona.Humorous), Resume_AfterBotPersonaDialog);
-            //await Task.CompletedTask;
-           
         }
+
+        private async Task Resume_AfterBotPersonaChoice(IDialogContext context, IAwaitable<IMessageActivity> result)
+        {
+            var activity = await result;
+
+            PersonalityChatPersona personaChoice = (PersonalityChatPersona) Enum.Parse(typeof(PersonalityChatPersona), activity.Text);
+
+            context.Call(_dialogBuilder.BuildBotPersonaDialog(context.Activity.AsMessageActivity(), personaChoice), Resume_AfterBotPersonaDialog);
+            await Task.CompletedTask;
+        }
+
 
         private async Task Resume_AfterBotPersonaDialog(IDialogContext context, IAwaitable<string> result)
         {
@@ -138,6 +145,8 @@ namespace BuddyBot.Dialogs
             await Task.CompletedTask;
 
         }
+
+
 
         private async Task Resume_AfterPreferredWeatherDialog(IDialogContext context, IAwaitable<string> result)
         {
