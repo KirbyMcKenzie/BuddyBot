@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using BuddyBot.Dialogs.Builders;
+using BuddyBot.Models;
 using BuddyBot.Services.Contracts;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Internals.Fibers;
@@ -80,6 +81,19 @@ namespace BuddyBot.Dialogs
             cardContentList.Add("Pork Shoulder", "https://<ImageUrl2>");
             cardContentList.Add("Bacon", "https://<ImageUrl3>");
 
+
+
+            PersonalityChoiceHeroCard friendlyHeroCard = new PersonalityChoiceHeroCard(PersonalityChatPersona.Friendly, "Friendly", "", "");
+            PersonalityChoiceHeroCard professionalHeroCard = new PersonalityChoiceHeroCard(PersonalityChatPersona.Professional, "Professional", "", "");
+            PersonalityChoiceHeroCard HumorousHeroCard = new PersonalityChoiceHeroCard(PersonalityChatPersona.Humorous, "Humorous", "", "");
+
+            List<PersonalityChoiceHeroCard> heroCardList = new List<PersonalityChoiceHeroCard>
+            {
+                friendlyHeroCard,
+                professionalHeroCard,
+                HumorousHeroCard
+            };
+
             foreach (KeyValuePair<string, string> cardContent in cardContentList)
             {
                 List<CardImage> cardImages = new List<CardImage>();
@@ -91,7 +105,7 @@ namespace BuddyBot.Dialogs
                 {
                     Value = $"https://en.wikipedia.org/wiki/{cardContent.Key}",
                     Type = "openUrl",
-                    Title = "WikiPedia Page"
+                    Title = "Confirm"
                 };
 
                 cardButtons.Add(plButton);
