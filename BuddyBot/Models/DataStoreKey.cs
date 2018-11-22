@@ -16,7 +16,7 @@ namespace BuddyBot.Models
         [DataStoreEntry("Preferred weather location", DataStore.User)]
         PreferredWeatherLocation,
 
-        [DataStoreEntry("New User", DataStore.User)]
-        IsNewUser
+        [DataStoreEntry("Has Completed Get Started", DataStore.User)]
+        HasCompletedGetStarted
     }
 }

@@ -19,7 +19,7 @@ namespace BuddyBot.Services
 
         public void SetPreferredName(IBotData botData, string name)
         {
-           botData.SetValue(DataStoreKey.PreferredFirstName, name); 
+           botData.SetValue(DataStoreKey.PreferredFirstName, name);
         }
 
         public PersonalityChatPersona GetPreferredBotPersona(IBotData botData)
@@ -44,21 +44,20 @@ namespace BuddyBot.Services
 
         public void DeleteUserData(IBotData botData)
         {
-            SetPreferredName(botData, String.Empty);
-            SetPreferredBotPersona(botData, PersonalityChatPersona.Friendly);
-            setPreferredWeatherLocation(botData, new City());
-            SetIsNewUser(botData, true);
-
+            botData.RemoveValue(DataStoreKey.PreferredFirstName);
+            botData.RemoveValue(DataStoreKey.PreferredBotPersona);
+            botData.RemoveValue(DataStoreKey.PreferredWeatherLocation);
+            botData.RemoveValue(DataStoreKey.HasCompletedGetStarted);
         }
 
-        public bool IsNewUser(IBotData botData)
+        public bool hasCompletedGetStarted(IBotData botData)
         {
-            return botData.GetValueOrDefault<bool>(DataStoreKey.IsNewUser);
+            return botData.GetValueOrDefault<bool>(DataStoreKey.HasCompletedGetStarted);
         }
 
         public void SetIsNewUser(IBotData botData, bool isNewUser)
         {
-            botData.SetValue(DataStoreKey.IsNewUser, isNewUser);
+            botData.SetValue(DataStoreKey.HasCompletedGetStarted, isNewUser);
         }
     }
 }

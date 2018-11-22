@@ -33,10 +33,17 @@ namespace BuddyBot.Dialogs
             await context.PostAsync("Hey I'm BuddyBot! 🤖");
             Sleep(Pause.MediumPause);
 
-            // TODO - Rename to something like CompletedGetStarted
-            if (_botDataService.IsNewUser(context))
-            //if(true)
+            var val = _botDataService.hasCompletedGetStarted(context);
+
+            if (_botDataService.hasCompletedGetStarted(context))
             {
+                // user has already done setup, show them what Buddy can do               
+                await FinishAsync(context);
+                await Task.CompletedTask;
+            }
+            else
+            {
+                // Set up user 
                 await context.PostAsync("Let's get you all set up 🛠");
                 Sleep(Pause.MediumLongPause);
 
@@ -45,12 +52,6 @@ namespace BuddyBot.Dialogs
 
 
                 context.Call(_dialogBuilder.BuildNameDialog(context.Activity.AsMessageActivity()), Resume_AfterNameDialog);
-                await Task.CompletedTask;
-
-            }
-            else
-            {
-                await FinishAsync(context);
                 await Task.CompletedTask;
             }
         }
