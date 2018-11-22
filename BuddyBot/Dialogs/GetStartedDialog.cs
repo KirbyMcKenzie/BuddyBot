@@ -76,16 +76,9 @@ namespace BuddyBot.Dialogs
             replyToConversation.AttachmentLayout = AttachmentLayoutTypes.Carousel;
             replyToConversation.Attachments = new List<Attachment>();
 
-            Dictionary<string, string> cardContentList = new Dictionary<string, string>();
-            cardContentList.Add("PigLatin", "https://<ImageUrl1>");
-            cardContentList.Add("Pork Shoulder", "https://<ImageUrl2>");
-            cardContentList.Add("Bacon", "https://<ImageUrl3>");
-
-
-
-            PersonalityChoiceHeroCard friendlyHeroCard = new PersonalityChoiceHeroCard(PersonalityChatPersona.Friendly, "Friendly", "", "");
-            PersonalityChoiceHeroCard professionalHeroCard = new PersonalityChoiceHeroCard(PersonalityChatPersona.Professional, "Professional", "", "");
-            PersonalityChoiceHeroCard HumorousHeroCard = new PersonalityChoiceHeroCard(PersonalityChatPersona.Humorous, "Humorous", "", "");
+            PersonalityChoiceHeroCard friendlyHeroCard = new PersonalityChoiceHeroCard(PersonalityChatPersona.Friendly, "Friendly", "I think we should be friends!", "");
+            PersonalityChoiceHeroCard professionalHeroCard = new PersonalityChoiceHeroCard(PersonalityChatPersona.Professional, "Professional", "I'm concise and helpful.", "");
+            PersonalityChoiceHeroCard HumorousHeroCard = new PersonalityChoiceHeroCard(PersonalityChatPersona.Humorous, "Humorous", "The authentic Buddy experience.", "");
 
             List<PersonalityChoiceHeroCard> heroCardList = new List<PersonalityChoiceHeroCard>
             {
@@ -94,16 +87,16 @@ namespace BuddyBot.Dialogs
                 HumorousHeroCard
             };
 
-            foreach (KeyValuePair<string, string> cardContent in cardContentList)
+            foreach (PersonalityChoiceHeroCard heroCard in heroCardList)
             {
                 List<CardImage> cardImages = new List<CardImage>();
-                cardImages.Add(new CardImage(url: cardContent.Value));
+                cardImages.Add(new CardImage(url: heroCard.ImageUrl));
 
                 List<CardAction> cardButtons = new List<CardAction>();
 
                 CardAction plButton = new CardAction()
                 {
-                    Value = $"https://en.wikipedia.org/wiki/{cardContent.Key}",
+                    Value = $"{heroCard.ImageUrl}",
                     Type = "openUrl",
                     Title = "Confirm"
                 };
@@ -112,8 +105,8 @@ namespace BuddyBot.Dialogs
 
                 HeroCard plCard = new HeroCard()
                 {
-                    Title = $"I'm a hero card about {cardContent.Key}",
-                    Subtitle = $"{cardContent.Key} Wikipedia Page",
+                    Title = $"{heroCard.Title}",
+                    Subtitle = $"{heroCard.Subtitle}",
                     Images = cardImages,
                     Buttons = cardButtons
                 };

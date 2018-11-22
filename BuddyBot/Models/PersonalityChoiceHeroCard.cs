@@ -4,18 +4,19 @@ namespace BuddyBot.Models
 {
     public class PersonalityChoiceHeroCard
     {
+        public PersonalityChatPersona PersonalityType { get; set; }
+        public string Title { get; set; }
+        public string Subtitle { get; set; }
+        public string ImageUrl { get; set; }
 
         public PersonalityChoiceHeroCard(PersonalityChatPersona personalityType, string title, string subtitle, string  imageUrl)
         {
-            personalityType = PersonalityType;
-            title = Title;
-            subtitle = Subtitle;
-            imageUrl = ImageUrl;
+            PersonalityType = personalityType;
+            Title = title;
+            Subtitle = subtitle;
+            ImageUrl = imageUrl;
         }
 
-        public PersonalityChatPersona PersonalityType { get; set; }
-        public string Title{ get; set; }
-        public string Subtitle { get; set; }
-        public string ImageUrl { get; set; }
+        
     }
 }
