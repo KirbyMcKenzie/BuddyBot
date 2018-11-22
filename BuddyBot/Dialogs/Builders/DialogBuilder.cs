@@ -63,9 +63,10 @@ namespace BuddyBot.Dialogs.Builders
             return CreateDialog(message, s => s.Resolve<PreferredWeatherLocationDialog>(TypedParameter.From(result)));
         }
 
-        public DeleteUserDataDialog BuildDeleteUserDataDialog(IMessageActivity message)
+
+        public DeleteUserDataDialog BuildDeleteUserDataDialog(IMessageActivity message, IList<EntityRecommendation> result)
         {
-            return CreateDialog(message, s => s.Resolve<DeleteUserDataDialog>());
+            return CreateDialog(message, s => s.Resolve<DeleteUserDataDialog>(TypedParameter.From(result)));
         }
 
         public GetStartedDialog BuildGetStartedDialog(IMessageActivity message)

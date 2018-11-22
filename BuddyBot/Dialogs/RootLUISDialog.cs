@@ -262,7 +262,7 @@ namespace BuddyBot.Dialogs
         [LuisIntent("User.DeleteUserData")]
         public async Task DeleteUserData(IDialogContext context, LuisResult result)
         {
-            context.Call(_dialogBuilder.BuildDeleteUserDataDialog(GetMessageActivity(context)), Resume_AfterDeleteUserDataDialog);
+            context.Call(_dialogBuilder.BuildDeleteUserDataDialog(GetMessageActivity(context), result.Entities), Resume_AfterDeleteUserDataDialog);
             await Task.Yield();
         }
 
