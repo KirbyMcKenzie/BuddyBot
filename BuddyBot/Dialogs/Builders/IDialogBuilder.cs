@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using BuddyBot.Models.Enums;
 using Microsoft.Bot.Builder.Luis.Models;
-using Microsoft.Bot.Builder.PersonalityChat.Core;
 using Microsoft.Bot.Connector;
 
 namespace BuddyBot.Dialogs.Builders

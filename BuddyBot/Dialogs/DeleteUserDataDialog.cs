@@ -34,7 +34,7 @@ namespace BuddyBot.Dialogs
 
             string command = MessageHelpers.ExtractEntityFromMessage("Bot.Command", _entities);
 
-            if (command.Replace(" ", String.Empty) == "--Quick")
+            if (command.Replace(" ", string.Empty) == "--Quick")
             {
                 _botDataService.DeleteUserData(context);
 

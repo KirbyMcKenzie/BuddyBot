@@ -4,11 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using BuddyBot.Helpers;
+using BuddyBot.Models.Enums;
 using BuddyBot.Services.Contracts;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Internals.Fibers;
 using Microsoft.Bot.Builder.Luis.Models;
-using Microsoft.Bot.Builder.PersonalityChat.Core;
 
 namespace BuddyBot.Dialogs
 {
@@ -17,6 +17,7 @@ namespace BuddyBot.Dialogs
         private readonly IBotDataService _botDataService;
         private readonly IList<EntityRecommendation> _entities;
         private string _preferredBotPersona;
+        private PersonalityChatPersona _heroCardSelectionPersona;
 
         public BotPersonaDialog(IBotDataService botDataService, IList<EntityRecommendation> entities)
         {
@@ -24,10 +25,27 @@ namespace BuddyBot.Dialogs
             _entities = entities;
         }
 
+        public BotPersonaDialog(IBotDataService botDataService, PersonalityChatPersona heroCardSelectionPersona)
+        {
+            SetField.NotNull(out _botDataService, nameof(botDataService), botDataService);
+            _heroCardSelectionPersona = heroCardSelectionPersona;
+        }
+
+
         public Task StartAsync(IDialogContext context)
         {
+            PersonalityChatPersona persona = _heroCardSelectionPersona;
 
-            PersonalityChatPersona persona = _botDataService.GetPreferredBotPersona(context);
+            
+            if (persona != PersonalityChatPersona.None)
+            {
+                PromptDialog.Confirm(context, ResumeAfterPreferredPersonaConfirmation, $"So you'd like me to change my personality to {persona}?", $"Sorry I don't understand - try again! Should I change my personality to {persona}?");
+                return Task.CompletedTask;
+            }
+            else
+            {
+                persona = _botDataService.GetPreferredBotPersona(context);
+            }
 
 
             if (_entities != null)
@@ -41,6 +59,7 @@ namespace BuddyBot.Dialogs
                 return Task.CompletedTask;
             }
 
+            // TODO - need to rework
             if (!string.IsNullOrWhiteSpace(persona.ToString()))
             {
                 PromptDialog.Confirm(context, ResumeAfterConfirmation, $"My persona is set to {persona}. Would you like to change it?", $"Sorry I don't understand - try again! Would you like to change my persona?");

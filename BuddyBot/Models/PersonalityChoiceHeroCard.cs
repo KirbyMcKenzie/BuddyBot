@@ -1,4 +1,4 @@
-﻿using Microsoft.Bot.Builder.PersonalityChat.Core;
+﻿using BuddyBot.Models.Enums;
 
 namespace BuddyBot.Models
 {

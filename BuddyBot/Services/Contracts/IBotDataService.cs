@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using BuddyBot.Models;
+using BuddyBot.Models.Enums;
 using Microsoft.Bot.Builder.Dialogs.Internals;
-using Microsoft.Bot.Builder.PersonalityChat.Core;
 
 namespace BuddyBot.Services.Contracts
 {

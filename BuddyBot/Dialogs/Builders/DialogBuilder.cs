@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Autofac;
+using BuddyBot.Models.Enums;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Dialogs.Internals;
 using Microsoft.Bot.Builder.Luis.Models;
-using Microsoft.Bot.Builder.PersonalityChat.Core;
 using Microsoft.Bot.Connector;
 
 namespace BuddyBot.Dialogs.Builders
@@ -48,9 +48,9 @@ namespace BuddyBot.Dialogs.Builders
             return CreateDialog(message, s => s.Resolve<BotPersonaDialog>(TypedParameter.From(result)));
         }
 
-        public BotPersonaDialog BuildBotPersonaDialog(IMessageActivity message, PersonalityChatPersona botPersona)
+        public BotPersonaDialog BuildBotPersonaDialog(IMessageActivity message, PersonalityChatPersona result)
         {
-            return CreateDialog(message, s => s.Resolve<BotPersonaDialog>(TypedParameter.From(botPersona)));
+            return CreateDialog(message, s => s.Resolve<BotPersonaDialog>(TypedParameter.From(result)));
         }
 
         public PreferredWeatherLocationDialog BuildPreferredWeatherLocationDialog(IMessageActivity message)

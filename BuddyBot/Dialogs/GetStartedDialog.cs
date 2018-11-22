@@ -4,11 +4,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using BuddyBot.Dialogs.Builders;
 using BuddyBot.Models;
+using BuddyBot.Models.Enums;
 using BuddyBot.Services.Contracts;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Internals.Fibers;
 using Microsoft.Bot.Builder.Luis.Models;
-using Microsoft.Bot.Builder.PersonalityChat.Core;
 using Microsoft.Bot.Connector;
 using static System.Threading.Thread;
 using Pause = BuddyBot.Models.ConversationPauseConstants;
@@ -118,7 +118,6 @@ namespace BuddyBot.Dialogs
             await context.PostAsync(replyToConversation);
 
             context.Wait(Resume_AfterBotPersonaChoice);
-
         }
 
         private async Task Resume_AfterBotPersonaChoice(IDialogContext context, IAwaitable<IMessageActivity> result)
@@ -129,6 +128,7 @@ namespace BuddyBot.Dialogs
 
             context.Call(_dialogBuilder.BuildBotPersonaDialog(context.Activity.AsMessageActivity(), personaChoice), Resume_AfterBotPersonaDialog);
             await Task.CompletedTask;
+
         }
 
 
