@@ -27,7 +27,7 @@ namespace BuddyBot.Services.Contracts
 
         // New User
         bool hasCompletedGetStarted(IBotData botData);
-        void SetIsNewUser(IBotData botData, bool isNewUser);
+        void SethasCompletedGetStarted(IBotData botData, bool isNewUser);
 
 
     }

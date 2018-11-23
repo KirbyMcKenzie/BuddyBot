@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Autofac;
 using BuddyBot.Dialogs;
+using BuddyBot.Services;
+using BuddyBot.Services.Contracts;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Dialogs.Internals;
+using Microsoft.Bot.Builder.Internals.Fibers;
 using Microsoft.Bot.Connector;
 using Microsoft.Rest;
 using Serilog;
@@ -17,6 +20,7 @@ namespace BuddyBot.Controllers
     [BotAuthentication]
     public class MessagesController : ApiController
     {
+
         /// <summary>
         /// POST: api/Messages
         /// Receive a message from a user and reply to it
@@ -34,10 +38,24 @@ namespace BuddyBot.Controllers
                     isTypingReply.Type = ActivityTypes.Typing;
                     await connector.Conversations.ReplyToActivityAsync(isTypingReply);
 
+
                     using (ILifetimeScope scope = DialogModule.BeginLifetimeScope(Conversation.Container, activity))
                     {
-                        var internalScope = scope;
-                        await Conversation.SendAsync(activity, () => internalScope.Resolve<RootLuisDialog>());
+                        IBotData botData = scope.Resolve<IBotData>();
+                        await botData.LoadAsync(new System.Threading.CancellationToken());
+
+                        var result = dataService.hasCompletedGetStarted(botData);
+
+                        if (result)
+                        {
+                            var internalScope = scope;
+                            await Conversation.SendAsync(activity, () => internalScope.Resolve<RootLuisDialog>());
+                        }
+                        else
+                        {
+                            var internalScope = scope;
+                            await Conversation.SendAsync(activity, () => internalScope.Resolve<RootLuisDialog>());
+                        }
                     }
                 }
                

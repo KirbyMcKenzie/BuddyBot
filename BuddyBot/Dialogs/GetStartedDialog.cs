@@ -155,7 +155,7 @@ namespace BuddyBot.Dialogs
             Sleep(Pause.ShortMediumPause);
             await context.PostAsync("Looks like you're all set up!");
             
-            _botDataService.SetIsNewUser(context, false);
+            _botDataService.SethasCompletedGetStarted(context, true);
 
             await FinishAsync(context);
 

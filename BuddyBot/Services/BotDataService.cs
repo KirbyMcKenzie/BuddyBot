@@ -55,7 +55,7 @@ namespace BuddyBot.Services
             return botData.GetValueOrDefault<bool>(DataStoreKey.HasCompletedGetStarted);
         }
 
-        public void SetIsNewUser(IBotData botData, bool isNewUser)
+        public void SethasCompletedGetStarted(IBotData botData, bool isNewUser)
         {
             botData.SetValue(DataStoreKey.HasCompletedGetStarted, isNewUser);
         }

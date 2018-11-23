@@ -62,7 +62,6 @@ namespace BuddyBot.Modules
             builder.RegisterType<ActivityLogger>().AsImplementedInterfaces().InstancePerDependency();
 
             // Data Access
-
             builder.RegisterType<BuddyBotDbContext>().InstancePerLifetimeScope();
 
             builder.RegisterType<WeatherConditionResponseReader>()
