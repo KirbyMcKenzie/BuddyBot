@@ -75,7 +75,7 @@ namespace BuddyBot.Dialogs
 
             await context.PostAsync(await _conversationService.GetGreeting(name));
 
-            context.Wait(MessageReceived);
+            context.Done("");
         }
 
 
@@ -183,7 +183,7 @@ namespace BuddyBot.Dialogs
             context.Wait(MessageReceived);
         }
 
-        private async Task Resume_AfterGetStartedDialog(IDialogContext context, IAwaitable<IMessageActivity> result)
+        private async Task Resume_AfterGetStartedDialog(IDialogContext context, IAwaitable<string> result)
         {
             var message = await result;
 

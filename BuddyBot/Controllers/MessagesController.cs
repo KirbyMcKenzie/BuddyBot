@@ -38,27 +38,31 @@ namespace BuddyBot.Controllers
                     isTypingReply.Type = ActivityTypes.Typing;
                     await connector.Conversations.ReplyToActivityAsync(isTypingReply);
 
+                    bool hasCompletedGetStarted;
 
                     using (ILifetimeScope scope = DialogModule.BeginLifetimeScope(Conversation.Container, activity))
                     {
+                        IBotDataService dataService = scope.Resolve<IBotDataService>();
+
                         IBotData botData = scope.Resolve<IBotData>();
                         await botData.LoadAsync(new System.Threading.CancellationToken());
-
-                        var result = dataService.hasCompletedGetStarted(botData);
-
-                        if (result)
-                        {
-                            var internalScope = scope;
-                            await Conversation.SendAsync(activity, () => internalScope.Resolve<RootLuisDialog>());
-                        }
-                        else
-                        {
-                            var internalScope = scope;
-                            await Conversation.SendAsync(activity, () => internalScope.Resolve<RootLuisDialog>());
-                        }
+                        hasCompletedGetStarted = dataService.hasCompletedGetStarted(botData);
+                        scope.Dispose();
                     }
+
+                   
+                        using (ILifetimeScope scope = DialogModule.BeginLifetimeScope(Conversation.Container, activity))
+                        {
+                     if (hasCompletedGetStarted)
+                        {
+                            await Conversation.SendAsync(activity, () => scope.Resolve<RootLuisDialog>());
+                        } else
+                        {
+                            await Conversation.SendAsync(activity, () => scope.Resolve<GetStartedDialog>());
+                        }
+                        }
+
                 }
-               
                 catch (Exception ex)
                 {
                    Log.Error(ex, $"An unexpected error occurred, error details: {ex.Message}");

@@ -16,7 +16,7 @@ using Pause = BuddyBot.Models.ConversationPauseConstants;
 namespace BuddyBot.Dialogs
 {
     [Serializable]
-    public class GetStartedDialog : IDialog<IMessageActivity>
+    public class GetStartedDialog : IDialog<string>
     {
         IBotDataService _botDataService;
         readonly IDialogBuilder _dialogBuilder;
@@ -27,19 +27,25 @@ namespace BuddyBot.Dialogs
             SetField.NotNull(out _dialogBuilder, nameof(dialogBuilder), dialogBuilder);
         }
 
-        public async Task StartAsync(IDialogContext context)
+        public Task StartAsync(IDialogContext context)
         {
+            context.Wait(MessageRecievedAsync);
+            return Task.CompletedTask;
+        }
 
+        public async Task MessageRecievedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
+
+        {
             await context.PostAsync("Hey I'm BuddyBot! 🤖");
             Sleep(Pause.MediumPause);
 
             var val = _botDataService.hasCompletedGetStarted(context);
 
-            if (_botDataService.hasCompletedGetStarted(context))
+            //if (_botDataService.hasCompletedGetStarted(context))
+            if(true)
             {
                 // user has already done setup, show them what Buddy can do               
                 await FinishAsync(context);
-                await Task.CompletedTask;
             }
             else
             {
@@ -54,6 +60,9 @@ namespace BuddyBot.Dialogs
                 context.Call(_dialogBuilder.BuildNameDialog(context.Activity.AsMessageActivity()), Resume_AfterNameDialog);
                 await Task.CompletedTask;
             }
+
+            context.Done("");
+            await Task.CompletedTask;
         }
 
         private async Task Resume_AfterNameDialog(IDialogContext context, IAwaitable<string> result)
@@ -155,14 +164,13 @@ namespace BuddyBot.Dialogs
             Sleep(Pause.ShortMediumPause);
             await context.PostAsync("Looks like you're all set up!");
             
-            _botDataService.SethasCompletedGetStarted(context, true);
-
             await FinishAsync(context);
 
         }
 
         private async Task FinishAsync(IDialogContext context)
         {
+            _botDataService.SethasCompletedGetStarted(context, true);
 
             IMessageActivity reply = context.MakeMessage();
 
@@ -182,8 +190,9 @@ namespace BuddyBot.Dialogs
                 }
             };
 
-            context.Done(reply);
-            await Task.CompletedTask;
+            await context.PostAsync(reply);
+
+            context.Done("");
         }
     }
 }

@@ -28,6 +28,11 @@ namespace BuddyBot.Dialogs.Builders
             return CreateDialog(message, s => s.Resolve<RandomNumberDialog>(TypedParameter.From(result)));
         }
 
+        public RootLuisDialog BuildRootLuisDialog(IMessageActivity message)
+        {
+            return CreateDialog(message, s => s.Resolve<RootLuisDialog>());
+        }
+
         public PersonalityChatDialog BuildBasicPersonalityChatBotDialog(IMessageActivity message, IList<EntityRecommendation> result)
         {
             return CreateDialog(message, s => s.Resolve<PersonalityChatDialog>(TypedParameter.From(result)));
