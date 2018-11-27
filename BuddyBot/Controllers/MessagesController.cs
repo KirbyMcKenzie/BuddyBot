@@ -53,13 +53,13 @@ namespace BuddyBot.Controllers
                    
                         using (ILifetimeScope scope = DialogModule.BeginLifetimeScope(Conversation.Container, activity))
                         {
-                     if (hasCompletedGetStarted)
-                        {
+                     //if (hasCompletedGetStarted)
+                        //{
                             await Conversation.SendAsync(activity, () => scope.Resolve<RootLuisDialog>());
-                        } else
-                        {
-                            await Conversation.SendAsync(activity, () => scope.Resolve<GetStartedDialog>());
-                        }
+                        //} else
+                        //{
+                        //    await Conversation.SendAsync(activity, () => scope.Resolve<GetStartedDialog>());
+                        //}
                         }
 
                 }
@@ -78,7 +78,7 @@ namespace BuddyBot.Controllers
         }
 
         // TODO - Make Async
-        private Task<Activity> HandleSystemMessage(Activity message)
+        private async Task<Activity> HandleSystemMessage(Activity message)
         {
             if (message.Type == ActivityTypes.DeleteUserData)
             {
@@ -90,21 +90,48 @@ namespace BuddyBot.Controllers
                 // Handle conversation state changes, like members being added and removed
                 // Use Activity.MembersAdded and Activity.MembersRemoved and Activity.Action for info
                 // Not available in all channels
-                
-                // TODO - ConversationUpdate - Come back to
-                //IConversationUpdateActivity update = message;
-                //using (var scope = DialogModule.BeginLifetimeScope(Conversation.Container, message))
+
+                bool hasCompletedGetStarted;
+
+                using (ILifetimeScope scope = DialogModule.BeginLifetimeScope(Conversation.Container, message))
+                {
+                    IBotDataService dataService = scope.Resolve<IBotDataService>();
+
+                    IBotData botData = scope.Resolve<IBotData>();
+                    await botData.LoadAsync(new System.Threading.CancellationToken());
+
+                    hasCompletedGetStarted = dataService.hasCompletedGetStarted(botData);
+                    scope.Dispose();
+                }
+
+
+
+                IConversationUpdateActivity update = message;
+                using (var scope = DialogModule.BeginLifetimeScope(Conversation.Container, message))
+                {
+                    if (update.MembersAdded.Any())
+                    {
+                        foreach (var newMember in update.MembersAdded)
+                        {
+                            if (newMember.Id != message.Recipient.Id)
+                            {
+                                var internalScope = scope;
+                                    await Conversation.SendAsync(message, () => scope.Resolve<GetStartedDialog>());
+                            }
+                        }
+                    }
+                }
+
+
+                //using (ILifetimeScope scope = DialogModule.BeginLifetimeScope(Conversation.Container, message))
                 //{
-                //    if (update.MembersAdded.Any())
+                //    if (hasCompletedGetStarted)
                 //    {
-                //        foreach (var newMember in update.MembersAdded)
-                //        {
-                //            if (newMember.Id != message.Recipient.Id)
-                //            {
-                //                var internalScope = scope;
-                //                await Conversation.SendAsync(message, () => internalScope.Resolve<ConfirmRobotDialog>());
-                //            }
-                //        }
+                //        await Conversation.SendAsync(message, () => scope.Resolve<RootLuisDialog>());
+                //    }
+                //    else
+                //    {
+                //        await Conversation.SendAsync(message, () => scope.Resolve<GetStartedDialog>());
                 //    }
                 //}
             }
