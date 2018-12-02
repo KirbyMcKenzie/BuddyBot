@@ -47,20 +47,22 @@ namespace BuddyBot.Controllers
                         IBotData botData = scope.Resolve<IBotData>();
                         await botData.LoadAsync(new System.Threading.CancellationToken());
                         hasCompletedGetStarted = dataService.hasCompletedGetStarted(botData);
-                        scope.Dispose();
                     }
 
-                   
                         using (ILifetimeScope scope = DialogModule.BeginLifetimeScope(Conversation.Container, activity))
                         {
-                     //if (hasCompletedGetStarted)
-                        //{
-                            await Conversation.SendAsync(activity, () => scope.Resolve<RootLuisDialog>());
-                        //} else
-                        //{
-                        //    await Conversation.SendAsync(activity, () => scope.Resolve<GetStartedDialog>());
-                        //}
+                        if (hasCompletedGetStarted)
+                        {
+                            var internalScope = scope;
+                            await Conversation.SendAsync(activity, () => internalScope.Resolve<RootLuisDialog>());
+                        } else
+                        {
+                            var internalScope = scope;
+                            await Conversation.SendAsync(activity, () => internalScope.Resolve<GetStartedDialog>());
                         }
+
+                            
+                    }
 
                 }
                 catch (Exception ex)
@@ -91,36 +93,36 @@ namespace BuddyBot.Controllers
                 // Use Activity.MembersAdded and Activity.MembersRemoved and Activity.Action for info
                 // Not available in all channels
 
-                bool hasCompletedGetStarted;
+                //bool hasCompletedGetStarted;
 
-                using (ILifetimeScope scope = DialogModule.BeginLifetimeScope(Conversation.Container, message))
-                {
-                    IBotDataService dataService = scope.Resolve<IBotDataService>();
+                //using (ILifetimeScope scope = DialogModule.BeginLifetimeScope(Conversation.Container, message))
+                //{
+                //    IBotDataService dataService = scope.Resolve<IBotDataService>();
 
-                    IBotData botData = scope.Resolve<IBotData>();
-                    await botData.LoadAsync(new System.Threading.CancellationToken());
+                //    IBotData botData = scope.Resolve<IBotData>();
+                //    await botData.LoadAsync(new System.Threading.CancellationToken());
 
-                    hasCompletedGetStarted = dataService.hasCompletedGetStarted(botData);
-                    scope.Dispose();
-                }
+                //    hasCompletedGetStarted = dataService.hasCompletedGetStarted(botData);
+                //    scope.Dispose();
+                //}
 
 
 
-                IConversationUpdateActivity update = message;
-                using (var scope = DialogModule.BeginLifetimeScope(Conversation.Container, message))
-                {
-                    if (update.MembersAdded.Any())
-                    {
-                        foreach (var newMember in update.MembersAdded)
-                        {
-                            if (newMember.Id != message.Recipient.Id)
-                            {
-                                var internalScope = scope;
-                                    await Conversation.SendAsync(message, () => scope.Resolve<GetStartedDialog>());
-                            }
-                        }
-                    }
-                }
+                //IConversationUpdateActivity update = message;
+                //using (var scope = DialogModule.BeginLifetimeScope(Conversation.Container, message))
+                //{
+                //    if (update.MembersAdded.Any())
+                //    {
+                //        foreach (var newMember in update.MembersAdded)
+                //        {
+                //            if (newMember.Id != message.Recipient.Id)
+                //            {
+                //                var internalScope = scope;
+                //                    await Conversation.SendAsync(message, () => scope.Resolve<GetStartedDialog>());
+                //            }
+                //        }
+                //    }
+                //}
 
 
                 //using (ILifetimeScope scope = DialogModule.BeginLifetimeScope(Conversation.Container, message))

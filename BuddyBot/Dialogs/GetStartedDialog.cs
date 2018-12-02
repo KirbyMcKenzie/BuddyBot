@@ -193,7 +193,8 @@ namespace BuddyBot.Dialogs
             await context.PostAsync(reply);
 
             context.EndConversation("");
-            context.Reset();
+
+            
         }
 
 
