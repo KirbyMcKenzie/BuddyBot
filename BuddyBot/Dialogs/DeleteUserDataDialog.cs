@@ -93,7 +93,7 @@ namespace BuddyBot.Dialogs
 
                 Sleep(Pause.LongerPause * 2);
 
-                context.Done("Congratulations, it's a bot.");
+                context.Done("Congratulations!! It's a bot! 😊🤖");
 
         }
     }
