@@ -40,11 +40,9 @@ namespace BuddyBot.Dialogs
                 context.Done("Buddy restored to factory defaults.");
                 return Task.CompletedTask;
             }
-            else
-            {
-                PromptDialog.Confirm(context, ResumeAfterConfirmation, $"Would you like to delete your user data?", $"Would you like to delete your user data");
-                return Task.CompletedTask;
-            }
+
+            PromptDialog.Confirm(context, ResumeAfterConfirmation, $"Would you like to delete your user data?", $"Would you like to delete your user data");
+            return Task.CompletedTask;
            
         }
 
