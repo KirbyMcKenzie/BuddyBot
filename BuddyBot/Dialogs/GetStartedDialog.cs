@@ -18,7 +18,7 @@ namespace BuddyBot.Dialogs
     [Serializable]
     public class GetStartedDialog : IDialog<IMessageActivity>
     {
-        IBotDataService _botDataService;
+        readonly IBotDataService _botDataService;
         readonly IDialogBuilder _dialogBuilder;
 
         public GetStartedDialog(IBotDataService botDataService, IDialogBuilder dialogBuilder)
@@ -48,7 +48,6 @@ namespace BuddyBot.Dialogs
                 await context.PostAsync("The first step is your name");
                 Sleep(Pause.MediumPause);
 
-
                 context.Call(_dialogBuilder.BuildNameDialog(context.Activity.AsMessageActivity()), Resume_AfterNameDialog);
                 await Task.CompletedTask;
             }
@@ -66,24 +65,20 @@ namespace BuddyBot.Dialogs
                                     "are dictated by my personality settings. Pick what works best with you");
             Sleep(Pause.VeryLongPause);
 
-
-            Activity message = new Activity();
-
             IMessageActivity replyToConversation = context.MakeMessage();
 
-            //Activity replyToConversation = message.CreateReply("Should go to conversation, in carousel format");
             replyToConversation.AttachmentLayout = AttachmentLayoutTypes.Carousel;
             replyToConversation.Attachments = new List<Attachment>();
 
             PersonalityChoiceHeroCard friendlyHeroCard = new PersonalityChoiceHeroCard(PersonalityChatPersona.Friendly, "Friendly", "I think we should be friends!", "https://www.popsci.com/sites/popsci.com/files/styles/1000_1x_/public/images/2014/11/robot-friend-popular-science.jpg?itok=BjNu0I7B");
             PersonalityChoiceHeroCard professionalHeroCard = new PersonalityChoiceHeroCard(PersonalityChatPersona.Professional, "Professional", "I'm concise and helpful.", "https://images.complex.com/complex/image/upload/c_limit,w_680/fl_lossy,pg_1,q_auto/robot-butler_fpiory.jpg");
-            PersonalityChoiceHeroCard HumorousHeroCard = new PersonalityChoiceHeroCard(PersonalityChatPersona.Humorous, "Humorous", "The authentic Buddy experience.", "https://3c1703fe8d.site.internapcdn.net/newman/gfx/news/hires/2009/achildrobotw.jpg");
+            PersonalityChoiceHeroCard humorousHeroCard = new PersonalityChoiceHeroCard(PersonalityChatPersona.Humorous, "Humorous", "The authentic Buddy experience.", "https://3c1703fe8d.site.internapcdn.net/newman/gfx/news/hires/2009/achildrobotw.jpg");
 
             List<PersonalityChoiceHeroCard> heroCardList = new List<PersonalityChoiceHeroCard>
             {
                 friendlyHeroCard,
                 professionalHeroCard,
-                HumorousHeroCard
+                humorousHeroCard
             };
 
             foreach (PersonalityChoiceHeroCard heroCard in heroCardList)
@@ -127,9 +122,7 @@ namespace BuddyBot.Dialogs
 
             context.Call(_dialogBuilder.BuildBotPersonaDialog(context.Activity.AsMessageActivity(), null, personaChoice), Resume_AfterBotPersonaDialog);
             await Task.CompletedTask;
-
         }
-
 
         private async Task Resume_AfterBotPersonaDialog(IDialogContext context, IAwaitable<string> result)
         {
@@ -142,10 +135,7 @@ namespace BuddyBot.Dialogs
             context.Call(_dialogBuilder.BuildPreferredWeatherLocationDialog(context.Activity.AsMessageActivity()), Resume_AfterPreferredWeatherDialog);
            
             await Task.CompletedTask;
-
         }
-
-
 
         private async Task Resume_AfterPreferredWeatherDialog(IDialogContext context, IAwaitable<string> result)
         {
@@ -154,7 +144,6 @@ namespace BuddyBot.Dialogs
             await context.PostAsync("Looks like you're all set up!");
             
             await FinishAsync(context);
-
         }
 
         private async Task FinishAsync(IDialogContext context)
@@ -175,10 +164,8 @@ namespace BuddyBot.Dialogs
                     new CardAction(){ Title = "Weather Forecast", Type=ActionTypes.ImBack, Value="Weather Forecast" },
                     new CardAction(){ Title = "Tell a joke", Type=ActionTypes.ImBack, Value="Tell a joke" },
                     new CardAction(){ Title = "Flip a coin", Type=ActionTypes.ImBack, Value="Flip a coin" },
-
                 }
             };
-
             context.Done(reply);
             await Task.CompletedTask;
         }
