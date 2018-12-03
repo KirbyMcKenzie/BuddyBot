@@ -72,13 +72,18 @@ namespace BuddyBot.Dialogs
         public async Task Greeting(IDialogContext context, LuisResult result)
         {
             string name =  _botDataService.GetPreferredName(context);
+            bool hasCompletedGetStarted = _botDataService.hasCompletedGetStarted(context);
 
-            if (_botDataService.hasCompletedGetStarted(context))
+            if (hasCompletedGetStarted)
             {
+                // Just say hey
+                await context.PostAsync(await _conversationService.GetGreeting(name));
+            }
+            else
+            {
+                // Run the setup/tutorial
                 context.Call(_dialogBuilder.BuildGetStartedDialog(GetMessageActivity(context)), Resume_AfterGetStartedDialog);
             }
-
-            await context.PostAsync(await _conversationService.GetGreeting(name));
         }
 
 
@@ -186,7 +191,7 @@ namespace BuddyBot.Dialogs
             context.Wait(MessageReceived);
         }
 
-        private async Task Resume_AfterGetStartedDialog(IDialogContext context, IAwaitable<string> result)
+        private async Task Resume_AfterGetStartedDialog(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
             var message = await result;
 

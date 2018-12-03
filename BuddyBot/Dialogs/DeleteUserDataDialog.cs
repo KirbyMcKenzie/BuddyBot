@@ -31,7 +31,6 @@ namespace BuddyBot.Dialogs
 
         public Task StartAsync(IDialogContext context)
         {
-
             string command = MessageHelpers.ExtractEntityFromMessage("Bot.Command", _entities);
 
             if (command.Replace(" ", string.Empty) == "--Quick")
