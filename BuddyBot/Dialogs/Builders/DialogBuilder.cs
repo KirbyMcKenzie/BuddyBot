@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Autofac;
-using BuddyBot.Dialogs.Interfaces;
+using BuddyBot.Models.Enums;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Dialogs.Internals;
 using Microsoft.Bot.Builder.Luis.Models;
@@ -18,8 +18,7 @@ namespace BuddyBot.Dialogs.Builders
             return CreateDialog(message, s => s.Resolve<ConfirmRobotDialog>());
         }
 
-        public GetWeatherForecastDialog BuilGetWeatherForecastDialog(IMessageActivity message,
-            IList<EntityRecommendation> result)
+        public GetWeatherForecastDialog BuilGetWeatherForecastDialog(IMessageActivity message,IList<EntityRecommendation> result)
         {
             return CreateDialog(message, s => s.Resolve<GetWeatherForecastDialog>(TypedParameter.From(result)));
         }
@@ -29,9 +28,19 @@ namespace BuddyBot.Dialogs.Builders
             return CreateDialog(message, s => s.Resolve<RandomNumberDialog>(TypedParameter.From(result)));
         }
 
+        public RootLuisDialog BuildRootLuisDialog(IMessageActivity message)
+        {
+            return CreateDialog(message, s => s.Resolve<RootLuisDialog>());
+        }
+
         public PersonalityChatDialog BuildBasicPersonalityChatBotDialog(IMessageActivity message, IList<EntityRecommendation> result)
         {
             return CreateDialog(message, s => s.Resolve<PersonalityChatDialog>(TypedParameter.From(result)));
+        }
+
+        public NameDialog BuildNameDialog(IMessageActivity message)
+        {
+            return CreateDialog(message, s => s.Resolve<NameDialog>());
         }
 
         public NameDialog BuildNameDialog(IMessageActivity message, IList<EntityRecommendation> result)
@@ -39,9 +48,20 @@ namespace BuddyBot.Dialogs.Builders
             return CreateDialog(message, s => s.Resolve<NameDialog>(TypedParameter.From(result)));
         }
 
-        public BotPersonaDialog BuildBotPersonaDialog(IMessageActivity message, IList<EntityRecommendation> result)
+        // TODO - Look at overloading here
+        public BotPersonaDialog BuildBotPersonaDialog(IMessageActivity message, IList<EntityRecommendation> result, PersonalityChatPersona persona)
+        {
+            return CreateDialog(message, s => s.Resolve<BotPersonaDialog>(TypedParameter.From(result), TypedParameter.From(persona)));
+        }
+
+        public BotPersonaDialog BuildBotPersonaDialog(IMessageActivity message, PersonalityChatPersona result)
         {
             return CreateDialog(message, s => s.Resolve<BotPersonaDialog>(TypedParameter.From(result)));
+        }
+
+        public PreferredWeatherLocationDialog BuildPreferredWeatherLocationDialog(IMessageActivity message)
+        {
+            return CreateDialog(message, s => s.Resolve<PreferredWeatherLocationDialog>());
         }
 
         public PreferredWeatherLocationDialog BuildPreferredWeatherLocationDialog(IMessageActivity message, IList<EntityRecommendation> result)
@@ -49,9 +69,15 @@ namespace BuddyBot.Dialogs.Builders
             return CreateDialog(message, s => s.Resolve<PreferredWeatherLocationDialog>(TypedParameter.From(result)));
         }
 
-        public DeleteUserDataDialog BuildDeleteUserDataDialog(IMessageActivity message)
+
+        public DeleteUserDataDialog BuildDeleteUserDataDialog(IMessageActivity message, IList<EntityRecommendation> result)
         {
-            return CreateDialog(message, s => s.Resolve<DeleteUserDataDialog>());
+            return CreateDialog(message, s => s.Resolve<DeleteUserDataDialog>(TypedParameter.From(result)));
+        }
+
+        public GetStartedDialog BuildGetStartedDialog(IMessageActivity message)
+        {
+            return CreateDialog(message, s => s.Resolve<GetStartedDialog>());
         }
 
         private T CreateDialog<T>(IMessageActivity message, Func<ILifetimeScope, T> func)

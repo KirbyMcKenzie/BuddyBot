@@ -4,11 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using BuddyBot.Helpers;
+using BuddyBot.Models.Enums;
 using BuddyBot.Services.Contracts;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Internals.Fibers;
 using Microsoft.Bot.Builder.Luis.Models;
-using Microsoft.Bot.Builder.PersonalityChat.Core;
 
 namespace BuddyBot.Dialogs
 {
@@ -16,62 +16,110 @@ namespace BuddyBot.Dialogs
     {
         private readonly IBotDataService _botDataService;
         private readonly IList<EntityRecommendation> _entities;
-        private string _preferredBotPersona;
+        private PersonalityChatPersona _preferredBotPersona;
 
-        public BotPersonaDialog(IBotDataService botDataService, IList<EntityRecommendation> entities)
+        public BotPersonaDialog(IBotDataService botDataService, IList<EntityRecommendation> entities, 
+            PersonalityChatPersona preferredBotPersona)
         {
             SetField.NotNull(out _botDataService, nameof(botDataService), botDataService);
-            SetField.NotNull(out _entities, nameof(entities), entities);
+            _entities = entities;
+            _preferredBotPersona = preferredBotPersona;
         }
 
         public Task StartAsync(IDialogContext context)
         {
-            PersonalityChatPersona persona = _botDataService.GetPreferredBotPersona(context);
-            _preferredBotPersona = MessageHelpers.ExtractEntityFromMessage("User.PreferredBotPersona", _entities);
+            /**
+             * ----------------------------------------------------
+             *  Order of Dialog Flow:
+             * ----------------------------------------------------
+             * 
+             * - Check if there is hero card selection, if yes, 
+             *   confirm and finish.
+             * 
+             * - Check if dialog has entities, extract, confirm and 
+             *   finish.
+             * 
+             * - Check if user has pre-saved persona, prompt to 
+             *   update, if yes,prompt options, confirm and finish. 
+             *   
+             * - Else, prompt user for option, confirm and finish.
+             **/
 
-
-            if (!string.IsNullOrWhiteSpace(_preferredBotPersona))
+            // Check if there is hero card selection
+            if (_preferredBotPersona != PersonalityChatPersona.None)
             {
-                PromptDialog.Confirm(context, ResumeAfterPreferredPersonaConfirmation, $"So you'd like me to change my personality to {_preferredBotPersona}?", $"Sorry I don't understand - try again! Should I change my personality to {_preferredBotPersona}?");
+                PromptDialog.Confirm(context, ResumeAfterConfirmChosenPersona, 
+                    $"So you'd to set my personality as {_preferredBotPersona}?", 
+                    $"Sorry I don't understand - try again! Should I set my personality to {_preferredBotPersona}?");
+
+                return Task.CompletedTask;
+            }
+            // Else we can assume LUIS called the dialog
+            else
+            {
+                if (_entities.Count > 0 || _entities != null)
+                {
+                    Enum.TryParse(MessageHelpers.ExtractEntityFromMessage("User.PreferredBotPersona", _entities),
+                        out PersonalityChatPersona parsedResult);
+
+                    _preferredBotPersona = parsedResult;
+                }
+            }
+
+            // Check If LUIS found entity preference, otherwise continue
+            if (_preferredBotPersona != PersonalityChatPersona.None)
+            {
+                PromptDialog.Confirm(context, ResumeAfterConfirmChosenPersona, 
+                    $"So you'd like me to change my personality to {_preferredBotPersona}?",
+                    $"Sorry I don't understand - try again! Should I change my personality to {_preferredBotPersona}?");
+
                 return Task.CompletedTask;
             }
 
-
-
-            if (!string.IsNullOrWhiteSpace(persona.ToString()))
+            PersonalityChatPersona preSavedPersona = _botDataService.GetPreferredBotPersona(context);
+            // Check if user has pre-saved persona, otherwise continue
+            if (preSavedPersona != PersonalityChatPersona.None)
             {
-                PromptDialog.Confirm(context, ResumeAfterConfirmation, $"My persona is set to {persona}. Would you like to change it?", $"Sorry I don't understand - try again! Would you like to change my persona?");
+                PromptDialog.Confirm(context, ResumeAfterUpdateConfirmation, $"My persona is set to {preSavedPersona}. Would you like to change it?", $"Sorry I don't understand - try again! Would you like to change my persona?");
                 return Task.CompletedTask;
             }
 
-            PromptDialog.Confirm(context, ResumeAfterConfirmation, $"What persona would you like me to take on?", $"Sorry I don't understand - try again! What persona would you like me to take on?");
+            // Could not determine preferred personality prompt user to choose
+            PromptDialog.Choice(context, ResumeAfterPromptDialogChoice,
+                Enum.GetValues(typeof(PersonalityChatPersona)).Cast<PersonalityChatPersona>(),
+                "What would you like my personality to be?");
+
             return Task.CompletedTask;
         }
 
-        // TODO - check true/false
-        private async Task ResumeAfterPreferredPersonaConfirmation(IDialogContext context, IAwaitable<bool> result)
-        {
-
-            // TODO - handle exception/ nulls
-            Enum.TryParse(_preferredBotPersona, out PersonalityChatPersona preferredPersona);
-
-            _botDataService.SetPreferredBotPersona(context, preferredPersona);
-            context.Done(_preferredBotPersona);
-
-            await Task.Yield();
-        }
-
-        private async Task ResumeAfterConfirmation(IDialogContext context, IAwaitable<bool> result)
+        private async Task ResumeAfterConfirmChosenPersona(IDialogContext context, IAwaitable<bool> result)
         {
             bool confirmation = await result;
 
             switch (confirmation)
             {
                 case true:
-                    PromptDialog.Choice(context, ResumeAfterPersonaFilled,
+                    _botDataService.SetPreferredBotPersona(context, _preferredBotPersona);
+                    context.Done(_preferredBotPersona.ToString());
+                    break;
+                default:
+                    PromptDialog.Choice(context, ResumeAfterPromptDialogChoice,
+                       Enum.GetValues(typeof(PersonalityChatPersona)).Cast<PersonalityChatPersona>(),
+                       "What would you like my personality to be?");
+                    break;
+            }
+        }
+
+        private async Task ResumeAfterUpdateConfirmation(IDialogContext context, IAwaitable<bool> result)
+        {
+            bool confirmation = await result;
+
+            switch (confirmation)
+            {
+                case true:
+                    PromptDialog.Choice(context, ResumeAfterPromptDialogChoice,
                         Enum.GetValues(typeof(PersonalityChatPersona)).Cast<PersonalityChatPersona>(),
                         "What would you like my personality to be?");
-                    
                     break;
                 default:
                     context.Done(_botDataService.GetPreferredBotPersona(context).ToString());
@@ -79,14 +127,12 @@ namespace BuddyBot.Dialogs
             }
         }
 
-        private async Task ResumeAfterPersonaFilled(IDialogContext context, IAwaitable<PersonalityChatPersona> result)
+        private async Task ResumeAfterPromptDialogChoice(IDialogContext context, IAwaitable<PersonalityChatPersona> result)
         {
-            PersonalityChatPersona filledPersona = await result;
+            PersonalityChatPersona chosenPersona = await result;
 
-            _botDataService.SetPreferredBotPersona(context, filledPersona);
-
-            context.Done(filledPersona.ToString());
+            _botDataService.SetPreferredBotPersona(context, chosenPersona);
+            context.Done(chosenPersona.ToString());
         }
-       
     }
 }

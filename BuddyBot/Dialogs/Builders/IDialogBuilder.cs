@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
+using BuddyBot.Models.Enums;
 using Microsoft.Bot.Builder.Luis.Models;
 using Microsoft.Bot.Connector;
 
-namespace BuddyBot.Dialogs.Interfaces
+namespace BuddyBot.Dialogs.Builders
 {
     public interface IDialogBuilder
     {
@@ -18,13 +16,21 @@ namespace BuddyBot.Dialogs.Interfaces
 
         PersonalityChatDialog BuildBasicPersonalityChatBotDialog(IMessageActivity message, IList<EntityRecommendation> result);
 
+        RootLuisDialog BuildRootLuisDialog(IMessageActivity message);
+
+        NameDialog BuildNameDialog(IMessageActivity message);
+
         NameDialog BuildNameDialog(IMessageActivity message, IList<EntityRecommendation> result);
 
-        BotPersonaDialog BuildBotPersonaDialog(IMessageActivity message, IList<EntityRecommendation> result);
+        BotPersonaDialog BuildBotPersonaDialog(IMessageActivity message, IList<EntityRecommendation> result, PersonalityChatPersona botPersona);
+
+        PreferredWeatherLocationDialog BuildPreferredWeatherLocationDialog(IMessageActivity message);
 
         PreferredWeatherLocationDialog BuildPreferredWeatherLocationDialog(IMessageActivity message, IList<EntityRecommendation> result);
 
-        DeleteUserDataDialog BuildDeleteUserDataDialog(IMessageActivity message);
+        DeleteUserDataDialog BuildDeleteUserDataDialog(IMessageActivity message, IList<EntityRecommendation> result);
+
+        GetStartedDialog BuildGetStartedDialog(IMessageActivity message);
 
 
     }
