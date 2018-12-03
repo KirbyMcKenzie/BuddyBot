@@ -191,12 +191,10 @@ namespace BuddyBot.Dialogs
             };
 
             await context.PostAsync(reply);
-
-            context.EndConversation("");
-
             
+            context.Done(true);
+            await Task.CompletedTask;
         }
-
 
     }
 }

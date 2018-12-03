@@ -73,9 +73,12 @@ namespace BuddyBot.Dialogs
         {
             string name =  _botDataService.GetPreferredName(context);
 
-            await context.PostAsync(await _conversationService.GetGreeting(name));
+            if (_botDataService.hasCompletedGetStarted(context))
+            {
+                context.Call(_dialogBuilder.BuildGetStartedDialog(GetMessageActivity(context)), Resume_AfterGetStartedDialog);
+            }
 
-            context.Done("");
+            await context.PostAsync(await _conversationService.GetGreeting(name));
         }
 
 

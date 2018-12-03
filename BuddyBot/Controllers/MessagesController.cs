@@ -38,31 +38,11 @@ namespace BuddyBot.Controllers
                     isTypingReply.Type = ActivityTypes.Typing;
                     await connector.Conversations.ReplyToActivityAsync(isTypingReply);
 
-                    bool hasCompletedGetStarted;
-
-                    using (ILifetimeScope scope = DialogModule.BeginLifetimeScope(Conversation.Container, activity))
-                    {
-                        IBotDataService dataService = scope.Resolve<IBotDataService>();
-
-                        IBotData botData = scope.Resolve<IBotData>();
-                        await botData.LoadAsync(new System.Threading.CancellationToken());
-                        hasCompletedGetStarted = dataService.hasCompletedGetStarted(botData);
-                    }
-
                         using (ILifetimeScope scope = DialogModule.BeginLifetimeScope(Conversation.Container, activity))
                         {
-                        if (hasCompletedGetStarted)
-                        {
-                            var internalScope = scope;
-                            await Conversation.SendAsync(activity, () => internalScope.Resolve<RootLuisDialog>());
-                        } else
-                        {
-                            var internalScope = scope;
-                            await Conversation.SendAsync(activity, () => internalScope.Resolve<GetStartedDialog>());
+                                var internalScope = scope;
+                                await Conversation.SendAsync(activity, () => internalScope.Resolve<RootLuisDialog>());
                         }
-
-                            
-                    }
 
                 }
                 catch (Exception ex)
