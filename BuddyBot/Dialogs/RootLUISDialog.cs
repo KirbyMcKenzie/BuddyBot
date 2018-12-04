@@ -58,8 +58,6 @@ namespace BuddyBot.Dialogs
         {
             await context.Forward(new PersonalityChatDialog(_botDataService, _conversationService, context), Resume_AfterChitchat, new Activity { Text = result.Query },
                 CancellationToken.None);
-
-
         }
 
         private async Task Resume_AfterChitchat(IDialogContext context, IAwaitable<IMessageActivity> result)
