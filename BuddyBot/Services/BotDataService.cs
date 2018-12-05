@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using BuddyBot.Models;
+using BuddyBot.Models.Enums;
 using BuddyBot.Services.Contracts;
 using Microsoft.Bot.Builder.Dialogs.Internals;
-using Microsoft.Bot.Builder.PersonalityChat.Core;
 
 namespace BuddyBot.Services
 {
@@ -19,7 +19,7 @@ namespace BuddyBot.Services
 
         public void SetPreferredName(IBotData botData, string name)
         {
-           botData.SetValue(DataStoreKey.PreferredFirstName, name); 
+           botData.SetValue(DataStoreKey.PreferredFirstName, name);
         }
 
         public PersonalityChatPersona GetPreferredBotPersona(IBotData botData)
@@ -44,10 +44,20 @@ namespace BuddyBot.Services
 
         public void DeleteUserData(IBotData botData)
         {
-            SetPreferredName(botData, String.Empty);
-            SetPreferredBotPersona(botData, PersonalityChatPersona.Friendly);
-            setPreferredWeatherLocation(botData, new City());
+            botData.RemoveValue(DataStoreKey.PreferredFirstName);
+            botData.RemoveValue(DataStoreKey.PreferredBotPersona);
+            botData.RemoveValue(DataStoreKey.PreferredWeatherLocation);
+            botData.RemoveValue(DataStoreKey.HasCompletedGetStarted);
+        }
 
+        public bool hasCompletedGetStarted(IBotData botData)
+        {
+            return botData.GetValueOrDefault<bool>(DataStoreKey.HasCompletedGetStarted);
+        }
+
+        public void SethasCompletedGetStarted(IBotData botData, bool isNewUser)
+        {
+            botData.SetValue(DataStoreKey.HasCompletedGetStarted, isNewUser);
         }
     }
 }

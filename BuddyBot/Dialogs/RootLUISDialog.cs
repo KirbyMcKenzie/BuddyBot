@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Threading;
 using System.Threading.Tasks;
+using BuddyBot.Dialogs.Builders;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Luis;
 using Microsoft.Bot.Builder.Luis.Models;
 using Microsoft.Bot.Connector;
 using BuddyBot.Services;
-using BuddyBot.Dialogs.Interfaces;
 using BuddyBot.Helpers;
 using BuddyBot.Services.Contracts;
 using Microsoft.Bot.Builder.Internals.Fibers;
 using static System.Threading.Thread;
 using Pause = BuddyBot.Models.ConversationPauseConstants;
 using Serilog;
+using BuddyBot.Models.Enums;
 
 namespace BuddyBot.Dialogs
 {
@@ -55,10 +56,10 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Chit-Chat")]
         public async Task Chitchat(IDialogContext context, LuisResult result)
         {
-            await context.Forward(new PersonalityChatDialog(_botDataService, _conversationService, context), Resume_AfterChitchat, new Activity {Text = result.Query},
+            await context.Forward(new PersonalityChatDialog(_botDataService, _conversationService, context), Resume_AfterChitchat, new Activity { Text = result.Query },
                 CancellationToken.None);
 
-            
+
         }
 
         private async Task Resume_AfterChitchat(IDialogContext context, IAwaitable<IMessageActivity> result)
@@ -71,40 +72,29 @@ namespace BuddyBot.Dialogs
         public async Task Greeting(IDialogContext context, LuisResult result)
         {
             string name =  _botDataService.GetPreferredName(context);
+            bool hasCompletedGetStarted = _botDataService.hasCompletedGetStarted(context);
 
-            await context.PostAsync(await _conversationService.GetGreeting(name));
-
-            context.Wait(MessageReceived);
+            if (hasCompletedGetStarted)
+            {
+                // Just say hey
+                await context.PostAsync(await _conversationService.GetGreeting(name));
+            }
+            else
+            {
+                // Run the setup/tutorial
+                context.Call(_dialogBuilder.BuildGetStartedDialog(GetMessageActivity(context)), Resume_AfterGetStartedDialog);
+            }
         }
 
 
         [LuisIntent("GetStarted")]
         public async Task GetStarted(IDialogContext context, LuisResult result)
         {
-            await context.PostAsync("Hey I'm BuddyBot! 🤖");
 
-            IMessageActivity reply = context.MakeMessage();
-
-            reply.Text = "I'm here to help you with whatever you need. " +
-                         "However, I'm still learning so be patient! " +
-                         "Heres some things I can help you with now. 😀";
-
-            reply.SuggestedActions = new SuggestedActions
-            {
-                Actions = new List<CardAction>()
-                {
-                    new CardAction(){ Title = "Generate Random Number", Type=ActionTypes.ImBack, Value="Generate Random Number" },
-                    new CardAction(){ Title = "Tell a joke", Type=ActionTypes.ImBack, Value="Tell a joke" },
-                    new CardAction(){ Title = "Flip a coin", Type=ActionTypes.ImBack, Value="Flip a coin" },
-                }
-            };
-
-            await context.PostAsync(reply);
-
-            context.Call(_dialogBuilder.BuildNameDialog(GetMessageActivity(context), result.Entities), Resume_AfterNameDialog);
+            context.Call(_dialogBuilder.BuildGetStartedDialog(GetMessageActivity(context)), Resume_AfterGetStartedDialog);
             await Task.Yield();
         }
-
+        
 
         [LuisIntent("Help")]
         public async Task Help(IDialogContext context, LuisResult result)
@@ -201,6 +191,15 @@ namespace BuddyBot.Dialogs
             context.Wait(MessageReceived);
         }
 
+        private async Task Resume_AfterGetStartedDialog(IDialogContext context, IAwaitable<IMessageActivity> result)
+        {
+            var message = await result;
+
+            await context.PostAsync(message);
+
+            context.Wait(MessageReceived);
+        }
+
 
         [LuisIntent("User.UpdatePreferredName")]
         public async Task UpdatePreferredName(IDialogContext context, LuisResult result)
@@ -221,7 +220,7 @@ namespace BuddyBot.Dialogs
         [LuisIntent("User.UpdatePreferredBotPersona")]
         public async Task UpdatePreferredBotPersona(IDialogContext context, LuisResult result)
         {
-            context.Call(_dialogBuilder.BuildBotPersonaDialog(GetMessageActivity(context), result.Entities), Resume_AfterBotPersonaDialog);
+            context.Call(_dialogBuilder.BuildBotPersonaDialog(GetMessageActivity(context), result.Entities, PersonalityChatPersona.None), Resume_AfterBotPersonaDialog);
             await Task.Yield();
         }
 
@@ -272,7 +271,7 @@ namespace BuddyBot.Dialogs
         [LuisIntent("User.DeleteUserData")]
         public async Task DeleteUserData(IDialogContext context, LuisResult result)
         {
-            context.Call(_dialogBuilder.BuildDeleteUserDataDialog(GetMessageActivity(context)), Resume_AfterDeleteUserDataDialog);
+            context.Call(_dialogBuilder.BuildDeleteUserDataDialog(GetMessageActivity(context), result.Entities), Resume_AfterDeleteUserDataDialog);
             await Task.Yield();
         }
 

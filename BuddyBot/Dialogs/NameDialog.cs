@@ -23,12 +23,17 @@ namespace BuddyBot.Dialogs
         public NameDialog(IBotDataService botDataService, IList<EntityRecommendation> entities)
         {
             SetField.NotNull(out _botDataService, nameof(botDataService), botDataService);
-            SetField.NotNull(out _entities, nameof(entities), entities);
+            _entities = entities;
         }
 
         public Task StartAsync(IDialogContext context)
         {
-            _preferredNameFromMessage = MessageHelpers.ExtractEntityFromMessage("User.PreferredName", _entities);
+
+            if (_entities != null)
+            {
+                _preferredNameFromMessage = MessageHelpers.ExtractEntityFromMessage("User.PreferredName", _entities);
+            }
+           
             string name = _botDataService.GetPreferredName(context);
 
             if (!string.IsNullOrWhiteSpace(_preferredNameFromMessage))

@@ -44,5 +44,6 @@ namespace BuddyBot.Dialogs.Builders
 
             return heroCard.ToAttachment();
         }
+
     }
 }

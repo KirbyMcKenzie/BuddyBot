@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Autofac;
 using BuddyBot.Dialogs;
+using BuddyBot.Services;
+using BuddyBot.Services.Contracts;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Dialogs.Internals;
+using Microsoft.Bot.Builder.Internals.Fibers;
 using Microsoft.Bot.Connector;
 using Microsoft.Rest;
 using Serilog;
@@ -17,6 +20,7 @@ namespace BuddyBot.Controllers
     [BotAuthentication]
     public class MessagesController : ApiController
     {
+
         /// <summary>
         /// POST: api/Messages
         /// Receive a message from a user and reply to it
@@ -27,13 +31,20 @@ namespace BuddyBot.Controllers
             {
                 try
                 {
-                    using (ILifetimeScope scope = DialogModule.BeginLifetimeScope(Conversation.Container, activity))
-                    {
-                        var internalScope = scope;
-                        await Conversation.SendAsync(activity, () => internalScope.Resolve<RootLuisDialog>());
-                    }
+                    // TODO - Make length of typing random
+                    // Sends typing indicator to user
+                    var connector = new ConnectorClient(new Uri(activity.ServiceUrl));
+                    Activity isTypingReply = activity.CreateReply();
+                    isTypingReply.Type = ActivityTypes.Typing;
+                    await connector.Conversations.ReplyToActivityAsync(isTypingReply);
+
+                        using (ILifetimeScope scope = DialogModule.BeginLifetimeScope(Conversation.Container, activity))
+                        {
+                                var internalScope = scope;
+                                await Conversation.SendAsync(activity, () => internalScope.Resolve<RootLuisDialog>());
+                        }
+
                 }
-               
                 catch (Exception ex)
                 {
                    Log.Error(ex, $"An unexpected error occurred, error details: {ex.Message}");
@@ -61,8 +72,22 @@ namespace BuddyBot.Controllers
                 // Handle conversation state changes, like members being added and removed
                 // Use Activity.MembersAdded and Activity.MembersRemoved and Activity.Action for info
                 // Not available in all channels
-                
-                // TODO - ConversationUpdate - Come back to
+
+                //bool hasCompletedGetStarted;
+
+                //using (ILifetimeScope scope = DialogModule.BeginLifetimeScope(Conversation.Container, message))
+                //{
+                //    IBotDataService dataService = scope.Resolve<IBotDataService>();
+
+                //    IBotData botData = scope.Resolve<IBotData>();
+                //    await botData.LoadAsync(new System.Threading.CancellationToken());
+
+                //    hasCompletedGetStarted = dataService.hasCompletedGetStarted(botData);
+                //    scope.Dispose();
+                //}
+
+
+
                 //IConversationUpdateActivity update = message;
                 //using (var scope = DialogModule.BeginLifetimeScope(Conversation.Container, message))
                 //{
@@ -73,9 +98,22 @@ namespace BuddyBot.Controllers
                 //            if (newMember.Id != message.Recipient.Id)
                 //            {
                 //                var internalScope = scope;
-                //                await Conversation.SendAsync(message, () => internalScope.Resolve<ConfirmRobotDialog>());
+                //                    await Conversation.SendAsync(message, () => scope.Resolve<GetStartedDialog>());
                 //            }
                 //        }
+                //    }
+                //}
+
+
+                //using (ILifetimeScope scope = DialogModule.BeginLifetimeScope(Conversation.Container, message))
+                //{
+                //    if (hasCompletedGetStarted)
+                //    {
+                //        await Conversation.SendAsync(message, () => scope.Resolve<RootLuisDialog>());
+                //    }
+                //    else
+                //    {
+                //        await Conversation.SendAsync(message, () => scope.Resolve<GetStartedDialog>());
                 //    }
                 //}
             }

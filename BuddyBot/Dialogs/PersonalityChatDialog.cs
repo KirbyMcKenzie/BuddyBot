@@ -11,6 +11,7 @@ using Microsoft.Bot.Builder.Internals.Fibers;
 using Microsoft.Bot.Builder.PersonalityChat.Core;
 using Microsoft.Bot.Builder.PersonalityChat;
 using Microsoft.Bot.Connector;
+using PersonalityChatPersona = BuddyBot.Models.Enums.PersonalityChatPersona;
 
 namespace BuddyBot.Dialogs
 {
@@ -31,8 +32,12 @@ namespace BuddyBot.Dialogs
             SetField.NotNull(out _botDataService, nameof(botDataService), botDataService);
             SetField.NotNull(out _conversationService, nameof(conversationService), conversationService);
 
-            // TODO - null check
             var preferredBotPersona = _botDataService.GetPreferredBotPersona(context);
+
+            if (preferredBotPersona == PersonalityChatPersona.None)
+            {
+                preferredBotPersona = PersonalityChatPersona.Friendly;
+            }
 
             var scenarioResponses = File.ReadAllLines(System.Web.Hosting.HostingEnvironment.MapPath($"/Scenario_Responses_{preferredBotPersona}.tsv")
                              ?? throw new InvalidOperationException());
