@@ -19,7 +19,16 @@ namespace BuddyBot.Dialogs
             await context.PostAsync("I am a Robot 🤖");
 
             Sleep(Pause.MediumLongPause);
+
+
+            // Sends typing indicator to user
+            var typingMsg = context.MakeMessage();
+            typingMsg.Type = ActivityTypes.Typing;
+            await context.PostAsync(typingMsg);
+
             await context.PostAsync("Here's a selfie I took recently.");
+
+
 
             Sleep(Pause.MediumLongPause);
             IMessageActivity message = context.MakeMessage();

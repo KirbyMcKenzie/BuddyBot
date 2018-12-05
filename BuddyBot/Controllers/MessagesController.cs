@@ -38,7 +38,6 @@ namespace BuddyBot.Controllers
                     isTypingReply.Type = ActivityTypes.Typing;
                     await connector.Conversations.ReplyToActivityAsync(isTypingReply);
 
-
                     using (ILifetimeScope scope = DialogModule.BeginLifetimeScope(Conversation.Container, activity))
                         {
                                 var internalScope = scope;
