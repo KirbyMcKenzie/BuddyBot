@@ -35,14 +35,11 @@ namespace BuddyBot.Controllers
                     // Sends typing indicator to user
                     var connector = new ConnectorClient(new Uri(activity.ServiceUrl));
                     Activity isTypingReply = activity.CreateReply();
-
-                    Random random = new Random();
-                    Thread.Sleep(1000 * random.Next(0, 3));
                     isTypingReply.Type = ActivityTypes.Typing;
-
                     await connector.Conversations.ReplyToActivityAsync(isTypingReply);
 
-                        using (ILifetimeScope scope = DialogModule.BeginLifetimeScope(Conversation.Container, activity))
+
+                    using (ILifetimeScope scope = DialogModule.BeginLifetimeScope(Conversation.Container, activity))
                         {
                                 var internalScope = scope;
                                 await Conversation.SendAsync(activity, () => internalScope.Resolve<RootLuisDialog>());
