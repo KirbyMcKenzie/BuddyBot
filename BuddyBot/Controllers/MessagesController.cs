@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Autofac;
@@ -31,11 +32,14 @@ namespace BuddyBot.Controllers
             {
                 try
                 {
-                    // TODO - Make length of typing random
                     // Sends typing indicator to user
                     var connector = new ConnectorClient(new Uri(activity.ServiceUrl));
                     Activity isTypingReply = activity.CreateReply();
+
+                    Random random = new Random();
+                    Thread.Sleep(1000 * random.Next(0, 3));
                     isTypingReply.Type = ActivityTypes.Typing;
+
                     await connector.Conversations.ReplyToActivityAsync(isTypingReply);
 
                         using (ILifetimeScope scope = DialogModule.BeginLifetimeScope(Conversation.Container, activity))
@@ -43,7 +47,6 @@ namespace BuddyBot.Controllers
                                 var internalScope = scope;
                                 await Conversation.SendAsync(activity, () => internalScope.Resolve<RootLuisDialog>());
                         }
-
                 }
                 catch (Exception ex)
                 {
@@ -59,8 +62,7 @@ namespace BuddyBot.Controllers
             return response;
         }
 
-        // TODO - Make Async
-        private async Task<Activity> HandleSystemMessage(Activity message)
+        private Task<Activity> HandleSystemMessage(Activity message)
         {
             if (message.Type == ActivityTypes.DeleteUserData)
             {
