@@ -49,7 +49,7 @@ namespace BuddyBot.Dialogs
             if (_preferredBotPersona != PersonalityChatPersona.None)
             {
                 PromptDialog.Confirm(context, ResumeAfterConfirmChosenPersona, 
-                    $"So you'd to set my personality as {_preferredBotPersona}?", 
+                    $"So you'd like to set my personality as {_preferredBotPersona}?", 
                     $"Sorry I don't understand - try again! Should I set my personality to {_preferredBotPersona}?");
 
                 return Task.CompletedTask;

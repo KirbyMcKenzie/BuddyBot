@@ -32,8 +32,6 @@ namespace BuddyBot.Dialogs
             await context.PostAsync("Hey I'm BuddyBot! 🤖");
             Sleep(Pause.MediumPause);
 
-            var val = _botDataService.hasCompletedGetStarted(context);
-
             if (_botDataService.hasCompletedGetStarted(context))
             {
                 // user has already done setup, show them what Buddy can do               
@@ -92,7 +90,7 @@ namespace BuddyBot.Dialogs
                 {
                     Value = $"{heroCard.PersonalityType}",
                     Type = "imBack",
-                    Title = "Confirm"
+                    Title = "Select"
                 };
 
                 cardButtons.Add(plButton);
