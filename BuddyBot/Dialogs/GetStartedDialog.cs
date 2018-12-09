@@ -175,7 +175,7 @@ namespace BuddyBot.Dialogs
                 Actions = new List<CardAction>()
                 {
                     new CardAction(){ Title = "🎲 Random Number", Type=ActionTypes.ImBack, Value="🎲 Random Number" },
-                    new CardAction(){ Title = "⛅ Weather", Type=ActionTypes.ImBack, Value="⛅ Weather" },
+                    new CardAction(){ Title = "⛅ Weather", Type=ActionTypes.ImBack, Value=" Weather" },
                     new CardAction(){ Title = "🤣 Joke", Type=ActionTypes.ImBack, Value="🤣 Joke" },
                     new CardAction(){ Title = "❓ Flip Coin", Type=ActionTypes.ImBack, Value="❓ Flip Coin" },
                 }
