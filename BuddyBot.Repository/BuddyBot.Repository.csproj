@@ -14,14 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="city.list.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="city.list.json" />
-  </ItemGroup>
-
-  <ItemGroup>
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.1" />
