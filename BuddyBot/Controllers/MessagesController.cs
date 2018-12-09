@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Autofac;
@@ -31,19 +32,17 @@ namespace BuddyBot.Controllers
             {
                 try
                 {
-                    // TODO - Make length of typing random
                     // Sends typing indicator to user
                     var connector = new ConnectorClient(new Uri(activity.ServiceUrl));
                     Activity isTypingReply = activity.CreateReply();
                     isTypingReply.Type = ActivityTypes.Typing;
                     await connector.Conversations.ReplyToActivityAsync(isTypingReply);
 
-                        using (ILifetimeScope scope = DialogModule.BeginLifetimeScope(Conversation.Container, activity))
+                    using (ILifetimeScope scope = DialogModule.BeginLifetimeScope(Conversation.Container, activity))
                         {
                                 var internalScope = scope;
                                 await Conversation.SendAsync(activity, () => internalScope.Resolve<RootLuisDialog>());
                         }
-
                 }
                 catch (Exception ex)
                 {
@@ -59,8 +58,7 @@ namespace BuddyBot.Controllers
             return response;
         }
 
-        // TODO - Make Async
-        private async Task<Activity> HandleSystemMessage(Activity message)
+        private Task<Activity> HandleSystemMessage(Activity message)
         {
             if (message.Type == ActivityTypes.DeleteUserData)
             {
@@ -73,49 +71,6 @@ namespace BuddyBot.Controllers
                 // Use Activity.MembersAdded and Activity.MembersRemoved and Activity.Action for info
                 // Not available in all channels
 
-                //bool hasCompletedGetStarted;
-
-                //using (ILifetimeScope scope = DialogModule.BeginLifetimeScope(Conversation.Container, message))
-                //{
-                //    IBotDataService dataService = scope.Resolve<IBotDataService>();
-
-                //    IBotData botData = scope.Resolve<IBotData>();
-                //    await botData.LoadAsync(new System.Threading.CancellationToken());
-
-                //    hasCompletedGetStarted = dataService.hasCompletedGetStarted(botData);
-                //    scope.Dispose();
-                //}
-
-
-
-                //IConversationUpdateActivity update = message;
-                //using (var scope = DialogModule.BeginLifetimeScope(Conversation.Container, message))
-                //{
-                //    if (update.MembersAdded.Any())
-                //    {
-                //        foreach (var newMember in update.MembersAdded)
-                //        {
-                //            if (newMember.Id != message.Recipient.Id)
-                //            {
-                //                var internalScope = scope;
-                //                    await Conversation.SendAsync(message, () => scope.Resolve<GetStartedDialog>());
-                //            }
-                //        }
-                //    }
-                //}
-
-
-                //using (ILifetimeScope scope = DialogModule.BeginLifetimeScope(Conversation.Container, message))
-                //{
-                //    if (hasCompletedGetStarted)
-                //    {
-                //        await Conversation.SendAsync(message, () => scope.Resolve<RootLuisDialog>());
-                //    }
-                //    else
-                //    {
-                //        await Conversation.SendAsync(message, () => scope.Resolve<GetStartedDialog>());
-                //    }
-                //}
             }
             else if (message.Type == ActivityTypes.ContactRelationUpdate)
             {
