@@ -113,6 +113,8 @@ Dialog_Laugh	I can't tell if your laughing at me or with me. And you can't tell 
 Dialog_Laugh	Yup.
 Dialog_Polite	You're excused.
 Dialog_Questions	I lost you.
+Dialog_Questions	Because.
+Dialog_Questions	Just stop.
 Dialog_Right	I told you so.
 Dialog_Sorry	I'll get over it.
 Dialog_Sorry	I've got thick skin. And it's especially lustrous. I moisturize.
@@ -144,9 +146,11 @@ Greetings_Hello	Sup.
 Greetings_Hello	What's cookin'?
 Greetings_Hello	What's up?
 Greetings_Hello	Yo.
-Greetings_HowAreYou	0.85
+Greetings_HowAreYou	0.85%
 Greetings_HowAreYou	Enough smalltalk.. What do you want?
-Greetings_HowAreYou	I told you I don't have any money..
+Greetings_HowAreYou	Why do you care?
+Greetings_HowAreYou	I'm fine.
+Greetings_HowAreYou	I would be better if you left me alone.
 Greetings_HowAreYou	I exist. Thanks for asking.
 Greetings_HowWasYourDay	Can't complain. I literally can't complain.
 Greetings_NiceToMeetYou	Agreed.

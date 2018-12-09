@@ -58,8 +58,6 @@ namespace BuddyBot.Dialogs
         {
             await context.Forward(new PersonalityChatDialog(_botDataService, _conversationService, context), Resume_AfterChitchat, new Activity { Text = result.Query },
                 CancellationToken.None);
-
-
         }
 
         private async Task Resume_AfterChitchat(IDialogContext context, IAwaitable<IMessageActivity> result)
@@ -88,35 +86,12 @@ namespace BuddyBot.Dialogs
 
 
         [LuisIntent("GetStarted")]
+        [LuisIntent("Help")]
         public async Task GetStarted(IDialogContext context, LuisResult result)
         {
 
             context.Call(_dialogBuilder.BuildGetStartedDialog(GetMessageActivity(context)), Resume_AfterGetStartedDialog);
             await Task.Yield();
-        }
-        
-
-        [LuisIntent("Help")]
-        public async Task Help(IDialogContext context, LuisResult result)
-        {
-            IMessageActivity reply = context.MakeMessage();
-
-            reply.Text = "Here's a few suggestions of things I can do right now. I'm trying my best to learn new things 😀";
-
-            reply.SuggestedActions = new SuggestedActions
-            {
-                Actions = new List<CardAction>()
-                {
-                    new CardAction(){ Title = "Generate a random number", Type=ActionTypes.ImBack, Value="Generate a random number" },
-                    new CardAction(){ Title = "Tell a joke", Type=ActionTypes.ImBack, Value="Tell a joke" },
-                    new CardAction(){ Title = "Flip a coin", Type=ActionTypes.ImBack, Value="Flip a coin" },
-                }
-            };
-
-            await context.PostAsync(reply);
-
-            context.Wait(MessageReceived);
-
         }
 
 
