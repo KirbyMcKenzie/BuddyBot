@@ -105,9 +105,10 @@ namespace BuddyBot.Dialogs
             {
                 Actions = new List<CardAction>()
                 {
-                    new CardAction(){ Title = "Generate a random number", Type=ActionTypes.ImBack, Value="Generate a random number" },
-                    new CardAction(){ Title = "Tell a joke", Type=ActionTypes.ImBack, Value="Tell a joke" },
-                    new CardAction(){ Title = "Flip a coin", Type=ActionTypes.ImBack, Value="Flip a coin" },
+                    new CardAction(){ Title = "🎲 Random Number", Type=ActionTypes.ImBack, Value="🎲 Random Number" },
+                    new CardAction(){ Title = "☁ Weather", Type=ActionTypes.ImBack, Value="☁ Weather" },
+                    new CardAction(){ Title = "🤣 Joke", Type=ActionTypes.ImBack, Value="🤣 Joke" },
+                    new CardAction(){ Title = "❓ Flip Coin", Type=ActionTypes.ImBack, Value="❓ Flip Coin" },
                 }
             };
 

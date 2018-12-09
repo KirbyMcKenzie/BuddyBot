@@ -18,19 +18,20 @@ namespace BuddyBot.Dialogs
     [Serializable]
     public class GetStartedDialog : IDialog<IMessageActivity>
     {
-        readonly IBotDataService _botDataService;
-        readonly IDialogBuilder _dialogBuilder;
+        private readonly IBotDataService _botDataService;
+        private readonly IDialogBuilder _dialogBuilder;
+        private readonly IConversationService _conversationService;
 
-        public GetStartedDialog(IBotDataService botDataService, IDialogBuilder dialogBuilder)
+        public GetStartedDialog(IBotDataService botDataService, IDialogBuilder dialogBuilder, IConversationService conversationService)
         {
             SetField.NotNull(out _botDataService, nameof(botDataService), botDataService);
             SetField.NotNull(out _dialogBuilder, nameof(dialogBuilder), dialogBuilder);
+            SetField.NotNull(out _conversationService, nameof(conversationService), conversationService);
         }
 
         public async Task StartAsync(IDialogContext context)
         {
-            await context.PostAsync("Hey I'm BuddyBot! 🤖");
-            Sleep(Pause.MediumPause);
+            
 
             if (_botDataService.hasCompletedGetStarted(context))
             {
@@ -39,12 +40,27 @@ namespace BuddyBot.Dialogs
             }
             else
             {
-                // Set up user 
-                await context.PostAsync("Let's get you all set up 🛠");
-                Sleep(Pause.MediumLongPause);
-
-                await context.PostAsync("The first step is your name");
+                // Introductions and user setup
+                await context.PostAsync("Hey there!");
                 Sleep(Pause.MediumPause);
+
+                await context.PostAsync("🤔");
+                Sleep(Pause.ExtraLongPause);
+
+                await context.PostAsync("I don't think, we've met before?");
+                Sleep(Pause.LongPause);
+
+                await context.PostAsync("Let me introduce myself.");
+                Sleep(Pause.ExtraLongPause);
+
+                // Sends typing indicator to user
+                var typingMsg = context.MakeMessage();
+                typingMsg.Type = ActivityTypes.Typing;
+                await context.PostAsync(typingMsg);
+
+                await context.PostAsync("I'm BuddyBot 🤖 I'm an intelligent personal assistant, " +
+                                        "here to help wherever I can. Pleased to meet you!");
+                Sleep(Pause.ExtraLongPause);
 
                 context.Call(_dialogBuilder.BuildNameDialog(context.Activity.AsMessageActivity()), Resume_AfterNameDialog);
                 await Task.CompletedTask;
@@ -148,20 +164,20 @@ namespace BuddyBot.Dialogs
         {
             _botDataService.SethasCompletedGetStarted(context, true);
 
+            await context.PostAsync($"Hey {_botDataService.GetPreferredName(context)} 🙂");
+
             IMessageActivity reply = context.MakeMessage();
 
-            reply.Text = "I'm here to help you with whatever you need. " +
-                         "However, I'm still learning so be patient! " +
-                         "Heres some things I can help you with now. 😀";
+            reply.Text = "Here's a few things I can do right now. I'm trying my best to learn new things 😀";
 
             reply.SuggestedActions = new SuggestedActions
             {
                 Actions = new List<CardAction>()
                 {
-                    new CardAction(){ Title = "Generate Random Number", Type=ActionTypes.ImBack, Value="Generate Random Number" },
-                    new CardAction(){ Title = "Weather Forecast", Type=ActionTypes.ImBack, Value="Weather Forecast" },
-                    new CardAction(){ Title = "Tell a joke", Type=ActionTypes.ImBack, Value="Tell a joke" },
-                    new CardAction(){ Title = "Flip a coin", Type=ActionTypes.ImBack, Value="Flip a coin" },
+                    new CardAction(){ Title = "🎲 Random Number", Type=ActionTypes.ImBack, Value="🎲 Random Number" },
+                    new CardAction(){ Title = "☁ Weather", Type=ActionTypes.ImBack, Value="☁ Weather" },
+                    new CardAction(){ Title = "🤣 Joke", Type=ActionTypes.ImBack, Value="🤣 Joke" },
+                    new CardAction(){ Title = "❓ Flip Coin", Type=ActionTypes.ImBack, Value="❓ Flip Coin" },
                 }
             };
             context.Done(reply);
