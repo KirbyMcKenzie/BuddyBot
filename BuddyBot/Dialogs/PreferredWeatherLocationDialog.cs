@@ -74,6 +74,8 @@ namespace BuddyBot.Dialogs
             string cityName = await result;
 
             IList<City> citySearchResults = MessageHelpers.SearchForCities(cityName);
+            IList<City> citySearchResults;
+
 
             if (citySearchResults != null && citySearchResults.Count <= 0)
             {
