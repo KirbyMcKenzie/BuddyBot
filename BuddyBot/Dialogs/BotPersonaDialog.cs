@@ -49,7 +49,7 @@ namespace BuddyBot.Dialogs
             if (_preferredBotPersona != PersonalityChatPersona.None)
             {
                 PromptDialog.Confirm(context, ResumeAfterConfirmChosenPersona, 
-                    $"So you'd to set my personality as {_preferredBotPersona}?", 
+                    $"So you'd like to set my personality as {_preferredBotPersona}?", 
                     $"Sorry I don't understand - try again! Should I set my personality to {_preferredBotPersona}?");
 
                 return Task.CompletedTask;
@@ -86,8 +86,10 @@ namespace BuddyBot.Dialogs
 
             // Could not determine preferred personality prompt user to choose
             PromptDialog.Choice(context, ResumeAfterPromptDialogChoice,
-                Enum.GetValues(typeof(PersonalityChatPersona)).Cast<PersonalityChatPersona>(),
-                "What would you like my personality to be?");
+                Enum.GetValues(typeof(PersonalityChatPersona))
+                    .Cast<PersonalityChatPersona>()
+                    .Where(p => p != PersonalityChatPersona.None),
+                    "What would you like my personality to be?");
 
             return Task.CompletedTask;
         }
@@ -104,8 +106,10 @@ namespace BuddyBot.Dialogs
                     break;
                 default:
                     PromptDialog.Choice(context, ResumeAfterPromptDialogChoice,
-                       Enum.GetValues(typeof(PersonalityChatPersona)).Cast<PersonalityChatPersona>(),
-                       "What would you like my personality to be?");
+                        Enum.GetValues(typeof(PersonalityChatPersona))
+                            .Cast<PersonalityChatPersona>()
+                            .Where(p => p != PersonalityChatPersona.None),
+                        "What would you like my personality to be?");
                     break;
             }
         }
@@ -118,7 +122,9 @@ namespace BuddyBot.Dialogs
             {
                 case true:
                     PromptDialog.Choice(context, ResumeAfterPromptDialogChoice,
-                        Enum.GetValues(typeof(PersonalityChatPersona)).Cast<PersonalityChatPersona>(),
+                        Enum.GetValues(typeof(PersonalityChatPersona))
+                            .Cast<PersonalityChatPersona>()
+                            .Where(p => p != PersonalityChatPersona.None),
                         "What would you like my personality to be?");
                     break;
                 default:

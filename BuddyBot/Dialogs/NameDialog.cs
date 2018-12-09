@@ -54,7 +54,7 @@ namespace BuddyBot.Dialogs
 
             if (_suggestedName.ToLower().Contains("user"))
             {
-                PromptDialog.Text(context, ResumeAfterNameFilled, "What should I call you?", "Sorry I didn't get that - try again! What should I call you?");
+                PromptDialog.Text(context, ResumeAfterNameFilled, "What is your name?", "Sorry I didn't get that - try again! What should I call you?");
                 return Task.CompletedTask;
             }
 
