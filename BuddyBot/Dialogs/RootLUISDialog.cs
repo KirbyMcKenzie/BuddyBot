@@ -86,36 +86,12 @@ namespace BuddyBot.Dialogs
 
 
         [LuisIntent("GetStarted")]
+        [LuisIntent("Help")]
         public async Task GetStarted(IDialogContext context, LuisResult result)
         {
 
             context.Call(_dialogBuilder.BuildGetStartedDialog(GetMessageActivity(context)), Resume_AfterGetStartedDialog);
             await Task.Yield();
-        }
-        
-
-        [LuisIntent("Help")]
-        public async Task Help(IDialogContext context, LuisResult result)
-        {
-            IMessageActivity reply = context.MakeMessage();
-
-            reply.Text = "Here's a few suggestions of things I can do right now. I'm trying my best to learn new things 😀";
-
-            reply.SuggestedActions = new SuggestedActions
-            {
-                Actions = new List<CardAction>()
-                {
-                    new CardAction(){ Title = "🎲 Random Number", Type=ActionTypes.ImBack, Value="🎲 Random Number" },
-                    new CardAction(){ Title = "☁ Weather", Type=ActionTypes.ImBack, Value="☁ Weather" },
-                    new CardAction(){ Title = "🤣 Joke", Type=ActionTypes.ImBack, Value="🤣 Joke" },
-                    new CardAction(){ Title = "❓ Flip Coin", Type=ActionTypes.ImBack, Value="❓ Flip Coin" },
-                }
-            };
-
-            await context.PostAsync(reply);
-
-            context.Wait(MessageReceived);
-
         }
 
 
