@@ -1,5 +1,7 @@
 ﻿using BuddyBot.Repository.Models;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 
 namespace BuddyBot.Repository.DbContext
 {
@@ -78,6 +80,14 @@ namespace BuddyBot.Repository.DbContext
             };
 
             return weatherConditionResponseList;
+        }
+
+        public City[] BuildCities()
+        {
+            var jsonData = System.IO.File.ReadAllText(@"city.list.json");
+            City[] cities =JsonConvert.DeserializeObject<City[]>(jsonData);
+
+            return cities;
         }
 
         private WeatherConditionResponse BuildWeatherConditionResponse(int id, string condition, string group, string response)
