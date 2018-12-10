@@ -48,17 +48,7 @@ namespace BuddyBot.Dialogs
                 return Task.CompletedTask;
             }
 
-            string fromName = context.Activity.From.Name;
-
-            _suggestedName = fromName.Split(' ').First();
-
-            if (_suggestedName.ToLower().Contains("user"))
-            {
-                PromptDialog.Text(context, ResumeAfterNameFilled, "What is your name?", "Sorry I didn't get that - try again! What should I call you?");
-                return Task.CompletedTask;
-            }
-
-            PromptDialog.Confirm(context, ResumeAfterConfirmation, $"Should I call you {_suggestedName}?", $"Sorry I don't understand - try again! Should I call you {_suggestedName}?");
+            PromptDialog.Text(context, ResumeAfterNameFilled, "What is your name?", "Sorry I didn't get that - try again! What should I call you?");
             return Task.CompletedTask;
         }
 
