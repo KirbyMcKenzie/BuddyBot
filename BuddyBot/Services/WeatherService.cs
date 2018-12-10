@@ -81,6 +81,8 @@ namespace BuddyBot.Services
             
             string requestUri = $"{_baseUrl}{cityName}&appid={_apiKey}";
 
+            //"https://openweathermap.org/data/2.5/find?q=Dunedin&type=like&appid=b6907d289e10d714a6e88b30761fae22&_=1544472710273"
+
             HttpClient client = new HttpClient {BaseAddress = new Uri(requestUri)};
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
