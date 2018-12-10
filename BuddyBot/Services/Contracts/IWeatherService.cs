@@ -9,5 +9,7 @@ namespace BuddyBot.Services.Contracts
     {
         Task<string> GetWeather(City city);
 
+        Task<IList<City>> SearchForCities(string cityName, string countryCode, string countryName);
+
     }
 }

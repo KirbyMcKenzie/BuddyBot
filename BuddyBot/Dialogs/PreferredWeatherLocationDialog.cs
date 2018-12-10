@@ -17,18 +17,20 @@ namespace BuddyBot.Dialogs
     public class PreferredWeatherLocationDialog : IDialog<string>
     {
         private readonly IBotDataService _botDataService;
+        private readonly IWeatherService _weatherService;
         private readonly IList<EntityRecommendation> _entities;
         private string _extractedCityFromMessage;
 
-        public PreferredWeatherLocationDialog(IBotDataService botDataService, IList<EntityRecommendation> entities)
+        public PreferredWeatherLocationDialog(IBotDataService botDataService, IWeatherService weatherService,
+            IList<EntityRecommendation> entities)
         {
             SetField.NotNull(out _botDataService, nameof(botDataService), botDataService);
+            SetField.NotNull(out _weatherService, nameof(weatherService), weatherService);
             _entities = entities;
         }
 
         public Task StartAsync(IDialogContext context)
         {
-           
             City savedPreferredCity= _botDataService.GetPreferredWeatherLocation(context);
 
             if (_entities != null)
@@ -68,14 +70,12 @@ namespace BuddyBot.Dialogs
             }
         }
 
-
         private async Task ResumeAfterPromptForPreferredLocation(IDialogContext context, IAwaitable<string> result)
         {
             string cityName = await result;
 
-            IList<City> citySearchResults = MessageHelpers.SearchForCities(cityName);
-            IList<City> citySearchResults;
-
+            //IList<City> citySearchResults = MessageHelpers.SearchForCities(cityName);
+            IList<City> citySearchResults = await _weatherService.SearchForCities(cityName, "NZ", "NZ");
 
             if (citySearchResults != null && citySearchResults.Count <= 0)
             {

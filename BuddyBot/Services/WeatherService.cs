@@ -8,6 +8,7 @@ using BuddyBot.Services.Contracts;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
@@ -34,7 +35,7 @@ namespace BuddyBot.Services
         {
             string requestUri = $"{_baseUrl}{city.Name},{city.Country}&appid={_apiKey}";
 
-            HttpClient client = new HttpClient { BaseAddress = new Uri(requestUri) };
+            HttpClient client = new HttpClient {BaseAddress = new Uri(requestUri)};
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -50,12 +51,15 @@ namespace BuddyBot.Services
 
                 if (weatherDescriptionJsonResult != null && weatherTemperturesJsonResult != null)
                 {
-                    WeatherDescriptionDto weatherDescriptionResult = weatherDescriptionJsonResult.ToObject<WeatherDescriptionDto>();
-                    WeatherTemperatureDto weatherTemperatureResult = weatherTemperturesJsonResult.ToObject<WeatherTemperatureDto>();
+                    WeatherDescriptionDto weatherDescriptionResult =
+                        weatherDescriptionJsonResult.ToObject<WeatherDescriptionDto>();
+                    WeatherTemperatureDto weatherTemperatureResult =
+                        weatherTemperturesJsonResult.ToObject<WeatherTemperatureDto>();
 
                     // TODO - Convert temperture using entity e.g. "Weather in Auckland in fahrenheit"
 
-                    double convertedTemperture = WeatherHelpers.ConvertTemperture(weatherTemperatureResult.temp, Temperature.Celsius);
+                    double convertedTemperture =
+                        WeatherHelpers.ConvertTemperture(weatherTemperatureResult.temp, Temperature.Celsius);
 
                     var mappedConitionReponse = await _weatherConditionResponseReader
                         .GetResponseByCondition(weatherDescriptionResult.description);
@@ -65,8 +69,31 @@ namespace BuddyBot.Services
                            $"with {mappedConitionReponse.MappedConditionResponse}";
                 }
             }
+
             // TODO - do something else with this
             return "I'm having problems accessing weather reports. Please try again later";
+        }
+
+        public async Task<IList<City>> SearchForCities(string cityName, string countryCode = null,
+            string countryName = null)
+        {
+            IList<City> cityList = new List<City>();
+            
+            string requestUri = $"{_baseUrl}{cityName}&appid={_apiKey}";
+
+            HttpClient client = new HttpClient {BaseAddress = new Uri(requestUri)};
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+            HttpResponseMessage response = await client.GetAsync(requestUri);
+
+            if (response.IsSuccessStatusCode)
+            {
+                String responseJsonString = await response.Content.ReadAsStringAsync();
+                JObject parsedJsonReponseString = JObject.Parse(responseJsonString);
+            }
+
+            return cityList;
         }
     }
 }
