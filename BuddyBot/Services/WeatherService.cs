@@ -91,8 +91,11 @@ namespace BuddyBot.Services
 
             if (response.IsSuccessStatusCode)
             {
-                String responseJsonString = await response.Content.ReadAsStringAsync();
+                string responseJsonString = await response.Content.ReadAsStringAsync();
                 JObject parsedJsonReponseString = JObject.Parse(responseJsonString);
+
+                WeatherSearchResultDto deserializedProduct = JsonConvert.DeserializeObject<WeatherSearchResultDto>(responseJsonString);
+
             }
 
             return cityList;
