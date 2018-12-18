@@ -16,6 +16,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using BuddyBot.Models.Factories;
 
 namespace BuddyBot.Services
 {
@@ -96,6 +97,9 @@ namespace BuddyBot.Services
 
                 WeatherSearchResultDto deserializedProduct = JsonConvert.DeserializeObject<WeatherSearchResultDto>(responseJsonString);
 
+                ICityFactory cityFactory = new CityFactory();
+
+                City city = cityFactory.ConvertFromDto(deserializedProduct);
             }
 
             return cityList;
