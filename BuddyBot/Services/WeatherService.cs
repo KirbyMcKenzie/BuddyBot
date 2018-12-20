@@ -16,7 +16,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using BuddyBot.Models.Factories;
+using BuddyBot.Models.Mappers;
 
 namespace BuddyBot.Services
 {
@@ -97,9 +97,10 @@ namespace BuddyBot.Services
 
                 WeatherSearchResultDto deserializedProduct = JsonConvert.DeserializeObject<WeatherSearchResultDto>(responseJsonString);
 
-                ICityFactory cityFactory = new CityFactory();
+                IDomainMapper<WeatherSearchResultDto,IList<City>> cityMapper = new CityMap();
 
-                City city = cityFactory.ConvertFromDto(deserializedProduct);
+                IList<City> mappedCities = cityMapper.MapTo(deserializedProduct);
+
             }
 
             return cityList;

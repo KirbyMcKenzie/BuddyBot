@@ -6,11 +6,22 @@ using BuddyBot.Models.Dtos;
 
 namespace BuddyBot.Models.Mappers
 {
-    public class CityMap : IDomainMapper<WeatherSearchResultDto, City>
+    public class CityMap : IDomainMapper<WeatherSearchResultDto, IList<City>>
     {
-        public City MapTo(WeatherSearchResultDto mapFrom)
+        public IList<City> MapTo(WeatherSearchResultDto mapFrom)
         {
-            return new City();
+            IList<City> cityList = new List<City>();
+
+            foreach (var searchResult in mapFrom.SearchResultList)
+            {
+                cityList.Add(new City
+                {
+                    Id = searchResult.Id.ToString(),
+                    Name = searchResult.Name,
+                    Country = searchResult.Sys.Country
+                });
+            }
+            return cityList;   
         }
     }
 }

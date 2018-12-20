@@ -290,6 +290,8 @@
     <Compile Include="Dialogs\NameDialog.cs" />
     <Compile Include="Models\Dtos\WeatherSearchResultDto.cs" />
     <Compile Include="Models\Enums\PersonalityChatPersona.cs" />
+    <Compile Include="Models\Mappers\CityMap.cs" />
+    <Compile Include="Models\Mappers\IDomainMapper.cs" />
     <Compile Include="Models\PersonalityChoiceHeroCard.cs" />
     <Compile Include="Dialogs\PreferredWeatherLocationDialog.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />

@@ -10,12 +10,4 @@ namespace BuddyBot.Models.Mappers
     {
         TTo MapTo(TFrom mapFrom);
     }
-
-    public class CityWeatherMap : IDomainMapper<WeatherSearchResultDto, City>
-    {
-        public City MapTo(WeatherSearchResultDto mapFrom)
-        {
-            return new City();
-        }
-    }
 }
