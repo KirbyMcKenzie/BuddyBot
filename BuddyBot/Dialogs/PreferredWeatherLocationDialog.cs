@@ -106,16 +106,13 @@ namespace BuddyBot.Dialogs
 
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
-            IMessageActivity cityId = await result;
+            IMessageActivity cityChoice = await result;
 
+            City extractedCity = MessageHelpers.ExtractCityFromMessagePrompt(cityChoice.Text);
 
-            string extractedId = MessageHelpers.ExtractIdFromMessage(cityId.Text);
+            _botDataService.setPreferredWeatherLocation(context, extractedCity);
 
-            City preferredCity = MessageHelpers.GetCityById(extractedId);
-
-            _botDataService.setPreferredWeatherLocation(context, preferredCity);
-
-            context.Done(preferredCity.Name);
+            context.Done(extractedCity.Name);
         }
 
         private async Task ResumeAfterConfirmation(IDialogContext context, IAwaitable<bool> result)
@@ -142,7 +139,7 @@ namespace BuddyBot.Dialogs
             {
                 cardOptionsList.Add(new CardAction(ActionTypes.ImBack,
                     title: $"{city.Name}, {city.Country}",
-                    value: $"{city.Name}, {city.Country}, {city.Id}"));
+                    value: $"{city.Name}, {city.Country}, (#{city.Id})"));
 
             }
 

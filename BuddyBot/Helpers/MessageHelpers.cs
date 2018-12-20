@@ -70,11 +70,13 @@ namespace BuddyBot.Helpers
         {
             var cityName = messagePrompt.Substring(0, messagePrompt.IndexOf(','));
             var cityCountry = messagePrompt.Substring(messagePrompt.IndexOf(',') + 2);
+            var cityId = messagePrompt.Substring(messagePrompt.IndexOf('#') +1, messagePrompt.Length);
 
             City city = new City()
             {
                 Name = cityName,
-                Country = cityCountry
+                Country = cityCountry,
+                Id = cityId
             };
 
             return city;

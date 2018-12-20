@@ -80,7 +80,6 @@ namespace BuddyBot.Services
         public async Task<IList<City>> SearchForCities(string cityName, string countryCode = null,
             string countryName = null)
         {
-            IList<City> cityList = new List<City>();
             
             string requestUri = $"{_serachBaseUrl}{cityName}&type=like&appid={_searchApiKey}";
 
@@ -99,11 +98,11 @@ namespace BuddyBot.Services
 
                 IDomainMapper<WeatherSearchResultDto,IList<City>> cityMapper = new CityMap();
 
-                IList<City> mappedCities = cityMapper.MapTo(deserializedProduct);
+                IList<City> cityList = cityMapper.MapTo(deserializedProduct);
 
+                return cityList;
             }
-
-            return cityList;
+            return null;
         }
     }
 }
