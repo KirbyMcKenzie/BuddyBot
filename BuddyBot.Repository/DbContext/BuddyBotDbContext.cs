@@ -29,9 +29,6 @@ namespace BuddyBot.Repository.DbContext
             WeatherConditionResponse[] weatherConditionResponses = dbSeeder.BuildWeatherConditionResponses();
             modelBuilder.Entity<WeatherConditionResponse>().HasData(weatherConditionResponses);
 
-            //City[] cities = dbSeeder.BuildCities();
-            //modelBuilder.Entity<City>().HasData(cities);
-
 
         }
 

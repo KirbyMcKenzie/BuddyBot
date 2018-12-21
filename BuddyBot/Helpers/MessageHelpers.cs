@@ -68,6 +68,8 @@ namespace BuddyBot.Helpers
 
         public static City ExtractCityFromMessagePrompt(string messagePrompt)
         {
+
+            // TODO - use string .split here
             var cityName = messagePrompt.Substring(0, messagePrompt.IndexOf(','));
             var cityCountry = messagePrompt.Substring(messagePrompt.IndexOf(',') + 2, 2);
             var cityId = messagePrompt.Substring(messagePrompt.IndexOf('#') +1, 7);
