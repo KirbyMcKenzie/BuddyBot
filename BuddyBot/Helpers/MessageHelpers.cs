@@ -69,8 +69,8 @@ namespace BuddyBot.Helpers
         public static City ExtractCityFromMessagePrompt(string messagePrompt)
         {
             var cityName = messagePrompt.Substring(0, messagePrompt.IndexOf(','));
-            var cityCountry = messagePrompt.Substring(messagePrompt.IndexOf(',') + 2);
-            var cityId = messagePrompt.Substring(messagePrompt.IndexOf('#') +1, messagePrompt.Length);
+            var cityCountry = messagePrompt.Substring(messagePrompt.IndexOf(',') + 2, 2);
+            var cityId = messagePrompt.Substring(messagePrompt.IndexOf('#') +1, 7);
 
             City city = new City()
             {
