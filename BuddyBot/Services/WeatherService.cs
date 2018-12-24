@@ -61,21 +61,19 @@ namespace BuddyBot.Services
                         weatherTemperturesJsonResult.ToObject<WeatherTemperatureDto>();
 
                     // TODO - Convert temperture using entity e.g. "Weather in Auckland in fahrenheit"
-
                     double convertedTemperture =
                         WeatherHelpers.ConvertTemperture(weatherTemperatureResult.temp, Temperature.Celsius);
 
                     var mappedConitionReponse = await _weatherConditionResponseReader
                         .GetResponseByCondition(weatherDescriptionResult.description);
 
-                    // TODO - map temp to icon
+                    // TODO - map temp to icon 🔥🌿😤
                     return $"{convertedTemperture}{Temperature.Celsius.DisplayName()} " +
                            $"with {mappedConitionReponse.MappedConditionResponse}";
                 }
             }
 
-            // TODO - do something else with this
-            return "I'm having problems accessing weather reports. Please try again later";
+            return null;
         }
 
         public async Task<IList<City>> SearchForCities(string cityName, string countryCode = null,

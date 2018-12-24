@@ -54,7 +54,17 @@ namespace BuddyBot.Dialogs
                 else
                 {
                     var weatherForecast = await _weatherService.GetWeather(preferredCity);
-                    context.Done($"Currently the weather in {preferredCity.Name} is {weatherForecast}");
+
+                    if(weatherForecast != string.Empty)
+                    {
+                        context.Done($"Currently the weather in {preferredCity.Name} is {weatherForecast}");
+
+                    }
+                    else
+                    {
+                        context.Done("🤧⛅ - I'm having trouble accessing weather reports. We'll have to try again later!");
+                    }
+
                 }
             }
             else
@@ -75,8 +85,18 @@ namespace BuddyBot.Dialogs
             }
             else if (citySearchResults != null && citySearchResults.Count == 1)
             {
+
                 var weatherForecast = await _weatherService.GetWeather(citySearchResults.FirstOrDefault());
-                context.Done($"The weather in {cityName} right now is {weatherForecast}");
+
+                if(weatherForecast != string.Empty)
+                {
+                    context.Done($"The weather in {cityName} right now is {weatherForecast}");
+                }
+                else
+                {
+                    context.Done("🤧⛅ - I'm having trouble accessing weather reports. We'll have to try again later!");
+                }
+
             }
             else if (citySearchResults != null && citySearchResults.Count >= 2)
             {
@@ -118,7 +138,16 @@ namespace BuddyBot.Dialogs
 
             var weatherForecast = await _weatherService.GetWeather(city);
 
-            context.Done($"Currently the weather in {message.Text} is {weatherForecast}");
+            if(weatherForecast != string.Empty)
+            {
+                context.Done($"Currently the weather in {message.Text} is {weatherForecast}");
+            }
+            else
+            {
+                context.Done("🤧⛅ - I'm having trouble accessing weather reports. We'll have to try again later!");
+            }
+
+            
         }
 
         private List<CardAction> CreateCardActionList(IList<City> cityResultList)
