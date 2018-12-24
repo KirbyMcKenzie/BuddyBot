@@ -140,9 +140,7 @@ namespace BuddyBot.Dialogs
                 cardOptionsList.Add(new CardAction(ActionTypes.ImBack,
                     title: $"{city.Name}, {city.Country}",
                     value: $"{city.Name}, {city.Country}, (#{city.Id})"));
-
             }
-
             return cardOptionsList;
         }
     }

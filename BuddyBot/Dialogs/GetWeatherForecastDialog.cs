@@ -12,8 +12,6 @@ using BuddyBot.Models;
 using BuddyBot.Services.Contracts;
 using Microsoft.Bot.Connector;
 using BuddyBot.Models.Enums;
-using Microsoft.Azure.Documents.SystemFunctions;
-using Microsoft.Bot.Builder.Dialogs.Internals;
 
 namespace BuddyBot.Dialogs
 {
@@ -61,9 +59,8 @@ namespace BuddyBot.Dialogs
             }
             else
             {
-                IList<City> citySearchResults = MessageHelpers.SearchForCities(cityName, countryCode, countryName);
+                IList<City> citySearchResults = await _weatherService.SearchForCities(cityName, countryCode, countryName);
                 await ResumeAfterCitySearch(context, cityName, citySearchResults);
-                
             }
         }
 
@@ -108,7 +105,7 @@ namespace BuddyBot.Dialogs
             var cityName = await result;
             cityName = Regex.Replace(cityName, @"[\W_]", string.Empty);
 
-            IList<City> citySearchResults = MessageHelpers.SearchForCities(cityName);
+            IList<City> citySearchResults = await _weatherService.SearchForCities(cityName, null, null);
 
             await  ResumeAfterCitySearch(context, cityName, citySearchResults);
         }
