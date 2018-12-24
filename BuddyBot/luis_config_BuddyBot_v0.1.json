@@ -1,0 +1,2768 @@
+{
+  "luis_schema_version": "3.1.0",
+  "versionId": "0.1",
+  "name": "BuddyBot",
+  "desc": "An intelligent bot to assist with your everyday needs.",
+  "culture": "en-us",
+  "intents": [
+    {
+      "name": "Chit-Chat"
+    },
+    {
+      "name": "GetStarted"
+    },
+    {
+      "name": "Greeting"
+    },
+    {
+      "name": "Help"
+    },
+    {
+      "name": "Miscellaneous.ConfirmRobot"
+    },
+    {
+      "name": "None"
+    },
+    {
+      "name": "Random.HeadsTails"
+    },
+    {
+      "name": "Random.Joke"
+    },
+    {
+      "name": "Random.Number"
+    },
+    {
+      "name": "Reminder.Change",
+      "inherits": {
+        "domain_name": "Reminder",
+        "model_name": "Change"
+      }
+    },
+    {
+      "name": "Reminder.Create",
+      "inherits": {
+        "domain_name": "Reminder",
+        "model_name": "Create"
+      }
+    },
+    {
+      "name": "Reminder.Delete",
+      "inherits": {
+        "domain_name": "Reminder",
+        "model_name": "Delete"
+      }
+    },
+    {
+      "name": "Reminder.Find",
+      "inherits": {
+        "domain_name": "Reminder",
+        "model_name": "Find"
+      }
+    },
+    {
+      "name": "User.DeleteUserData"
+    },
+    {
+      "name": "User.UpdatePreferredBotPersona"
+    },
+    {
+      "name": "User.UpdatePreferredName"
+    },
+    {
+      "name": "User.UpdatePreferredWeatherLocation"
+    },
+    {
+      "name": "Weather.GetForecast",
+      "inherits": {
+        "domain_name": "Weather",
+        "model_name": "GetForecast"
+      }
+    }
+  ],
+  "entities": [
+    {
+      "name": "Bot.Command",
+      "roles": []
+    },
+    {
+      "name": "Bot.Name",
+      "roles": []
+    },
+    {
+      "name": "City",
+      "roles": []
+    },
+    {
+      "name": "City.CountryCode",
+      "roles": []
+    },
+    {
+      "name": "City.CountryName",
+      "roles": []
+    },
+    {
+      "name": "City.Name",
+      "inherits": {
+        "domain_name": "Weather",
+        "model_name": "Location"
+      },
+      "roles": []
+    },
+    {
+      "name": "City.State",
+      "roles": []
+    },
+    {
+      "name": "NotablePerson",
+      "roles": [
+        "FirstName",
+        "LastName"
+      ]
+    },
+    {
+      "name": "Number",
+      "roles": []
+    },
+    {
+      "name": "Reminder.Text",
+      "inherits": {
+        "domain_name": "Reminder",
+        "model_name": "Text"
+      },
+      "roles": []
+    },
+    {
+      "name": "Temperature",
+      "roles": []
+    },
+    {
+      "name": "Time.Hour",
+      "roles": []
+    },
+    {
+      "name": "User.PreferredBotPersona",
+      "roles": []
+    },
+    {
+      "name": "User.PreferredName",
+      "roles": []
+    },
+    {
+      "name": "Weather.Date",
+      "roles": []
+    }
+  ],
+  "composites": [],
+  "closedLists": [],
+  "patternAnyEntities": [],
+  "regex_entities": [],
+  "prebuiltEntities": [],
+  "model_features": [],
+  "regex_features": [],
+  "patterns": [
+    {
+      "pattern": "update my name to be {User.PreferredName}",
+      "intent": "User.UpdatePreferredName"
+    },
+    {
+      "pattern": "can you please call me {User.PreferredName} from now on",
+      "intent": "User.UpdatePreferredName"
+    },
+    {
+      "pattern": "please update your personality to be {User.PreferredBotPersona}",
+      "intent": "User.UpdatePreferredBotPersona"
+    },
+    {
+      "pattern": "call me {User.PreferredName} from now on",
+      "intent": "User.UpdatePreferredName"
+    },
+    {
+      "pattern": "update your personality to {User.PreferredBotPersona}",
+      "intent": "User.UpdatePreferredBotPersona"
+    },
+    {
+      "pattern": "start calling me {User.PreferredName}",
+      "intent": "User.UpdatePreferredName"
+    },
+    {
+      "pattern": "can you be more {User.PreferredBotPersona}",
+      "intent": "User.UpdatePreferredBotPersona"
+    },
+    {
+      "pattern": "change your persona to {User.PreferredBotPersona}",
+      "intent": "User.UpdatePreferredBotPersona"
+    },
+    {
+      "pattern": "please refer to me as {User.PreferredName}",
+      "intent": "User.UpdatePreferredName"
+    }
+  ],
+  "utterances": [
+    {
+      "text": "\" i need to know the temperature at bangor , sme \"",
+      "intent": "Weather.GetForecast",
+      "entities": [
+        {
+          "entity": "City.Name",
+          "startPos": 36,
+          "endPos": 47
+        }
+      ]
+    },
+    {
+      "text": "11 : 15 am tomorrow reminder",
+      "intent": "Reminder.Find",
+      "entities": []
+    },
+    {
+      "text": "4 : 30 tue doc reminder",
+      "intent": "Reminder.Create",
+      "entities": [
+        {
+          "entity": "Reminder.Text",
+          "startPos": 11,
+          "endPos": 13
+        }
+      ]
+    },
+    {
+      "text": "a reminder to recall calling carlos",
+      "intent": "Reminder.Create",
+      "entities": [
+        {
+          "entity": "Reminder.Text",
+          "startPos": 14,
+          "endPos": 34
+        }
+      ]
+    },
+    {
+      "text": "add reminder for marry ' s party friday evening at 8",
+      "intent": "Reminder.Create",
+      "entities": []
+    },
+    {
+      "text": "another joke",
+      "intent": "Random.Joke",
+      "entities": []
+    },
+    {
+      "text": "anyone there?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "are you a bot",
+      "intent": "Miscellaneous.ConfirmRobot",
+      "entities": []
+    },
+    {
+      "text": "are you a bot?",
+      "intent": "Miscellaneous.ConfirmRobot",
+      "entities": []
+    },
+    {
+      "text": "are you a human?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "are you a person?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "are you a robot",
+      "intent": "Miscellaneous.ConfirmRobot",
+      "entities": []
+    },
+    {
+      "text": "are you a robot?",
+      "intent": "Miscellaneous.ConfirmRobot",
+      "entities": []
+    },
+    {
+      "text": "are you bot or real",
+      "intent": "Miscellaneous.ConfirmRobot",
+      "entities": []
+    },
+    {
+      "text": "are you busy?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "are you dumb",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "are you gay?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "are you happy?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "are you human",
+      "intent": "Miscellaneous.ConfirmRobot",
+      "entities": []
+    },
+    {
+      "text": "are you hungry?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "are you lesbian?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "are you male or female?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "are you my assistant?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "are you old?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "are you prettier than me?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "are you real",
+      "intent": "Miscellaneous.ConfirmRobot",
+      "entities": []
+    },
+    {
+      "text": "are you real?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "are you smart?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "are you smarter than me?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "are you spying on me?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "are you straight?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "are you there?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "ask me anything",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "awesome",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "awesome work",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "be my friend?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "buddy",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "button1",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "bye",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "byeeeeee",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "call me ed",
+      "intent": "User.UpdatePreferredName",
+      "entities": [
+        {
+          "entity": "User.PreferredName",
+          "startPos": 8,
+          "endPos": 9
+        }
+      ]
+    },
+    {
+      "text": "call me kevin",
+      "intent": "User.UpdatePreferredName",
+      "entities": [
+        {
+          "entity": "User.PreferredName",
+          "startPos": 8,
+          "endPos": 12
+        }
+      ]
+    },
+    {
+      "text": "call me kirby from now on",
+      "intent": "User.UpdatePreferredName",
+      "entities": [
+        {
+          "entity": "User.PreferredName",
+          "startPos": 8,
+          "endPos": 12
+        }
+      ]
+    },
+    {
+      "text": "call me something else",
+      "intent": "User.UpdatePreferredName",
+      "entities": []
+    },
+    {
+      "text": "can i trust you?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "can we be friends",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "can we chat?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "can we update your persona",
+      "intent": "User.UpdatePreferredBotPersona",
+      "entities": []
+    },
+    {
+      "text": "can you call me something else",
+      "intent": "User.UpdatePreferredName",
+      "entities": []
+    },
+    {
+      "text": "can you change my reminder",
+      "intent": "Reminder.Change",
+      "entities": []
+    },
+    {
+      "text": "can you change my saved city to dunedin",
+      "intent": "User.UpdatePreferredWeatherLocation",
+      "entities": [
+        {
+          "entity": "City.Name",
+          "startPos": 32,
+          "endPos": 38
+        }
+      ]
+    },
+    {
+      "text": "can you find the reminder that jack turns twenty",
+      "intent": "Reminder.Find",
+      "entities": []
+    },
+    {
+      "text": "can you fly?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "can you not call me that",
+      "intent": "User.UpdatePreferredName",
+      "entities": []
+    },
+    {
+      "text": "can you now call me mike",
+      "intent": "User.UpdatePreferredName",
+      "entities": [
+        {
+          "entity": "User.PreferredName",
+          "startPos": 20,
+          "endPos": 23
+        }
+      ]
+    },
+    {
+      "text": "can you please call me tom",
+      "intent": "User.UpdatePreferredName",
+      "entities": [
+        {
+          "entity": "User.PreferredName",
+          "startPos": 23,
+          "endPos": 25
+        }
+      ]
+    },
+    {
+      "text": "can you please change my preferred name",
+      "intent": "User.UpdatePreferredName",
+      "entities": []
+    },
+    {
+      "text": "can you sing",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "cancel reminder for iced tea",
+      "intent": "Reminder.Delete",
+      "entities": [
+        {
+          "entity": "Reminder.Text",
+          "startPos": 20,
+          "endPos": 27
+        }
+      ]
+    },
+    {
+      "text": "chane my name",
+      "intent": "User.UpdatePreferredName",
+      "entities": []
+    },
+    {
+      "text": "change my name to james",
+      "intent": "User.UpdatePreferredName",
+      "entities": [
+        {
+          "entity": "User.PreferredName",
+          "startPos": 18,
+          "endPos": 22
+        }
+      ]
+    },
+    {
+      "text": "change my preferred city",
+      "intent": "User.UpdatePreferredWeatherLocation",
+      "entities": []
+    },
+    {
+      "text": "change my saved weather location",
+      "intent": "User.UpdatePreferredWeatherLocation",
+      "entities": []
+    },
+    {
+      "text": "change my weather settings",
+      "intent": "User.UpdatePreferredWeatherLocation",
+      "entities": []
+    },
+    {
+      "text": "change persona",
+      "intent": "User.UpdatePreferredBotPersona",
+      "entities": []
+    },
+    {
+      "text": "change personality",
+      "intent": "User.UpdatePreferredBotPersona",
+      "entities": []
+    },
+    {
+      "text": "change reminder",
+      "intent": "Reminder.Change",
+      "entities": []
+    },
+    {
+      "text": "change reminder time",
+      "intent": "Reminder.Change",
+      "entities": []
+    },
+    {
+      "text": "change your persona to friendly",
+      "intent": "User.UpdatePreferredBotPersona",
+      "entities": [
+        {
+          "entity": "User.PreferredBotPersona",
+          "startPos": 23,
+          "endPos": 30
+        }
+      ]
+    },
+    {
+      "text": "change your personality",
+      "intent": "User.UpdatePreferredBotPersona",
+      "entities": []
+    },
+    {
+      "text": "change your personality to professional",
+      "intent": "User.UpdatePreferredBotPersona",
+      "entities": [
+        {
+          "entity": "User.PreferredBotPersona",
+          "startPos": 27,
+          "endPos": 38
+        }
+      ]
+    },
+    {
+      "text": "cheers",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "cheers mate",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "chur g",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "cn you hear me?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "coin",
+      "intent": "Random.HeadsTails",
+      "entities": []
+    },
+    {
+      "text": "coin flip",
+      "intent": "Random.HeadsTails",
+      "entities": []
+    },
+    {
+      "text": "cook me something",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "cool",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "cool!",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "create reminder",
+      "intent": "Reminder.Create",
+      "entities": []
+    },
+    {
+      "text": "damn",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "damn that sucks",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "delete data --quick",
+      "intent": "User.DeleteUserData",
+      "entities": [
+        {
+          "entity": "Bot.Command",
+          "startPos": 12,
+          "endPos": 18
+        }
+      ]
+    },
+    {
+      "text": "delete datat --quick",
+      "intent": "User.DeleteUserData",
+      "entities": [
+        {
+          "entity": "Bot.Command",
+          "startPos": 13,
+          "endPos": 19
+        }
+      ]
+    },
+    {
+      "text": "delete doctor ' s appointment on tuesday",
+      "intent": "Reminder.Delete",
+      "entities": [
+        {
+          "entity": "Reminder.Text",
+          "startPos": 7,
+          "endPos": 28
+        }
+      ]
+    },
+    {
+      "text": "delete meeting reminders",
+      "intent": "Reminder.Delete",
+      "entities": [
+        {
+          "entity": "Reminder.Text",
+          "startPos": 7,
+          "endPos": 13
+        }
+      ]
+    },
+    {
+      "text": "delete my data",
+      "intent": "User.DeleteUserData",
+      "entities": []
+    },
+    {
+      "text": "delete my data --quick",
+      "intent": "User.DeleteUserData",
+      "entities": [
+        {
+          "entity": "Bot.Command",
+          "startPos": 15,
+          "endPos": 21
+        }
+      ]
+    },
+    {
+      "text": "delete my user data",
+      "intent": "User.DeleteUserData",
+      "entities": []
+    },
+    {
+      "text": "delete reminder for class",
+      "intent": "Reminder.Delete",
+      "entities": []
+    },
+    {
+      "text": "delete reminder twenty eight",
+      "intent": "Reminder.Delete",
+      "entities": [
+        {
+          "entity": "Reminder.Text",
+          "startPos": 16,
+          "endPos": 27
+        }
+      ]
+    },
+    {
+      "text": "delete surprise party reminder",
+      "intent": "Reminder.Delete",
+      "entities": [
+        {
+          "entity": "Reminder.Text",
+          "startPos": 7,
+          "endPos": 20
+        }
+      ]
+    },
+    {
+      "text": "delete user data --quick",
+      "intent": "User.DeleteUserData",
+      "entities": [
+        {
+          "entity": "Bot.Command",
+          "startPos": 17,
+          "endPos": 23
+        }
+      ]
+    },
+    {
+      "text": "delete your memory",
+      "intent": "User.DeleteUserData",
+      "entities": []
+    },
+    {
+      "text": "deletet datat --quick",
+      "intent": "User.DeleteUserData",
+      "entities": [
+        {
+          "entity": "Bot.Command",
+          "startPos": 14,
+          "endPos": 20
+        }
+      ]
+    },
+    {
+      "text": "display dog groomer reminder",
+      "intent": "Reminder.Find",
+      "entities": [
+        {
+          "entity": "Reminder.Text",
+          "startPos": 8,
+          "endPos": 18
+        }
+      ]
+    },
+    {
+      "text": "do you hate me?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "do you have a family?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "do you know me?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "do you know other ai?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "do you know other chatbots?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "do you know siri",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "do you like donald trump",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "do you like google?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "do you like me?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "do you like siri?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "do you like the donald",
+      "intent": "Chit-Chat",
+      "entities": [
+        {
+          "entity": "City.Name",
+          "startPos": 16,
+          "endPos": 21
+        }
+      ]
+    },
+    {
+      "text": "do you love me?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "do you play games?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "do you want to rule the world?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "don ' t remind me anymore to give johnny his antibiotic",
+      "intent": "Reminder.Delete",
+      "entities": [
+        {
+          "entity": "Reminder.Text",
+          "startPos": 29,
+          "endPos": 54
+        }
+      ]
+    },
+    {
+      "text": "don't you ever sleep?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "don't you get hungry?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "excuse me",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "extend reminder",
+      "intent": "Reminder.Change",
+      "entities": []
+    },
+    {
+      "text": "find today ' s reminders",
+      "intent": "Reminder.Find",
+      "entities": []
+    },
+    {
+      "text": "flip a coin",
+      "intent": "Random.HeadsTails",
+      "entities": []
+    },
+    {
+      "text": "flip a coing?",
+      "intent": "Random.HeadsTails",
+      "entities": []
+    },
+    {
+      "text": "flip me a coin",
+      "intent": "Random.HeadsTails",
+      "entities": []
+    },
+    {
+      "text": "forecast in celcius",
+      "intent": "Weather.GetForecast",
+      "entities": []
+    },
+    {
+      "text": "forget about me",
+      "intent": "User.DeleteUserData",
+      "entities": []
+    },
+    {
+      "text": "forget everything",
+      "intent": "User.DeleteUserData",
+      "entities": []
+    },
+    {
+      "text": "g'day",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "g'dy m8",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "generate a number between 1 and 5",
+      "intent": "Random.Number",
+      "entities": [
+        {
+          "entity": "Number",
+          "startPos": 26,
+          "endPos": 26
+        },
+        {
+          "entity": "Number",
+          "startPos": 32,
+          "endPos": 32
+        }
+      ]
+    },
+    {
+      "text": "generate a random number",
+      "intent": "Random.Number",
+      "entities": []
+    },
+    {
+      "text": "generate a random number between 1 and 5",
+      "intent": "Random.Number",
+      "entities": [
+        {
+          "entity": "Number",
+          "startPos": 33,
+          "endPos": 33
+        },
+        {
+          "entity": "Number",
+          "startPos": 39,
+          "endPos": 39
+        }
+      ]
+    },
+    {
+      "text": "generate heads or tails",
+      "intent": "Random.HeadsTails",
+      "entities": []
+    },
+    {
+      "text": "generate numebr between 1 and 5",
+      "intent": "Random.Number",
+      "entities": [
+        {
+          "entity": "Number",
+          "startPos": 24,
+          "endPos": 24
+        },
+        {
+          "entity": "Number",
+          "startPos": 30,
+          "endPos": 30
+        }
+      ]
+    },
+    {
+      "text": "generate random number",
+      "intent": "Random.Number",
+      "entities": []
+    },
+    {
+      "text": "generate random number between 1 and 5",
+      "intent": "Random.Number",
+      "entities": [
+        {
+          "entity": "Number",
+          "startPos": 31,
+          "endPos": 31
+        },
+        {
+          "entity": "Number",
+          "startPos": 37,
+          "endPos": 37
+        }
+      ]
+    },
+    {
+      "text": "get start",
+      "intent": "GetStarted",
+      "entities": []
+    },
+    {
+      "text": "get started",
+      "intent": "GetStarted",
+      "entities": []
+    },
+    {
+      "text": "get the forcast for me",
+      "intent": "Weather.GetForecast",
+      "entities": []
+    },
+    {
+      "text": "get white shirts while in the mall later afternoon",
+      "intent": "Reminder.Create",
+      "entities": [
+        {
+          "entity": "Reminder.Text",
+          "startPos": 0,
+          "endPos": 15
+        }
+      ]
+    },
+    {
+      "text": "getstarted",
+      "intent": "GetStarted",
+      "entities": []
+    },
+    {
+      "text": "getting tired of you",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "give me a hug",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "give me a kiss",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "give me a random number between 1 and 5",
+      "intent": "Random.Number",
+      "entities": [
+        {
+          "entity": "Number",
+          "startPos": 32,
+          "endPos": 32
+        },
+        {
+          "entity": "Number",
+          "startPos": 38,
+          "endPos": 38
+        }
+      ]
+    },
+    {
+      "text": "go away",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "go to hell",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "good afternoon",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "good evening",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "good job",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "good job!@",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "good morning",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "good night",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "good on ya mate",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "good thank you",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "good thanks",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "goodnight",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "got any jokes",
+      "intent": "Random.Joke",
+      "entities": []
+    },
+    {
+      "text": "great!",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "ha ha",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "haha",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "hahaha",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "hahahaha",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "hahahahaha",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "happy halloween",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "have you any dreams?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "he bud",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "head tail",
+      "intent": "Random.HeadsTails",
+      "entities": []
+    },
+    {
+      "text": "heads",
+      "intent": "Random.HeadsTails",
+      "entities": []
+    },
+    {
+      "text": "heads & tails",
+      "intent": "Random.HeadsTails",
+      "entities": []
+    },
+    {
+      "text": "heads and tails",
+      "intent": "Random.HeadsTails",
+      "entities": []
+    },
+    {
+      "text": "heads or tails",
+      "intent": "Random.HeadsTails",
+      "entities": []
+    },
+    {
+      "text": "heads tails",
+      "intent": "Random.HeadsTails",
+      "entities": []
+    },
+    {
+      "text": "heard any jokes lately?",
+      "intent": "Random.Joke",
+      "entities": []
+    },
+    {
+      "text": "heeeeeeeeeeeeeeelp",
+      "intent": "Help",
+      "entities": []
+    },
+    {
+      "text": "hello buddybot",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "hello cortana",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "hello google assistant",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "hello siri",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "hello!",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "help",
+      "intent": "Help",
+      "entities": []
+    },
+    {
+      "text": "help menu",
+      "intent": "Help",
+      "entities": []
+    },
+    {
+      "text": "hey",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "hey buddy",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "heya",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "heya :)",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "hi",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "hi buddy",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "hi there",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "hi!",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "hiya",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "hiya buddy",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "how are you",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "how do i erase reminders ?",
+      "intent": "Reminder.Delete",
+      "entities": []
+    },
+    {
+      "text": "how do i look today",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "how do you feel about love?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "how do you feel about working late?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "how old are you?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "how was your day?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "howdy",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "hows it",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "hows it going",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "human or bot?",
+      "intent": "Miscellaneous.ConfirmRobot",
+      "entities": []
+    },
+    {
+      "text": "i am angry",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "i am annoyed",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "i am at liquor store - beer",
+      "intent": "None",
+      "entities": [
+        {
+          "entity": "Reminder.Text",
+          "startPos": 23,
+          "endPos": 26
+        }
+      ]
+    },
+    {
+      "text": "i am bored",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "i am going on a run",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "i am happy",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "i am hungry",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "i am in love",
+      "intent": "Chit-Chat",
+      "entities": [
+        {
+          "entity": "City.Name",
+          "startPos": 8,
+          "endPos": 11
+        }
+      ]
+    },
+    {
+      "text": "i am just kidding",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "i am lonely",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "i am sleepy",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "i am so lonely",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "i am sorry",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "i am tired",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "i am tired of you",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "i don't get it",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "i don't know what to do",
+      "intent": "Help",
+      "entities": []
+    },
+    {
+      "text": "i don't know where i am",
+      "intent": "Help",
+      "entities": []
+    },
+    {
+      "text": "i feel sad",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "i hate you",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "i know",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "i like you",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "i love music",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "i love my family",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "i love you",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "i miss you",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "i said a joke",
+      "intent": "Random.Joke",
+      "entities": []
+    },
+    {
+      "text": "i want to change my name",
+      "intent": "User.UpdatePreferredName",
+      "entities": []
+    },
+    {
+      "text": "i want to go shopping",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "i want to marry you",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "i will be back",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "i'm bad",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "im breaking up with you",
+      "intent": "User.DeleteUserData",
+      "entities": []
+    },
+    {
+      "text": "i'm leaving you",
+      "intent": "User.DeleteUserData",
+      "entities": []
+    },
+    {
+      "text": "i'm lost",
+      "intent": "Help",
+      "entities": []
+    },
+    {
+      "text": "i'm stuck",
+      "intent": "Help",
+      "entities": []
+    },
+    {
+      "text": "i'm well thanks",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "joke",
+      "intent": "Random.Joke",
+      "entities": []
+    },
+    {
+      "text": "joke me",
+      "intent": "Random.Joke",
+      "entities": []
+    },
+    {
+      "text": "just kidding",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "kia ora",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "know any good jokes?",
+      "intent": "Random.Joke",
+      "entities": []
+    },
+    {
+      "text": "lmao",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "locate meeting with maria this week for me",
+      "intent": "Reminder.Find",
+      "entities": []
+    },
+    {
+      "text": "lol",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "mean cheers",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "modify my reminder",
+      "intent": "Reminder.Change",
+      "entities": []
+    },
+    {
+      "text": "nice",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "nice joke",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "nice to meet you",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "no thanks",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "not bad, not bad",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "number between 1 5",
+      "intent": "Random.Number",
+      "entities": [
+        {
+          "entity": "Number",
+          "startPos": 15,
+          "endPos": 15
+        },
+        {
+          "entity": "Number",
+          "startPos": 17,
+          "endPos": 17
+        }
+      ]
+    },
+    {
+      "text": "open other reminders",
+      "intent": "Reminder.Find",
+      "entities": []
+    },
+    {
+      "text": "open work reminder",
+      "intent": "Reminder.Find",
+      "entities": [
+        {
+          "entity": "Reminder.Text",
+          "startPos": 5,
+          "endPos": 8
+        }
+      ]
+    },
+    {
+      "text": "please call me jason\\",
+      "intent": "User.UpdatePreferredName",
+      "entities": [
+        {
+          "entity": "User.PreferredName",
+          "startPos": 15,
+          "endPos": 19
+        }
+      ]
+    },
+    {
+      "text": "please delete all my data",
+      "intent": "User.DeleteUserData",
+      "entities": []
+    },
+    {
+      "text": "please refer to me as god",
+      "intent": "User.UpdatePreferredName",
+      "entities": [
+        {
+          "entity": "User.PreferredName",
+          "startPos": 22,
+          "endPos": 24
+        }
+      ]
+    },
+    {
+      "text": "please snooze suntan reminder",
+      "intent": "None",
+      "entities": [
+        {
+          "entity": "Reminder.Text",
+          "startPos": 14,
+          "endPos": 19
+        }
+      ]
+    },
+    {
+      "text": "please start calling me john",
+      "intent": "User.UpdatePreferredName",
+      "entities": [
+        {
+          "entity": "User.PreferredName",
+          "startPos": 24,
+          "endPos": 27
+        }
+      ]
+    },
+    {
+      "text": "please update your personality",
+      "intent": "User.UpdatePreferredBotPersona",
+      "entities": []
+    },
+    {
+      "text": "postpone my eight thirty reminder to nine thirty",
+      "intent": "Reminder.Change",
+      "entities": []
+    },
+    {
+      "text": "provide me by toronto weather please",
+      "intent": "Weather.GetForecast",
+      "entities": [
+        {
+          "entity": "City.Name",
+          "startPos": 14,
+          "endPos": 20
+        }
+      ]
+    },
+    {
+      "text": "put to sleep reminder to cut grass on thursday",
+      "intent": "Reminder.Change",
+      "entities": []
+    },
+    {
+      "text": "r u a robot",
+      "intent": "Miscellaneous.ConfirmRobot",
+      "entities": []
+    },
+    {
+      "text": "r u real",
+      "intent": "Miscellaneous.ConfirmRobot",
+      "entities": []
+    },
+    {
+      "text": "ran num",
+      "intent": "Random.Number",
+      "entities": []
+    },
+    {
+      "text": "ran num 1 10",
+      "intent": "Random.Number",
+      "entities": [
+        {
+          "entity": "Number",
+          "startPos": 8,
+          "endPos": 8
+        },
+        {
+          "entity": "Number",
+          "startPos": 10,
+          "endPos": 11
+        }
+      ]
+    },
+    {
+      "text": "ran num between 1 and 5",
+      "intent": "Random.Number",
+      "entities": [
+        {
+          "entity": "Number",
+          "startPos": 16,
+          "endPos": 16
+        },
+        {
+          "entity": "Number",
+          "startPos": 22,
+          "endPos": 22
+        }
+      ]
+    },
+    {
+      "text": "random coin flip",
+      "intent": "Random.HeadsTails",
+      "entities": []
+    },
+    {
+      "text": "random num",
+      "intent": "Random.Number",
+      "entities": []
+    },
+    {
+      "text": "random num 10 and 100",
+      "intent": "Random.Number",
+      "entities": [
+        {
+          "entity": "Number",
+          "startPos": 11,
+          "endPos": 12
+        },
+        {
+          "entity": "Number",
+          "startPos": 18,
+          "endPos": 20
+        }
+      ]
+    },
+    {
+      "text": "random num between 1 and 20",
+      "intent": "Random.Number",
+      "entities": [
+        {
+          "entity": "Number",
+          "startPos": 19,
+          "endPos": 19
+        },
+        {
+          "entity": "Number",
+          "startPos": 25,
+          "endPos": 26
+        }
+      ]
+    },
+    {
+      "text": "random number",
+      "intent": "Random.Number",
+      "entities": []
+    },
+    {
+      "text": "random number between 1 and 15",
+      "intent": "Random.Number",
+      "entities": [
+        {
+          "entity": "Number",
+          "startPos": 22,
+          "endPos": 22
+        },
+        {
+          "entity": "Number",
+          "startPos": 28,
+          "endPos": 29
+        }
+      ]
+    },
+    {
+      "text": "random number between 10 100",
+      "intent": "Random.Number",
+      "entities": [
+        {
+          "entity": "Number",
+          "startPos": 22,
+          "endPos": 23
+        },
+        {
+          "entity": "Number",
+          "startPos": 25,
+          "endPos": 27
+        }
+      ]
+    },
+    {
+      "text": "random number between 50 and 100",
+      "intent": "Random.Number",
+      "entities": [
+        {
+          "entity": "Number",
+          "startPos": 22,
+          "endPos": 23
+        },
+        {
+          "entity": "Number",
+          "startPos": 29,
+          "endPos": 31
+        }
+      ]
+    },
+    {
+      "text": "random number please",
+      "intent": "Random.Number",
+      "entities": []
+    },
+    {
+      "text": "ranom number",
+      "intent": "Random.Number",
+      "entities": []
+    },
+    {
+      "text": "refer to me as dan from now on",
+      "intent": "User.UpdatePreferredName",
+      "entities": [
+        {
+          "entity": "User.PreferredName",
+          "startPos": 15,
+          "endPos": 17
+        }
+      ]
+    },
+    {
+      "text": "remember fragrances",
+      "intent": "Reminder.Create",
+      "entities": [
+        {
+          "entity": "Reminder.Text",
+          "startPos": 9,
+          "endPos": 18
+        }
+      ]
+    },
+    {
+      "text": "remember poltergeist",
+      "intent": "Reminder.Create",
+      "entities": [
+        {
+          "entity": "Reminder.Text",
+          "startPos": 9,
+          "endPos": 19
+        }
+      ]
+    },
+    {
+      "text": "remember to kill",
+      "intent": "Reminder.Create",
+      "entities": [
+        {
+          "entity": "Reminder.Text",
+          "startPos": 12,
+          "endPos": 15
+        }
+      ]
+    },
+    {
+      "text": "remember to run errands",
+      "intent": "Reminder.Create",
+      "entities": [
+        {
+          "entity": "Reminder.Text",
+          "startPos": 12,
+          "endPos": 22
+        }
+      ]
+    },
+    {
+      "text": "remember tomorrow",
+      "intent": "Reminder.Create",
+      "entities": []
+    },
+    {
+      "text": "remind me about tuesday ' s bake sale at 9 instead of 11",
+      "intent": "Reminder.Change",
+      "entities": []
+    },
+    {
+      "text": "remind me to listen to imagine dragons",
+      "intent": "Reminder.Create",
+      "entities": []
+    },
+    {
+      "text": "reminder to call henry",
+      "intent": "Reminder.Create",
+      "entities": [
+        {
+          "entity": "Reminder.Text",
+          "startPos": 12,
+          "endPos": 21
+        }
+      ]
+    },
+    {
+      "text": "remove data",
+      "intent": "User.DeleteUserData",
+      "entities": []
+    },
+    {
+      "text": "remove my data",
+      "intent": "User.DeleteUserData",
+      "entities": []
+    },
+    {
+      "text": "remove my reminder for the grocery shopping this friday",
+      "intent": "Reminder.Delete",
+      "entities": []
+    },
+    {
+      "text": "reset reminder",
+      "intent": "Reminder.Change",
+      "entities": []
+    },
+    {
+      "text": "rofl",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "say something funny",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "search for the massage reminder",
+      "intent": "Reminder.Find",
+      "entities": []
+    },
+    {
+      "text": "set a reminder for may twenty fifth",
+      "intent": "Reminder.Create",
+      "entities": []
+    },
+    {
+      "text": "show me the forecast at alabama",
+      "intent": "Weather.GetForecast",
+      "entities": [
+        {
+          "entity": "City.Name",
+          "startPos": 24,
+          "endPos": 30
+        }
+      ]
+    },
+    {
+      "text": "show me the menu",
+      "intent": "Help",
+      "entities": []
+    },
+    {
+      "text": "show me the reminders",
+      "intent": "Reminder.Find",
+      "entities": []
+    },
+    {
+      "text": "show me what you can do",
+      "intent": "Help",
+      "entities": []
+    },
+    {
+      "text": "shut up",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "sing a songsurprise me",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "snooze appointment",
+      "intent": "None",
+      "entities": [
+        {
+          "entity": "Reminder.Text",
+          "startPos": 7,
+          "endPos": 17
+        }
+      ]
+    },
+    {
+      "text": "so much sass",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "soliciting today ' s weather",
+      "intent": "Weather.GetForecast",
+      "entities": []
+    },
+    {
+      "text": "start",
+      "intent": "GetStarted",
+      "entities": []
+    },
+    {
+      "text": "start conversation",
+      "intent": "GetStarted",
+      "entities": []
+    },
+    {
+      "text": "stuck",
+      "intent": "Help",
+      "entities": []
+    },
+    {
+      "text": "sup",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "support",
+      "intent": "Help",
+      "entities": []
+    },
+    {
+      "text": "support menu",
+      "intent": "Help",
+      "entities": []
+    },
+    {
+      "text": "sweet",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "talk to me?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "talk to you later",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "tbd",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "tell a joke",
+      "intent": "Random.Joke",
+      "entities": []
+    },
+    {
+      "text": "tell me a funny joke!",
+      "intent": "Random.Joke",
+      "entities": []
+    },
+    {
+      "text": "tell me a joke",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "tell me a silly joke",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "tell me joke",
+      "intent": "Random.Joke",
+      "entities": []
+    },
+    {
+      "text": "tell me something interesting",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "tell us a joke",
+      "intent": "Random.Joke",
+      "entities": []
+    },
+    {
+      "text": "testing",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "thank you",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "thanks",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "thanks buddy",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "that is smart",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "that was a boring answer",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "that was a sad joke",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "that was hilarious",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "that's interesting",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "throw a coin",
+      "intent": "Random.HeadsTails",
+      "entities": []
+    },
+    {
+      "text": "toss a coin",
+      "intent": "Random.HeadsTails",
+      "entities": []
+    },
+    {
+      "text": "toss a dime",
+      "intent": "Random.HeadsTails",
+      "entities": []
+    },
+    {
+      "text": "undo fold laundry reminder",
+      "intent": "Reminder.Delete",
+      "entities": [
+        {
+          "entity": "Reminder.Text",
+          "startPos": 5,
+          "endPos": 16
+        }
+      ]
+    },
+    {
+      "text": "update bot persona",
+      "intent": "User.UpdatePreferredBotPersona",
+      "entities": []
+    },
+    {
+      "text": "update my name to be michael",
+      "intent": "User.UpdatePreferredName",
+      "entities": [
+        {
+          "entity": "User.PreferredName",
+          "startPos": 21,
+          "endPos": 27
+        }
+      ]
+    },
+    {
+      "text": "update my preferred name",
+      "intent": "User.UpdatePreferredName",
+      "entities": []
+    },
+    {
+      "text": "update my preferred weather to dunedin",
+      "intent": "User.UpdatePreferredWeatherLocation",
+      "entities": [
+        {
+          "entity": "City.Name",
+          "startPos": 31,
+          "endPos": 37
+        }
+      ]
+    },
+    {
+      "text": "update my saved weather location to auckland",
+      "intent": "User.UpdatePreferredWeatherLocation",
+      "entities": [
+        {
+          "entity": "City.Name",
+          "startPos": 36,
+          "endPos": 43
+        }
+      ]
+    },
+    {
+      "text": "update my weather location",
+      "intent": "User.UpdatePreferredWeatherLocation",
+      "entities": []
+    },
+    {
+      "text": "update name",
+      "intent": "User.UpdatePreferredName",
+      "entities": []
+    },
+    {
+      "text": "update persona to humorous",
+      "intent": "User.UpdatePreferredBotPersona",
+      "entities": [
+        {
+          "entity": "User.PreferredBotPersona",
+          "startPos": 18,
+          "endPos": 25
+        }
+      ]
+    },
+    {
+      "text": "update reminder for courthouse",
+      "intent": "Reminder.Change",
+      "entities": [
+        {
+          "entity": "Reminder.Text",
+          "startPos": 20,
+          "endPos": 29
+        }
+      ]
+    },
+    {
+      "text": "update the name you call me",
+      "intent": "User.UpdatePreferredName",
+      "entities": []
+    },
+    {
+      "text": "wassup",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "we can't do this anymore buddybot ...",
+      "intent": "User.DeleteUserData",
+      "entities": []
+    },
+    {
+      "text": "we need to go our separate ways..",
+      "intent": "User.DeleteUserData",
+      "entities": []
+    },
+    {
+      "text": "we need to part ways",
+      "intent": "User.DeleteUserData",
+      "entities": []
+    },
+    {
+      "text": "well done",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "what are you doing",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "what are you doing later?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "what are you doing tomorrow?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "what can you do",
+      "intent": "Help",
+      "entities": []
+    },
+    {
+      "text": "what did you do last week?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "what did you do yesterday?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "what do you think about *?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "what do you think about ai?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "what do you think about bots?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "what do you think about me?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "what do you think about technology?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "what function can you do",
+      "intent": "Help",
+      "entities": []
+    },
+    {
+      "text": "what functions do you have",
+      "intent": "Help",
+      "entities": []
+    },
+    {
+      "text": "what is life",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "what is the meaning of life?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "what is the weather in redmond ?",
+      "intent": "Weather.GetForecast",
+      "entities": [
+        {
+          "entity": "City.Name",
+          "startPos": 23,
+          "endPos": 29
+        }
+      ]
+    },
+    {
+      "text": "what is up?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "what is wrong with you!",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "what reminders do i have tomorrow ?",
+      "intent": "Reminder.Find",
+      "entities": []
+    },
+    {
+      "text": "what to do",
+      "intent": "Help",
+      "entities": []
+    },
+    {
+      "text": "what up",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "whats going on?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "whats happening",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "whats the answer to the universe?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "whats up",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "what's your age?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "what's your favourite color?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "what's your favourite colour?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "where are you based?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "where are you?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "where have you come from?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "who are you?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "who created you?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "who invented you?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "who is your boss?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "who is your father",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "who is your favourite bot?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "who is your mother",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "who made you?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "why do you exist?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "why not?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "why?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "will it be raining in ranchi",
+      "intent": "Weather.GetForecast",
+      "entities": [
+        {
+          "entity": "City.Name",
+          "startPos": 22,
+          "endPos": 27
+        }
+      ]
+    },
+    {
+      "text": "will it rain this weekend",
+      "intent": "Weather.GetForecast",
+      "entities": []
+    },
+    {
+      "text": "will it snow today",
+      "intent": "Weather.GetForecast",
+      "entities": []
+    },
+    {
+      "text": "will you marry me?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "wipe data --quick",
+      "intent": "User.DeleteUserData",
+      "entities": [
+        {
+          "entity": "Bot.Command",
+          "startPos": 10,
+          "endPos": 16
+        }
+      ]
+    },
+    {
+      "text": "yay",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "yeah cheers",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "yes",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "yo",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "yo buddy",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "yo buddybot",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "yooooo",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "you a bot?",
+      "intent": "Miscellaneous.ConfirmRobot",
+      "entities": []
+    },
+    {
+      "text": "you a guy?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "you are a genius!",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "you are awesome",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "you are beautiful",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "you are boring",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "you are fired",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "you are so annoying!",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "you are stupid",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "you are ugly",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "you are useless",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "you are welcome",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "you can't work for me anymore",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "you human?",
+      "intent": "Miscellaneous.ConfirmRobot",
+      "entities": []
+    },
+    {
+      "text": "you made no sensewhat do you mean by that ?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "you real?",
+      "intent": "Miscellaneous.ConfirmRobot",
+      "entities": []
+    },
+    {
+      "text": "you seem happy!",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "your are funny :)",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "you're a girl?",
+      "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "you're nice",
+      "intent": "Chit-Chat",
+      "entities": []
+    }
+  ],
+  "settings": []
+}
