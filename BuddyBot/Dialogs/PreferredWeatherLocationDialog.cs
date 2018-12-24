@@ -17,18 +17,20 @@ namespace BuddyBot.Dialogs
     public class PreferredWeatherLocationDialog : IDialog<string>
     {
         private readonly IBotDataService _botDataService;
+        private readonly IWeatherService _weatherService;
         private readonly IList<EntityRecommendation> _entities;
         private string _extractedCityFromMessage;
 
-        public PreferredWeatherLocationDialog(IBotDataService botDataService, IList<EntityRecommendation> entities)
+        public PreferredWeatherLocationDialog(IBotDataService botDataService, IWeatherService weatherService,
+            IList<EntityRecommendation> entities)
         {
             SetField.NotNull(out _botDataService, nameof(botDataService), botDataService);
+            SetField.NotNull(out _weatherService, nameof(weatherService), weatherService);
             _entities = entities;
         }
 
         public Task StartAsync(IDialogContext context)
         {
-           
             City savedPreferredCity= _botDataService.GetPreferredWeatherLocation(context);
 
             if (_entities != null)
@@ -68,12 +70,11 @@ namespace BuddyBot.Dialogs
             }
         }
 
-
         private async Task ResumeAfterPromptForPreferredLocation(IDialogContext context, IAwaitable<string> result)
         {
             string cityName = await result;
 
-            IList<City> citySearchResults = MessageHelpers.SearchForCities(cityName);
+            IList<City> citySearchResults = await _weatherService.SearchForCities(cityName, null, null);
 
             if (citySearchResults != null && citySearchResults.Count <= 0)
             {
@@ -104,16 +105,13 @@ namespace BuddyBot.Dialogs
 
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
-            IMessageActivity cityId = await result;
+            IMessageActivity cityChoice = await result;
 
+            City extractedCity = MessageHelpers.ExtractCityFromMessagePrompt(cityChoice.Text);
 
-            string extractedId = MessageHelpers.ExtractIdFromMessage(cityId.Text);
+            _botDataService.setPreferredWeatherLocation(context, extractedCity);
 
-            City preferredCity = MessageHelpers.GetCityById(extractedId);
-
-            _botDataService.setPreferredWeatherLocation(context, preferredCity);
-
-            context.Done(preferredCity.Name);
+            context.Done(extractedCity.Name);
         }
 
         private async Task ResumeAfterConfirmation(IDialogContext context, IAwaitable<bool> result)
@@ -140,10 +138,8 @@ namespace BuddyBot.Dialogs
             {
                 cardOptionsList.Add(new CardAction(ActionTypes.ImBack,
                     title: $"{city.Name}, {city.Country}",
-                    value: $"{city.Name}, {city.Country}, {city.Id}"));
-
+                    value: $"{city.Name}, {city.Country}, (#{city.Id})"));
             }
-
             return cardOptionsList;
         }
     }

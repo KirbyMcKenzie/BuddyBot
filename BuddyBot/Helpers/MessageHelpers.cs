@@ -66,15 +66,20 @@ namespace BuddyBot.Helpers
         }
 
 
+        // TODO Amend to process ID or not
         public static City ExtractCityFromMessagePrompt(string messagePrompt)
         {
+
+            // TODO - use string .split here
             var cityName = messagePrompt.Substring(0, messagePrompt.IndexOf(','));
-            var cityCountry = messagePrompt.Substring(messagePrompt.IndexOf(',') + 2);
+            var cityCountry = messagePrompt.Substring(messagePrompt.IndexOf(',') + 2, 2);
+            var cityId = messagePrompt.Substring(messagePrompt.IndexOf('#') +1, 7);
 
             City city = new City()
             {
                 Name = cityName,
-                Country = cityCountry
+                Country = cityCountry,
+                Id = cityId
             };
 
             return city;

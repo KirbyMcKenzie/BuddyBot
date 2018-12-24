@@ -164,8 +164,6 @@ namespace BuddyBot.Dialogs
         {
             _botDataService.SethasCompletedGetStarted(context, true);
 
-            await context.PostAsync($"Hey {_botDataService.GetPreferredName(context)}");
-
             IMessageActivity reply = context.MakeMessage();
 
             reply.Text = "Here's a few things I can do right now. I'm trying my best to learn new things 😀";

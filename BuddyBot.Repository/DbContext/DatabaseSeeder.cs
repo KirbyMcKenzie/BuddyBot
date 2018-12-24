@@ -1,5 +1,7 @@
 ﻿using BuddyBot.Repository.Models;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 
 namespace BuddyBot.Repository.DbContext
 {
@@ -79,6 +81,7 @@ namespace BuddyBot.Repository.DbContext
 
             return weatherConditionResponseList;
         }
+
 
         private WeatherConditionResponse BuildWeatherConditionResponse(int id, string condition, string group, string response)
         {
