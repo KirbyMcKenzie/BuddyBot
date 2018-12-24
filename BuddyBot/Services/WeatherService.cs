@@ -56,6 +56,7 @@ namespace BuddyBot.Services
                 {
                     WeatherDescriptionDto weatherDescriptionResult =
                         weatherDescriptionJsonResult.ToObject<WeatherDescriptionDto>();
+
                     WeatherTemperatureDto weatherTemperatureResult =
                         weatherTemperturesJsonResult.ToObject<WeatherTemperatureDto>();
 
@@ -80,8 +81,21 @@ namespace BuddyBot.Services
         public async Task<IList<City>> SearchForCities(string cityName, string countryCode = null,
             string countryName = null)
         {
-            
-            string requestUri = $"{_serachBaseUrl}{cityName}&type=like&appid={_searchApiKey}";
+            string requestUri = string.Empty;
+
+            if (countryCode == null && countryName != null)
+            {
+                countryCode = GlobalizationHelpers.GetCountryCode(countryName);
+            }
+
+            if(countryCode != null)
+            {
+                 requestUri = $"{_serachBaseUrl}{cityName},{countryCode}&type=like&appid={_searchApiKey}";
+            }
+            else
+            {
+                 requestUri = $"{_serachBaseUrl}{cityName}&type=like&appid={_searchApiKey}";
+            }
 
             HttpClient client = new HttpClient {BaseAddress = new Uri(requestUri)};
             client.DefaultRequestHeaders.Accept.Add(
@@ -92,12 +106,9 @@ namespace BuddyBot.Services
             if (response.IsSuccessStatusCode)
             {
                 string responseJsonString = await response.Content.ReadAsStringAsync();
-                JObject parsedJsonReponseString = JObject.Parse(responseJsonString);
-
                 WeatherSearchResultDto deserializedProduct = JsonConvert.DeserializeObject<WeatherSearchResultDto>(responseJsonString);
 
                 IDomainMapper<WeatherSearchResultDto,IList<City>> cityMapper = new CityMap();
-
                 IList<City> cityList = cityMapper.MapTo(deserializedProduct);
 
                 return cityList;

@@ -74,8 +74,7 @@ namespace BuddyBot.Dialogs
         {
             string cityName = await result;
 
-            //IList<City> citySearchResults = MessageHelpers.SearchForCities(cityName);
-            IList<City> citySearchResults = await _weatherService.SearchForCities(cityName, "NZ", "NZ");
+            IList<City> citySearchResults = await _weatherService.SearchForCities(cityName, null, null);
 
             if (citySearchResults != null && citySearchResults.Count <= 0)
             {
