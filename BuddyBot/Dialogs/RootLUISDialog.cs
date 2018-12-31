@@ -52,14 +52,6 @@ namespace BuddyBot.Dialogs
             context.Wait(MessageReceived);
         }
 
-
-        [LuisIntent("Chit-Chat")]
-        public async Task Chitchat(IDialogContext context, LuisResult result)
-        {
-            await context.Forward(new PersonalityChatDialog(_botDataService, _conversationService, context), 
-                Resume_AfterChitchat, new Activity { Text = result.Query }, CancellationToken.None);
-        }
-
         [LuisIntent("Smalltalk.Greetings.HowAreYou")]
         [LuisIntent("Smalltalk.Greetings.HowWasYourDay")]
         public async Task SmallTalk(IDialogContext context, LuisResult result)

@@ -33,10 +33,6 @@ namespace BuddyBot.Dialogs.Builders
             return CreateDialog(message, s => s.Resolve<RootLuisDialog>());
         }
 
-        public PersonalityChatDialog BuildBasicPersonalityChatBotDialog(IMessageActivity message, IList<EntityRecommendation> result)
-        {
-            return CreateDialog(message, s => s.Resolve<PersonalityChatDialog>(TypedParameter.From(result)));
-        }
 
         public NameDialog BuildNameDialog(IMessageActivity message)
         {

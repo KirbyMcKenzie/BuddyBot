@@ -305,7 +305,6 @@
     <Compile Include="Models\EnumExtensions.cs" />
     <Compile Include="Models\Enums\Temperature.cs" />
     <Compile Include="Models\Enums\TextCaseType.cs" />
-    <Compile Include="Dialogs\PersonalityChatDialog.cs" />
     <Compile Include="Services\BotDataExtensions.cs" />
     <Compile Include="Services\BotDataService.cs" />
     <Compile Include="Services\Contracts\IBotDataService.cs" />
