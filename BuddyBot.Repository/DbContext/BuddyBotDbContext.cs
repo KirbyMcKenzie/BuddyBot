@@ -21,9 +21,11 @@ namespace BuddyBot.Repository.DbContext
             modelBuilder.Entity<City>()
                 .ToTable("City").HasKey(_ => _.Id);
 
-
             modelBuilder.Entity<WeatherConditionResponse>()
                 .ToTable("WeatherConditionResponse").HasKey(_ => _.Id);
+
+            modelBuilder.Entity<SmallTalkResponse>()
+                .ToTable("SmallTalkResponse").HasKey(_ => _.Id);
 
             // Seed
             WeatherConditionResponse[] weatherConditionResponses = dbSeeder.BuildWeatherConditionResponses();
@@ -34,5 +36,6 @@ namespace BuddyBot.Repository.DbContext
 
         public DbSet<City> Cities { get; set; }
         public DbSet<WeatherConditionResponse> WeatherConditionResponses{ get; set; }
+        public DbSet<SmallTalkResponse> SmallTalkResponses { get; set; }
     }
 }
