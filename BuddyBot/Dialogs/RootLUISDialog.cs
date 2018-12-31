@@ -56,8 +56,17 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Chit-Chat")]
         public async Task Chitchat(IDialogContext context, LuisResult result)
         {
-            await context.Forward(new PersonalityChatDialog(_botDataService, _conversationService, context), Resume_AfterChitchat, new Activity { Text = result.Query },
-                CancellationToken.None);
+            await context.Forward(new PersonalityChatDialog(_botDataService, _conversationService, context), 
+                Resume_AfterChitchat, new Activity { Text = result.Query }, CancellationToken.None);
+        }
+
+        [LuisIntent("Smalltalk.Greetings.HowAreYou")]
+        [LuisIntent("Smalltalk.Greetings.HowWasYourDay")]
+        public async Task SmallTalk(IDialogContext context, LuisResult result)
+        {
+            await context.PostAsync($"Top scoring intent is: {result.TopScoringIntent.Intent.ToString()}");
+
+            context.Wait(MessageReceived);
         }
 
         private async Task Resume_AfterChitchat(IDialogContext context, IAwaitable<IMessageActivity> result)

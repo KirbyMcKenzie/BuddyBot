@@ -338,7 +338,7 @@
     <Compile Include="Settings\IAzureStorageSettings.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="city.list.json" />
+    <Content Include="luis.config.json" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
