@@ -82,6 +82,16 @@ namespace BuddyBot.Repository.DbContext
             return weatherConditionResponseList;
         }
 
+        public SmallTalkResponse[] BuildSmallTalkRespenses()
+        {
+            SmallTalkResponse[] smallTalkReponses =
+        {
+            BuildSmallTalkResponse(Guid.NewGuid(), "Greeting", "Greeting.HowAreYou", "I'm good, how are you?"),
+            BuildSmallTalkResponse(Guid.NewGuid(), "Greeting", "Greeting.HowAreYou", "I'm good thanks 😀")
+        };
+
+            return smallTalkReponses;
+    }
 
         private WeatherConditionResponse BuildWeatherConditionResponse(int id, string condition, string group, string response)
         {
@@ -91,6 +101,17 @@ namespace BuddyBot.Repository.DbContext
                 Condition = condition,
                 Group = group,
                  MappedConditionResponse = response
+            };
+        }
+
+        private SmallTalkResponse BuildSmallTalkResponse(Guid id, string intentGroup, string intentName, string intentResponse)
+        {
+            return new SmallTalkResponse()
+            {
+                Id = id,
+                IntentGroup = intentGroup,
+                IntentName = intentName,
+                IntentResponse = intentResponse
             };
         }
     }

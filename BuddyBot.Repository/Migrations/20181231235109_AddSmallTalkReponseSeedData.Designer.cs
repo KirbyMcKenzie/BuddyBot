@@ -4,14 +4,16 @@ using BuddyBot.Repository.DbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BuddyBot.Repository.Migrations
 {
     [DbContext(typeof(BuddyBotDbContext))]
-    partial class BuddyBotDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181231235109_AddSmallTalkReponseSeedData")]
+    partial class AddSmallTalkReponseSeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

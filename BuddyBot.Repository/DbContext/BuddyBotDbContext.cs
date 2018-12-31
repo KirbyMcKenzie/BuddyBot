@@ -31,6 +31,8 @@ namespace BuddyBot.Repository.DbContext
             WeatherConditionResponse[] weatherConditionResponses = dbSeeder.BuildWeatherConditionResponses();
             modelBuilder.Entity<WeatherConditionResponse>().HasData(weatherConditionResponses);
 
+            SmallTalkResponse[] smallTalkResponses = dbSeeder.BuildSmallTalkRespenses();
+            modelBuilder.Entity<SmallTalkResponse>().HasData(smallTalkResponses);
 
         }
 
