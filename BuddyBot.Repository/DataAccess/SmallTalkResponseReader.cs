@@ -16,7 +16,7 @@ namespace BuddyBot.Repository.DataAccess
         {
         }
 
-        public async Task<IList<SmallTalkResponse>> GetRandomResponseByIntentName(string IntentName)
+        public async Task<IList<SmallTalkResponse>> GetSmallTalkResponsesByIntentName(string IntentName)
         {
             IList<SmallTalkResponse> responseResult = await _context.SmallTalkResponses
                 .Where(r => r.IntentName == IntentName).ToListAsync();

@@ -59,10 +59,7 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Smalltalk.Greetings.HowWasYourDay")]
         public async Task SmallTalk(IDialogContext context, LuisResult result)
         {
-            var response = await _conversationService.GetResponseByIntentName(result.TopScoringIntent.Intent.ToString());
-
-            await context.PostAsync(response);
-
+            await context.PostAsync(await _conversationService.GetResponseByIntentName(result.TopScoringIntent.Intent));
             context.Wait(MessageReceived);
         }
 

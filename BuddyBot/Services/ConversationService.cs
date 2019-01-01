@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using BuddyBot.Repository.DataAccess.Contracts;
+using BuddyBot.Repository.Models;
 using BuddyBot.Services.Contracts;
 
 namespace BuddyBot.Services
@@ -101,8 +102,11 @@ namespace BuddyBot.Services
 
         public async Task<string> GetResponseByIntentName(string IntentName)
         {
-            var result = await _smallTalkResponseReader.GetRandomResponseByIntentName(IntentName);
-            return result.FirstOrDefault().IntentResponse;
+            IList<SmallTalkResponse> result = await _smallTalkResponseReader.GetSmallTalkResponsesByIntentName(IntentName);
+
+            Random random = new Random();
+
+            return result[random.Next(result.Count)].IntentResponse;
 
         }
     }
