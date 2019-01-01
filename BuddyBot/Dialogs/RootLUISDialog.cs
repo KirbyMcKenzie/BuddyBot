@@ -29,12 +29,12 @@ namespace BuddyBot.Dialogs
         private readonly IHeadTailsService _headTailsService;
         private readonly IJokeService _jokeService;
         private readonly IBotDataService _botDataService;
-        private readonly ISmallTalkResponseReader _smallTalkResponseReader;
+        
 
         public RootLuisDialog(
             IDialogBuilder dialogBuilder, IConversationService conversationService,
             IHeadTailsService headTailsService, IJokeService jokeService,
-            IBotDataService botDataService, ISmallTalkResponseReader smallTalkResponseReader) : base(new LuisService(new LuisModelAttribute(
+            IBotDataService botDataService) : base(new LuisService(new LuisModelAttribute(
             ConfigurationManager.AppSettings["luis:ModelId"],
             ConfigurationManager.AppSettings["luis:SubscriptionId"])))
         {
@@ -43,7 +43,6 @@ namespace BuddyBot.Dialogs
             SetField.NotNull(out _headTailsService, nameof(headTailsService), headTailsService);
             SetField.NotNull(out _jokeService, nameof(jokeService), jokeService);
             SetField.NotNull(out _botDataService, nameof(botDataService), botDataService);
-            SetField.NotNull(out _smallTalkResponseReader, nameof(smallTalkResponseReader), smallTalkResponseReader);
         }
 
 
@@ -60,11 +59,9 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Smalltalk.Greetings.HowWasYourDay")]
         public async Task SmallTalk(IDialogContext context, LuisResult result)
         {
-            string intentResult = result.TopScoringIntent.Intent.ToString();
+            var response = await _conversationService.GetResponseByIntentName(result.TopScoringIntent.Intent.ToString());
 
-            var response = await _smallTalkResponseReader.GetRandomResponseByIntentName(intentResult);
-
-            await context.PostAsync(response.FirstOrDefault().IntentResponse);
+            await context.PostAsync(response);
 
             context.Wait(MessageReceived);
         }

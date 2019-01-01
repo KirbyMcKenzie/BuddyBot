@@ -8,5 +8,6 @@ namespace BuddyBot.Services.Contracts
 
         string GetHowCanIHelpPhrase();
 
+        Task<string> GetResponseByIntentName(string IntentName);
     }
 }
