@@ -1,0 +1,13 @@
+﻿using BuddyBot.Repository.Models;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BuddyBot.Repository.DataAccess.Contracts
+{
+    interface ISmallTalkResponseReader
+    {
+        Task<IList<SmallTalkResponse>> GetRandomResponseByIntentName(string intentName);
+    }
+}
