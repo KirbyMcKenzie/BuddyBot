@@ -16,6 +16,8 @@ using static System.Threading.Thread;
 using Pause = BuddyBot.Models.ConversationPauseConstants;
 using Serilog;
 using BuddyBot.Models.Enums;
+using BuddyBot.Repository.DataAccess.Contracts;
+using System.Linq;
 
 namespace BuddyBot.Dialogs
 {
@@ -27,11 +29,12 @@ namespace BuddyBot.Dialogs
         private readonly IHeadTailsService _headTailsService;
         private readonly IJokeService _jokeService;
         private readonly IBotDataService _botDataService;
+        private readonly ISmallTalkResponseReader _smallTalkResponseReader;
 
         public RootLuisDialog(
             IDialogBuilder dialogBuilder, IConversationService conversationService,
             IHeadTailsService headTailsService, IJokeService jokeService,
-            IBotDataService botDataService) : base(new LuisService(new LuisModelAttribute(
+            IBotDataService botDataService, ISmallTalkResponseReader smallTalkResponseReader) : base(new LuisService(new LuisModelAttribute(
             ConfigurationManager.AppSettings["luis:ModelId"],
             ConfigurationManager.AppSettings["luis:SubscriptionId"])))
         {
@@ -40,6 +43,7 @@ namespace BuddyBot.Dialogs
             SetField.NotNull(out _headTailsService, nameof(headTailsService), headTailsService);
             SetField.NotNull(out _jokeService, nameof(jokeService), jokeService);
             SetField.NotNull(out _botDataService, nameof(botDataService), botDataService);
+            SetField.NotNull(out _smallTalkResponseReader, nameof(smallTalkResponseReader), smallTalkResponseReader);
         }
 
 
@@ -56,7 +60,11 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Smalltalk.Greetings.HowWasYourDay")]
         public async Task SmallTalk(IDialogContext context, LuisResult result)
         {
-            await context.PostAsync($"Top scoring intent is: {result.TopScoringIntent.Intent.ToString()}");
+            string intentResult = result.TopScoringIntent.Intent.ToString();
+
+            var response = await _smallTalkResponseReader.GetRandomResponseByIntentName(intentResult);
+
+            await context.PostAsync(response.FirstOrDefault().IntentResponse);
 
             context.Wait(MessageReceived);
         }

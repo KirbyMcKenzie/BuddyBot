@@ -68,6 +68,10 @@ namespace BuddyBot.Modules
                 .As<IWeatherConditionResponseReader>()
                 .AsImplementedInterfaces().SingleInstance();
 
+            builder.RegisterType<SmallTalkResponseReader>()
+                .As<ISmallTalkResponseReader>()
+                .AsImplementedInterfaces().SingleInstance();
+
             builder.RegisterType<ChatHistoryWriter>()
                 .As<IChatHistoryWriter>()
                 .AsImplementedInterfaces().SingleInstance();
