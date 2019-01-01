@@ -50,8 +50,8 @@ namespace BuddyBot.Repository.Migrations
                     b.ToTable("SmallTalkResponse");
 
                     b.HasData(
-                        new { Id = new Guid("334416d4-b56a-47ad-bf2a-84c02f617509"), IntentGroup = "Greeting", IntentName = "Greeting.HowAreYou", IntentResponse = "I'm good, how are you?" },
-                        new { Id = new Guid("6548509f-303f-4ecd-9e99-98fcd2a6d1c4"), IntentGroup = "Greeting", IntentName = "Greeting.HowAreYou", IntentResponse = "I'm good thanks 😀" }
+                        new { Id = new Guid("5ae55d79-c691-49b9-b738-d03c6ec4126c"), IntentGroup = "Greeting", IntentName = "Smalltalk.Greetings.HowAreYou", IntentResponse = "I'm good, how are you?" },
+                        new { Id = new Guid("f76781ad-15bb-45ec-81de-e5febd49f46e"), IntentGroup = "Greeting", IntentName = "Smalltalk.Greetings.HowAreYou", IntentResponse = "I'm good thanks 😀" }
                     );
                 });
 

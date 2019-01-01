@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BuddyBot.Repository.DataAccess.Contracts
 {
-    interface ISmallTalkResponseReader
+    public interface ISmallTalkResponseReader
     {
         Task<IList<SmallTalkResponse>> GetRandomResponseByIntentName(string intentName);
     }

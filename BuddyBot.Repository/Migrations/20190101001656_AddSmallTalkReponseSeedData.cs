@@ -10,12 +10,12 @@ namespace BuddyBot.Repository.Migrations
             migrationBuilder.InsertData(
                 table: "SmallTalkResponse",
                 columns: new[] { "Id", "IntentGroup", "IntentName", "IntentResponse" },
-                values: new object[] { new Guid("334416d4-b56a-47ad-bf2a-84c02f617509"), "Greeting", "Greeting.HowAreYou", "I'm good, how are you?" });
+                values: new object[] { new Guid("5ae55d79-c691-49b9-b738-d03c6ec4126c"), "Greeting", "Smalltalk.Greetings.HowAreYou", "I'm good, how are you?" });
 
             migrationBuilder.InsertData(
                 table: "SmallTalkResponse",
                 columns: new[] { "Id", "IntentGroup", "IntentName", "IntentResponse" },
-                values: new object[] { new Guid("6548509f-303f-4ecd-9e99-98fcd2a6d1c4"), "Greeting", "Greeting.HowAreYou", "I'm good thanks 😀" });
+                values: new object[] { new Guid("f76781ad-15bb-45ec-81de-e5febd49f46e"), "Greeting", "Smalltalk.Greetings.HowAreYou", "I'm good thanks 😀" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -23,12 +23,12 @@ namespace BuddyBot.Repository.Migrations
             migrationBuilder.DeleteData(
                 table: "SmallTalkResponse",
                 keyColumn: "Id",
-                keyValue: new Guid("334416d4-b56a-47ad-bf2a-84c02f617509"));
+                keyValue: new Guid("5ae55d79-c691-49b9-b738-d03c6ec4126c"));
 
             migrationBuilder.DeleteData(
                 table: "SmallTalkResponse",
                 keyColumn: "Id",
-                keyValue: new Guid("6548509f-303f-4ecd-9e99-98fcd2a6d1c4"));
+                keyValue: new Guid("f76781ad-15bb-45ec-81de-e5febd49f46e"));
         }
     }
 }

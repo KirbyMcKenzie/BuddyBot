@@ -86,8 +86,8 @@ namespace BuddyBot.Repository.DbContext
         {
             SmallTalkResponse[] smallTalkReponses =
         {
-            BuildSmallTalkResponse(Guid.NewGuid(), "Greeting", "Greeting.HowAreYou", "I'm good, how are you?"),
-            BuildSmallTalkResponse(Guid.NewGuid(), "Greeting", "Greeting.HowAreYou", "I'm good thanks 😀")
+            BuildSmallTalkResponse(Guid.NewGuid(), "Greeting", "Smalltalk.Greetings.HowAreYou", "I'm good, how are you?"),
+            BuildSmallTalkResponse(Guid.NewGuid(), "Greeting", "Smalltalk.Greetings.HowAreYou", "I'm good thanks 😀")
         };
 
             return smallTalkReponses;
