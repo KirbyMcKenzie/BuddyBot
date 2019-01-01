@@ -1,23 +1,110 @@
-  [
-    {
-      "Id": "6158870a-294c-4406-b165-7287bc1899f7",
-      "IntentGroup": "Greeting",
-      "IntentName": "Smalltalk.Greeting.HowAreYou",
-      "IntentResponse": "I'm good, how are you?",
-      "PersonalityResponseType": "Friendly"
-    },
-    {
-      "Id": "9ae67222-2776-4758-9273-6e37f4e87e27",
-      "IntentGroup": "Greeting",
-      "IntentName": "Smalltalk.Greeting.HowAreYou",
-      "IntentResponse": "I'm good thanks!",
-      "PersonalityResponseType": ""
-    },
-    {
-      "Id": "6158870a-294c-4406-b165-7287bc1899f8",
-      "IntentGroup": "Greeting",
-      "IntentName": "Smalltalk.Greeting.HowAreYou",
-      "IntentResponse": "I exist, thanks for asking.",
-      "PersonalityResponseType": "Humorous"
-    }
-  ]
+﻿[
+  // Friendly
+  {
+    "Id": "",
+    "IntentGroup": "Greeting",
+    "IntentName": "Smalltalk.Greetings.Bye",
+    "IntentResponse": "Bye!",
+    "PersonalityResponseType": "Friendly"
+  },
+  {
+    "Id": "",
+    "IntentGroup": "Greeting",
+    "IntentName": "Smalltalk.Greetings.Bye",
+    "IntentResponse": "Bye!",
+    "PersonalityResponseType": "Friendly"
+  },
+  {
+    "Id": "",
+    "IntentGroup": "Greeting",
+    "IntentName": "Smalltalk.Greetings.Bye",
+    "IntentResponse": "See ya!",
+    "PersonalityResponseType": "Friendly"
+  },
+  {
+    "Id": "",
+    "IntentGroup": "Greeting",
+    "IntentName": "Smalltalk.Greetings.Bye",
+    "IntentResponse": "Catch ya later!",
+    "PersonalityResponseType": "Friendly"
+  },
+  {
+    "Id": "",
+    "IntentGroup": "Greeting",
+    "IntentName": "Smalltalk.Greetings.GoodEvening",
+    "IntentResponse": "Good evening",
+    "PersonalityResponseType": "Friendly"
+  },
+  {
+    "Id": "",
+    "IntentGroup": "Greeting",
+    "IntentName": "Smalltalk.Greetings.GoodEvening",
+    "IntentResponse": "Evening 😊",
+    "PersonalityResponseType": "Friendly"
+  },
+  {
+    "Id": "",
+    "IntentGroup": "Greeting",
+    "IntentName": "Smalltalk.Greetings.GoodEvening",
+    "IntentResponse": "Evening",
+    "PersonalityResponseType": "Friendly"
+  },
+  {
+    "Id": "",
+    "IntentGroup": "Greeting",
+    "IntentName": "Smalltalk.Greetings.GoodMorning",
+    "IntentResponse": "Good Morning 😊",
+    "PersonalityResponseType": "Friendly"
+  },
+  {
+    "Id": "",
+    "IntentGroup": "Greeting",
+    "IntentName": "Smalltalk.Greetings.GoodMorning",
+    "IntentResponse": "Good Morning",
+    "PersonalityResponseType": "Friendly"
+  },
+  {
+    "Id": "",
+    "IntentGroup": "Greeting",
+    "IntentName": "Smalltalk.Greetings.GoodMorning",
+    "IntentResponse": "Morning!!",
+    "PersonalityResponseType": "Friendly"
+  },
+  {
+    "Id": "",
+    "IntentGroup": "Greeting",
+    "IntentName": "Smalltalk.Greetings.GoodNight",
+    "IntentResponse": "Goodnight!",
+    "PersonalityResponseType": "Friendly"
+  },
+
+  // TODO  HOW ARE YOU
+  {
+    "Id": "6158870a-294c-4406-b165-7287bc1899f7",
+    "IntentGroup": "Greeting",
+    "IntentName": "Smalltalk.Greeting.HowAreYou",
+    "IntentResponse": "I'm good, how are you?",
+    "PersonalityResponseType": "Friendly"
+  },
+  {
+    "Id": "9ae67222-2776-4758-9273-6e37f4e87e27",
+    "IntentGroup": "Greeting",
+    "IntentName": "Smalltalk.Greeting.HowAreYou",
+    "IntentResponse": "I'm good thanks!",
+    "PersonalityResponseType": "Friendly"
+  },
+  {
+    "Id": "6158870a-294c-4406-b165-7287bc1899f8",
+    "IntentGroup": "Greeting",
+    "IntentName": "Smalltalk.Greeting.HowAreYou",
+    "IntentResponse": "I exist, thanks for asking.",
+    "PersonalityResponseType": "Humorous"
+  },
+  {
+    "Id": "",
+    "IntentGroup": "",
+    "IntentName": "",
+    "IntentResponse": "",
+    "PersonalityResponseType": ""
+  }
+]
