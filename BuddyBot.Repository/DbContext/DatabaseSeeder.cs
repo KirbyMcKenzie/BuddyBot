@@ -84,14 +84,20 @@ namespace BuddyBot.Repository.DbContext
 
         public SmallTalkResponse[] BuildSmallTalkRespenses()
         {
-            SmallTalkResponse[] smallTalkReponses =
-        {
-            BuildSmallTalkResponse(Guid.NewGuid(), "Greeting", "Smalltalk.Greetings.HowAreYou", "I'm good, how are you?"),
-            BuildSmallTalkResponse(Guid.NewGuid(), "Greeting", "Smalltalk.Greetings.HowAreYou", "I'm good thanks 😀")
-        };
+            var jsonData = System.IO.File.ReadAllText(@"smallTalkResponses.config.json");
+            SmallTalkResponse[] responses = JsonConvert.DeserializeObject<SmallTalkResponse[]>(jsonData);
 
-            return smallTalkReponses;
-    }
+            return responses;
+        }
+
+
+        public City[] BuildCities()
+        {
+            var jsonData = System.IO.File.ReadAllText(@"city.list.json");
+            City[] cities = JsonConvert.DeserializeObject<City[]>(jsonData);
+
+            return cities;
+        }
 
         private WeatherConditionResponse BuildWeatherConditionResponse(int id, string condition, string group, string response)
         {

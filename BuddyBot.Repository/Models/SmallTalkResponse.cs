@@ -10,5 +10,7 @@ namespace BuddyBot.Repository.Models
         public string IntentName { get; set; }
         public string IntentGroup { get; set; }
         public string IntentResponse { get; set; }
+        public string PersonalityResponseType { get; set; }
+
     }
 }

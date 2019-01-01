@@ -45,14 +45,11 @@ namespace BuddyBot.Repository.Migrations
 
                     b.Property<string>("IntentResponse");
 
+                    b.Property<string>("PersonalityResponseType");
+
                     b.HasKey("Id");
 
                     b.ToTable("SmallTalkResponse");
-
-                    b.HasData(
-                        new { Id = new Guid("5ae55d79-c691-49b9-b738-d03c6ec4126c"), IntentGroup = "Greeting", IntentName = "Smalltalk.Greetings.HowAreYou", IntentResponse = "I'm good, how are you?" },
-                        new { Id = new Guid("f76781ad-15bb-45ec-81de-e5febd49f46e"), IntentGroup = "Greeting", IntentName = "Smalltalk.Greetings.HowAreYou", IntentResponse = "I'm good thanks 😀" }
-                    );
                 });
 
             modelBuilder.Entity("BuddyBot.Repository.Models.WeatherConditionResponse", b =>
