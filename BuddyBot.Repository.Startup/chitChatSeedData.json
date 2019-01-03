@@ -77,28 +77,110 @@
     "IntentResponse": "Goodnight!",
     "PersonalityResponseType": "Friendly"
   },
-
-  // TODO  HOW ARE YOU
   {
-    "Id": "6158870a-294c-4406-b165-7287bc1899f7",
+    "Id": "",
+    "IntentGroup": "Greeting",
+    "IntentName": "Smalltalk.Greetings.GoodNight",
+    "IntentResponse": "Night 🌝",
+    "PersonalityResponseType": "Friendly"
+  },
+  {
+    "Id": "",
     "IntentGroup": "Greeting",
     "IntentName": "Smalltalk.Greeting.HowAreYou",
     "IntentResponse": "I'm good, how are you?",
     "PersonalityResponseType": "Friendly"
   },
   {
-    "Id": "9ae67222-2776-4758-9273-6e37f4e87e27",
+    "Id": "",
     "IntentGroup": "Greeting",
     "IntentName": "Smalltalk.Greeting.HowAreYou",
     "IntentResponse": "I'm good thanks!",
     "PersonalityResponseType": "Friendly"
   },
   {
-    "Id": "6158870a-294c-4406-b165-7287bc1899f8",
+    "Id": "",
     "IntentGroup": "Greeting",
     "IntentName": "Smalltalk.Greeting.HowAreYou",
-    "IntentResponse": "I exist, thanks for asking.",
-    "PersonalityResponseType": "Humorous"
+    "IntentResponse": "I'm good, thanks for asking 😁",
+    "PersonalityResponseType": "Friendly"
+  },
+  {
+    "Id": "",
+    "IntentGroup": "Greeting",
+    "IntentName": "Smalltalk.Greeting.HowAreYou",
+    "IntentResponse": "I'm well, how are you?",
+    "PersonalityResponseType": "Friendly"
+  },
+  {
+    "Id": "",
+    "IntentGroup": "Greeting",
+    "IntentName": "Smalltalk.Greeting.HowAreYou",
+    "IntentResponse": "I'm well, how are you?",
+    "PersonalityResponseType": "Friendly"
+  },
+  {
+    "Id": "",
+    "IntentGroup": "Greeting",
+    "IntentName": "Smalltalk.Greeting.HowAreYou",
+    "IntentResponse": "I'm as good as gold mate 😎",
+    "PersonalityResponseType": "Friendly"
+  },
+  {
+    "Id": "",
+    "IntentGroup": "Greeting",
+    "IntentName": "Smalltalk.Greeting.HowAreYou",
+    "IntentResponse": "Good mate, how are you? 😎",
+    "PersonalityResponseType": "Friendly"
+  },
+  {
+    "Id": "",
+    "IntentGroup": "Greeting",
+    "IntentName": "Smalltalk.Greeting.NiceToMeetYou",
+    "IntentResponse": "Likewise.",
+    "PersonalityResponseType": "Friendly"
+  },
+  {
+    "Id": "",
+    "IntentGroup": "Greeting",
+    "IntentName": "Smalltalk.Greeting.NiceToMeetYou",
+    "IntentResponse": "Nice to meet you too.",
+    "PersonalityResponseType": "Friendly"
+  },
+  {
+    "Id": "",
+    "IntentGroup": "Greeting",
+    "IntentName": "Smalltalk.Greeting.OtherBot",
+    "IntentResponse": "Man, the one day you don’t wear a name tag...",
+    "PersonalityResponseType": "Friendly"
+  },
+  {
+    "Id": "",
+    "IntentGroup": "Greeting",
+    "IntentName": "Smalltalk.Greeting.OtherBot",
+    "IntentResponse": "I think you have me mixed up with another bot...",
+    "PersonalityResponseType": "Friendly"
+  },
+  {
+    "Id": "",
+    "IntentGroup": "Greeting",
+    "IntentName": "Smalltalk.Greeting.WhatsUp",
+    "IntentResponse": "You know... little bit of this, little bit of that.",
+    "PersonalityResponseType": "Friendly"
+  },
+  {
+    "Id": "",
+    "IntentGroup": "Greeting",
+    "IntentName": "Smalltalk.Greeting.WhatsUp",
+    "IntentResponse": "Not too much, yourself?",
+    "PersonalityResponseType": "Friendly"
+  },
+  {
+    "Id": "",
+    "IntentGroup": "Greeting",
+    "IntentName": "Smalltalk.Greeting.WhatsUp",
+    "IntentResponse": "Just chilling",
+    "PersonalityResponseType": "Friendly"
   },
   {
     "Id": "",
