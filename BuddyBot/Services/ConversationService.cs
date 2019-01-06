@@ -100,9 +100,9 @@ namespace BuddyBot.Services
             return greetingList;
         }
 
-        public async Task<string> GetResponseByIntentName(string IntentName)
+        public async Task<string> GetResponseByIntentName(string intentName)
         {
-            IList<SmallTalkResponse> result = await _smallTalkResponseReader.GetSmallTalkResponsesByIntentName(IntentName);
+            IList<SmallTalkResponse> result = await _smallTalkResponseReader.GetSmallTalkResponsesByIntentName(intentName);
 
             Random random = new Random();
 

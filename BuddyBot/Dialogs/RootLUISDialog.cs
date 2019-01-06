@@ -55,19 +55,12 @@ namespace BuddyBot.Dialogs
             context.Wait(MessageReceived);
         }
 
-        [LuisIntent("Smalltalk.Greetings.HowAreYou")]
-        [LuisIntent("Smalltalk.Greetings.HowWasYourDay")]
+        [LuisIntent("Smalltalk.Greeting.HowAreYou")]
         public async Task SmallTalk(IDialogContext context, LuisResult result)
         {
             await context.PostAsync(await _conversationService.GetResponseByIntentName(result.TopScoringIntent.Intent));
             context.Wait(MessageReceived);
         }
-
-        private async Task Resume_AfterChitchat(IDialogContext context, IAwaitable<IMessageActivity> result)
-        {
-            await Task.Yield();
-        }
-
 
         [LuisIntent("Greeting")]
         public async Task Greeting(IDialogContext context, LuisResult result)
