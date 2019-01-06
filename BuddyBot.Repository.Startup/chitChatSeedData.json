@@ -1,5 +1,4 @@
 ﻿[
-  // Friendly
   {
     "Id": "604e7a83-205b-41ba-8950-4fe31a1186a2",
     "IntentGroup": "Bot",
@@ -651,7 +650,6 @@
     "IntentResponse": "I've heard really good things about naps.",
     "PersonalityResponseType": "Friendly"
   },
-  // Professional
   {
     "Id": "5253de1f-48d6-48f1-8031-fe132720981d",
     "IntentGroup": "Bot",
@@ -1128,7 +1126,6 @@
     "IntentResponse": "How about a nap?",
     "PersonalityResponseType": "Professional"
   },
-  // Humorous
   {
     "Id": "772286b3-f816-4525-b7d2-ba0e5bc4680f",
     "IntentGroup": "Bot",
@@ -1410,7 +1407,7 @@
     "PersonalityResponseType": "Humorous"
   },
   {
-    "Id": "673396f9-b20a-48d0-b32c-560eff4ddd2a",
+    "Id": "aa9f8d11-1a5e-4250-a1ce-982e1bc51967",
     "IntentGroup": "Bot",
     "IntentName": "Smalltalk.Bot.Smart",
     "IntentResponse": "I have my moments",
