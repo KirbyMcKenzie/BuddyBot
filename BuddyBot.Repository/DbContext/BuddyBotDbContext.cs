@@ -28,12 +28,13 @@ namespace BuddyBot.Repository.DbContext
                 .ToTable("SmallTalkResponse").HasKey(_ => _.Id);
 
 #if DEBUG
+            // TODO - Ask someone about cleaner data seeding 
             // Seed
-            WeatherConditionResponse[] weatherConditionResponses = dbSeeder.BuildWeatherConditionResponses();
-            modelBuilder.Entity<WeatherConditionResponse>().HasData(weatherConditionResponses);
+            //WeatherConditionResponse[] weatherConditionResponses = dbSeeder.BuildWeatherConditionResponses();
+            //modelBuilder.Entity<WeatherConditionResponse>().HasData(weatherConditionResponses);
 
-            SmallTalkResponse[] smallTalkResponses = dbSeeder.BuildSmallTalkRespenses();
-            modelBuilder.Entity<SmallTalkResponse>().HasData(smallTalkResponses);
+            //SmallTalkResponse[] smallTalkResponses = dbSeeder.BuildSmallTalkRespenses();
+            //modelBuilder.Entity<SmallTalkResponse>().HasData(smallTalkResponses);
 #endif
 
         }
