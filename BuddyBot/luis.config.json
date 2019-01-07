@@ -1,9 +1,10 @@
-{
-  "luis_schema_version": "3.1.0",
+﻿{
+  "luis_schema_version": "3.2.0",
   "versionId": "0.1",
   "name": "BuddyBot",
   "desc": "An intelligent bot to assist with your everyday needs.",
   "culture": "en-us",
+  "tokenizerVersion": "1.0.0",
   "intents": [
     {
       "name": "Chit-Chat"
@@ -59,6 +60,27 @@
         "domain_name": "Reminder",
         "model_name": "Find"
       }
+    },
+    {
+      "name": "Smalltalk.Bot.Age"
+    },
+    {
+      "name": "Smalltalk.Bot.BodyFunctions"
+    },
+    {
+      "name": "Smalltalk.Bot.Boss"
+    },
+    {
+      "name": "Smalltalk.Bot.Busy"
+    },
+    {
+      "name": "Smalltalk.Bot.Creator"
+    },
+    {
+      "name": "Smalltalk.Greeting.HowAreYou"
+    },
+    {
+      "name": "Smalltalk.Greeting.HowWasYourDay"
     },
     {
       "name": "User.DeleteUserData"
@@ -211,6 +233,21 @@
       ]
     },
     {
+      "text": "☀",
+      "intent": "Weather.GetForecast",
+      "entities": []
+    },
+    {
+      "text": "☁",
+      "intent": "Weather.GetForecast",
+      "entities": []
+    },
+    {
+      "text": "✋",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
       "text": "11 : 15 am tomorrow reminder",
       "intent": "Reminder.Find",
       "entities": []
@@ -288,6 +325,16 @@
       "entities": []
     },
     {
+      "text": "are you busy",
+      "intent": "Smalltalk.Bot.Busy",
+      "entities": []
+    },
+    {
+      "text": "are you busy right now?",
+      "intent": "Smalltalk.Bot.Busy",
+      "entities": []
+    },
+    {
       "text": "are you busy?",
       "intent": "Chit-Chat",
       "entities": []
@@ -333,6 +380,16 @@
       "entities": []
     },
     {
+      "text": "are you my boss",
+      "intent": "Smalltalk.Bot.Boss",
+      "entities": []
+    },
+    {
+      "text": "are you old",
+      "intent": "Smalltalk.Bot.Age",
+      "entities": []
+    },
+    {
       "text": "are you old?",
       "intent": "Chit-Chat",
       "entities": []
@@ -373,8 +430,18 @@
       "entities": []
     },
     {
+      "text": "are you the boss",
+      "intent": "Smalltalk.Bot.Boss",
+      "entities": []
+    },
+    {
       "text": "are you there?",
       "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "are you young",
+      "intent": "Smalltalk.Bot.Age",
       "entities": []
     },
     {
@@ -456,6 +523,11 @@
       "entities": []
     },
     {
+      "text": "can i know who your boss is",
+      "intent": "Smalltalk.Bot.Boss",
+      "entities": []
+    },
+    {
       "text": "can i trust you?",
       "intent": "Chit-Chat",
       "entities": []
@@ -523,6 +595,11 @@
       ]
     },
     {
+      "text": "can you piss",
+      "intent": "Smalltalk.Bot.BodyFunctions",
+      "entities": []
+    },
+    {
       "text": "can you please call me tom",
       "intent": "User.UpdatePreferredName",
       "entities": [
@@ -539,8 +616,18 @@
       "entities": []
     },
     {
+      "text": "can you shit",
+      "intent": "Smalltalk.Bot.BodyFunctions",
+      "entities": []
+    },
+    {
       "text": "can you sing",
       "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "can you urinate",
+      "intent": "Smalltalk.Bot.BodyFunctions",
       "entities": []
     },
     {
@@ -683,6 +770,11 @@
       "entities": []
     },
     {
+      "text": "current weather",
+      "intent": "Weather.GetForecast",
+      "entities": []
+    },
+    {
       "text": "damn",
       "intent": "Chit-Chat",
       "entities": []
@@ -812,6 +904,21 @@
       ]
     },
     {
+      "text": "did you have a good day?",
+      "intent": "Smalltalk.Greeting.HowWasYourDay",
+      "entities": []
+    },
+    {
+      "text": "did you have a lovely day?",
+      "intent": "Smalltalk.Greeting.HowWasYourDay",
+      "entities": []
+    },
+    {
+      "text": "did you have a nice day?",
+      "intent": "Smalltalk.Greeting.HowWasYourDay",
+      "entities": []
+    },
+    {
       "text": "display dog groomer reminder",
       "intent": "Reminder.Find",
       "entities": [
@@ -823,8 +930,18 @@
       ]
     },
     {
+      "text": "do you drop kiddies at the pool?",
+      "intent": "Smalltalk.Bot.BodyFunctions",
+      "entities": []
+    },
+    {
       "text": "do you hate me?",
       "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "do you have a dick",
+      "intent": "Smalltalk.Bot.BodyFunctions",
       "entities": []
     },
     {
@@ -889,8 +1006,33 @@
       "entities": []
     },
     {
+      "text": "do you need to go toilet",
+      "intent": "Smalltalk.Bot.BodyFunctions",
+      "entities": []
+    },
+    {
+      "text": "do you piss",
+      "intent": "Smalltalk.Bot.BodyFunctions",
+      "entities": []
+    },
+    {
       "text": "do you play games?",
       "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "do you poo",
+      "intent": "Smalltalk.Bot.BodyFunctions",
+      "entities": []
+    },
+    {
+      "text": "do you shit",
+      "intent": "Smalltalk.Bot.BodyFunctions",
+      "entities": []
+    },
+    {
+      "text": "do you use the toilet",
+      "intent": "Smalltalk.Bot.BodyFunctions",
       "entities": []
     },
     {
@@ -1065,6 +1207,16 @@
     },
     {
       "text": "get the forcast for me",
+      "intent": "Weather.GetForecast",
+      "entities": []
+    },
+    {
+      "text": "get weather",
+      "intent": "Weather.GetForecast",
+      "entities": []
+    },
+    {
+      "text": "get weather please",
       "intent": "Weather.GetForecast",
       "entities": []
     },
@@ -1306,6 +1458,11 @@
       "entities": []
     },
     {
+      "text": "hey are you busy?",
+      "intent": "Smalltalk.Bot.Busy",
+      "entities": []
+    },
+    {
       "text": "hey buddy",
       "intent": "Greeting",
       "entities": []
@@ -1323,6 +1480,11 @@
     {
       "text": "hi",
       "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "hi are you busy",
+      "intent": "Smalltalk.Bot.Busy",
       "entities": []
     },
     {
@@ -1352,7 +1514,12 @@
     },
     {
       "text": "how are you",
-      "intent": "Chit-Chat",
+      "intent": "Smalltalk.Greeting.HowAreYou",
+      "entities": []
+    },
+    {
+      "text": "how are you today?",
+      "intent": "Smalltalk.Greeting.HowAreYou",
       "entities": []
     },
     {
@@ -1376,13 +1543,23 @@
       "entities": []
     },
     {
+      "text": "how is the weather",
+      "intent": "Weather.GetForecast",
+      "entities": []
+    },
+    {
+      "text": "how old are you",
+      "intent": "Smalltalk.Bot.Age",
+      "entities": []
+    },
+    {
       "text": "how old are you?",
       "intent": "Chit-Chat",
       "entities": []
     },
     {
       "text": "how was your day?",
-      "intent": "Chit-Chat",
+      "intent": "Smalltalk.Greeting.HowWasYourDay",
       "entities": []
     },
     {
@@ -1392,12 +1569,28 @@
     },
     {
       "text": "hows it",
-      "intent": "Chit-Chat",
+      "intent": "Smalltalk.Greeting.HowAreYou",
       "entities": []
     },
     {
+      "text": "hows it buddy",
+      "intent": "Smalltalk.Greeting.HowAreYou",
+      "entities": [
+        {
+          "entity": "Bot.Name",
+          "startPos": 8,
+          "endPos": 12
+        }
+      ]
+    },
+    {
       "text": "hows it going",
-      "intent": "Chit-Chat",
+      "intent": "Smalltalk.Greeting.HowAreYou",
+      "entities": []
+    },
+    {
+      "text": "hows it going g",
+      "intent": "Smalltalk.Greeting.HowAreYou",
       "entities": []
     },
     {
@@ -2195,6 +2388,11 @@
       "entities": []
     },
     {
+      "text": "tell me the weather",
+      "intent": "Weather.GetForecast",
+      "entities": []
+    },
+    {
       "text": "tell us a joke",
       "intent": "Random.Joke",
       "entities": []
@@ -2371,6 +2569,21 @@
       "entities": []
     },
     {
+      "text": "weather",
+      "intent": "Weather.GetForecast",
+      "entities": []
+    },
+    {
+      "text": "weather please",
+      "intent": "Weather.GetForecast",
+      "entities": []
+    },
+    {
+      "text": "weather today",
+      "intent": "Weather.GetForecast",
+      "entities": []
+    },
+    {
       "text": "well done",
       "intent": "Chit-Chat",
       "entities": []
@@ -2472,6 +2685,21 @@
       "entities": []
     },
     {
+      "text": "what is your age",
+      "intent": "Smalltalk.Bot.Age",
+      "entities": []
+    },
+    {
+      "text": "what is your current age",
+      "intent": "Smalltalk.Bot.Age",
+      "entities": []
+    },
+    {
+      "text": "what made you?",
+      "intent": "Smalltalk.Bot.Creator",
+      "entities": []
+    },
+    {
       "text": "what reminders do i have tomorrow ?",
       "intent": "Reminder.Find",
       "entities": []
@@ -2502,8 +2730,34 @@
       "entities": []
     },
     {
+      "text": "whats the weather doing currently",
+      "intent": "Weather.GetForecast",
+      "entities": []
+    },
+    {
+      "text": "whats the weather doing?",
+      "intent": "Weather.GetForecast",
+      "entities": []
+    },
+    {
+      "text": "whats the weather in dunedin",
+      "intent": "Weather.GetForecast",
+      "entities": [
+        {
+          "entity": "City.Name",
+          "startPos": 21,
+          "endPos": 27
+        }
+      ]
+    },
+    {
       "text": "whats up",
       "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "whats your age",
+      "intent": "Smalltalk.Bot.Age",
       "entities": []
     },
     {
@@ -2519,6 +2773,11 @@
     {
       "text": "what's your favourite colour?",
       "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "when were you born",
+      "intent": "Smalltalk.Bot.Age",
       "entities": []
     },
     {
@@ -2542,18 +2801,33 @@
       "entities": []
     },
     {
+      "text": "who created you",
+      "intent": "Smalltalk.Bot.Creator",
+      "entities": []
+    },
+    {
       "text": "who created you?",
       "intent": "Chit-Chat",
       "entities": []
     },
     {
       "text": "who invented you?",
-      "intent": "Chit-Chat",
+      "intent": "Smalltalk.Bot.Creator",
+      "entities": []
+    },
+    {
+      "text": "who is your boss",
+      "intent": "Smalltalk.Bot.Boss",
       "entities": []
     },
     {
       "text": "who is your boss?",
       "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "who is your creator?",
+      "intent": "Smalltalk.Bot.Creator",
       "entities": []
     },
     {
@@ -2567,8 +2841,23 @@
       "entities": []
     },
     {
+      "text": "who is your inventor?",
+      "intent": "Smalltalk.Bot.Creator",
+      "entities": []
+    },
+    {
+      "text": "who is your maker?",
+      "intent": "Smalltalk.Bot.Creator",
+      "entities": []
+    },
+    {
       "text": "who is your mother",
       "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "who made you",
+      "intent": "Smalltalk.Bot.Creator",
       "entities": []
     },
     {
@@ -2659,7 +2948,22 @@
       "entities": []
     },
     {
+      "text": "yoooo",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
       "text": "yooooo",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "yoooooo",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "yooooooooooooooooooooooooo",
       "intent": "Greeting",
       "entities": []
     },
@@ -2729,6 +3033,11 @@
       "entities": []
     },
     {
+      "text": "you have a nice day?",
+      "intent": "Smalltalk.Greeting.HowWasYourDay",
+      "entities": []
+    },
+    {
       "text": "you human?",
       "intent": "Miscellaneous.ConfirmRobot",
       "entities": []
@@ -2761,6 +3070,16 @@
     {
       "text": "you're nice",
       "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "🌤",
+      "intent": "Weather.GetForecast",
+      "entities": []
+    },
+    {
+      "text": "🖐",
+      "intent": "Greeting",
       "entities": []
     }
   ],

@@ -100,9 +100,14 @@ namespace BuddyBot.Services
             return greetingList;
         }
 
-        // TODO - Add Personality Type
         public async Task<string> GetResponseByIntentName(string intentName, PersonalityChatPersona persona)
         {
+
+            if (persona == PersonalityChatPersona.None)
+            {
+                persona = PersonalityChatPersona.Friendly;
+            }
+
             IList<SmallTalkResponse> result = await _smallTalkResponseReader.GetSmallTalkResponsesByIntentName(intentName, persona.ToString());
 
             Random random = new Random();
