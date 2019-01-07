@@ -16,10 +16,10 @@ namespace BuddyBot.Repository.DataAccess
         {
         }
 
-        public async Task<IList<SmallTalkResponse>> GetSmallTalkResponsesByIntentName(string IntentName)
+        public async Task<IList<SmallTalkResponse>> GetSmallTalkResponsesByIntentName(string intentName, string personaType)
         {
             IList<SmallTalkResponse> responseResult = await _context.SmallTalkResponses
-                .Where(r => r.IntentName == IntentName).ToListAsync();
+                .Where(r => r.IntentName == intentName && r.PersonalityResponseType == personaType).ToListAsync();
                
             return responseResult;
         }

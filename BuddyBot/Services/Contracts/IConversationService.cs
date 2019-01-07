@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using BuddyBot.Models.Enums;
 
 namespace BuddyBot.Services.Contracts
 {
@@ -8,6 +9,6 @@ namespace BuddyBot.Services.Contracts
 
         string GetHowCanIHelpPhrase();
 
-        Task<string> GetResponseByIntentName(string IntentName);
+        Task<string> GetResponseByIntentName(string intentName, PersonalityChatPersona persona);
     }
 }

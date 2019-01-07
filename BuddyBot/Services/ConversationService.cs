@@ -6,7 +6,7 @@ using System.Web;
 using BuddyBot.Repository.DataAccess.Contracts;
 using BuddyBot.Repository.Models;
 using BuddyBot.Services.Contracts;
-
+using PersonalityChatPersona = BuddyBot.Models.Enums.PersonalityChatPersona;
 namespace BuddyBot.Services
 {
     public class ConversationService : IConversationService
@@ -100,9 +100,10 @@ namespace BuddyBot.Services
             return greetingList;
         }
 
-        public async Task<string> GetResponseByIntentName(string intentName)
+        // TODO - Add Personality Type
+        public async Task<string> GetResponseByIntentName(string intentName, PersonalityChatPersona persona)
         {
-            IList<SmallTalkResponse> result = await _smallTalkResponseReader.GetSmallTalkResponsesByIntentName(intentName);
+            IList<SmallTalkResponse> result = await _smallTalkResponseReader.GetSmallTalkResponsesByIntentName(intentName, persona.ToString());
 
             Random random = new Random();
 

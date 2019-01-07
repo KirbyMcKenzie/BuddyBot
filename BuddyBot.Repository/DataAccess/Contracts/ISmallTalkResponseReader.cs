@@ -8,6 +8,6 @@ namespace BuddyBot.Repository.DataAccess.Contracts
 {
     public interface ISmallTalkResponseReader
     {
-        Task<IList<SmallTalkResponse>> GetSmallTalkResponsesByIntentName(string intentName);
+        Task<IList<SmallTalkResponse>> GetSmallTalkResponsesByIntentName(string intentName, string personaType);
     }
 }
