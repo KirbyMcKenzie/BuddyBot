@@ -55,6 +55,12 @@ namespace BuddyBot.Dialogs
             context.Wait(MessageReceived);
         }
 
+
+        [LuisIntent("Smalltalk.Bot.Age")]
+        [LuisIntent("Smalltalk.Bot.BodyFunctions")]
+        [LuisIntent("Smalltalk.Bot.Boss")]
+        [LuisIntent("Smalltalk.Bot.Busy")]
+        [LuisIntent("Smalltalk.Bot.Creator")]
         [LuisIntent("Smalltalk.Greeting.HowAreYou")]
         public async Task SmallTalk(IDialogContext context, LuisResult result)
         {
