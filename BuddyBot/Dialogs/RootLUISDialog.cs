@@ -61,6 +61,14 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Smalltalk.Bot.Boss")]
         [LuisIntent("Smalltalk.Bot.Busy")]
         [LuisIntent("Smalltalk.Bot.Creator")]
+        [LuisIntent("Smalltalk.Bot.Doing")]
+        [LuisIntent("Smalltalk.Bot.DoingLater")]
+        [LuisIntent("Smalltalk.Bot.Family")]
+        [LuisIntent("Smalltalk.Bot.Favorites")]
+        [LuisIntent("Smalltalk.Bot.Gender")]
+        [LuisIntent("Smalltalk.Bot.Happy")]
+        [LuisIntent("Smalltalk.Bot.Hungry")]
+        [LuisIntent("Smalltalk.Bot.KnowOtherBot")]
         [LuisIntent("Smalltalk.Greeting.HowAreYou")]
         public async Task SmallTalk(IDialogContext context, LuisResult result)
         {

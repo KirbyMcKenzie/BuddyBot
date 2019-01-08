@@ -77,6 +77,30 @@
       "name": "Smalltalk.Bot.Creator"
     },
     {
+      "name": "Smalltalk.Bot.Doing"
+    },
+    {
+      "name": "Smalltalk.Bot.DoingLater"
+    },
+    {
+      "name": "Smalltalk.Bot.Family"
+    },
+    {
+      "name": "Smalltalk.Bot.Favorites"
+    },
+    {
+      "name": "Smalltalk.Bot.Gender"
+    },
+    {
+      "name": "Smalltalk.Bot.Happy"
+    },
+    {
+      "name": "Smalltalk.Bot.Hungry"
+    },
+    {
+      "name": "Smalltalk.Bot.KnowOtherBot"
+    },
+    {
       "name": "Smalltalk.Greeting.HowAreYou"
     },
     {
@@ -300,8 +324,28 @@
       "entities": []
     },
     {
+      "text": "are you a chick?",
+      "intent": "Smalltalk.Bot.Gender",
+      "entities": []
+    },
+    {
+      "text": "are you a dude?",
+      "intent": "Smalltalk.Bot.Gender",
+      "entities": []
+    },
+    {
+      "text": "are you a happy bot?",
+      "intent": "Smalltalk.Bot.Happy",
+      "entities": []
+    },
+    {
       "text": "are you a human?",
       "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "are you a man",
+      "intent": "Smalltalk.Bot.Gender",
       "entities": []
     },
     {
@@ -317,6 +361,16 @@
     {
       "text": "are you a robot?",
       "intent": "Miscellaneous.ConfirmRobot",
+      "entities": []
+    },
+    {
+      "text": "are you a woman",
+      "intent": "Smalltalk.Bot.Gender",
+      "entities": []
+    },
+    {
+      "text": "are you bigender?",
+      "intent": "Smalltalk.Bot.Gender",
       "entities": []
     },
     {
@@ -340,8 +394,28 @@
       "entities": []
     },
     {
+      "text": "are you cheery today",
+      "intent": "Smalltalk.Bot.Happy",
+      "entities": []
+    },
+    {
+      "text": "are you cis",
+      "intent": "Smalltalk.Bot.Gender",
+      "entities": []
+    },
+    {
+      "text": "are you cis female",
+      "intent": "Smalltalk.Bot.Gender",
+      "entities": []
+    },
+    {
       "text": "are you dumb",
       "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "are you female",
+      "intent": "Smalltalk.Bot.Gender",
       "entities": []
     },
     {
@@ -351,12 +425,17 @@
     },
     {
       "text": "are you happy?",
-      "intent": "Chit-Chat",
+      "intent": "Smalltalk.Bot.Happy",
       "entities": []
     },
     {
       "text": "are you human",
       "intent": "Miscellaneous.ConfirmRobot",
+      "entities": []
+    },
+    {
+      "text": "are you hungry",
+      "intent": "Smalltalk.Bot.Hungry",
       "entities": []
     },
     {
@@ -370,8 +449,13 @@
       "entities": []
     },
     {
+      "text": "are you male",
+      "intent": "Smalltalk.Bot.Gender",
+      "entities": []
+    },
+    {
       "text": "are you male or female?",
-      "intent": "Chit-Chat",
+      "intent": "Smalltalk.Bot.Gender",
       "entities": []
     },
     {
@@ -382,6 +466,16 @@
     {
       "text": "are you my boss",
       "intent": "Smalltalk.Bot.Boss",
+      "entities": []
+    },
+    {
+      "text": "are you non binary",
+      "intent": "Smalltalk.Bot.Gender",
+      "entities": []
+    },
+    {
+      "text": "are you non-binary",
+      "intent": "Smalltalk.Bot.Gender",
       "entities": []
     },
     {
@@ -420,6 +514,11 @@
       "entities": []
     },
     {
+      "text": "are you smiling",
+      "intent": "Smalltalk.Bot.Happy",
+      "entities": []
+    },
+    {
       "text": "are you spying on me?",
       "intent": "Chit-Chat",
       "entities": []
@@ -440,8 +539,28 @@
       "entities": []
     },
     {
+      "text": "are you trans male?",
+      "intent": "Smalltalk.Bot.Gender",
+      "entities": []
+    },
+    {
+      "text": "are you transgender",
+      "intent": "Smalltalk.Bot.Gender",
+      "entities": []
+    },
+    {
+      "text": "are you transsexual?",
+      "intent": "Smalltalk.Bot.Gender",
+      "entities": []
+    },
+    {
       "text": "are you young",
       "intent": "Smalltalk.Bot.Age",
+      "entities": []
+    },
+    {
+      "text": "aren't you hungry?",
+      "intent": "Smalltalk.Bot.Hungry",
       "entities": []
     },
     {
@@ -930,13 +1049,38 @@
       ]
     },
     {
+      "text": "do you come from a large family?",
+      "intent": "Smalltalk.Bot.Family",
+      "entities": []
+    },
+    {
       "text": "do you drop kiddies at the pool?",
       "intent": "Smalltalk.Bot.BodyFunctions",
       "entities": []
     },
     {
+      "text": "do you eat food?",
+      "intent": "Smalltalk.Bot.Hungry",
+      "entities": []
+    },
+    {
+      "text": "do you eat?",
+      "intent": "Smalltalk.Bot.Hungry",
+      "entities": []
+    },
+    {
+      "text": "do you happen to know ibm watson",
+      "intent": "Smalltalk.Bot.KnowOtherBot",
+      "entities": []
+    },
+    {
       "text": "do you hate me?",
       "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "do you have a brother?",
+      "intent": "Smalltalk.Bot.Family",
       "entities": []
     },
     {
@@ -946,12 +1090,82 @@
     },
     {
       "text": "do you have a family?",
-      "intent": "Chit-Chat",
+      "intent": "Smalltalk.Bot.Family",
+      "entities": []
+    },
+    {
+      "text": "do you have a favorite sports team?",
+      "intent": "Smalltalk.Bot.Favorites",
+      "entities": []
+    },
+    {
+      "text": "do you have a sister?",
+      "intent": "Smalltalk.Bot.Family",
+      "entities": []
+    },
+    {
+      "text": "do you have a small family?",
+      "intent": "Smalltalk.Bot.Family",
+      "entities": []
+    },
+    {
+      "text": "do you identify as trans",
+      "intent": "Smalltalk.Bot.Gender",
+      "entities": []
+    },
+    {
+      "text": "do you identify your gender as male or female?",
+      "intent": "Smalltalk.Bot.Gender",
+      "entities": []
+    },
+    {
+      "text": "do you know alexa",
+      "intent": "Smalltalk.Bot.KnowOtherBot",
+      "entities": []
+    },
+    {
+      "text": "do you know amazon alexa?",
+      "intent": "Smalltalk.Bot.KnowOtherBot",
+      "entities": []
+    },
+    {
+      "text": "do you know amazons ai?",
+      "intent": "Smalltalk.Bot.KnowOtherBot",
+      "entities": []
+    },
+    {
+      "text": "do you know apple's ai?",
+      "intent": "Smalltalk.Bot.KnowOtherBot",
+      "entities": []
+    },
+    {
+      "text": "do you know apple's siri",
+      "intent": "Smalltalk.Bot.KnowOtherBot",
+      "entities": []
+    },
+    {
+      "text": "do you know cortana?",
+      "intent": "Smalltalk.Bot.KnowOtherBot",
+      "entities": []
+    },
+    {
+      "text": "do you know googel assistant?",
+      "intent": "Smalltalk.Bot.KnowOtherBot",
       "entities": []
     },
     {
       "text": "do you know me?",
       "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "do you know microsoft cortana?",
+      "intent": "Smalltalk.Bot.KnowOtherBot",
+      "entities": []
+    },
+    {
+      "text": "do you know mircosoft ai?",
+      "intent": "Smalltalk.Bot.KnowOtherBot",
       "entities": []
     },
     {
@@ -966,7 +1180,12 @@
     },
     {
       "text": "do you know siri",
-      "intent": "Chit-Chat",
+      "intent": "Smalltalk.Bot.KnowOtherBot",
+      "entities": []
+    },
+    {
+      "text": "do you know siri and alexa?",
+      "intent": "Smalltalk.Bot.KnowOtherBot",
       "entities": []
     },
     {
@@ -1003,6 +1222,11 @@
     {
       "text": "do you love me?",
       "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "do you need some food?",
+      "intent": "Smalltalk.Bot.Hungry",
       "entities": []
     },
     {
@@ -1058,7 +1282,7 @@
     },
     {
       "text": "don't you get hungry?",
-      "intent": "Chit-Chat",
+      "intent": "Smalltalk.Bot.Hungry",
       "entities": []
     },
     {
@@ -1360,6 +1584,11 @@
     {
       "text": "hahahahaha",
       "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "happy bot",
+      "intent": "Smalltalk.Bot.Happy",
       "entities": []
     },
     {
@@ -2469,6 +2698,11 @@
       ]
     },
     {
+      "text": "up to?",
+      "intent": "Smalltalk.Bot.Doing",
+      "entities": []
+    },
+    {
       "text": "update bot persona",
       "intent": "User.UpdatePreferredBotPersona",
       "entities": []
@@ -2549,6 +2783,11 @@
       "entities": []
     },
     {
+      "text": "upto later?",
+      "intent": "Smalltalk.Bot.DoingLater",
+      "entities": []
+    },
+    {
       "text": "wassup",
       "intent": "Greeting",
       "entities": []
@@ -2590,17 +2829,37 @@
     },
     {
       "text": "what are you doing",
-      "intent": "Chit-Chat",
+      "intent": "Smalltalk.Bot.Doing",
       "entities": []
     },
     {
       "text": "what are you doing later?",
-      "intent": "Chit-Chat",
+      "intent": "Smalltalk.Bot.DoingLater",
+      "entities": []
+    },
+    {
+      "text": "what are you doing right now?",
+      "intent": "Smalltalk.Bot.Doing",
       "entities": []
     },
     {
       "text": "what are you doing tomorrow?",
-      "intent": "Chit-Chat",
+      "intent": "Smalltalk.Bot.DoingLater",
+      "entities": []
+    },
+    {
+      "text": "what are you going to be doing later?",
+      "intent": "Smalltalk.Bot.DoingLater",
+      "entities": []
+    },
+    {
+      "text": "what are you up to",
+      "intent": "Smalltalk.Bot.Doing",
+      "entities": []
+    },
+    {
+      "text": "what are you up to later tonight?",
+      "intent": "Smalltalk.Bot.DoingLater",
       "entities": []
     },
     {
@@ -2654,6 +2913,11 @@
       "entities": []
     },
     {
+      "text": "what gender do you identify as?",
+      "intent": "Smalltalk.Bot.Gender",
+      "entities": []
+    },
+    {
       "text": "what is life",
       "intent": "Chit-Chat",
       "entities": []
@@ -2695,6 +2959,21 @@
       "entities": []
     },
     {
+      "text": "what is your current gender",
+      "intent": "Smalltalk.Bot.Gender",
+      "entities": []
+    },
+    {
+      "text": "what is your favourite food?",
+      "intent": "Smalltalk.Bot.Favorites",
+      "entities": []
+    },
+    {
+      "text": "what is your gender",
+      "intent": "Smalltalk.Bot.Gender",
+      "entities": []
+    },
+    {
       "text": "what made you?",
       "intent": "Smalltalk.Bot.Creator",
       "entities": []
@@ -2712,6 +2991,46 @@
     {
       "text": "what up",
       "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "what will you be doing next monday?",
+      "intent": "Smalltalk.Bot.DoingLater",
+      "entities": []
+    },
+    {
+      "text": "what will you be doing next week?",
+      "intent": "Smalltalk.Bot.DoingLater",
+      "entities": []
+    },
+    {
+      "text": "what will you be up to next year?",
+      "intent": "Smalltalk.Bot.DoingLater",
+      "entities": []
+    },
+    {
+      "text": "what you doin?",
+      "intent": "Smalltalk.Bot.Doing",
+      "entities": []
+    },
+    {
+      "text": "what you doing",
+      "intent": "Smalltalk.Bot.Doing",
+      "entities": []
+    },
+    {
+      "text": "what you doing later today",
+      "intent": "Smalltalk.Bot.DoingLater",
+      "entities": []
+    },
+    {
+      "text": "what you doing later?",
+      "intent": "Smalltalk.Bot.DoingLater",
+      "entities": []
+    },
+    {
+      "text": "whats going on",
+      "intent": "Smalltalk.Bot.Doing",
       "entities": []
     },
     {
@@ -2766,6 +3085,21 @@
       "entities": []
     },
     {
+      "text": "whats your fav band?",
+      "intent": "Smalltalk.Bot.Favorites",
+      "entities": []
+    },
+    {
+      "text": "whats your fav food?",
+      "intent": "Smalltalk.Bot.Favorites",
+      "entities": []
+    },
+    {
+      "text": "what's your favorite color?",
+      "intent": "Smalltalk.Bot.Favorites",
+      "entities": []
+    },
+    {
       "text": "what's your favourite color?",
       "intent": "Chit-Chat",
       "entities": []
@@ -2773,6 +3107,11 @@
     {
       "text": "what's your favourite colour?",
       "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "what's your favourite song?",
+      "intent": "Smalltalk.Bot.Favorites",
       "entities": []
     },
     {
@@ -2816,6 +3155,11 @@
       "entities": []
     },
     {
+      "text": "who is in your family?",
+      "intent": "Smalltalk.Bot.Family",
+      "entities": []
+    },
+    {
       "text": "who is your boss",
       "intent": "Smalltalk.Bot.Boss",
       "entities": []
@@ -2823,6 +3167,11 @@
     {
       "text": "who is your boss?",
       "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "who is your brother",
+      "intent": "Smalltalk.Bot.Family",
       "entities": []
     },
     {
@@ -2836,8 +3185,23 @@
       "entities": []
     },
     {
+      "text": "who is your father?",
+      "intent": "Smalltalk.Bot.Family",
+      "entities": []
+    },
+    {
+      "text": "who is your favorite bot?",
+      "intent": "Smalltalk.Bot.Favorites",
+      "entities": []
+    },
+    {
       "text": "who is your favourite bot?",
       "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "who is your favourite person?",
+      "intent": "Smalltalk.Bot.Favorites",
       "entities": []
     },
     {
@@ -2856,6 +3220,16 @@
       "entities": []
     },
     {
+      "text": "who is your mother?",
+      "intent": "Smalltalk.Bot.Family",
+      "entities": []
+    },
+    {
+      "text": "who is your sister?",
+      "intent": "Smalltalk.Bot.Family",
+      "entities": []
+    },
+    {
       "text": "who made you",
       "intent": "Smalltalk.Bot.Creator",
       "entities": []
@@ -2863,6 +3237,11 @@
     {
       "text": "who made you?",
       "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "whos your favourite musician",
+      "intent": "Smalltalk.Bot.Favorites",
       "entities": []
     },
     {
@@ -2973,8 +3352,18 @@
       "entities": []
     },
     {
+      "text": "you a chick?",
+      "intent": "Smalltalk.Bot.Gender",
+      "entities": []
+    },
+    {
+      "text": "you a gal?",
+      "intent": "Smalltalk.Bot.Gender",
+      "entities": []
+    },
+    {
       "text": "you a guy?",
-      "intent": "Chit-Chat",
+      "intent": "Smalltalk.Bot.Gender",
       "entities": []
     },
     {
@@ -3043,6 +3432,11 @@
       "entities": []
     },
     {
+      "text": "you know watson?",
+      "intent": "Smalltalk.Bot.KnowOtherBot",
+      "entities": []
+    },
+    {
       "text": "you made no sensewhat do you mean by that ?",
       "intent": "Chit-Chat",
       "entities": []
@@ -3053,8 +3447,28 @@
       "entities": []
     },
     {
+      "text": "you seem content",
+      "intent": "Smalltalk.Bot.Happy",
+      "entities": []
+    },
+    {
+      "text": "you seem happy today",
+      "intent": "Smalltalk.Bot.Happy",
+      "entities": []
+    },
+    {
       "text": "you seem happy!",
       "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "you seem jolly",
+      "intent": "Smalltalk.Bot.Happy",
+      "entities": []
+    },
+    {
+      "text": "you sound happy",
+      "intent": "Smalltalk.Bot.Happy",
       "entities": []
     },
     {
