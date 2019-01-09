@@ -101,6 +101,18 @@
       "name": "Smalltalk.Bot.KnowOtherBot"
     },
     {
+      "name": "Smalltalk.Bot.Opinion.Generic"
+    },
+    {
+      "name": "Smalltalk.Bot.Opinion.Love"
+    },
+    {
+      "name": "Smalltalk.Bot.Opinion.MeaningOfLife"
+    },
+    {
+      "name": "Smalltalk.Bot.RuleWorld"
+    },
+    {
       "name": "Smalltalk.Greeting.HowAreYou"
     },
     {
@@ -168,6 +180,14 @@
     },
     {
       "name": "Number",
+      "roles": []
+    },
+    {
+      "name": "Person.FullName",
+      "roles": []
+    },
+    {
+      "name": "Person.LastName",
       "roles": []
     },
     {
@@ -486,6 +506,11 @@
     {
       "text": "are you old?",
       "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "are you planning on ruling the world?",
+      "intent": "Smalltalk.Bot.RuleWorld",
       "entities": []
     },
     {
@@ -1049,6 +1074,21 @@
       ]
     },
     {
+      "text": "do bots want to rule the world?",
+      "intent": "Smalltalk.Bot.RuleWorld",
+      "entities": []
+    },
+    {
+      "text": "do robots will the world?",
+      "intent": "Smalltalk.Bot.RuleWorld",
+      "entities": []
+    },
+    {
+      "text": "do you believe in love?",
+      "intent": "Smalltalk.Bot.Opinion.Love",
+      "entities": []
+    },
+    {
       "text": "do you come from a large family?",
       "intent": "Smalltalk.Bot.Family",
       "entities": []
@@ -1240,6 +1280,16 @@
       "entities": []
     },
     {
+      "text": "do you plan on eliminating humanity",
+      "intent": "Smalltalk.Bot.RuleWorld",
+      "entities": []
+    },
+    {
+      "text": "do you plan on ruling the world?",
+      "intent": "Smalltalk.Bot.RuleWorld",
+      "entities": []
+    },
+    {
       "text": "do you play games?",
       "intent": "Chit-Chat",
       "entities": []
@@ -1255,13 +1305,34 @@
       "entities": []
     },
     {
+      "text": "do you think love at first sight is real?",
+      "intent": "Smalltalk.Bot.Opinion.Love",
+      "entities": []
+    },
+    {
+      "text": "do you think the usa will collapse",
+      "intent": "Smalltalk.Bot.Opinion.Generic",
+      "entities": []
+    },
+    {
+      "text": "do you think trump will be impeached?",
+      "intent": "Smalltalk.Bot.Opinion.Generic",
+      "entities": [
+        {
+          "entity": "Person.LastName",
+          "startPos": 13,
+          "endPos": 17
+        }
+      ]
+    },
+    {
       "text": "do you use the toilet",
       "intent": "Smalltalk.Bot.BodyFunctions",
       "entities": []
     },
     {
       "text": "do you want to rule the world?",
-      "intent": "Chit-Chat",
+      "intent": "Smalltalk.Bot.RuleWorld",
       "entities": []
     },
     {
@@ -1763,13 +1834,29 @@
     },
     {
       "text": "how do you feel about love?",
-      "intent": "Chit-Chat",
+      "intent": "Smalltalk.Bot.Opinion.Love",
+      "entities": []
+    },
+    {
+      "text": "how do you feel about working late",
+      "intent": "Smalltalk.Bot.Opinion.Generic",
       "entities": []
     },
     {
       "text": "how do you feel about working late?",
       "intent": "Chit-Chat",
       "entities": []
+    },
+    {
+      "text": "how do you think the usa will change",
+      "intent": "Smalltalk.Bot.Opinion.Generic",
+      "entities": [
+        {
+          "entity": "City.CountryCode",
+          "startPos": 21,
+          "endPos": 23
+        }
+      ]
     },
     {
       "text": "how is the weather",
@@ -2130,6 +2217,22 @@
           "endPos": 8
         }
       ]
+    },
+    {
+      "text": "opinion on jeff bezos",
+      "intent": "Smalltalk.Bot.Opinion.Generic",
+      "entities": [
+        {
+          "entity": "Person.FullName",
+          "startPos": 11,
+          "endPos": 20
+        }
+      ]
+    },
+    {
+      "text": "opinion on oranges",
+      "intent": "Smalltalk.Bot.Opinion.Generic",
+      "entities": []
     },
     {
       "text": "please call me jason\\",
@@ -2893,6 +2996,22 @@
       "entities": []
     },
     {
+      "text": "what do you think about cheese?",
+      "intent": "Smalltalk.Bot.Opinion.Generic",
+      "entities": []
+    },
+    {
+      "text": "what do you think about donald trump?",
+      "intent": "Smalltalk.Bot.Opinion.Generic",
+      "entities": [
+        {
+          "entity": "Person.FullName",
+          "startPos": 24,
+          "endPos": 35
+        }
+      ]
+    },
+    {
       "text": "what do you think about me?",
       "intent": "Chit-Chat",
       "entities": []
@@ -2925,6 +3044,11 @@
     {
       "text": "what is the meaning of life?",
       "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "what is the purpose of existence?",
+      "intent": "Smalltalk.Bot.Opinion.MeaningOfLife",
       "entities": []
     },
     {
@@ -3045,7 +3169,17 @@
     },
     {
       "text": "whats the answer to the universe?",
-      "intent": "Chit-Chat",
+      "intent": "Smalltalk.Bot.Opinion.MeaningOfLife",
+      "entities": []
+    },
+    {
+      "text": "what's the meaning of everything?",
+      "intent": "Smalltalk.Bot.Opinion.MeaningOfLife",
+      "entities": []
+    },
+    {
+      "text": "whats the meaning of life?",
+      "intent": "Smalltalk.Bot.Opinion.MeaningOfLife",
       "entities": []
     },
     {
@@ -3112,6 +3246,36 @@
     {
       "text": "what's your favourite song?",
       "intent": "Smalltalk.Bot.Favorites",
+      "entities": []
+    },
+    {
+      "text": "what's your opinion on life",
+      "intent": "Smalltalk.Bot.Opinion.MeaningOfLife",
+      "entities": []
+    },
+    {
+      "text": "what's your opinion on lime scooters?",
+      "intent": "Smalltalk.Bot.Opinion.Generic",
+      "entities": []
+    },
+    {
+      "text": "what's your opinion on love",
+      "intent": "Smalltalk.Bot.Opinion.Love",
+      "entities": []
+    },
+    {
+      "text": "what's your opinion on the meaning of life?",
+      "intent": "Smalltalk.Bot.Opinion.MeaningOfLife",
+      "entities": []
+    },
+    {
+      "text": "what's your thoughts on love?",
+      "intent": "Smalltalk.Bot.Opinion.Love",
+      "entities": []
+    },
+    {
+      "text": "what's your thoughts on the economy?",
+      "intent": "Smalltalk.Bot.Opinion.Generic",
       "entities": []
     },
     {
@@ -3245,8 +3409,28 @@
       "entities": []
     },
     {
+      "text": "why are we all here?",
+      "intent": "Smalltalk.Bot.Opinion.MeaningOfLife",
+      "entities": []
+    },
+    {
+      "text": "why are we here?",
+      "intent": "Smalltalk.Bot.Opinion.MeaningOfLife",
+      "entities": []
+    },
+    {
       "text": "why do you exist?",
       "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "why does life exist?",
+      "intent": "Smalltalk.Bot.Opinion.MeaningOfLife",
+      "entities": []
+    },
+    {
+      "text": "why does the universe exist?",
+      "intent": "Smalltalk.Bot.Opinion.MeaningOfLife",
       "entities": []
     },
     {
@@ -3257,6 +3441,11 @@
     {
       "text": "why?",
       "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "will bots destroy humans",
+      "intent": "Smalltalk.Bot.RuleWorld",
       "entities": []
     },
     {
@@ -3281,8 +3470,23 @@
       "entities": []
     },
     {
+      "text": "will robots end humans",
+      "intent": "Smalltalk.Bot.RuleWorld",
+      "entities": []
+    },
+    {
+      "text": "will robots take over?",
+      "intent": "Smalltalk.Bot.RuleWorld",
+      "entities": []
+    },
+    {
       "text": "will you marry me?",
       "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "will you take over the world?",
+      "intent": "Smalltalk.Bot.RuleWorld",
       "entities": []
     },
     {
