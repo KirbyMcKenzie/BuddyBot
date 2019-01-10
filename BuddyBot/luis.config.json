@@ -113,6 +113,24 @@
       "name": "Smalltalk.Bot.RuleWorld"
     },
     {
+      "name": "Smalltalk.Bot.SexualIdentity"
+    },
+    {
+      "name": "Smalltalk.Bot.Smart"
+    },
+    {
+      "name": "Smalltalk.Bot.Spy"
+    },
+    {
+      "name": "Smalltalk.Bot.There"
+    },
+    {
+      "name": "Smalltalk.Bot.WhatAreYou"
+    },
+    {
+      "name": "Smalltalk.Bot.WhereAreYou"
+    },
+    {
       "name": "Smalltalk.Greeting.HowAreYou"
     },
     {
@@ -329,8 +347,13 @@
       "entities": []
     },
     {
+      "text": "anyone home?",
+      "intent": "Smalltalk.Bot.There",
+      "entities": []
+    },
+    {
       "text": "anyone there?",
-      "intent": "Chit-Chat",
+      "intent": "Smalltalk.Bot.There",
       "entities": []
     },
     {
@@ -344,6 +367,11 @@
       "entities": []
     },
     {
+      "text": "are you a boy",
+      "intent": "Smalltalk.Bot.SexualIdentity",
+      "entities": []
+    },
+    {
       "text": "are you a chick?",
       "intent": "Smalltalk.Bot.Gender",
       "entities": []
@@ -351,6 +379,11 @@
     {
       "text": "are you a dude?",
       "intent": "Smalltalk.Bot.Gender",
+      "entities": []
+    },
+    {
+      "text": "are you a girl",
+      "intent": "Smalltalk.Bot.SexualIdentity",
       "entities": []
     },
     {
@@ -365,7 +398,7 @@
     },
     {
       "text": "are you a man",
-      "intent": "Smalltalk.Bot.Gender",
+      "intent": "Smalltalk.Bot.SexualIdentity",
       "entities": []
     },
     {
@@ -386,6 +419,16 @@
     {
       "text": "are you a woman",
       "intent": "Smalltalk.Bot.Gender",
+      "entities": []
+    },
+    {
+      "text": "are you an fbi agent?",
+      "intent": "Smalltalk.Bot.Spy",
+      "entities": []
+    },
+    {
+      "text": "are you apart of the gcsb?",
+      "intent": "Smalltalk.Bot.Spy",
       "entities": []
     },
     {
@@ -435,7 +478,7 @@
     },
     {
       "text": "are you female",
-      "intent": "Smalltalk.Bot.Gender",
+      "intent": "Smalltalk.Bot.SexualIdentity",
       "entities": []
     },
     {
@@ -470,12 +513,17 @@
     },
     {
       "text": "are you male",
-      "intent": "Smalltalk.Bot.Gender",
+      "intent": "Smalltalk.Bot.SexualIdentity",
       "entities": []
     },
     {
       "text": "are you male or female?",
       "intent": "Smalltalk.Bot.Gender",
+      "entities": []
+    },
+    {
+      "text": "are you mi6",
+      "intent": "Smalltalk.Bot.Spy",
       "entities": []
     },
     {
@@ -530,7 +578,7 @@
     },
     {
       "text": "are you smart?",
-      "intent": "Chit-Chat",
+      "intent": "Smalltalk.Bot.Smart",
       "entities": []
     },
     {
@@ -545,7 +593,7 @@
     },
     {
       "text": "are you spying on me?",
-      "intent": "Chit-Chat",
+      "intent": "Smalltalk.Bot.Spy",
       "entities": []
     },
     {
@@ -559,8 +607,33 @@
       "entities": []
     },
     {
+      "text": "are you the gru",
+      "intent": "Smalltalk.Bot.Spy",
+      "entities": []
+    },
+    {
+      "text": "are you the kgb?",
+      "intent": "Smalltalk.Bot.Spy",
+      "entities": []
+    },
+    {
+      "text": "are you the mss",
+      "intent": "Smalltalk.Bot.Spy",
+      "entities": []
+    },
+    {
+      "text": "are you the nsa",
+      "intent": "Smalltalk.Bot.Spy",
+      "entities": []
+    },
+    {
       "text": "are you there?",
-      "intent": "Chit-Chat",
+      "intent": "Smalltalk.Bot.There",
+      "entities": []
+    },
+    {
+      "text": "are you trans",
+      "intent": "Smalltalk.Bot.SexualIdentity",
       "entities": []
     },
     {
@@ -576,6 +649,11 @@
     {
       "text": "are you transsexual?",
       "intent": "Smalltalk.Bot.Gender",
+      "entities": []
+    },
+    {
+      "text": "are you working for the mss?",
+      "intent": "Smalltalk.Bot.Spy",
       "entities": []
     },
     {
@@ -1149,6 +1227,11 @@
       "entities": []
     },
     {
+      "text": "do you identify as cis",
+      "intent": "Smalltalk.Bot.SexualIdentity",
+      "entities": []
+    },
+    {
       "text": "do you identify as trans",
       "intent": "Smalltalk.Bot.Gender",
       "entities": []
@@ -1305,6 +1388,11 @@
       "entities": []
     },
     {
+      "text": "do you spy on me?",
+      "intent": "Smalltalk.Bot.Spy",
+      "entities": []
+    },
+    {
       "text": "do you think love at first sight is real?",
       "intent": "Smalltalk.Bot.Opinion.Love",
       "entities": []
@@ -1326,6 +1414,11 @@
       ]
     },
     {
+      "text": "do you think you're smart",
+      "intent": "Smalltalk.Bot.Smart",
+      "entities": []
+    },
+    {
       "text": "do you use the toilet",
       "intent": "Smalltalk.Bot.BodyFunctions",
       "entities": []
@@ -1333,6 +1426,31 @@
     {
       "text": "do you want to rule the world?",
       "intent": "Smalltalk.Bot.RuleWorld",
+      "entities": []
+    },
+    {
+      "text": "do you work for gru",
+      "intent": "Smalltalk.Bot.Spy",
+      "entities": []
+    },
+    {
+      "text": "do you work for raw india?",
+      "intent": "Smalltalk.Bot.Spy",
+      "entities": []
+    },
+    {
+      "text": "do you work for the cia",
+      "intent": "Smalltalk.Bot.Spy",
+      "entities": []
+    },
+    {
+      "text": "do you work for the fbi?",
+      "intent": "Smalltalk.Bot.Spy",
+      "entities": []
+    },
+    {
+      "text": "do you work for the nsa",
+      "intent": "Smalltalk.Bot.Spy",
       "entities": []
     },
     {
@@ -1489,6 +1607,11 @@
           "endPos": 37
         }
       ]
+    },
+    {
+      "text": "genius!!",
+      "intent": "Smalltalk.Bot.Smart",
+      "entities": []
     },
     {
       "text": "get start",
@@ -1763,8 +1886,18 @@
       "entities": []
     },
     {
+      "text": "hey are you there?",
+      "intent": "Smalltalk.Bot.There",
+      "entities": []
+    },
+    {
       "text": "hey buddy",
       "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "hey buddy are you there?",
+      "intent": "Smalltalk.Bot.There",
       "entities": []
     },
     {
@@ -1785,6 +1918,11 @@
     {
       "text": "hi are you busy",
       "intent": "Smalltalk.Bot.Busy",
+      "entities": []
+    },
+    {
+      "text": "hi are you home?",
+      "intent": "Smalltalk.Bot.There",
       "entities": []
     },
     {
@@ -2149,6 +2287,11 @@
     {
       "text": "lol",
       "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "man you are on to it today",
+      "intent": "Smalltalk.Bot.Smart",
       "entities": []
     },
     {
@@ -2619,6 +2762,11 @@
       "entities": []
     },
     {
+      "text": "smart guy",
+      "intent": "Smalltalk.Bot.Smart",
+      "entities": []
+    },
+    {
       "text": "snooze appointment",
       "intent": "None",
       "entities": [
@@ -2632,6 +2780,11 @@
     {
       "text": "so much sass",
       "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "so resourceful!",
+      "intent": "Smalltalk.Bot.Smart",
       "entities": []
     },
     {
@@ -2931,6 +3084,11 @@
       "entities": []
     },
     {
+      "text": "what are you",
+      "intent": "Smalltalk.Bot.WhatAreYou",
+      "entities": []
+    },
+    {
       "text": "what are you doing",
       "intent": "Smalltalk.Bot.Doing",
       "entities": []
@@ -2953,6 +3111,16 @@
     {
       "text": "what are you going to be doing later?",
       "intent": "Smalltalk.Bot.DoingLater",
+      "entities": []
+    },
+    {
+      "text": "what are you meant to be?",
+      "intent": "Smalltalk.Bot.WhatAreYou",
+      "entities": []
+    },
+    {
+      "text": "what are you supposed to be?",
+      "intent": "Smalltalk.Bot.WhatAreYou",
       "entities": []
     },
     {
@@ -3098,6 +3266,11 @@
       "entities": []
     },
     {
+      "text": "what is your sexual identity",
+      "intent": "Smalltalk.Bot.SexualIdentity",
+      "entities": []
+    },
+    {
       "text": "what made you?",
       "intent": "Smalltalk.Bot.Creator",
       "entities": []
@@ -3105,6 +3278,11 @@
     {
       "text": "what reminders do i have tomorrow ?",
       "intent": "Reminder.Find",
+      "entities": []
+    },
+    {
+      "text": "what the heck are you",
+      "intent": "Smalltalk.Bot.WhatAreYou",
       "entities": []
     },
     {
@@ -3289,13 +3467,23 @@
       "entities": []
     },
     {
+      "text": "where are you right now?",
+      "intent": "Smalltalk.Bot.WhereAreYou",
+      "entities": []
+    },
+    {
       "text": "where are you?",
-      "intent": "Chit-Chat",
+      "intent": "Smalltalk.Bot.WhereAreYou",
       "entities": []
     },
     {
       "text": "where have you come from?",
-      "intent": "Chit-Chat",
+      "intent": "Smalltalk.Bot.WhereAreYou",
+      "entities": []
+    },
+    {
+      "text": "where is your location?",
+      "intent": "Smalltalk.Bot.WhereAreYou",
       "entities": []
     },
     {
@@ -3501,6 +3689,11 @@
       ]
     },
     {
+      "text": "wow your pretty clever",
+      "intent": "Smalltalk.Bot.Smart",
+      "entities": []
+    },
+    {
       "text": "yay",
       "intent": "Chit-Chat",
       "entities": []
@@ -3591,8 +3784,18 @@
       "entities": []
     },
     {
+      "text": "you are clever buddy",
+      "intent": "Smalltalk.Bot.Smart",
+      "entities": []
+    },
+    {
       "text": "you are fired",
       "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "you are intelligent",
+      "intent": "Smalltalk.Bot.Smart",
       "entities": []
     },
     {
@@ -3621,6 +3824,11 @@
       "entities": []
     },
     {
+      "text": "you can be so smart sometimes",
+      "intent": "Smalltalk.Bot.Smart",
+      "entities": []
+    },
+    {
       "text": "you can't work for me anymore",
       "intent": "Chit-Chat",
       "entities": []
@@ -3628,6 +3836,11 @@
     {
       "text": "you have a nice day?",
       "intent": "Smalltalk.Greeting.HowWasYourDay",
+      "entities": []
+    },
+    {
+      "text": "you home?",
+      "intent": "Smalltalk.Bot.There",
       "entities": []
     },
     {
@@ -3676,8 +3889,33 @@
       "entities": []
     },
     {
+      "text": "you there man?",
+      "intent": "Smalltalk.Bot.There",
+      "entities": []
+    },
+    {
+      "text": "you there?",
+      "intent": "Smalltalk.Bot.There",
+      "entities": []
+    },
+    {
       "text": "your are funny :)",
       "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "your very intelligent",
+      "intent": "Smalltalk.Bot.Smart",
+      "entities": []
+    },
+    {
+      "text": "you're a brain box",
+      "intent": "Smalltalk.Bot.Smart",
+      "entities": []
+    },
+    {
+      "text": "you're a genius!",
+      "intent": "Smalltalk.Bot.Smart",
       "entities": []
     },
     {
@@ -3688,6 +3926,11 @@
     {
       "text": "you're nice",
       "intent": "Chit-Chat",
+      "entities": []
+    },
+    {
+      "text": "you're pretty on to it",
+      "intent": "Smalltalk.Bot.Smart",
       "entities": []
     },
     {
