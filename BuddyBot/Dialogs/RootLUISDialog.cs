@@ -79,6 +79,16 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Smalltalk.Bot.There")]
         [LuisIntent("Smalltalk.Bot.WhatAreYou")]
         [LuisIntent("Smalltalk.Bot.WhereAreyou")]
+        [LuisIntent("Smalltalk.Compliment.Bot")]
+        [LuisIntent("Smalltalk.Compliment.Response")]
+        [LuisIntent("Smalltalk.Criticism.Bot")]
+        [LuisIntent("Smalltalk.Dialog.Affirmation")]
+        [LuisIntent("Smalltalk.Dialog.Laugh")]
+        [LuisIntent("Smalltalk.Dialog.Polite")]
+        [LuisIntent("Smalltalk.Dialog.Right")]
+        [LuisIntent("Smalltalk.Dialog.Sorry")]
+        [LuisIntent("Smalltalk.Dialog.ThankYou")]
+        [LuisIntent("Smalltalk.Greeting.Bye")]
         [LuisIntent("Smalltalk.Greeting.HowAreYou")]
         public async Task SmallTalk(IDialogContext context, LuisResult result)
         {
