@@ -95,13 +95,13 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Smalltalk.Greeting.WhatsUp")]
         [LuisIntent("Smalltalk.User.Angry")]
         [LuisIntent("Smalltalk.User.BeBack")]
-        [LuisIntent("Smalltalk.User.Bored")] // Add to LUIS
-        [LuisIntent("Smalltalk.User.Happy")] // Add to LUIS
-        [LuisIntent("Smalltalk.User.Hungry")] // Add to LUIS
-        [LuisIntent("Smalltalk.User.Kidding")] // Add to LUIS
-        [LuisIntent("Smalltalk.User.Lonely")] // Add to LUIS
-        [LuisIntent("Smalltalk.User.Sad")] // Add to LUIS
-        [LuisIntent("Smalltalk.User.Tired")] // Add to LUIS
+        [LuisIntent("Smalltalk.User.Bored")]
+        [LuisIntent("Smalltalk.User.Happy")]
+        [LuisIntent("Smalltalk.User.Hungry")]
+        [LuisIntent("Smalltalk.User.Kidding")]
+        [LuisIntent("Smalltalk.User.Lonely")]
+        [LuisIntent("Smalltalk.User.Sad")]
+        [LuisIntent("Smalltalk.User.Tired")]
         public async Task SmallTalk(IDialogContext context, LuisResult result)
         {
             await context.PostAsync(await _conversationService.GetResponseByIntentName(result.TopScoringIntent.Intent, _botDataService.GetPreferredBotPersona(context)));
