@@ -33,3 +33,9 @@ Then remove the most recent migration:
 
 `
 dotnet ef --startup-project ..\\BuddyBot.Repository.Startup\\ migrations remove
+
+### Generate sql script
+
+`
+dotnet ef --startup-project ..\\BuddyBot.Repository.Startup\\ migrations script -o <filename>
+`
