@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BuddyBot.Repository.Migrations
 {
     [DbContext(typeof(BuddyBotDbContext))]
-    [Migration("20190115072553_AddSmallTalkResponseSeedData")]
+    [Migration("20190115080457_AddSmallTalkResponseSeedData")]
     partial class AddSmallTalkResponseSeedData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -361,6 +361,61 @@ namespace BuddyBot.Repository.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("WeatherConditionResponse");
+
+                    b.HasData(
+                        new { Id = 200, Condition = "thunderstorm with light rain", Group = "Thunderstorm", MappedConditionResponse = "thunderstorm with light rain" },
+                        new { Id = 201, Condition = "thunderstorm with rain", Group = "Thunderstorm", MappedConditionResponse = "thunderstorm with rain" },
+                        new { Id = 202, Condition = "thunderstorm with heavy rain", Group = "Thunderstorm", MappedConditionResponse = "thunderstorm with heavy rain" },
+                        new { Id = 210, Condition = "light thunderstorm", Group = "Thunderstorm", MappedConditionResponse = "light thunderstorm" },
+                        new { Id = 211, Condition = "thunderstorm", Group = "Thunderstorm", MappedConditionResponse = "thunderstorm" },
+                        new { Id = 212, Condition = "heavy thunderstorm", Group = "Thunderstorm", MappedConditionResponse = "heavy thunderstorm" },
+                        new { Id = 221, Condition = "ragged thunderstorm", Group = "Thunderstorm", MappedConditionResponse = "ragged thunderstorm" },
+                        new { Id = 230, Condition = "thunderstorm with light drizzle", Group = "Thunderstorm", MappedConditionResponse = "thunderstorm with light drizzle" },
+                        new { Id = 231, Condition = "thunderstorm with drizzle", Group = "Thunderstorm", MappedConditionResponse = "thunderstorm with drizzle" },
+                        new { Id = 232, Condition = "thunderstorm with heavy drizzle", Group = "Thunderstorm", MappedConditionResponse = "thunderstorm with heavy drizzle" },
+                        new { Id = 300, Condition = "light intensity drizzle", Group = "Drizzle", MappedConditionResponse = "light intensity drizzle" },
+                        new { Id = 301, Condition = "drizzle", Group = "Drizzle", MappedConditionResponse = "drizzle" },
+                        new { Id = 302, Condition = "heavy intensity drizzle", Group = "Drizzle", MappedConditionResponse = "heavy intensity drizzle" },
+                        new { Id = 310, Condition = "light intensity drizzle rain", Group = "Drizzle", MappedConditionResponse = "light intensity drizzle rain" },
+                        new { Id = 311, Condition = "drizzle rain", Group = "Drizzle", MappedConditionResponse = "drizzle rain" },
+                        new { Id = 312, Condition = "heavy intensity drizzle rain", Group = "Drizzle", MappedConditionResponse = "heavy intensity drizzle rain" },
+                        new { Id = 313, Condition = "shower rain and drizzle", Group = "Drizzle", MappedConditionResponse = "shower rain and drizzle" },
+                        new { Id = 500, Condition = "light rain", Group = "Rain", MappedConditionResponse = "light rain" },
+                        new { Id = 501, Condition = "moderate rain", Group = "Rain", MappedConditionResponse = "moderate rain" },
+                        new { Id = 502, Condition = "heavy intensity rain", Group = "Rain", MappedConditionResponse = "heavy intensity rain" },
+                        new { Id = 503, Condition = "very heavy rain", Group = "Rain", MappedConditionResponse = "very heavy rain" },
+                        new { Id = 504, Condition = "extreme rain", Group = "Rain", MappedConditionResponse = "extreme rain" },
+                        new { Id = 511, Condition = "freezing rain", Group = "Rain", MappedConditionResponse = "freezing rain" },
+                        new { Id = 520, Condition = "light intensity shower rain", Group = "Rain", MappedConditionResponse = "light intensity shower rain" },
+                        new { Id = 521, Condition = "shower rain", Group = "Rain", MappedConditionResponse = "shower rain" },
+                        new { Id = 522, Condition = "heavy intensity shower rain", Group = "Rain", MappedConditionResponse = "heavy intensity shower rain" },
+                        new { Id = 531, Condition = "ragged shower rain", Group = "Rain", MappedConditionResponse = "ragged shower rain" },
+                        new { Id = 600, Condition = "light snow", Group = "Snow", MappedConditionResponse = "light snow" },
+                        new { Id = 601, Condition = "snow", Group = "Snow", MappedConditionResponse = "snow" },
+                        new { Id = 602, Condition = "heavy snow", Group = "Snow", MappedConditionResponse = "heavy snow" },
+                        new { Id = 611, Condition = "sleet", Group = "Snow", MappedConditionResponse = "sleet" },
+                        new { Id = 612, Condition = "shower sleet", Group = "Snow", MappedConditionResponse = "shower sleet" },
+                        new { Id = 615, Condition = "light rain and snow", Group = "Snow", MappedConditionResponse = "light rain and snow" },
+                        new { Id = 616, Condition = "rain and snow", Group = "Snow", MappedConditionResponse = "rain and snow" },
+                        new { Id = 620, Condition = "light shower snow", Group = "Snow", MappedConditionResponse = "light shower snow" },
+                        new { Id = 621, Condition = "shower snow", Group = "Snow", MappedConditionResponse = "shower snow" },
+                        new { Id = 622, Condition = "heavy shower snow", Group = "Snow", MappedConditionResponse = "heavy shower snow" },
+                        new { Id = 701, Condition = "mist", Group = "Atmosphere", MappedConditionResponse = "mist" },
+                        new { Id = 711, Condition = "smoke", Group = "Atmosphere", MappedConditionResponse = "smoke" },
+                        new { Id = 721, Condition = "haze", Group = "Atmosphere", MappedConditionResponse = "haze" },
+                        new { Id = 731, Condition = "sand, dust whirls", Group = "Atmosphere", MappedConditionResponse = "sand, dust whirls" },
+                        new { Id = 741, Condition = "fog", Group = "Atmosphere", MappedConditionResponse = "fog" },
+                        new { Id = 751, Condition = "sand", Group = "Atmosphere", MappedConditionResponse = "sand" },
+                        new { Id = 761, Condition = "dust", Group = "Atmosphere", MappedConditionResponse = "dust" },
+                        new { Id = 762, Condition = "volcanic ash", Group = "Atmosphere", MappedConditionResponse = "volcanic ash" },
+                        new { Id = 771, Condition = "squalls", Group = "Atmosphere", MappedConditionResponse = "squalls" },
+                        new { Id = 781, Condition = "tornado", Group = "Atmosphere", MappedConditionResponse = "tornado" },
+                        new { Id = 800, Condition = "clear sky", Group = "Clear", MappedConditionResponse = "clear sky" },
+                        new { Id = 801, Condition = "few clouds", Group = "Clouds", MappedConditionResponse = "few clouds" },
+                        new { Id = 802, Condition = "scattered clouds", Group = "Clouds", MappedConditionResponse = "scattered clouds" },
+                        new { Id = 803, Condition = "broken clouds", Group = "Clouds", MappedConditionResponse = "broken clouds" },
+                        new { Id = 804, Condition = "overcast clouds", Group = "Clouds", MappedConditionResponse = "overcast clouds" }
+                    );
                 });
 #pragma warning restore 612, 618
         }
