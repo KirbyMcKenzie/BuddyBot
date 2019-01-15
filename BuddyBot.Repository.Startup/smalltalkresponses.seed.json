@@ -538,7 +538,7 @@
     "IntentResponse": "Bye for now!",
     "PersonalityResponseType": "Friendly"
   },
-  {I'll '
+  {
     "Id": "71c5973e-6074-457a-86ad-df8911059ad8",
     "IntentGroup": "User",
     "IntentName": "Smalltalk.User.BeBack",
