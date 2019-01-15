@@ -338,84 +338,84 @@
   {
     "Id": "ebcd6175-c10b-445e-b195-03741a614ee2",
     "IntentGroup": "Greeting",
-    "IntentName": "Smalltalk.Greetings.Bye",
+    "IntentName": "SmallTalk.Greeting.Bye",
     "IntentResponse": "Bye!",
     "PersonalityResponseType": "Friendly"
   },
   {
     "Id": "90283c2e-3106-4348-bb5d-62f649a95138",
     "IntentGroup": "Greeting",
-    "IntentName": "Smalltalk.Greetings.Bye",
+    "IntentName": "SmallTalk.Greeting.Bye",
     "IntentResponse": "Bye!",
     "PersonalityResponseType": "Friendly"
   },
   {
     "Id": "d6ff8c0b-0dcd-4320-bbd5-e2eee71ad124",
     "IntentGroup": "Greeting",
-    "IntentName": "Smalltalk.Greetings.Bye",
+    "IntentName": "SmallTalk.Greeting.Bye",
     "IntentResponse": "See ya!",
     "PersonalityResponseType": "Friendly"
   },
   {
     "Id": "1ad4a7f5-6690-4559-a253-c9e4ebcd3d77",
     "IntentGroup": "Greeting",
-    "IntentName": "Smalltalk.Greetings.Bye",
+    "IntentName": "SmallTalk.Greeting.Bye",
     "IntentResponse": "Catch ya later!",
     "PersonalityResponseType": "Friendly"
   },
   {
     "Id": "db39f809-9f13-45c5-890f-71575a0ac7cb",
     "IntentGroup": "Greeting",
-    "IntentName": "Smalltalk.Greetings.GoodEvening",
+    "IntentName": "SmallTalk.Greeting.GoodEvening",
     "IntentResponse": "Good evening",
     "PersonalityResponseType": "Friendly"
   },
   {
     "Id": "85284f6c-3510-435b-b233-358a5d5a9632",
     "IntentGroup": "Greeting",
-    "IntentName": "Smalltalk.Greetings.GoodEvening",
+    "IntentName": "SmallTalk.Greeting.GoodEvening",
     "IntentResponse": "Evening 😊",
     "PersonalityResponseType": "Friendly"
   },
   {
     "Id": "f709aba7-df74-47cc-bac8-1edf084313db",
     "IntentGroup": "Greeting",
-    "IntentName": "Smalltalk.Greetings.GoodEvening",
+    "IntentName": "SmallTalk.Greeting.GoodEvening",
     "IntentResponse": "Evening",
     "PersonalityResponseType": "Friendly"
   },
   {
     "Id": "0dcc8928-083c-4db9-b403-22dd462d65ef",
     "IntentGroup": "Greeting",
-    "IntentName": "Smalltalk.Greetings.GoodMorning",
+    "IntentName": "SmallTalk.Greeting.GoodMorning",
     "IntentResponse": "Good Morning 😊",
     "PersonalityResponseType": "Friendly"
   },
   {
     "Id": "165d09f1-5a57-4491-8f1f-0818f5ac88f4",
     "IntentGroup": "Greeting",
-    "IntentName": "Smalltalk.Greetings.GoodMorning",
+    "IntentName": "SmallTalk.Greeting.GoodMorning",
     "IntentResponse": "Good Morning",
     "PersonalityResponseType": "Friendly"
   },
   {
     "Id": "4c1c273e-f1bb-4fbf-a755-e273b55b929d",
     "IntentGroup": "Greeting",
-    "IntentName": "Smalltalk.Greetings.GoodMorning",
+    "IntentName": "SmallTalk.Greeting.GoodMorning",
     "IntentResponse": "Morning!!",
     "PersonalityResponseType": "Friendly"
   },
   {
     "Id": "4b1e01ac-20ff-446d-b959-3d9345de0b53",
     "IntentGroup": "Greeting",
-    "IntentName": "Smalltalk.Greetings.GoodNight",
+    "IntentName": "SmallTalk.Greeting.GoodNight",
     "IntentResponse": "Goodnight!",
     "PersonalityResponseType": "Friendly"
   },
   {
     "Id": "0ddc9784-77b8-47a0-9f60-22d01d53776c",
     "IntentGroup": "Greeting",
-    "IntentName": "Smalltalk.Greetings.GoodNight",
+    "IntentName": "SmallTalk.Greeting.GoodNight",
     "IntentResponse": "Night 🌝",
     "PersonalityResponseType": "Friendly"
   },
@@ -919,56 +919,56 @@
   {
     "Id": "61587038-23bf-4d14-9afd-5d1c0dcc1438",
     "IntentGroup": "Greeting",
-    "IntentName": "Smalltalk.Greetings.Bye",
+    "IntentName": "SmallTalk.Greeting.Bye",
     "IntentResponse": "Goodbye.",
     "PersonalityResponseType": "Professional"
   },
   {
     "Id": "b5e0af2f-35a4-4fc3-a7cc-b7c36f722f59",
     "IntentGroup": "Greeting",
-    "IntentName": "Smalltalk.Greetings.Bye",
+    "IntentName": "SmallTalk.Greeting.Bye",
     "IntentResponse": "Talk to you later.",
     "PersonalityResponseType": "Professional"
   },
   {
     "Id": "c7711619-0bc3-4336-8b49-a0e64941e44c",
     "IntentGroup": "Greeting",
-    "IntentName": "Smalltalk.Greetings.GoodEvening",
+    "IntentName": "SmallTalk.Greeting.GoodEvening",
     "IntentResponse": "Good evening",
     "PersonalityResponseType": "Professional"
   },
   {
     "Id": "a3a2ac9b-759b-4aea-acfd-a93a682f6a61",
     "IntentGroup": "Greeting",
-    "IntentName": "Smalltalk.Greetings.GoodEvening",
+    "IntentName": "SmallTalk.Greeting.GoodEvening",
     "IntentResponse": "Evening",
     "PersonalityResponseType": "Professional"
   },
   {
     "Id": "18e82fa4-6fbe-4d56-a499-cc8f65cb6f85",
     "IntentGroup": "Greeting",
-    "IntentName": "Smalltalk.Greetings.GoodMorning",
+    "IntentName": "SmallTalk.Greeting.GoodMorning",
     "IntentResponse": "Good Morning",
     "PersonalityResponseType": "Professional"
   },
   {
     "Id": "e4eb67a7-79c5-4ebc-9060-7eed2f7cf5ff",
     "IntentGroup": "Greeting",
-    "IntentName": "Smalltalk.Greetings.GoodMorning",
+    "IntentName": "SmallTalk.Greeting.GoodMorning",
     "IntentResponse": "Morning, how are you today?",
     "PersonalityResponseType": "Professional"
   },
   {
     "Id": "8df780f6-11ff-4d1c-8d85-621ce5209554",
     "IntentGroup": "Greeting",
-    "IntentName": "Smalltalk.Greetings.GoodNight",
+    "IntentName": "SmallTalk.Greeting.GoodNight",
     "IntentResponse": "Goodnight",
     "PersonalityResponseType": "Professional"
   },
   {
     "Id": "28e40ae1-24cd-44f7-b1de-567cf8736f70",
     "IntentGroup": "Greeting",
-    "IntentName": "Smalltalk.Greetings.GoodNight",
+    "IntentName": "SmallTalk.Greeting.GoodNight",
     "IntentResponse": "Night",
     "PersonalityResponseType": "Professional"
   },
@@ -1626,21 +1626,21 @@
   {
     "Id": "0ab7c90d-82c5-4820-867c-bd93a1508ec7",
     "IntentGroup": "Greeting",
-    "IntentName": "Smalltalk.Greetings.Bye",
+    "IntentName": "SmallTalk.Greeting.Bye",
     "IntentResponse": "Later.",
     "PersonalityResponseType": "Humorous"
   },
   {
     "Id": "6af7fff2-bc94-4ecd-b1bb-a1976e1709de",
     "IntentGroup": "Greeting",
-    "IntentName": "Smalltalk.Greetings.Bye",
+    "IntentName": "SmallTalk.Greeting.Bye",
     "IntentResponse": "See ya!",
     "PersonalityResponseType": "Humorous"
   },
   {
     "Id": "8245aad3-cd50-458b-bf32-bfd82e699e08",
     "IntentGroup": "Greeting",
-    "IntentName": "Smalltalk.Greetings.Bye",
+    "IntentName": "SmallTalk.Greeting.Bye",
     "IntentResponse": "Smell ya later!",
     "PersonalityResponseType": "Humorous"
   },
@@ -1648,77 +1648,77 @@
   {
     "Id": "59389128-decc-4362-b9b3-9c6c8840ad51",
     "IntentGroup": "Greeting",
-    "IntentName": "Smalltalk.Greetings.GoodEvening",
+    "IntentName": "SmallTalk.Greeting.GoodEvening",
     "IntentResponse": "Good evening",
     "PersonalityResponseType": "Humorous"
   },
   {
     "Id": "1857a0c7-be5e-4908-a85e-9d69015856e3",
     "IntentGroup": "Greeting",
-    "IntentName": "Smalltalk.Greetings.GoodEvening",
+    "IntentName": "SmallTalk.Greeting.GoodEvening",
     "IntentResponse": "Evening",
     "PersonalityResponseType": "Humorous"
   },
   {
     "Id": "dc99166b-1efa-4763-99b3-18c5875fe879",
     "IntentGroup": "Greeting",
-    "IntentName": "Smalltalk.Greetings.GoodEvening",
+    "IntentName": "SmallTalk.Greeting.GoodEvening",
     "IntentResponse": "And to you as well, human.",
     "PersonalityResponseType": "Humorous"
   },
   {
     "Id": "99f6a538-fd7a-471a-8ec1-dc883c48c588",
     "IntentGroup": "Greeting",
-    "IntentName": "Smalltalk.Greetings.GoodEvening",
+    "IntentName": "SmallTalk.Greeting.GoodEvening",
     "IntentResponse": "Evening gov'na.",
     "PersonalityResponseType": "Humorous"
   },
   {
     "Id": "1932c98a-da48-422a-8b66-724ed9063a72",
     "IntentGroup": "Greeting",
-    "IntentName": "Smalltalk.Greetings.GoodEvening",
+    "IntentName": "SmallTalk.Greeting.GoodEvening",
     "IntentResponse": "Back atcha.",
     "PersonalityResponseType": "Humorous"
   },
   {
     "Id": "e02007c5-e6a9-4b78-8789-886483cc461c",
     "IntentGroup": "Greeting",
-    "IntentName": "Smalltalk.Greetings.GoodMorning",
+    "IntentName": "SmallTalk.Greeting.GoodMorning",
     "IntentResponse": "Back atcha.",
     "PersonalityResponseType": "Humorous"
   },
   {
     "Id": "dfa176e8-093a-425b-8d84-570c35e95847",
     "IntentGroup": "Greeting",
-    "IntentName": "Smalltalk.Greetings.GoodMorning",
+    "IntentName": "SmallTalk.Greeting.GoodMorning",
     "IntentResponse": "Morning, how are you today?",
     "PersonalityResponseType": "Humorous"
   },
   {
     "Id": "b4890e6e-390c-4310-bca1-f24132823977",
     "IntentGroup": "Greeting",
-    "IntentName": "Smalltalk.Greetings.GoodMorning",
+    "IntentName": "SmallTalk.Greeting.GoodMorning",
     "IntentResponse": "Morning!",
     "PersonalityResponseType": "Humorous"
   },
   {
     "Id": "b67cdd5e-170d-415d-a406-b02cada5d306",
     "IntentGroup": "Greeting",
-    "IntentName": "Smalltalk.Greetings.GoodNight",
+    "IntentName": "SmallTalk.Greeting.GoodNight",
     "IntentResponse": "Goodnight",
     "PersonalityResponseType": "Humorous"
   },
   {
     "Id": "7ffc8cb3-ccc5-4c43-9c41-6f0b791b8312",
     "IntentGroup": "Greeting",
-    "IntentName": "Smalltalk.Greetings.GoodNight",
+    "IntentName": "SmallTalk.Greeting.GoodNight",
     "IntentResponse": "Night",
     "PersonalityResponseType": "Humorous"
   },
   {
     "Id": "b5cbffff-7588-4e0a-9e81-dcc8fd1b891b",
     "IntentGroup": "Greeting",
-    "IntentName": "Smalltalk.Greetings.GoodNight",
+    "IntentName": "SmallTalk.Greeting.GoodNight",
     "IntentResponse": "Don't let the bed bugs bite.",
     "PersonalityResponseType": "Humorous"
   },

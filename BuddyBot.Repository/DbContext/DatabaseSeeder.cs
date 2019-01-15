@@ -84,7 +84,7 @@ namespace BuddyBot.Repository.DbContext
 
         public SmallTalkResponse[] BuildSmallTalkRespenses()
         {
-            var jsonData = System.IO.File.ReadAllText(@"chitChatSeedData.json");
+            var jsonData = System.IO.File.ReadAllText(@"smalltalkresponses.seed.json");
             SmallTalkResponse[] responses = JsonConvert.DeserializeObject<SmallTalkResponse[]>(jsonData);
 
             return responses;
