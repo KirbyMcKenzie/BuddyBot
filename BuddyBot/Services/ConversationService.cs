@@ -110,6 +110,11 @@ namespace BuddyBot.Services
 
             IList<SmallTalkResponse> result = await _smallTalkResponseReader.GetSmallTalkResponsesByIntentName(intentName, persona.ToString());
 
+            if(result == null)
+            {
+                return "Let's move on. What can I help with?";
+            }
+
             Random random = new Random();
 
             return result[random.Next(result.Count)].IntentResponse;
