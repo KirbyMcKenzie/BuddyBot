@@ -82,6 +82,22 @@ namespace BuddyBot.Repository.DbContext
             return weatherConditionResponseList;
         }
 
+        public SmallTalkResponse[] BuildSmallTalkRespenses()
+        {
+            var jsonData = System.IO.File.ReadAllText(@"smalltalkresponses.seed.json");
+            SmallTalkResponse[] responses = JsonConvert.DeserializeObject<SmallTalkResponse[]>(jsonData);
+
+            return responses;
+        }
+
+
+        public City[] BuildCities()
+        {
+            var jsonData = System.IO.File.ReadAllText(@"city.list.json");
+            City[] cities = JsonConvert.DeserializeObject<City[]>(jsonData);
+
+            return cities;
+        }
 
         private WeatherConditionResponse BuildWeatherConditionResponse(int id, string condition, string group, string response)
         {
@@ -91,6 +107,17 @@ namespace BuddyBot.Repository.DbContext
                 Condition = condition,
                 Group = group,
                  MappedConditionResponse = response
+            };
+        }
+
+        private SmallTalkResponse BuildSmallTalkResponse(Guid id, string intentGroup, string intentName, string intentResponse)
+        {
+            return new SmallTalkResponse()
+            {
+                Id = id,
+                IntentGroup = intentGroup,
+                IntentName = intentName,
+                IntentResponse = intentResponse
             };
         }
     }

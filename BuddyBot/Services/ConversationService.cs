@@ -3,13 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using BuddyBot.Repository.DataAccess.Contracts;
+using BuddyBot.Repository.Models;
 using BuddyBot.Services.Contracts;
-
+using PersonalityChatPersona = BuddyBot.Models.Enums.PersonalityChatPersona;
 namespace BuddyBot.Services
 {
     public class ConversationService : IConversationService
     {
-        
+        private readonly ISmallTalkResponseReader _smallTalkResponseReader;
+
+        public ConversationService(ISmallTalkResponseReader smallTalkResponseReader)
+        {
+            _smallTalkResponseReader = smallTalkResponseReader;
+        }
+
         public async Task<string> GetGreeting(string name = null)
         {
             IList<string> greetingList = getGreetingList(name);
@@ -90,6 +98,27 @@ namespace BuddyBot.Services
             });
 
             return greetingList;
+        }
+
+        public async Task<string> GetResponseByIntentName(string intentName, PersonalityChatPersona persona)
+        {
+
+            if (persona == PersonalityChatPersona.None)
+            {
+                persona = PersonalityChatPersona.Friendly;
+            }
+
+            IList<SmallTalkResponse> result = await _smallTalkResponseReader.GetSmallTalkResponsesByIntentName(intentName, persona.ToString());
+
+            if(result == null)
+            {
+                return "Let's move on. What can I help with?";
+            }
+
+            Random random = new Random();
+
+            return result[random.Next(result.Count)].IntentResponse;
+
         }
     }
 }

@@ -16,6 +16,8 @@ using static System.Threading.Thread;
 using Pause = BuddyBot.Models.ConversationPauseConstants;
 using Serilog;
 using BuddyBot.Models.Enums;
+using BuddyBot.Repository.DataAccess.Contracts;
+using System.Linq;
 
 namespace BuddyBot.Dialogs
 {
@@ -27,6 +29,7 @@ namespace BuddyBot.Dialogs
         private readonly IHeadTailsService _headTailsService;
         private readonly IJokeService _jokeService;
         private readonly IBotDataService _botDataService;
+        
 
         public RootLuisDialog(
             IDialogBuilder dialogBuilder, IConversationService conversationService,
@@ -53,18 +56,57 @@ namespace BuddyBot.Dialogs
         }
 
 
-        [LuisIntent("Chit-Chat")]
-        public async Task Chitchat(IDialogContext context, LuisResult result)
+        [LuisIntent("Smalltalk.Bot.Age")]
+        [LuisIntent("Smalltalk.Bot.BodyFunctions")]
+        [LuisIntent("Smalltalk.Bot.Boss")]
+        [LuisIntent("Smalltalk.Bot.Busy")]
+        [LuisIntent("Smalltalk.Bot.Creator")]
+        [LuisIntent("Smalltalk.Bot.Doing")]
+        [LuisIntent("Smalltalk.Bot.DoingLater")]
+        [LuisIntent("Smalltalk.Bot.Family")]
+        [LuisIntent("Smalltalk.Bot.Favorites")]
+        [LuisIntent("Smalltalk.Bot.Gender")]
+        [LuisIntent("Smalltalk.Bot.Happy")]
+        [LuisIntent("Smalltalk.Bot.Hungry")]
+        [LuisIntent("Smalltalk.Bot.KnowOtherBot")]
+        [LuisIntent("Smalltalk.Bot.Opinion.Generic")]
+        [LuisIntent("Smalltalk.Bot.Opinion.Love")]
+        [LuisIntent("Smalltalk.Bot.Opinion.MeaningOfLife")]
+        [LuisIntent("Smalltalk.Bot.RuleWorld")]
+        [LuisIntent("Smalltalk.Bot.SexualIdentity")]
+        [LuisIntent("Smalltalk.Bot.Smart")]
+        [LuisIntent("Smalltalk.Bot.Spy")]
+        [LuisIntent("Smalltalk.Bot.There")]
+        [LuisIntent("Smalltalk.Bot.WhatAreYou")]
+        [LuisIntent("Smalltalk.Bot.WhereAreyou")]
+        [LuisIntent("Smalltalk.Compliment.Bot")]
+        [LuisIntent("Smalltalk.Compliment.Response")]
+        [LuisIntent("Smalltalk.Criticism.Bot")]
+        [LuisIntent("Smalltalk.Dialog.Affirmation")]
+        [LuisIntent("Smalltalk.Dialog.Laugh")]
+        [LuisIntent("Smalltalk.Dialog.Polite")]
+        [LuisIntent("Smalltalk.Dialog.Right")]
+        [LuisIntent("Smalltalk.Dialog.Sorry")]
+        [LuisIntent("Smalltalk.Dialog.ThankYou")]
+        [LuisIntent("Smalltalk.Greeting.Bye")]
+        [LuisIntent("Smalltalk.Greeting.HowAreYou")]
+        [LuisIntent("Smalltalk.Greeting.HowWasYourDay")]
+        [LuisIntent("Smalltalk.Greeting.OtherBot")]
+        [LuisIntent("Smalltalk.Greeting.WhatsUp")]
+        [LuisIntent("Smalltalk.User.Angry")]
+        [LuisIntent("Smalltalk.User.BeBack")]
+        [LuisIntent("Smalltalk.User.Bored")]
+        [LuisIntent("Smalltalk.User.Happy")]
+        [LuisIntent("Smalltalk.User.Hungry")]
+        [LuisIntent("Smalltalk.User.Kidding")]
+        [LuisIntent("Smalltalk.User.Lonely")]
+        [LuisIntent("Smalltalk.User.Sad")]
+        [LuisIntent("Smalltalk.User.Tired")]
+        public async Task SmallTalk(IDialogContext context, LuisResult result)
         {
-            await context.Forward(new PersonalityChatDialog(_botDataService, _conversationService, context), Resume_AfterChitchat, new Activity { Text = result.Query },
-                CancellationToken.None);
+            await context.PostAsync(await _conversationService.GetResponseByIntentName(result.TopScoringIntent.Intent, _botDataService.GetPreferredBotPersona(context)));
+            context.Wait(MessageReceived);
         }
-
-        private async Task Resume_AfterChitchat(IDialogContext context, IAwaitable<IMessageActivity> result)
-        {
-            await Task.Yield();
-        }
-
 
         [LuisIntent("Greeting")]
         public async Task Greeting(IDialogContext context, LuisResult result)
