@@ -338,9 +338,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="luis.config.json" />
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\buddy-bot - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\BuddyBot - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
