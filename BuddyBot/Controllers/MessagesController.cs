@@ -46,7 +46,6 @@ namespace BuddyBot.Controllers
                 }
                 catch (Exception ex)
                 {
-
                     Log.Error(ex, $"An unexpected error occurred, error details: {ex.Message}");
                     throw;
                 }

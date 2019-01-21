@@ -8,17 +8,6 @@ namespace BuddyBot.Dialogs.Builders
 {
     public class RichCardAttachmentBuilder
     {
-        private static IList<Attachment> GetCardsAttachments()
-        {
-            return new List<Attachment>()
-            {
-                GetHeroCard(
-                    "Azure Functions",
-                    "Process events with a serverless code architecture",
-                    new CardAction(ActionTypes.PostBack, "Learn more", value: "https://azure.microsoft.com/en-us/services/functions/")),
-            };
-        }
-
         private static Attachment GetHeroCard(string title, string text, CardAction cardAction)
         {
             var heroCard = new HeroCard
