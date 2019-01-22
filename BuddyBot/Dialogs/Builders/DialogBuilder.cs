@@ -33,7 +33,6 @@ namespace BuddyBot.Dialogs.Builders
             return CreateDialog(message, s => s.Resolve<RootLuisDialog>());
         }
 
-
         public NameDialog BuildNameDialog(IMessageActivity message)
         {
             return CreateDialog(message, s => s.Resolve<NameDialog>());

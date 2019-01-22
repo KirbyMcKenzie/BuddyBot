@@ -46,7 +46,7 @@ namespace BuddyBot.Dialogs
             if (string.IsNullOrEmpty(cityName))
             {
 
-                if (preferredCity == null || preferredCity.Name == null)
+                if (preferredCity?.Name == null)
                 {
                     PromptDialog.Text(context, ResumeAfterSpecifyCityNamePrompt, "What's the name of the city you want the forecast for?", "I can't understand you. Tell me the name of the city you want the forecast for");
                     
@@ -55,16 +55,9 @@ namespace BuddyBot.Dialogs
                 {
                     var weatherForecast = await _weatherService.GetWeather(preferredCity);
 
-                    if(weatherForecast != string.Empty)
-                    {
-                        context.Done($"Currently the weather in {preferredCity.Name} is {weatherForecast}");
-
-                    }
-                    else
-                    {
-                        context.Done("🤧⛅ - I'm having trouble accessing weather reports. We'll have to try again later!");
-                    }
-
+                    context.Done(weatherForecast != string.Empty
+                        ? $"Currently the weather in {preferredCity.Name} is {weatherForecast}"
+                        : "🤧⛅ - I'm having trouble accessing weather reports. We'll have to try again later!");
                 }
             }
             else
@@ -85,18 +78,11 @@ namespace BuddyBot.Dialogs
             }
             else if (citySearchResults != null && citySearchResults.Count == 1)
             {
-
                 var weatherForecast = await _weatherService.GetWeather(citySearchResults.FirstOrDefault());
 
-                if(weatherForecast != string.Empty)
-                {
-                    context.Done($"The weather in {cityName} right now is {weatherForecast}");
-                }
-                else
-                {
-                    context.Done("🤧⛅ - I'm having trouble accessing weather reports. We'll have to try again later!");
-                }
-
+                context.Done(weatherForecast != string.Empty
+                    ? $"The weather in {cityName} right now is {weatherForecast}"
+                    : "🤧⛅ - I'm having trouble accessing weather reports. We'll have to try again later!");
             }
             else if (citySearchResults != null && citySearchResults.Count >= 2)
             {
@@ -138,16 +124,9 @@ namespace BuddyBot.Dialogs
 
             var weatherForecast = await _weatherService.GetWeather(city);
 
-            if(weatherForecast != string.Empty)
-            {
-                context.Done($"Currently the weather in {message.Text} is {weatherForecast}");
-            }
-            else
-            {
-                context.Done("🤧⛅ - I'm having trouble accessing weather reports. We'll have to try again later!");
-            }
-
-            
+            context.Done(weatherForecast != string.Empty
+                ? $"Currently the weather in {message.Text} is {weatherForecast}"
+                : "🤧⛅ - I'm having trouble accessing weather reports. We'll have to try again later!");
         }
 
         private List<CardAction> CreateCardActionList(IList<City> cityResultList)
