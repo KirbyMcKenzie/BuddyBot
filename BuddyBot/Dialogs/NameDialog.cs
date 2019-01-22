@@ -15,8 +15,6 @@ namespace BuddyBot.Dialogs
     [Serializable]
     public class NameDialog : IDialog<string>
     {
-
-
         private string _preferredNameFromMessage;
         private readonly IBotDataService _botDataService;
         private readonly IList<EntityRecommendation> _entities;

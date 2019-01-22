@@ -86,7 +86,7 @@ namespace BuddyBot.Dialogs
             }
             else if (citySearchResults != null && citySearchResults.Count >= 2)
             {
-                // TODO - Change type of card
+
                 // TODO - Think about limiting amount of cards displayed, see more button? 
                 List<CardAction> cityCardActionList = CreateCardActionList(citySearchResults);
 

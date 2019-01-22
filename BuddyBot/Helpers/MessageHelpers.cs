@@ -65,8 +65,6 @@ namespace BuddyBot.Helpers
             return null;
         }
 
-
-        // TODO Amend to process ID or not
         public static City ExtractCityFromMessagePrompt(string messagePrompt)
         {
 
@@ -83,84 +81,6 @@ namespace BuddyBot.Helpers
             };
 
             return city;
-        }
-
-        public static IList<City> SearchForCities(string cityName, string countryCode = null, string countryName = null)
-        {
-            IList<City> cityList = new List<City>();
-
-            if (countryName != null)
-            {
-                countryCode = GlobalizationHelpers.GetCountryCode(countryName);
-            }
-
-            //TODO - Add to DB or move to blob storage
-            string json =
-                File.ReadAllText(System.Web.Hosting.HostingEnvironment.MapPath("/city.list.json")
-                                 ?? throw new InvalidOperationException());
-
-            IList<JObject> products = JsonConvert.DeserializeObject<List<JObject>>(json);
-
-            for (int i = 0; i < products.Count; i++)
-            {
-                string itemId = (string)products[i]["id"];
-                string itemTitle = (string)products[i]["name"];
-                string itemCountry = (string)products[i]["country"];
-
-                if (countryCode != null)
-                {
-                    if (itemTitle.Contains(cityName) && itemCountry.Contains(countryCode))
-                    {
-                        City cityInformation = new City()
-                        {
-                            Id = itemId,
-                            Name = itemTitle,
-                            Country = itemCountry,
-                        };
-
-                        cityList.Add(cityInformation);
-                    }
-                }
-                else if (itemTitle.Contains(cityName))
-                {
-                    City city = new City()
-                    {
-                        Id = itemId,
-                        Name = itemTitle,
-                        Country = itemCountry,
-                    };
-
-                    cityList.Add(city);
-                }
-            }
-            return cityList;
-        }
-
-        public static City GetCityById(string cityId)
-        {
-            string json =
-                File.ReadAllText(System.Web.Hosting.HostingEnvironment.MapPath("/city.list.json")
-                                 ?? throw new InvalidOperationException());
-
-            IList<JObject> products = JsonConvert.DeserializeObject<List<JObject>>(json);
-
-            for (int i = 0; i < products.Count; i++)
-            {
-                string itemId = (string) products[i]["id"];
-                string itemTitle = (string) products[i]["name"];
-                string itemCountry = (string) products[i]["country"];
-
-                    if (itemId.Contains(cityId))
-                    {
-                        return new City()
-                        {
-                            Id = itemId,
-                            Name = itemTitle,
-                            Country = itemCountry,
-                        };
-                    }
-            }
-            return null;
         }
 
         public static string ExtractIdFromMessage(string messagePrompt)
