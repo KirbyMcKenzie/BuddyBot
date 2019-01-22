@@ -18,7 +18,5 @@ namespace BuddyBot.Repository.Settings
             ChatHistoryTableName = ConfigurationManager.AppSettings["azureStorage:conversationHistory"];
             ConnectionString = ConfigurationManager.AppSettings["azureStorage:connectionString"];
         }
-
-
     }
 }

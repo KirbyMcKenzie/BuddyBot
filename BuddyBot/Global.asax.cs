@@ -1,20 +1,15 @@
 ﻿using System;
 using System.Configuration;
-using System.IO;
 using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
 using BuddyBot.Modules;
 using BuddyBot.Repository.DbContext;
 using BuddyBot.Settings;
-using Microsoft.Bot.Builder.Azure;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Dialogs.Internals;
 using Microsoft.Bot.Builder.Internals.Fibers;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.FileExtensions;
-using Microsoft.Extensions.Logging;
 using Microsoft.WindowsAzure.Storage;
 using Serilog;
 
@@ -39,6 +34,7 @@ namespace BuddyBot
         {
             AzureStorageSettings azureStorageSettings = new AzureStorageSettings();
 
+            // TODO - Dependancy on Azure Table Storage
             var storage = CloudStorageAccount.Parse(azureStorageSettings.ConnectionString);
 
             Log.Logger = new LoggerConfiguration()

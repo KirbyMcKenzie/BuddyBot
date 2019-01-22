@@ -15,7 +15,8 @@ namespace BuddyBot.Dialogs
     [Serializable]
     public class NameDialog : IDialog<string>
     {
-        private string _suggestedName;
+
+
         private string _preferredNameFromMessage;
         private readonly IBotDataService _botDataService;
         private readonly IList<EntityRecommendation> _entities;
@@ -44,7 +45,7 @@ namespace BuddyBot.Dialogs
 
             if (!string.IsNullOrWhiteSpace(name))
             {
-                PromptDialog.Confirm(context, ResumeAfterConfirmation, $"Do you want me to keep calling you {name}?", $"Sorry I don't understand - try again! Should I call you {_suggestedName}?");
+                PromptDialog.Confirm(context, ResumeAfterConfirmation, $"Do you want me to keep calling you {name}?", $"Sorry I don't understand - try again! Should I call you {name}?");
                 return Task.CompletedTask;
             }
 
