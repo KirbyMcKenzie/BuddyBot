@@ -5,7 +5,6 @@ using System.Web;
 
 namespace BuddyBot.Models.Dtos
 {
-    // TODO - See if it's necessary to rename props 
     public class WeatherTemperatureDto
     {
         public double temp { get; set; }

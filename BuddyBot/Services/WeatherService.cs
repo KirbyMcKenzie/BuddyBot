@@ -72,7 +72,6 @@ namespace BuddyBot.Services
                         return $"I'm having trouble accessing weather reports. Try again later. ";
                     }
 
-                    // TODO - map temp to icon 🔥🌿😤
                     return $"{convertedTemperture}{Temperature.Celsius.DisplayName()} " +
                            $"with {mappedConitionReponse.MappedConditionResponse}";
                 }

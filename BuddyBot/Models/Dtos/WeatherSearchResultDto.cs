@@ -96,7 +96,6 @@ namespace BuddyBot.Models.Dtos
         public double? GrndLevel { get; set; }
     }
 
-    // TODO - find out what the heck sys is 
     public class Sys
     {
         [JsonProperty("country")]
