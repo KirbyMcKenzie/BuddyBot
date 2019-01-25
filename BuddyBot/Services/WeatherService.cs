@@ -67,13 +67,12 @@ namespace BuddyBot.Services
                     var mappedConitionReponse = await _weatherConditionResponseReader
                         .GetResponseByCondition(weatherDescriptionResult.description);
 
-                    if(mappedConitionReponse == null)
+                    if (mappedConitionReponse != null)
                     {
-                        return $"I'm having trouble accessing weather reports. Try again later. ";
+                        return $"{convertedTemperture}{Temperature.Celsius.DisplayName()} " +
+                               $"with {mappedConitionReponse.MappedConditionResponse}";
                     }
-
-                    return $"{convertedTemperture}{Temperature.Celsius.DisplayName()} " +
-                           $"with {mappedConitionReponse.MappedConditionResponse}";
+                   
                 }
             }
 

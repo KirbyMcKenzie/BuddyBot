@@ -55,9 +55,9 @@ namespace BuddyBot.Dialogs
                 {
                     var weatherForecast = await _weatherService.GetWeather(preferredCity);
 
-                    context.Done(weatherForecast != string.Empty
-                        ? $"Currently the weather in {preferredCity.Name} is {weatherForecast}"
-                        : "🤧⛅ - I'm having trouble accessing weather reports. We'll have to try again later!");
+                        context.Done(weatherForecast != null
+                            ? $"Currently the weather in {preferredCity.Name} is {weatherForecast}"
+                            : "🤧⛅ - I'm having trouble accessing weather reports. We'll have to try again later!");
                 }
             }
             else

@@ -30,8 +30,8 @@ namespace BuddyBot.Repository.DbContext
 #if DEBUG
             // TODO - Ask someone about cleaner data seeding 
             // Seed
-            //WeatherConditionResponse[] weatherConditionResponses = dbSeeder.BuildWeatherConditionResponses();
-            //modelBuilder.Entity<WeatherConditionResponse>().HasData(weatherConditionResponses);
+            WeatherConditionResponse[] weatherConditionResponses = dbSeeder.BuildWeatherConditionResponses();
+            modelBuilder.Entity<WeatherConditionResponse>().HasData(weatherConditionResponses);
 
             //SmallTalkResponse[] smallTalkResponses = dbSeeder.BuildSmallTalkRespenses();
             //modelBuilder.Entity<SmallTalkResponse>().HasData(smallTalkResponses);
