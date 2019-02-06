@@ -155,28 +155,28 @@
       "name": "Smalltalk.Dialog.ThankYou"
     },
     {
-      "name": "Smalltalk.Greetings.Bye"
+      "name": "Smalltalk.Greeting.Bye"
     },
     {
-      "name": "Smalltalk.Greetings.GoodEvening"
+      "name": "Smalltalk.Greeting.GoodEvening"
     },
     {
-      "name": "Smalltalk.Greetings.GoodMorning"
+      "name": "Smalltalk.Greeting.GoodMorning"
     },
     {
-      "name": "Smalltalk.Greetings.GoodNight"
+      "name": "Smalltalk.Greeting.GoodNight"
     },
     {
-      "name": "Smalltalk.Greetings.HowAreYou"
+      "name": "Smalltalk.Greeting.HowAreYou"
     },
     {
-      "name": "Smalltalk.Greetings.HowWasYourDay"
+      "name": "Smalltalk.Greeting.OtherBot"
     },
     {
-      "name": "Smalltalk.Greetings.OtherBot"
+      "name": "Smalltalk.Greeting.WhatsUp"
     },
     {
-      "name": "Smalltalk.Greetings.WhatsUp"
+      "name": "SmallTalk.User.Abusive"
     },
     {
       "name": "Smalltalk.User.Angry"
@@ -378,9 +378,25 @@
       "entities": []
     },
     {
+      "text": "❓ flip coin",
+      "intent": "Random.HeadsTails",
+      "entities": []
+    },
+    {
       "text": "✋",
       "intent": "Greeting",
       "entities": []
+    },
+    {
+      "text": "0 & 100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "intent": "None",
+      "entities": [
+        {
+          "entity": "Number",
+          "startPos": 0,
+          "endPos": 0
+        }
+      ]
     },
     {
       "text": "11 : 15 am tomorrow reminder",
@@ -695,8 +711,18 @@
       "entities": []
     },
     {
+      "text": "asshole!",
+      "intent": "SmallTalk.User.Abusive",
+      "entities": []
+    },
+    {
       "text": "awesome",
       "intent": "Smalltalk.Dialog.Affirmation",
+      "entities": []
+    },
+    {
+      "text": "awesome, thank you",
+      "intent": "Smalltalk.Dialog.ThankYou",
       "entities": []
     },
     {
@@ -705,8 +731,18 @@
       "entities": []
     },
     {
+      "text": "bastard",
+      "intent": "SmallTalk.User.Abusive",
+      "entities": []
+    },
+    {
       "text": "be right back",
       "intent": "Smalltalk.User.BeBack",
+      "entities": []
+    },
+    {
+      "text": "bitch",
+      "intent": "SmallTalk.User.Abusive",
       "entities": []
     },
     {
@@ -721,22 +757,22 @@
     },
     {
       "text": "bye",
-      "intent": "Smalltalk.Greetings.Bye",
+      "intent": "Smalltalk.Greeting.Bye",
       "entities": []
     },
     {
       "text": "bye bye",
-      "intent": "Smalltalk.Greetings.Bye",
+      "intent": "Smalltalk.Greeting.Bye",
       "entities": []
     },
     {
       "text": "bye bye for now",
-      "intent": "Smalltalk.Greetings.Bye",
+      "intent": "Smalltalk.Greeting.Bye",
       "entities": []
     },
     {
       "text": "bye for now",
-      "intent": "Smalltalk.Greetings.Bye",
+      "intent": "Smalltalk.Greeting.Bye",
       "entities": []
     },
     {
@@ -816,6 +852,11 @@
     {
       "text": "can you find the reminder that jack turns twenty",
       "intent": "Reminder.Find",
+      "entities": []
+    },
+    {
+      "text": "can you help me?",
+      "intent": "Help",
       "entities": []
     },
     {
@@ -980,8 +1021,23 @@
       "entities": []
     },
     {
+      "text": "cool thank you",
+      "intent": "Smalltalk.Dialog.ThankYou",
+      "entities": []
+    },
+    {
       "text": "create reminder",
       "intent": "Reminder.Create",
+      "entities": []
+    },
+    {
+      "text": "cunt",
+      "intent": "SmallTalk.User.Abusive",
+      "entities": []
+    },
+    {
+      "text": "cuntfuck",
+      "intent": "SmallTalk.User.Abusive",
       "entities": []
     },
     {
@@ -991,7 +1047,7 @@
     },
     {
       "text": "cya!",
-      "intent": "Smalltalk.Greetings.Bye",
+      "intent": "Smalltalk.Greeting.Bye",
       "entities": []
     },
     {
@@ -1114,23 +1170,13 @@
       ]
     },
     {
+      "text": "dickhead",
+      "intent": "SmallTalk.User.Abusive",
+      "entities": []
+    },
+    {
       "text": "did you even listen",
       "intent": "Smalltalk.Criticism.Bot",
-      "entities": []
-    },
-    {
-      "text": "did you have a good day?",
-      "intent": "Smalltalk.Greetings.HowWasYourDay",
-      "entities": []
-    },
-    {
-      "text": "did you have a lovely day?",
-      "intent": "Smalltalk.Greetings.HowWasYourDay",
-      "entities": []
-    },
-    {
-      "text": "did you have a nice day?",
-      "intent": "Smalltalk.Greetings.HowWasYourDay",
       "entities": []
     },
     {
@@ -1152,6 +1198,11 @@
     {
       "text": "do robots will the world?",
       "intent": "Smalltalk.Bot.RuleWorld",
+      "entities": []
+    },
+    {
+      "text": "do you age",
+      "intent": "Smalltalk.Bot.Age",
       "entities": []
     },
     {
@@ -1285,6 +1336,16 @@
       "entities": []
     },
     {
+      "text": "do you know the meaning of life?",
+      "intent": "Smalltalk.Bot.Opinion.MeaningOfLife",
+      "entities": []
+    },
+    {
+      "text": "do you love me",
+      "intent": "Smalltalk.Bot.Opinion.Love",
+      "entities": []
+    },
+    {
       "text": "do you need some food?",
       "intent": "Smalltalk.Bot.Hungry",
       "entities": []
@@ -1408,12 +1469,12 @@
     },
     {
       "text": "evening",
-      "intent": "Smalltalk.Greetings.GoodEvening",
+      "intent": "Smalltalk.Greeting.GoodEvening",
       "entities": []
     },
     {
       "text": "evening to you",
-      "intent": "Smalltalk.Greetings.GoodEvening",
+      "intent": "Smalltalk.Greeting.GoodEvening",
       "entities": []
     },
     {
@@ -1424,6 +1485,16 @@
     {
       "text": "extend reminder",
       "intent": "Reminder.Change",
+      "entities": []
+    },
+    {
+      "text": "fav band?",
+      "intent": "Smalltalk.Bot.Favorites",
+      "entities": []
+    },
+    {
+      "text": "fav food?",
+      "intent": "Smalltalk.Bot.Favorites",
       "entities": []
     },
     {
@@ -1464,6 +1535,46 @@
     {
       "text": "forgive me",
       "intent": "Smalltalk.Dialog.Polite",
+      "entities": []
+    },
+    {
+      "text": "fuck",
+      "intent": "SmallTalk.User.Abusive",
+      "entities": []
+    },
+    {
+      "text": "fuck off",
+      "intent": "SmallTalk.User.Abusive",
+      "entities": []
+    },
+    {
+      "text": "fuck sakes",
+      "intent": "SmallTalk.User.Abusive",
+      "entities": []
+    },
+    {
+      "text": "fuck you",
+      "intent": "SmallTalk.User.Abusive",
+      "entities": []
+    },
+    {
+      "text": "fucking dick head",
+      "intent": "SmallTalk.User.Abusive",
+      "entities": []
+    },
+    {
+      "text": "fucking wanker",
+      "intent": "SmallTalk.User.Abusive",
+      "entities": []
+    },
+    {
+      "text": "fuckwit",
+      "intent": "SmallTalk.User.Abusive",
+      "entities": []
+    },
+    {
+      "text": "fudge packer",
+      "intent": "SmallTalk.User.Abusive",
       "entities": []
     },
     {
@@ -1561,6 +1672,11 @@
       "entities": []
     },
     {
+      "text": "get fucked you stupid cunt",
+      "intent": "SmallTalk.User.Abusive",
+      "entities": []
+    },
+    {
       "text": "get start",
       "intent": "GetStarted",
       "entities": []
@@ -1571,12 +1687,27 @@
       "entities": []
     },
     {
+      "text": "get stuffed",
+      "intent": "SmallTalk.User.Abusive",
+      "entities": []
+    },
+    {
       "text": "get the forcast for me",
       "intent": "Weather.GetForecast",
       "entities": []
     },
     {
+      "text": "get the weather forecast",
+      "intent": "Weather.GetForecast",
+      "entities": []
+    },
+    {
       "text": "get weather",
+      "intent": "Weather.GetForecast",
+      "entities": []
+    },
+    {
+      "text": "get weather forecast",
       "intent": "Weather.GetForecast",
       "entities": []
     },
@@ -1618,43 +1749,63 @@
       ]
     },
     {
+      "text": "go fuck yourself",
+      "intent": "SmallTalk.User.Abusive",
+      "entities": []
+    },
+    {
       "text": "good evening",
-      "intent": "Smalltalk.Greetings.GoodEvening",
+      "intent": "Smalltalk.Greeting.GoodEvening",
+      "entities": []
+    },
+    {
+      "text": "good man, you?",
+      "intent": "Smalltalk.Greeting.HowAreYou",
       "entities": []
     },
     {
       "text": "good morning to you",
-      "intent": "Smalltalk.Greetings.GoodMorning",
+      "intent": "Smalltalk.Greeting.GoodMorning",
       "entities": []
     },
     {
       "text": "good morning!",
-      "intent": "Smalltalk.Greetings.GoodMorning",
+      "intent": "Smalltalk.Greeting.GoodMorning",
       "entities": []
     },
     {
       "text": "good night",
-      "intent": "Smalltalk.Greetings.GoodNight",
+      "intent": "Smalltalk.Greeting.GoodNight",
       "entities": []
     },
     {
       "text": "good night!",
-      "intent": "Smalltalk.Greetings.GoodNight",
+      "intent": "Smalltalk.Greeting.GoodNight",
+      "entities": []
+    },
+    {
+      "text": "good thanks",
+      "intent": "Smalltalk.Dialog.ThankYou",
+      "entities": []
+    },
+    {
+      "text": "good, you?",
+      "intent": "Smalltalk.Greeting.HowAreYou",
       "entities": []
     },
     {
       "text": "goodbye",
-      "intent": "Smalltalk.Greetings.Bye",
+      "intent": "Smalltalk.Greeting.Bye",
       "entities": []
     },
     {
       "text": "goodbye for now",
-      "intent": "Smalltalk.Greetings.Bye",
+      "intent": "Smalltalk.Greeting.Bye",
       "entities": []
     },
     {
       "text": "goodnight",
-      "intent": "Smalltalk.Greetings.GoodNight",
+      "intent": "Smalltalk.Greeting.GoodNight",
       "entities": []
     },
     {
@@ -1674,6 +1825,11 @@
     },
     {
       "text": "haha",
+      "intent": "Smalltalk.Dialog.Laugh",
+      "entities": []
+    },
+    {
+      "text": "hahah",
       "intent": "Smalltalk.Dialog.Laugh",
       "entities": []
     },
@@ -1758,8 +1914,13 @@
       "entities": []
     },
     {
+      "text": "hello",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
       "text": "hello siri",
-      "intent": "Smalltalk.Greetings.OtherBot",
+      "intent": "Smalltalk.Greeting.OtherBot",
       "entities": [
         {
           "entity": "OtherAI",
@@ -1790,7 +1951,7 @@
     },
     {
       "text": "hey alexa",
-      "intent": "Smalltalk.Greetings.OtherBot",
+      "intent": "Smalltalk.Greeting.OtherBot",
       "entities": [
         {
           "entity": "OtherAI",
@@ -1821,7 +1982,7 @@
     },
     {
       "text": "hey cortana",
-      "intent": "Smalltalk.Greetings.OtherBot",
+      "intent": "Smalltalk.Greeting.OtherBot",
       "entities": [
         {
           "entity": "OtherAI",
@@ -1832,7 +1993,7 @@
     },
     {
       "text": "hey google assistant",
-      "intent": "Smalltalk.Greetings.OtherBot",
+      "intent": "Smalltalk.Greeting.OtherBot",
       "entities": [
         {
           "entity": "OtherAI",
@@ -1843,7 +2004,7 @@
     },
     {
       "text": "hey siri",
-      "intent": "Smalltalk.Greetings.OtherBot",
+      "intent": "Smalltalk.Greeting.OtherBot",
       "entities": [
         {
           "entity": "OtherAI",
@@ -1851,6 +2012,16 @@
           "endPos": 7
         }
       ]
+    },
+    {
+      "text": "hey there",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "hey there!",
+      "intent": "Greeting",
+      "entities": []
     },
     {
       "text": "heya",
@@ -1909,12 +2080,12 @@
     },
     {
       "text": "how are you",
-      "intent": "Smalltalk.Greetings.HowAreYou",
+      "intent": "Smalltalk.Greeting.HowAreYou",
       "entities": []
     },
     {
       "text": "how are you siri?",
-      "intent": "Smalltalk.Greetings.OtherBot",
+      "intent": "Smalltalk.Greeting.OtherBot",
       "entities": [
         {
           "entity": "OtherAI",
@@ -1925,7 +2096,12 @@
     },
     {
       "text": "how are you today?",
-      "intent": "Smalltalk.Greetings.HowAreYou",
+      "intent": "Smalltalk.Greeting.HowAreYou",
+      "entities": []
+    },
+    {
+      "text": "how are you?",
+      "intent": "Smalltalk.Greeting.HowAreYou",
       "entities": []
     },
     {
@@ -1960,13 +2136,13 @@
       "entities": []
     },
     {
-      "text": "how old are you",
-      "intent": "Smalltalk.Bot.Age",
+      "text": "how made you",
+      "intent": "Smalltalk.Bot.Creator",
       "entities": []
     },
     {
-      "text": "how was your day?",
-      "intent": "Smalltalk.Greetings.HowWasYourDay",
+      "text": "how old are you",
+      "intent": "Smalltalk.Bot.Age",
       "entities": []
     },
     {
@@ -1976,12 +2152,12 @@
     },
     {
       "text": "hows it",
-      "intent": "Smalltalk.Greetings.HowAreYou",
+      "intent": "Smalltalk.Greeting.HowAreYou",
       "entities": []
     },
     {
       "text": "hows it buddy",
-      "intent": "Smalltalk.Greetings.HowAreYou",
+      "intent": "Smalltalk.Greeting.HowAreYou",
       "entities": [
         {
           "entity": "Bot.Name",
@@ -1992,12 +2168,12 @@
     },
     {
       "text": "hows it going",
-      "intent": "Smalltalk.Greetings.HowAreYou",
+      "intent": "Smalltalk.Greeting.HowAreYou",
       "entities": []
     },
     {
       "text": "hows it going alexa",
-      "intent": "Smalltalk.Greetings.OtherBot",
+      "intent": "Smalltalk.Greeting.OtherBot",
       "entities": [
         {
           "entity": "OtherAI",
@@ -2008,7 +2184,7 @@
     },
     {
       "text": "hows it going cortana",
-      "intent": "Smalltalk.Greetings.OtherBot",
+      "intent": "Smalltalk.Greeting.OtherBot",
       "entities": [
         {
           "entity": "OtherAI",
@@ -2019,12 +2195,12 @@
     },
     {
       "text": "hows it going g",
-      "intent": "Smalltalk.Greetings.HowAreYou",
+      "intent": "Smalltalk.Greeting.HowAreYou",
       "entities": []
     },
     {
       "text": "hows it going google assistant",
-      "intent": "Smalltalk.Greetings.OtherBot",
+      "intent": "Smalltalk.Greeting.OtherBot",
       "entities": [
         {
           "entity": "OtherAI",
@@ -2035,7 +2211,7 @@
     },
     {
       "text": "hows it going siri",
-      "intent": "Smalltalk.Greetings.OtherBot",
+      "intent": "Smalltalk.Greeting.OtherBot",
       "entities": [
         {
           "entity": "OtherAI",
@@ -2251,6 +2427,11 @@
       "entities": []
     },
     {
+      "text": "i love you",
+      "intent": "Smalltalk.Bot.Opinion.Love",
+      "entities": []
+    },
+    {
       "text": "i need someone to talk to",
       "intent": "Smalltalk.User.Lonely",
       "entities": []
@@ -2377,7 +2558,7 @@
     },
     {
       "text": "i'm done, goodbye",
-      "intent": "Smalltalk.Greetings.Bye",
+      "intent": "Smalltalk.Greeting.Bye",
       "entities": []
     },
     {
@@ -2537,12 +2718,12 @@
     },
     {
       "text": "i'm off",
-      "intent": "Smalltalk.Greetings.Bye",
+      "intent": "Smalltalk.Greeting.Bye",
       "entities": []
     },
     {
       "text": "i'm off, see you",
-      "intent": "Smalltalk.Greetings.Bye",
+      "intent": "Smalltalk.Greeting.Bye",
       "entities": []
     },
     {
@@ -2567,7 +2748,7 @@
     },
     {
       "text": "i'm out of here",
-      "intent": "Smalltalk.Greetings.Bye",
+      "intent": "Smalltalk.Greeting.Bye",
       "entities": []
     },
     {
@@ -2711,6 +2892,11 @@
       "entities": []
     },
     {
+      "text": "i'm well. how are you?",
+      "intent": "Smalltalk.Greeting.HowAreYou",
+      "entities": []
+    },
+    {
       "text": "i'm wiped out sorry",
       "intent": "Smalltalk.User.Tired",
       "entities": []
@@ -2741,8 +2927,23 @@
       "entities": []
     },
     {
+      "text": "knob",
+      "intent": "SmallTalk.User.Abusive",
+      "entities": []
+    },
+    {
       "text": "know any good jokes?",
       "intent": "Random.Joke",
+      "entities": []
+    },
+    {
+      "text": "lil bitch",
+      "intent": "SmallTalk.User.Abusive",
+      "entities": []
+    },
+    {
+      "text": "lil pussy bitch",
+      "intent": "SmallTalk.User.Abusive",
       "entities": []
     },
     {
@@ -2791,6 +2992,11 @@
       "entities": []
     },
     {
+      "text": "man i'm tired!",
+      "intent": "Smalltalk.User.Tired",
+      "entities": []
+    },
+    {
       "text": "man you are on to it today",
       "intent": "Smalltalk.Bot.Smart",
       "entities": []
@@ -2812,12 +3018,17 @@
     },
     {
       "text": "mornin'",
-      "intent": "Smalltalk.Greetings.GoodMorning",
+      "intent": "Smalltalk.Greeting.GoodMorning",
       "entities": []
     },
     {
       "text": "morning",
-      "intent": "Smalltalk.Greetings.GoodMorning",
+      "intent": "Smalltalk.Greeting.GoodMorning",
+      "entities": []
+    },
+    {
+      "text": "motherfucker",
+      "intent": "SmallTalk.User.Abusive",
       "entities": []
     },
     {
@@ -2828,6 +3039,16 @@
     {
       "text": "my stomach is hungry",
       "intent": "Smalltalk.User.Hungry",
+      "entities": []
+    },
+    {
+      "text": "nice",
+      "intent": "Smalltalk.Compliment.Response",
+      "entities": []
+    },
+    {
+      "text": "nice one",
+      "intent": "Smalltalk.Compliment.Response",
       "entities": []
     },
     {
@@ -2853,17 +3074,22 @@
     },
     {
       "text": "nun night",
-      "intent": "Smalltalk.Greetings.GoodNight",
+      "intent": "Smalltalk.Greeting.GoodNight",
       "entities": []
     },
     {
       "text": "nunight",
-      "intent": "Smalltalk.Greetings.GoodNight",
+      "intent": "Smalltalk.Greeting.GoodNight",
       "entities": []
     },
     {
       "text": "off i go, goodbye",
-      "intent": "Smalltalk.Greetings.Bye",
+      "intent": "Smalltalk.Greeting.Bye",
+      "entities": []
+    },
+    {
+      "text": "oh awesome, thank you very much",
+      "intent": "Smalltalk.Dialog.ThankYou",
       "entities": []
     },
     {
@@ -2879,6 +3105,16 @@
     {
       "text": "oh very good",
       "intent": "Smalltalk.Compliment.Response",
+      "entities": []
+    },
+    {
+      "text": "oh yeah lol",
+      "intent": "Smalltalk.Dialog.Affirmation",
+      "entities": []
+    },
+    {
+      "text": "ok",
+      "intent": "Smalltalk.Dialog.Affirmation",
       "entities": []
     },
     {
@@ -2930,7 +3166,17 @@
     },
     {
       "text": "peace out",
-      "intent": "Smalltalk.Greetings.Bye",
+      "intent": "Smalltalk.Greeting.Bye",
+      "entities": []
+    },
+    {
+      "text": "piss off dickhead",
+      "intent": "SmallTalk.User.Abusive",
+      "entities": []
+    },
+    {
+      "text": "pissflaps",
+      "intent": "SmallTalk.User.Abusive",
       "entities": []
     },
     {
@@ -3267,6 +3513,11 @@
       "entities": []
     },
     {
+      "text": "retard",
+      "intent": "SmallTalk.User.Abusive",
+      "entities": []
+    },
+    {
       "text": "rofl",
       "intent": "Smalltalk.Dialog.Laugh",
       "entities": []
@@ -3288,32 +3539,32 @@
     },
     {
       "text": "see ya!",
-      "intent": "Smalltalk.Greetings.Bye",
+      "intent": "Smalltalk.Greeting.Bye",
       "entities": []
     },
     {
       "text": "see ya, have a goody",
-      "intent": "Smalltalk.Greetings.Bye",
+      "intent": "Smalltalk.Greeting.Bye",
       "entities": []
     },
     {
       "text": "see you later",
-      "intent": "Smalltalk.Greetings.Bye",
+      "intent": "Smalltalk.Greeting.Bye",
       "entities": []
     },
     {
       "text": "see you later, have a good day",
-      "intent": "Smalltalk.Greetings.Bye",
+      "intent": "Smalltalk.Greeting.Bye",
       "entities": []
     },
     {
       "text": "seee ya",
-      "intent": "Smalltalk.Greetings.Bye",
+      "intent": "Smalltalk.Greeting.Bye",
       "entities": []
     },
     {
       "text": "seeeeee ya",
-      "intent": "Smalltalk.Greetings.Bye",
+      "intent": "Smalltalk.Greeting.Bye",
       "entities": []
     },
     {
@@ -3348,13 +3599,18 @@
       "entities": []
     },
     {
+      "text": "slut fucker",
+      "intent": "SmallTalk.User.Abusive",
+      "entities": []
+    },
+    {
       "text": "smart guy",
       "intent": "Smalltalk.Bot.Smart",
       "entities": []
     },
     {
       "text": "smell you later",
-      "intent": "Smalltalk.Greetings.Bye",
+      "intent": "Smalltalk.Greeting.Bye",
       "entities": []
     },
     {
@@ -3376,6 +3632,16 @@
     {
       "text": "soliciting today ' s weather",
       "intent": "Weather.GetForecast",
+      "entities": []
+    },
+    {
+      "text": "son of a bitch",
+      "intent": "SmallTalk.User.Abusive",
+      "entities": []
+    },
+    {
+      "text": "son of a whore",
+      "intent": "SmallTalk.User.Abusive",
       "entities": []
     },
     {
@@ -3404,13 +3670,18 @@
       "entities": []
     },
     {
+      "text": "stupid cunt",
+      "intent": "SmallTalk.User.Abusive",
+      "entities": []
+    },
+    {
       "text": "sup",
-      "intent": "Smalltalk.Greetings.WhatsUp",
+      "intent": "Smalltalk.Greeting.WhatsUp",
       "entities": []
     },
     {
       "text": "sup buddy",
-      "intent": "Smalltalk.Greetings.WhatsUp",
+      "intent": "Smalltalk.Greeting.WhatsUp",
       "entities": []
     },
     {
@@ -3421,6 +3692,11 @@
     {
       "text": "support menu",
       "intent": "Help",
+      "entities": []
+    },
+    {
+      "text": "sure",
+      "intent": "Smalltalk.Dialog.Affirmation",
       "entities": []
     },
     {
@@ -3435,17 +3711,27 @@
     },
     {
       "text": "take it easy!",
-      "intent": "Smalltalk.Greetings.Bye",
+      "intent": "Smalltalk.Greeting.Bye",
       "entities": []
     },
     {
       "text": "talk to you later",
-      "intent": "Smalltalk.Greetings.Bye",
+      "intent": "Smalltalk.Greeting.Bye",
       "entities": []
     },
     {
       "text": "talk to you later buddy",
-      "intent": "Smalltalk.Greetings.Bye",
+      "intent": "Smalltalk.Greeting.Bye",
+      "entities": []
+    },
+    {
+      "text": "tank you",
+      "intent": "Smalltalk.Dialog.ThankYou",
+      "entities": []
+    },
+    {
+      "text": "tanks",
+      "intent": "Smalltalk.Dialog.ThankYou",
       "entities": []
     },
     {
@@ -3474,6 +3760,21 @@
       "entities": []
     },
     {
+      "text": "thank you",
+      "intent": "Smalltalk.Dialog.ThankYou",
+      "entities": []
+    },
+    {
+      "text": "thank you heaps buddy!",
+      "intent": "Smalltalk.Dialog.ThankYou",
+      "entities": []
+    },
+    {
+      "text": "thank you thank you",
+      "intent": "Smalltalk.Dialog.ThankYou",
+      "entities": []
+    },
+    {
       "text": "thank you very much!",
       "intent": "Smalltalk.Dialog.ThankYou",
       "entities": []
@@ -3489,7 +3790,42 @@
       "entities": []
     },
     {
+      "text": "thanks",
+      "intent": "Smalltalk.Dialog.ThankYou",
+      "entities": []
+    },
+    {
+      "text": "thanks ❤",
+      "intent": "Smalltalk.Dialog.ThankYou",
+      "entities": []
+    },
+    {
       "text": "thanks a bunch!",
+      "intent": "Smalltalk.Dialog.ThankYou",
+      "entities": []
+    },
+    {
+      "text": "thanks buddy",
+      "intent": "Smalltalk.Dialog.ThankYou",
+      "entities": []
+    },
+    {
+      "text": "thanks g!",
+      "intent": "Smalltalk.Dialog.ThankYou",
+      "entities": []
+    },
+    {
+      "text": "thanks gee!",
+      "intent": "Smalltalk.Dialog.ThankYou",
+      "entities": []
+    },
+    {
+      "text": "thanks 👍🏼",
+      "intent": "Smalltalk.Dialog.ThankYou",
+      "entities": []
+    },
+    {
+      "text": "thanks 😊",
       "intent": "Smalltalk.Dialog.ThankYou",
       "entities": []
     },
@@ -3524,6 +3860,11 @@
       "entities": []
     },
     {
+      "text": "tittyfucker",
+      "intent": "SmallTalk.User.Abusive",
+      "entities": []
+    },
+    {
       "text": "toss a coin",
       "intent": "Random.HeadsTails",
       "entities": []
@@ -3531,6 +3872,11 @@
     {
       "text": "toss a dime",
       "intent": "Random.HeadsTails",
+      "entities": []
+    },
+    {
+      "text": "twat",
+      "intent": "SmallTalk.User.Abusive",
       "entities": []
     },
     {
@@ -3546,12 +3892,12 @@
     },
     {
       "text": "until later",
-      "intent": "Smalltalk.Greetings.Bye",
+      "intent": "Smalltalk.Greeting.Bye",
       "entities": []
     },
     {
       "text": "until tomorrow",
-      "intent": "Smalltalk.Greetings.Bye",
+      "intent": "Smalltalk.Greeting.Bye",
       "entities": []
     },
     {
@@ -3624,6 +3970,16 @@
       ]
     },
     {
+      "text": "update personality",
+      "intent": "User.UpdatePreferredBotPersona",
+      "entities": []
+    },
+    {
+      "text": "update personaltiy",
+      "intent": "User.UpdatePreferredBotPersona",
+      "entities": []
+    },
+    {
       "text": "update reminder for courthouse",
       "intent": "Reminder.Change",
       "entities": [
@@ -3640,6 +3996,26 @@
       "entities": []
     },
     {
+      "text": "update weather location",
+      "intent": "User.UpdatePreferredWeatherLocation",
+      "entities": []
+    },
+    {
+      "text": "update weather settings",
+      "intent": "User.UpdatePreferredWeatherLocation",
+      "entities": []
+    },
+    {
+      "text": "update your persona",
+      "intent": "User.UpdatePreferredBotPersona",
+      "entities": []
+    },
+    {
+      "text": "update your personality",
+      "intent": "User.UpdatePreferredBotPersona",
+      "entities": []
+    },
+    {
       "text": "upto later?",
       "intent": "Smalltalk.Bot.DoingLater",
       "entities": []
@@ -3651,22 +4027,27 @@
     },
     {
       "text": "waaassssuuuppp",
-      "intent": "Smalltalk.Greetings.WhatsUp",
+      "intent": "Smalltalk.Greeting.WhatsUp",
+      "entities": []
+    },
+    {
+      "text": "wanker",
+      "intent": "SmallTalk.User.Abusive",
       "entities": []
     },
     {
       "text": "wasssuuuppp",
-      "intent": "Smalltalk.Greetings.WhatsUp",
+      "intent": "Smalltalk.Greeting.WhatsUp",
       "entities": []
     },
     {
       "text": "wassup",
-      "intent": "Smalltalk.Greetings.WhatsUp",
+      "intent": "Smalltalk.Greeting.WhatsUp",
       "entities": []
     },
     {
       "text": "wasup",
-      "intent": "Smalltalk.Greetings.WhatsUp",
+      "intent": "Smalltalk.Greeting.WhatsUp",
       "entities": []
     },
     {
@@ -3691,6 +4072,11 @@
     },
     {
       "text": "weather please",
+      "intent": "Weather.GetForecast",
+      "entities": []
+    },
+    {
+      "text": "weather pls",
       "intent": "Weather.GetForecast",
       "entities": []
     },
@@ -3755,6 +4141,16 @@
       "entities": []
     },
     {
+      "text": "what can you do?",
+      "intent": "Help",
+      "entities": []
+    },
+    {
+      "text": "what do you do",
+      "intent": "Help",
+      "entities": []
+    },
+    {
       "text": "what do you think about cheese?",
       "intent": "Smalltalk.Bot.Opinion.Generic",
       "entities": []
@@ -3803,7 +4199,7 @@
     },
     {
       "text": "what is up?",
-      "intent": "Smalltalk.Greetings.WhatsUp",
+      "intent": "Smalltalk.Greeting.WhatsUp",
       "entities": []
     },
     {
@@ -3863,7 +4259,7 @@
     },
     {
       "text": "what up",
-      "intent": "Smalltalk.Greetings.WhatsUp",
+      "intent": "Smalltalk.Greeting.WhatsUp",
       "entities": []
     },
     {
@@ -3922,6 +4318,11 @@
       "entities": []
     },
     {
+      "text": "whats the meaning of life",
+      "intent": "Smalltalk.Bot.Opinion.MeaningOfLife",
+      "entities": []
+    },
+    {
       "text": "whats the meaning of life?",
       "intent": "Smalltalk.Bot.Opinion.MeaningOfLife",
       "entities": []
@@ -3954,12 +4355,12 @@
     },
     {
       "text": "whats up bot?",
-      "intent": "Smalltalk.Greetings.WhatsUp",
+      "intent": "Smalltalk.Greeting.WhatsUp",
       "entities": []
     },
     {
       "text": "whats up?",
-      "intent": "Smalltalk.Greetings.WhatsUp",
+      "intent": "Smalltalk.Greeting.WhatsUp",
       "entities": []
     },
     {
@@ -3969,6 +4370,11 @@
     },
     {
       "text": "whats your fav band?",
+      "intent": "Smalltalk.Bot.Favorites",
+      "entities": []
+    },
+    {
+      "text": "whats your fav board game?",
       "intent": "Smalltalk.Bot.Favorites",
       "entities": []
     },
@@ -4070,6 +4476,11 @@
     {
       "text": "who is your brother",
       "intent": "Smalltalk.Bot.Family",
+      "entities": []
+    },
+    {
+      "text": "who is your creator",
+      "intent": "Smalltalk.Bot.Creator",
       "entities": []
     },
     {
@@ -4210,6 +4621,11 @@
       "entities": []
     },
     {
+      "text": "wow... sorry",
+      "intent": "Smalltalk.Dialog.Sorry",
+      "entities": []
+    },
+    {
       "text": "yes thats right",
       "intent": "Smalltalk.Dialog.Right",
       "entities": []
@@ -4275,6 +4691,11 @@
       "entities": []
     },
     {
+      "text": "you are a choad",
+      "intent": "SmallTalk.User.Abusive",
+      "entities": []
+    },
+    {
       "text": "you are clever buddy",
       "intent": "Smalltalk.Bot.Smart",
       "entities": []
@@ -4305,8 +4726,23 @@
       "entities": []
     },
     {
+      "text": "you are so shit",
+      "intent": "SmallTalk.User.Abusive",
+      "entities": []
+    },
+    {
       "text": "you are stunning",
       "intent": "Smalltalk.Compliment.Bot",
+      "entities": []
+    },
+    {
+      "text": "you are such a twat",
+      "intent": "SmallTalk.User.Abusive",
+      "entities": []
+    },
+    {
+      "text": "you are such an arsehole",
+      "intent": "SmallTalk.User.Abusive",
       "entities": []
     },
     {
@@ -4315,13 +4751,28 @@
       "entities": []
     },
     {
+      "text": "you ass",
+      "intent": "SmallTalk.User.Abusive",
+      "entities": []
+    },
+    {
+      "text": "you asshole",
+      "intent": "SmallTalk.User.Abusive",
+      "entities": []
+    },
+    {
       "text": "you can be so smart sometimes",
       "intent": "Smalltalk.Bot.Smart",
       "entities": []
     },
     {
-      "text": "you have a nice day?",
-      "intent": "Smalltalk.Greetings.HowWasYourDay",
+      "text": "you fucked up",
+      "intent": "SmallTalk.User.Abusive",
+      "entities": []
+    },
+    {
+      "text": "you have a choad",
+      "intent": "SmallTalk.User.Abusive",
       "entities": []
     },
     {
@@ -4337,6 +4788,11 @@
     {
       "text": "you know watson?",
       "intent": "Smalltalk.Bot.KnowOtherBot",
+      "entities": []
+    },
+    {
+      "text": "you motherfucking stupid fuck",
+      "intent": "SmallTalk.User.Abusive",
       "entities": []
     },
     {
@@ -4380,6 +4836,11 @@
       "entities": []
     },
     {
+      "text": "you whore",
+      "intent": "SmallTalk.User.Abusive",
+      "entities": []
+    },
+    {
       "text": "your very intelligent",
       "intent": "Smalltalk.Bot.Smart",
       "entities": []
@@ -4390,8 +4851,28 @@
       "entities": []
     },
     {
+      "text": "you're a dickhead",
+      "intent": "SmallTalk.User.Abusive",
+      "entities": []
+    },
+    {
       "text": "you're a genius!",
       "intent": "Smalltalk.Bot.Smart",
+      "entities": []
+    },
+    {
+      "text": "you're a motherfucken whore",
+      "intent": "SmallTalk.User.Abusive",
+      "entities": []
+    },
+    {
+      "text": "you're a slut",
+      "intent": "SmallTalk.User.Abusive",
+      "entities": []
+    },
+    {
+      "text": "you're an arse",
+      "intent": "SmallTalk.User.Abusive",
       "entities": []
     },
     {
@@ -4450,6 +4931,11 @@
       "entities": []
     },
     {
+      "text": "🎲 random number",
+      "intent": "Random.Number",
+      "entities": []
+    },
+    {
       "text": "🖐",
       "intent": "Greeting",
       "entities": []
@@ -4467,6 +4953,11 @@
     {
       "text": "🤣",
       "intent": "Smalltalk.Dialog.Laugh",
+      "entities": []
+    },
+    {
+      "text": "🤣 joke",
+      "intent": "Random.Joke",
       "entities": []
     },
     {
