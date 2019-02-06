@@ -194,6 +194,9 @@
       "name": "Smalltalk.User.Hungry"
     },
     {
+      "name": "Smalltalk.User.KeyboardMash"
+    },
+    {
       "name": "Smalltalk.User.Kidding"
     },
     {
@@ -438,6 +441,11 @@
     {
       "text": "alright",
       "intent": "Smalltalk.Dialog.Affirmation",
+      "entities": []
+    },
+    {
+      "text": "alsdkfhlkajfnd;lf",
+      "intent": "Smalltalk.User.KeyboardMash",
       "entities": []
     },
     {
@@ -1191,6 +1199,16 @@
       ]
     },
     {
+      "text": "djfdj",
+      "intent": "Smalltalk.User.KeyboardMash",
+      "entities": []
+    },
+    {
+      "text": "dklsjfhdskljhflksdjhf",
+      "intent": "Smalltalk.User.KeyboardMash",
+      "entities": []
+    },
+    {
       "text": "do bots want to rule the world?",
       "intent": "Smalltalk.Bot.RuleWorld",
       "entities": []
@@ -1468,6 +1486,31 @@
       "entities": []
     },
     {
+      "text": "dsjkfhsdlkjhf",
+      "intent": "Smalltalk.User.KeyboardMash",
+      "entities": []
+    },
+    {
+      "text": "dskfjlhskdfhgljksd",
+      "intent": "Smalltalk.User.KeyboardMash",
+      "entities": []
+    },
+    {
+      "text": "dsklfjhlksjgfh",
+      "intent": "Smalltalk.User.KeyboardMash",
+      "entities": []
+    },
+    {
+      "text": "dslkjfhlkasdjhf",
+      "intent": "Smalltalk.User.KeyboardMash",
+      "entities": []
+    },
+    {
+      "text": "elfkgberlkghrylvndsk",
+      "intent": "Smalltalk.User.KeyboardMash",
+      "entities": []
+    },
+    {
       "text": "evening",
       "intent": "Smalltalk.Greeting.GoodEvening",
       "entities": []
@@ -1495,6 +1538,11 @@
     {
       "text": "fav food?",
       "intent": "Smalltalk.Bot.Favorites",
+      "entities": []
+    },
+    {
+      "text": "fdkjgh",
+      "intent": "Smalltalk.User.KeyboardMash",
       "entities": []
     },
     {
@@ -1786,6 +1834,11 @@
     {
       "text": "good thanks",
       "intent": "Smalltalk.Dialog.ThankYou",
+      "entities": []
+    },
+    {
+      "text": "good, how are you",
+      "intent": "Smalltalk.Greeting.HowAreYou",
       "entities": []
     },
     {
@@ -2131,6 +2184,21 @@
       ]
     },
     {
+      "text": "how doin",
+      "intent": "Smalltalk.Greeting.HowAreYou",
+      "entities": []
+    },
+    {
+      "text": "how doin'",
+      "intent": "Smalltalk.Greeting.HowAreYou",
+      "entities": []
+    },
+    {
+      "text": "how doing",
+      "intent": "Smalltalk.Greeting.HowAreYou",
+      "entities": []
+    },
+    {
       "text": "how is the weather",
       "intent": "Weather.GetForecast",
       "entities": []
@@ -2208,6 +2276,11 @@
           "endPos": 29
         }
       ]
+    },
+    {
+      "text": "hows it going man?",
+      "intent": "Smalltalk.Greeting.HowAreYou",
+      "entities": []
     },
     {
       "text": "hows it going siri",
@@ -2902,6 +2975,11 @@
       "entities": []
     },
     {
+      "text": "jfjfjf",
+      "intent": "Smalltalk.User.KeyboardMash",
+      "entities": []
+    },
+    {
       "text": "joax!",
       "intent": "Smalltalk.User.Kidding",
       "entities": []
@@ -2937,6 +3015,21 @@
       "entities": []
     },
     {
+      "text": "ldkjasbvlwrkhf",
+      "intent": "Smalltalk.User.KeyboardMash",
+      "entities": []
+    },
+    {
+      "text": "ldkshfgksdljfskdljhf",
+      "intent": "Smalltalk.User.KeyboardMash",
+      "entities": []
+    },
+    {
+      "text": "ldksjaghlaksjdhg",
+      "intent": "Smalltalk.User.KeyboardMash",
+      "entities": []
+    },
+    {
       "text": "lil bitch",
       "intent": "SmallTalk.User.Abusive",
       "entities": []
@@ -2944,6 +3037,26 @@
     {
       "text": "lil pussy bitch",
       "intent": "SmallTalk.User.Abusive",
+      "entities": []
+    },
+    {
+      "text": "lkdsjfhlksdjhfld",
+      "intent": "Smalltalk.User.KeyboardMash",
+      "entities": []
+    },
+    {
+      "text": "lkdsjgfjkasdg",
+      "intent": "Smalltalk.User.KeyboardMash",
+      "entities": []
+    },
+    {
+      "text": "lkfjdsghefklhgkje",
+      "intent": "Smalltalk.User.KeyboardMash",
+      "entities": []
+    },
+    {
+      "text": "lksdfgrlkejgnlrkgt",
+      "intent": "Smalltalk.User.KeyboardMash",
       "entities": []
     },
     {
@@ -2979,6 +3092,11 @@
     {
       "text": "looks like you're right",
       "intent": "Smalltalk.Dialog.Right",
+      "entities": []
+    },
+    {
+      "text": "lsdkjafghjsf",
+      "intent": "Smalltalk.User.KeyboardMash",
       "entities": []
     },
     {
@@ -3533,6 +3651,26 @@
       "entities": []
     },
     {
+      "text": "sdjfkh",
+      "intent": "Smalltalk.User.KeyboardMash",
+      "entities": []
+    },
+    {
+      "text": "sdklfglkdsf",
+      "intent": "Smalltalk.User.KeyboardMash",
+      "entities": []
+    },
+    {
+      "text": "sdlkjfh",
+      "intent": "Smalltalk.User.KeyboardMash",
+      "entities": []
+    },
+    {
+      "text": "sdlkjflsdakjfh",
+      "intent": "Smalltalk.User.KeyboardMash",
+      "entities": []
+    },
+    {
       "text": "search for the massage reminder",
       "intent": "Reminder.Find",
       "entities": []
@@ -3596,6 +3734,16 @@
     {
       "text": "show me what you can do",
       "intent": "Help",
+      "entities": []
+    },
+    {
+      "text": "skdlfhgklsd",
+      "intent": "Smalltalk.User.KeyboardMash",
+      "entities": []
+    },
+    {
+      "text": "skldjghrkjngf;lwdj",
+      "intent": "Smalltalk.User.KeyboardMash",
       "entities": []
     },
     {
@@ -4325,6 +4473,11 @@
     {
       "text": "whats the meaning of life?",
       "intent": "Smalltalk.Bot.Opinion.MeaningOfLife",
+      "entities": []
+    },
+    {
+      "text": "whats the wather doing?",
+      "intent": "Weather.GetForecast",
       "entities": []
     },
     {
