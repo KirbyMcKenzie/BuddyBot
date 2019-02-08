@@ -588,6 +588,20 @@
     "PersonalityResponseType": "Friendly"
   },
   {
+    "Id": "2c5bc4ea-4a60-4d6b-9e18-e79ad19abcd2",
+    "IntentGroup": "User",
+    "IntentName": "Smalltalk.User.KeyboardMash",
+    "IntentResponse": "Cat walk on your keyboard?",
+    "PersonalityResponseType": "Friendly"
+  },
+  {
+    "Id": "19712c28-0a9e-4d3c-a7ae-66e4d83df55a",
+    "IntentGroup": "User",
+    "IntentName": "Smalltalk.User.KeyboardMash",
+    "IntentResponse": "You okay there?",
+    "PersonalityResponseType": "Friendly"
+  },
+  {
     "Id": "f321145a-55dd-43c7-8700-a5e3a040e297",
     "IntentGroup": "User",
     "IntentName": "Smalltalk.User.Kidding",
@@ -1075,6 +1089,20 @@
     "IntentGroup": "User",
     "IntentName": "Smalltalk.User.Hungry",
     "IntentResponse": "You should eat some food",
+    "PersonalityResponseType": "Professional"
+  },
+  {
+    "Id": "580cc7fe-3380-4f1d-a04b-047ac4965318",
+    "IntentGroup": "User",
+    "IntentName": "Smalltalk.User.KeyboardMash",
+    "IntentResponse": "You okay there?",
+    "PersonalityResponseType": "Professional"
+  },
+  {
+    "Id": "22137007-04ec-4eb5-bc23-cbe2c8187140",
+    "IntentGroup": "User",
+    "IntentName": "Smalltalk.User.KeyboardMash",
+    "IntentResponse": "I'm sorry, I don't understand.",
     "PersonalityResponseType": "Professional"
   },
   {
@@ -1944,6 +1972,27 @@
     "IntentGroup": "User",
     "IntentName": "Smalltalk.User.Kidding",
     "IntentResponse": "I see.",
+    "PersonalityResponseType": "Humorous"
+  },
+  {
+    "Id": "cc5cfc96-2981-485f-9db9-5f196c655b2b",
+    "IntentGroup": "User",
+    "IntentName": "Smalltalk.User.KeyboardMash",
+    "IntentResponse": "sdkhfakshflkshdestroyallhumansksdfjhkdjf",
+    "PersonalityResponseType": "Humorous"
+  },
+  {
+    "Id": "26f47136-bd3f-40cc-87da-1e0a9e6699d2",
+    "IntentGroup": "User",
+    "IntentName": "Smalltalk.User.KeyboardMash",
+    "IntentResponse": "kfdsjghskdjgh to you too.",
+    "PersonalityResponseType": "Humorous"
+  },
+  {
+    "Id": "be91e7da-513e-45d2-8942-e43eb8ad39a9",
+    "IntentGroup": "User",
+    "IntentName": "Smalltalk.User.KeyboardMash",
+    "IntentResponse": "In English?",
     "PersonalityResponseType": "Humorous"
   },
   {
