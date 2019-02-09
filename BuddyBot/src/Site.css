@@ -16,11 +16,33 @@
 }
 
 .about-container {
+    padding: 10px 25px;
     width: 60%;
 }
 
 .webchat-container{
     width: 40%;
+}
+
+.main-title{
+    font-size: 48px;
+    margin-bottom: 0;
+}
+
+.sub-title{
+    margin-top: 5px;
+}
+
+.error-well {
+    background-color: #e6e6e6;
+    width: 70%;
+    padding: 5px 15px;
+    border-radius: 5px;
+}
+
+.error-text {
+    color: #da5a5a;
+    font-weight: 600;
 }
 
 
