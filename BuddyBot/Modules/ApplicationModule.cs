@@ -76,7 +76,6 @@ namespace BuddyBot.Modules
                 .As<IChatHistoryWriter>()
                 .AsImplementedInterfaces().SingleInstance();
 
-
             // Services
             builder.RegisterType<BotDataService>()
                 .Keyed<IBotDataService>(FiberModule.Key_DoNotSerialize)

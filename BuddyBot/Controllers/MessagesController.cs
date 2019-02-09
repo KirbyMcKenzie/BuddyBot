@@ -47,13 +47,13 @@ namespace BuddyBot.Controllers
                 catch (Exception ex)
                 {
                     Log.Error(ex, $"An unexpected error occurred, error details: {ex.Message}");
-                    throw;
                 }
             }
             else
             {
                 await HandleSystemMessage(activity);
             }
+
             var response = Request.CreateResponse(HttpStatusCode.OK);
             return response;
         }
