@@ -15,9 +15,6 @@ namespace BuddyBot.Repository.DataAccess
 
         public async Task SaveMessage(ChatHistoryEntity chatHistoryEntity)
         {
-
-           
-
             RepositorySettings repositorySettings = new RepositorySettings();
 
             // Retrieve the storage account from the connection string.
@@ -31,15 +28,14 @@ namespace BuddyBot.Repository.DataAccess
             CloudTable table = tableClient.GetTableReference(repositorySettings.ChatHistoryTableName);
 
             // Create the table if it doesn't exist.
-            table.CreateIfNotExists();
+            await table.CreateIfNotExistsAsync();
 
             // Create the TableOperation object that inserts the chat history entity.
             TableOperation insertOperation = TableOperation.Insert(chatHistoryEntity);
 
             // Execute the insert operation.
-            table.Execute(insertOperation);
+            await table.ExecuteAsync(insertOperation);
 
-            await Task.Yield();
         }
     }
 }
