@@ -10,19 +10,25 @@
 
 </head>
 
-<body style="font-family:'Segoe UI'">
-    <h1>BuddyBot</h1>
-    <p>An intelligent personal assistant bot to assist with your everyday needs</p>
-    
-    <p style="color: red">Due to an Auth issue, the first message will fail. Once you try again Buddy will come to life.</p>
-<div id="webchat"></div>
+<body>
+        <div class="flex-container">
+            <div class="about-container">
+                <h1>BuddyBot</h1>
+                <p>An intelligent personal assistant bot to assist with your everyday needs</p>
 
-    <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
-    <script>
-        window.WebChat.renderWebChat({
-            directLine: window.WebChat.createDirectLine({ secret: 'GWLuPsYNedU.cwA.khE.I3LeUlKURhomRrIo2FoLPM7amVzG594CvWOczgxpC30' })
-        }, document.getElementById('webchat'));
-    </script>
+                <p style="color: red">Due to an Auth issue, the first message will fail. Once you try again Buddy will come to life.</p>
+            </div>
+            <div class="webchat-container">
+                <div id="webchat"></div>
+            </div>
+
+            <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
+            <script>
+                window.WebChat.renderWebChat({
+                    directLine: window.WebChat.createDirectLine({ secret: 'GWLuPsYNedU.cwA.khE.I3LeUlKURhomRrIo2FoLPM7amVzG594CvWOczgxpC30' })
+                }, document.getElementById('webchat'));
+            </script>
+        </div>
 </body>
 
 
