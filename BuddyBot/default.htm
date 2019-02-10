@@ -13,20 +13,24 @@
                 <div class="error-well">
                     <p class="error-text">
                         Due to an internal server issue, the first message will fail. Simply enter your first message twice and
-                        Buddy will spring to life. I'm working to fix this bug ASAP! 🐛
+                        Buddy will spring to life. I'm working to fix this bug ASAP!
                     </p>
                 </div>
             </div>
             <div class="webchat-container">
-                <div id="webchat"></div>
+                <div class="webchat-wrapper">
+                    <div id="webchat"></div>
+                </div>
             </div>
 
             <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
             <script>
+
                 window.WebChat.renderWebChat({
                     directLine: window.WebChat.createDirectLine({ secret: 'GWLuPsYNedU.cwA.khE.I3LeUlKURhomRrIo2FoLPM7amVzG594CvWOczgxpC30' })
                 },
                     document.getElementById('webchat'));
+
             </script>
         </div>
 </body>

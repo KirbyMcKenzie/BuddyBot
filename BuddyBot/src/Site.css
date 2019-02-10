@@ -1,7 +1,8 @@
 ﻿body {
     width: 80%;
     margin: auto;
-    background-color: #f9f9f9;
+    /*background-color: #f9f9f9; TODO - Decide on background color */
+    background-color: #E5E9F0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
@@ -20,6 +21,11 @@
 
 .wrapper-container {
     justify-content: center;
+}
+
+.webchat-wrapper {
+    height: 100%;
+    margin: 10% 15%;
 }
 
 .about-container {
@@ -42,7 +48,7 @@
 }
 
 .error-well {
-    background-color: #e6e6e6;
+    background-color: #ead3d2;
     width: 70%;
     padding: 5px 15px;
     border-radius: 5px;
@@ -53,9 +59,8 @@
     font-weight: 600;
 }
 
-
 #webchat {
-    border-radius: 5px;
+    border-radius: 20px;
     box-shadow: 1px 5px 8px 1px #cecece;
     background-color: white;
 }
