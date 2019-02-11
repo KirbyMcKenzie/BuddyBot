@@ -1,11 +1,22 @@
 ﻿body {
-    /*width: 100%;*/
     margin: auto;
-    /*background-color: #f9f9f9; TODO - Decide on background color */
-    /*background-color: #E5E9F0;*/
     background-color: white;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
+
+section{
+    width: 75%;
+    margin: auto;
+}
+
+h1 {
+    font-size: 70px;
+}
+
+h2 {
+    font-size: 36px;
+}
+
 
 #webchat,
 #webchat > * {
@@ -47,7 +58,6 @@
 }
 
 .main-title {
-    font-size: 70px;
     margin: 0;
     text-align: center;
 }
