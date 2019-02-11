@@ -363,6 +363,8 @@
   <ItemGroup>
     <Content Include="default.htm" />
     <Content Include="Global.asax" />
+    <Content Include="src\buddybot_icon.ico" />
+    <Content Include="src\images\BuddyBotSlim.svg" />
     <Content Include="src\site.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
