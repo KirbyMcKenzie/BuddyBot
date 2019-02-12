@@ -35,6 +35,16 @@ a:visited {
         color: inherit;
 }
 
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 60%;
+    background-color: white;
+    color: #828181;
+    text-align: center;
+    padding: 0px 10px;
+}
 
 #webchat,
 #webchat > * {
