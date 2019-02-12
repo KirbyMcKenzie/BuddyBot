@@ -32,7 +32,7 @@ a:hover{
 }
 
 a:visited {
-        color: inherit;
+    color: inherit;
 }
 
 footer {
@@ -44,12 +44,6 @@ footer {
     color: #828181;
     text-align: center;
     padding: 0px 10px;
-}
-
-#webchat,
-#webchat > * {
-    height: 100%;
-    width: 100%;
 }
 
 .flex-container {
@@ -113,19 +107,19 @@ footer {
     
 }
 
-    .footer-link:hover {
+.footer-link:hover {
         font-weight: 500;
         color: #636262;
         border-bottom: 2px solid #828181;
-    }
+}
 
-    .footer-link:visited {
+.footer-link:visited {
         color: inherit;
-    }
+}
 
 .github-link img {
-        height: 50px;
-        width: 50px;
+        height: 40px;
+        width: 40px;
 }
 
 .footer-tagline{
@@ -137,4 +131,10 @@ footer {
     border-radius: 20px;
     box-shadow: 1px 5px 8px 1px #cecece;
     background-color: white;
+}
+
+
+#webchat, #webchat > * {
+        height: 100%;
+        width: 100%;
 }

@@ -38,8 +38,26 @@
 
         <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
         <script>
+
+            const styleOptions = {
+
+                // General
+                paddingWide: '2000px',
+
+                // BuddyBot
+                bubbleBackground: '#E3E8F1',
+                bubbleTextColor: '#32353A',
+                bubbleBorderRadius: 10,
+
+                // User
+                bubbleFromUserBackground: '#2E5EFF',
+                bubbleFromUserTextColor: 'White',
+                bubbleFromUserBorderRadius: 10,
+            };
+
             window.WebChat.renderWebChat({
-                directLine: window.WebChat.createDirectLine({ secret: 'GWLuPsYNedU.cwA.khE.I3LeUlKURhomRrIo2FoLPM7amVzG594CvWOczgxpC30' })
+                directLine: window.WebChat.createDirectLine({ secret: 'GWLuPsYNedU.cwA.khE.I3LeUlKURhomRrIo2FoLPM7amVzG594CvWOczgxpC30' }),
+                styleOptions
             },
                 document.getElementById('webchat'));
         </script>
