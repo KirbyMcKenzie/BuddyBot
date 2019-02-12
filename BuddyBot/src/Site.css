@@ -102,6 +102,36 @@ footer {
     text-align: justify;
 }
 
+.github-link {
+    background-image: none;
+    text-decoration: none;
+}
+
+.footer-link{
+    background-image: none;
+    text-decoration: none;
+    
+}
+
+    .footer-link:hover {
+        font-weight: 500;
+        color: #636262;
+        border-bottom: 2px solid #828181;
+    }
+
+    .footer-link:visited {
+        color: inherit;
+    }
+
+.github-link img {
+        height: 50px;
+        width: 50px;
+}
+
+.footer-tagline{
+    margin-top: 5px;
+}
+
 
 #webchat {
     border-radius: 20px;
