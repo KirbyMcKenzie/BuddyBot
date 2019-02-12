@@ -137,4 +137,5 @@ footer {
 #webchat, #webchat > * {
         height: 100%;
         width: 100%;
-}
+        max-width: 450px;
+ }
