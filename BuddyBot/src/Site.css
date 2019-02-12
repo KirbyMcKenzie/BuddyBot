@@ -17,6 +17,24 @@ h2 {
     font-size: 36px;
 }
 
+a {
+    background-image: linear-gradient(120deg, #17CE73 0%, #2079D2 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 0.2em;
+    background-position: 0 88%;
+    transition: background-size 0.25s ease-in;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+a:hover{
+    background-size: 100% 88%;
+}
+
+a:visited {
+        color: inherit;
+}
+
 
 #webchat,
 #webchat > * {
@@ -81,6 +99,12 @@ h2 {
     color: #da5a5a;
     font-weight: 600;
 }
+
+.article-text{
+    font-size: 18px;
+    text-align: justify;
+}
+
 
 #webchat {
     border-radius: 20px;
