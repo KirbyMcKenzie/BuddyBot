@@ -25,6 +25,7 @@ a {
     transition: background-size 0.25s ease-in;
     text-decoration: none;
     font-weight: 500;
+    color: #2d2d2d;
 }
 
 a:hover{
@@ -33,7 +34,7 @@ a:hover{
 
 a:visited {
     color: inherit;
-}
+    }
 
 footer {
     position: fixed;
@@ -56,11 +57,6 @@ footer {
     justify-content: center;
 }
 
-.webchat-wrapper {
-    height: 80%;
-    margin: 10% 15%;
-}
-
 .about-container {
     margin-top: 2.5%;
     padding: 10px 25px;
@@ -71,6 +67,28 @@ footer {
     width: 40%;
     background-color: #E5E9F0;
     box-shadow: inset 3px 0px 10px 1px #c5c2c2;
+}
+
+.webchat-wrapper {
+    height: 80%;
+    margin: 10% 15%;
+}
+
+.webchat-border {
+    height: 100%;
+    border: 10px solid white;
+    max-width: 400px;
+    margin: auto;
+    border-radius: 20px;
+    box-shadow: 1px 5px 8px 1px #cecece;
+    background-color: white;
+}
+
+#webchat, #webchat > * {
+    height: 100%;
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
 }
 
 .bot-avatar {
@@ -101,10 +119,10 @@ footer {
     text-decoration: none;
 }
 
-.footer-link{
+.footer-link {
     background-image: none;
     text-decoration: none;
-    
+    color: #828181;
 }
 
 .footer-link:hover {
@@ -127,15 +145,3 @@ footer {
 }
 
 
-#webchat {
-    border-radius: 20px;
-    box-shadow: 1px 5px 8px 1px #cecece;
-    background-color: white;
-}
-
-
-#webchat, #webchat > * {
-        height: 100%;
-        width: 100%;
-        max-width: 450px;
- }

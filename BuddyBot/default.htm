@@ -17,7 +17,7 @@
             <section class="article-section">
                 <h2>Meet Buddy</h2>
                 <p class="article-text">
-                    BuddyBot is a chatbot built with the <a href="https://dev.botframework.com/" target="_blank">Microsoft Bot Framework</a>; he's a text-based intelligent personal assistant,
+                    BuddyBot is a chatbot built with .NET and the <a href="https://dev.botframework.com/" target="_blank">Microsoft Bot Framework</a>; he's a text-based intelligent personal assistant,
                     who can understand what you write using a natural language processing service called <a href="https://www.luis.ai/home" target="_blank">LUIS</a>. BuddyBot has many features such as retrieving
                     weather forecasts, telling jokes, generating random values and is configurable through swappable personalities and a database managed small
                     talk response service.
@@ -32,8 +32,9 @@
         </div>
         <div class="webchat-container">
             <div class="webchat-wrapper">
-                <div class="webchat-wrapper">
-                <div id="webchat"></div>
+                <div class="webchat-border">
+                    <div id="webchat"></div>
+                </div>
             </div>
         </div>
 
@@ -42,15 +43,27 @@
 
             const styleOptions = {
 
+                //General
+                suggestedActionBackground: '#2E5EFF',
+                suggestedActionBorder: `none`,
+                suggestedActionBorderRadius: 10,
+                suggestedActionTextColor: 'white',
+
                 // BuddyBot
                 bubbleBackground: '#E3E8F1',
                 bubbleTextColor: '#32353A',
                 bubbleBorderRadius: 10,
+                bubbleBorder: 'none',
+
+
+                avatarSize: 40,
+                botAvatarImage: 'https://buddybottablestorage.blob.core.windows.net/buddybotimages/avatars/BuddyBotFriendly.svg',
 
                 // User
                 bubbleFromUserBackground: '#2E5EFF',
-                bubbleFromUserTextColor: 'White',
+                bubbleFromUserTextColor: 'white',
                 bubbleFromUserBorderRadius: 10,
+                bubbleFromUserBorder: 'none',
             };
 
             window.WebChat.renderWebChat({
