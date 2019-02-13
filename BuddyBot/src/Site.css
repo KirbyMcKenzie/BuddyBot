@@ -37,20 +37,20 @@ a:visited {
     }
 
 footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
     width: 60%;
+    margin: auto;
+    margin-top: 40px;
     background-color: white;
     color: #828181;
     text-align: center;
-    padding: 0px 10px;
+    padding: 5px 10px;
 }
 
 .flex-container {
     display: flex;
     justify-content: center;
     height: 100vh;
+    width: 60%;
 }
 
 .wrapper-container {
@@ -60,13 +60,16 @@ footer {
 .about-container {
     margin-top: 2.5%;
     padding: 10px 25px;
-    width: 60%;
 }
 
 .webchat-container {
     width: 40%;
     background-color: #E5E9F0;
     box-shadow: inset 3px 0px 10px 1px #c5c2c2;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    height: 100%;
 }
 
 .webchat-wrapper {
@@ -112,6 +115,33 @@ footer {
 .article-text{
     font-size: 18px;
     text-align: justify;
+}
+
+.conversation-bubbles {
+    margin: auto;
+}
+
+.conversation-bubbles li {
+    list-style-type: none;
+
+}
+
+.bubble {
+    border-radius: 10px;
+    border: none;
+    padding: 10px 15px;
+    margin: 10px;
+    display: inline-flex;
+}
+
+.bubble-grey {
+    color: #32353A;
+    background-color: #E3E8F1;
+}
+
+.bubble-blue {
+    color: white;
+    background-color: #2E5EFF;
 }
 
 .github-link {
