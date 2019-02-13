@@ -40,7 +40,7 @@
                     <li class="conversation-bubble bubble-blue">Hey Siri!</li>
                     <li class="conversation-bubble bubble-grey">I love you!</li>
                     <li class="conversation-bubble bubble-blue">How was your day?</li>
-                    <li class="conversation-bubble bubble-grey">Will you end humanity?</li>
+                    <li class="conversation-bubble bubble-grey">Will you destroy humanity?</li>
                     <li class="conversation-bubble bubble-grey">❤</li>
                     <li class="conversation-bubble bubble-blue">Pick a number between 1 & 10</li>
                     <li class="conversation-bubble bubble-grey">😡</li>
@@ -75,6 +75,23 @@
         <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
         <script>
 
+
+            function generateUniqueID() {
+                return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+            }
+
+            function getUserId() {
+
+                var userId = localStorage.getItem('userId');
+
+                if (userId == null || userId == undefined) {
+                    userId = (generateUniqueID() + generateUniqueID() + "-" + generateUniqueID() + "-4" + generateUniqueID().substr(0, 3) + "-" + generateUniqueID() + "-" + generateUniqueID() + generateUniqueID() + generateUniqueID()).toLowerCase();
+                    localStorage.setItem('userId', userId);
+                }
+                return userId;
+            }
+
+
             const styleOptions = {
 
                 //General
@@ -98,6 +115,7 @@
 
             window.WebChat.renderWebChat({
                 directLine: window.WebChat.createDirectLine({ secret: 'GWLuPsYNedU.cwA.khE.I3LeUlKURhomRrIo2FoLPM7amVzG594CvWOczgxpC30' }),
+                userID: getUserId(),
                 styleOptions
             },
                 document.getElementById('webchat'));
