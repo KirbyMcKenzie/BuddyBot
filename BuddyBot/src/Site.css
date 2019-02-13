@@ -119,6 +119,7 @@ footer {
 
 .conversation-bubbles {
     margin: auto;
+    padding: 10px;
 }
 
 .conversation-bubbles li {
@@ -126,7 +127,7 @@ footer {
 
 }
 
-.bubble {
+.conversation-bubble {
     border-radius: 10px;
     border: none;
     padding: 10px 15px;
