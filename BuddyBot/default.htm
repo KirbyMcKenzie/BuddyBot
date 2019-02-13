@@ -25,8 +25,10 @@
             </section>
             <section>
                 <h2>Conversation Starters </h2>
-                <p class="article-text">Unsure on where to start? Simply greet BuddyBot and he'll run you through a short setup,
-                Then take your pick on any of the following conversation starters. </p>
+                <p class="article-text">
+                    Unsure on where to start? Simply greet BuddyBot and he'll run you through a short setup,
+                    Then take your pick on any of the following conversation starters.
+                </p>
                 <ul class="conversation-bubbles">
                     <li class="conversation-bubble bubble-blue">Hey Buddy!</li>
                     <li class="conversation-bubble bubble-grey">What can do you?</li>
@@ -56,7 +58,7 @@
                     <li class="conversation-bubble bubble-grey">Let's be friends</li>
                 </ul>
             </section>
-            
+
             <footer>
                 <a class="github-link" href="https://github.com/KirbyMcKenzie/BuddyBot" target="_blank">
                     <img src="src/images/GitHubLogo.svg">
@@ -73,53 +75,18 @@
         </div>
 
         <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
+        <script src="./src/js/webChat.js"></script>
+
         <script>
+            //$(document).ready(function () {
+            //    $("button").click(function () {
+            //        $("input:text").val("Glenn Quagmire");
+            //    });
+            //});
 
 
-            function generateUniqueID() {
-                return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
-            }
-
-            function getUserId() {
-
-                var userId = localStorage.getItem('userId');
-
-                if (userId == null || userId == undefined) {
-                    userId = (generateUniqueID() + generateUniqueID() + "-" + generateUniqueID() + "-4" + generateUniqueID().substr(0, 3) + "-" + generateUniqueID() + "-" + generateUniqueID() + generateUniqueID() + generateUniqueID()).toLowerCase();
-                    localStorage.setItem('userId', userId);
-                }
-                return userId;
-            }
-
-
-            const styleOptions = {
-
-                //General
-                suggestedActionBackground: '#2E5EFF',
-                suggestedActionBorder: 'none',
-                suggestedActionBorderRadius: 10,
-                suggestedActionTextColor: 'white',
-
-                // BuddyBot
-                bubbleBackground: '#E3E8F1',
-                bubbleTextColor: '#32353A',
-                bubbleBorderRadius: 10,
-                bubbleBorder: 'none',
-
-                // User
-                bubbleFromUserBackground: '#2E5EFF',
-                bubbleFromUserTextColor: 'white',
-                bubbleFromUserBorderRadius: 10,
-                bubbleFromUserBorder: 'none',
-            };
-
-            window.WebChat.renderWebChat({
-                directLine: window.WebChat.createDirectLine({ secret: 'GWLuPsYNedU.cwA.khE.I3LeUlKURhomRrIo2FoLPM7amVzG594CvWOczgxpC30' }),
-                userID: getUserId(),
-                styleOptions
-            },
-                document.getElementById('webchat'));
         </script>
+
     </div>
 </body>
 </html>
