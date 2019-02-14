@@ -136,7 +136,7 @@ footer {
     color: white;
     background-color: #2E5EFF;
     transition: transform .2s;
-
+    cursor: default;
 }
 
 .conversation-bubble:hover {
@@ -182,4 +182,8 @@ footer {
     margin-top: 5px;
 }
 
-
+@media only screen and (max-width: 600px) {
+    body {
+        background-color: lightblue;
+    }
+}
