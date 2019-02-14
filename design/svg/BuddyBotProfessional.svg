@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="337" height="309" viewBox="0 0 337 309">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#159957"/>
+      <stop offset="1" stop-color="#155799"/>
+    </linearGradient>
+    <filter id="Union_29" x="26.373" y="3.013" width="283.359" height="309.73" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-BuddyBotProfessional">
+      <rect width="337" height="309"/>
+    </clipPath>
+  </defs>
+  <g id="BuddyBotProfessional" clip-path="url(#clip-BuddyBotProfessional)">
+    <g id="Group_1" data-name="Group 1" transform="translate(-527 -327)">
+      <g transform="matrix(1, 0, 0, 1, 527, 327)" filter="url(#Union_29)">
+        <path id="Union_29-2" data-name="Union 29" d="M-359.789,267.729a39.761,39.761,0,0,1-15.57-3.143,39.876,39.876,0,0,1-12.714-8.573,39.874,39.874,0,0,1-8.572-12.714,39.743,39.743,0,0,1-3.144-15.57V184.889a20.157,20.157,0,0,1-5.033-5.254,38.727,38.727,0,0,1-4.321-8.627,61.5,61.5,0,0,1-2.838-11.026,78.319,78.319,0,0,1-1.02-12.74,78.327,78.327,0,0,1,1.02-12.74,61.569,61.569,0,0,1,2.838-11.027,38.738,38.738,0,0,1,4.321-8.626,20.178,20.178,0,0,1,5.033-5.255V65.486a39.738,39.738,0,0,1,3.144-15.569A39.854,39.854,0,0,1-388.074,37.2a39.861,39.861,0,0,1,12.714-8.573,39.746,39.746,0,0,1,15.57-3.144h69.279V5.814a17.2,17.2,0,0,1-5.761-12.952,17.213,17.213,0,0,1,4.692-11.923A15.521,15.521,0,0,1-280.253-24a15.523,15.523,0,0,1,11.327,4.939,17.209,17.209,0,0,1,4.692,11.923,17.481,17.481,0,0,1-1.418,6.945,16.8,16.8,0,0,1-3.839,5.545V25.486h68.764a39.743,39.743,0,0,1,15.57,3.144A39.862,39.862,0,0,1-172.443,37.2a39.856,39.856,0,0,1,8.572,12.714,39.753,39.753,0,0,1,3.143,15.569v43.252a20.338,20.338,0,0,1,4.907,5.167,38.7,38.7,0,0,1,4.321,8.627,61.578,61.578,0,0,1,2.838,11.026,78.306,78.306,0,0,1,1.021,12.74,78.3,78.3,0,0,1-1.021,12.741,61.5,61.5,0,0,1-2.838,11.026,38.688,38.688,0,0,1-4.321,8.627,20.338,20.338,0,0,1-4.907,5.167v43.87a39.758,39.758,0,0,1-3.143,15.57,39.891,39.891,0,0,1-8.572,12.714,39.877,39.877,0,0,1-12.714,8.573,39.761,39.761,0,0,1-15.57,3.143ZM-373.373,77.987v134a26.029,26.029,0,0,0,26,26h138a26.029,26.029,0,0,0,26-26v-134a26.029,26.029,0,0,0-26-26h-138A26.03,26.03,0,0,0-373.373,77.987Zm82.435,117.193a38.2,38.2,0,0,1-9.914-4.406,33.422,33.422,0,0,1-7.757-6.709,28.436,28.436,0,0,1-4.983-8.49h68.221a28.432,28.432,0,0,1-4.983,8.49,33.421,33.421,0,0,1-7.757,6.709,38.182,38.182,0,0,1-9.914,4.406,41.658,41.658,0,0,1-11.455,1.585A41.66,41.66,0,0,1-290.939,195.179Zm30.566-73.693a28.5,28.5,0,0,1,28.5-28.5,28.5,28.5,0,0,1,28.5,28.5,28.5,28.5,0,0,1-28.5,28.5A28.5,28.5,0,0,1-260.373,121.487Zm-92,0a28.5,28.5,0,0,1,28.5-28.5,28.5,28.5,0,0,1,28.5,28.5,28.5,28.5,0,0,1-28.5,28.5A28.5,28.5,0,0,1-352.372,121.487Z" transform="translate(448.37 33.01)" fill="url(#linear-gradient)"/>
+      </g>
+    </g>
+    <g id="Group_8" data-name="Group 8" transform="translate(26 27)">
+      <g id="Ellipse_43" data-name="Ellipse 43" transform="translate(53.94 91)" fill="none" stroke="#2e2e2e" stroke-width="5">
+        <circle cx="36.879" cy="36.879" r="36.879" stroke="none"/>
+        <circle cx="36.879" cy="36.879" r="34.379" fill="none"/>
+      </g>
+      <g id="Ellipse_44" data-name="Ellipse 44" transform="translate(158.021 91)" fill="none" stroke="#2e2e2e" stroke-width="5">
+        <circle cx="36.879" cy="36.879" r="36.879" stroke="none"/>
+        <circle cx="36.879" cy="36.879" r="34.379" fill="none"/>
+      </g>
+      <line id="Line_1" data-name="Line 1" x2="32.782" transform="translate(126.469 128.289)" fill="none" stroke="#2e2e2e" stroke-width="6"/>
+      <line id="Line_2" data-name="Line 2" x1="20.488" y2="16.391" transform="translate(35.5 126.65)" fill="none" stroke="#2e2e2e" stroke-width="6"/>
+      <line id="Line_3" data-name="Line 3" x1="20.488" y2="16.391" transform="translate(245.647 123.445) rotate(81)" fill="none" stroke="#2e2e2e" stroke-width="6"/>
+    </g>
+    <g id="Group_9" data-name="Group 9" transform="translate(-1 9.038)">
+      <path id="Union_30" data-name="Union 30" d="M19.042,29.728V18.92L0,0H59.084L40.042,18.921V29.728Z" transform="translate(138.958 261.976)" fill="#2e2e2e"/>
+      <path id="Path_3" data-name="Path 3" d="M.058,0,40.617,40.559.072,40.544Z" transform="translate(110.78 261.966) rotate(-45)" fill="#fff"/>
+      <path id="Path_6" data-name="Path 6" d="M.058,0,40.617,40.559.072,40.544Z" transform="translate(169.78 261.966) rotate(-45)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

@@ -3,27 +3,78 @@
 <head>
     <title>BuddyBot - An intelligent personal assistant</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="./Site.css">
-    <style>
-        
-    </style>
-
+    <link rel="icon" href="./src/buddybot_icon.ico">
+    <link rel="stylesheet" href="./src/site.css">
 </head>
-
-<body style="font-family:'Segoe UI'">
-    <h1>BuddyBot</h1>
-    <p>An intelligent personal assistant bot to assist with your everyday needs</p>
-    
-    <p style="color: red">Due to an Auth issue, the first message will fail. Once you try again Buddy will come to life.</p>
-<div id="webchat"></div>
-
+<body>
+    <div class="flex-container">
+        <div class="about-container">
+            <img class="bot-avatar" src="src/images/BuddyBotAvatar.svg" />
+            <section class="header-section">
+                <h1 class="main-title">BuddyBot</h1>
+                <p class="sub-title">An intelligent personal assistant bot to assist with your everyday needs</p>
+            </section>
+            <section>
+                <h2>Meet Buddy</h2>
+                <p class="article-text">
+                    BuddyBot is a chatbot built with .NET and the <a href="https://dev.botframework.com/" target="_blank">Microsoft Bot Framework</a>; he's a text-based intelligent personal assistant,
+                    who can understand what you write using a natural language processing service called <a href="https://www.luis.ai/home" target="_blank">LUIS</a>. BuddyBot has many features such as retrieving
+                    weather forecasts, telling jokes, generating random values and is configurable through swappable personalities and a database managed small
+                    talk response service.
+                </p>
+            </section>
+            <section>
+                <h2>Conversation Starters </h2>
+                <p class="article-text">
+                    Unsure on where to start? Simply greet BuddyBot and he'll run you through a short setup,
+                    then take your pick on any of the following conversation starters.
+                </p>
+                <ul class="conversation-bubbles">
+                    <li class="conversation-bubble">Hey Buddy!</li>
+                    <li class="conversation-bubble">What can do you?</li>
+                    <li class="conversation-bubble">Are you busy?</li>
+                    <li class="conversation-bubble">Who created you? </li>
+                    <li class="conversation-bubble">😂</li>
+                    <li class="conversation-bubble">Whats the weather doing?</li>
+                    <li class="conversation-bubble">Do you get hungry?</li>
+                    <li class="conversation-bubble">Are you real? </li>
+                    <li class="conversation-bubble">Tell me a joke</li>
+                    <li class="conversation-bubble">Hey Siri!</li>
+                    <li class="conversation-bubble">I love you!</li>
+                    <li class="conversation-bubble">How was your day?</li>
+                    <li class="conversation-bubble">Will you destroy humanity?</li>
+                    <li class="conversation-bubble">❤</li>
+                    <li class="conversation-bubble">Pick a number between 1 & 10</li>
+                    <li class="conversation-bubble">😡</li>
+                    <li class="conversation-bubble">What's the meaning of life?</li>
+                    <li class="conversation-bubble">Flip a coin</li>
+                    <li class="conversation-bubble">How are you?</li>
+                    <li class="conversation-bubble">I'm happy!</li>
+                    <li class="conversation-bubble">Do you know Alexa?</li>
+                    <li class="conversation-bubble">😭</li>
+                    <li class="conversation-bubble">Do you have any family?</li>
+                    <li class="conversation-bubble">Are you spying on me?</li>
+                    <li class="conversation-bubble">Pleased to meet you!</li>
+                    <li class="conversation-bubble">Are you a robot?</li>
+                    <li class="conversation-bubble">Let's be friends</li>
+                </ul>
+            </section>
+            <footer>
+                <a class="github-link" href="https://github.com/KirbyMcKenzie/BuddyBot" target="_blank">
+                    <img src="src/images/GitHubLogo.svg">
+                </a>
+                <p class="footer-tagline">Developed by <a class="footer-link" href="https://www.linkedin.com/in/kirbymckenzie/" target="_blank">Kirby McKenzie</a></p>
+            </footer>
+        </div>
+    </div>
+    <div class="webchat-container">
+        <div class="webchat-wrapper">
+            <div class="webchat-border">
+                <div id="webchat"></div>
+            </div>
+        </div>
+    </div>
     <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
-    <script>
-        window.WebChat.renderWebChat({
-            directLine: window.WebChat.createDirectLine({ secret: 'GWLuPsYNedU.cwA.khE.I3LeUlKURhomRrIo2FoLPM7amVzG594CvWOczgxpC30' })
-        }, document.getElementById('webchat'));
-    </script>
+    <script src="./src/js/webChat.js"></script>
 </body>
-
-
 </html>

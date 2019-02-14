@@ -84,9 +84,9 @@ namespace BuddyBot.Dialogs
             replyToConversation.AttachmentLayout = AttachmentLayoutTypes.Carousel;
             replyToConversation.Attachments = new List<Attachment>();
 
-            PersonalityChoiceHeroCard friendlyHeroCard = new PersonalityChoiceHeroCard(PersonalityChatPersona.Friendly, "Friendly", "I think we should be friends!", "https://www.popsci.com/sites/popsci.com/files/styles/1000_1x_/public/images/2014/11/robot-friend-popular-science.jpg?itok=BjNu0I7B");
-            PersonalityChoiceHeroCard professionalHeroCard = new PersonalityChoiceHeroCard(PersonalityChatPersona.Professional, "Professional", "I'm concise and helpful.", "https://images.complex.com/complex/image/upload/c_limit,w_680/fl_lossy,pg_1,q_auto/robot-butler_fpiory.jpg");
-            PersonalityChoiceHeroCard humorousHeroCard = new PersonalityChoiceHeroCard(PersonalityChatPersona.Humorous, "Humorous", "The authentic Buddy experience.", "https://3c1703fe8d.site.internapcdn.net/newman/gfx/news/hires/2009/achildrobotw.jpg");
+            PersonalityChoiceHeroCard friendlyHeroCard = new PersonalityChoiceHeroCard(PersonalityChatPersona.Friendly, "Friendly", "I'm always happy to help!", "https://buddybottablestorage.blob.core.windows.net/buddybotimages/avatars/BuddyBotFriendly.svg");
+            PersonalityChoiceHeroCard professionalHeroCard = new PersonalityChoiceHeroCard(PersonalityChatPersona.Professional, "Professional", "I'm concise and helpful.", "https://buddybottablestorage.blob.core.windows.net/buddybotimages/avatars/BuddyBotProfessional.svg");
+            PersonalityChoiceHeroCard humorousHeroCard = new PersonalityChoiceHeroCard(PersonalityChatPersona.Humorous, "Humorous", "Hurry up and get on with it.", "https://buddybottablestorage.blob.core.windows.net/buddybotimages/avatars/BuddyBotSassy.svg");
 
             List<PersonalityChoiceHeroCard> heroCardList = new List<PersonalityChoiceHeroCard>
             {
