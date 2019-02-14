@@ -112,7 +112,19 @@ footer {
     color: #828181;
 }
 
-.article-text{
+.info-well {
+    padding: 10px;
+    background-color: #D9EDF6;
+    border-radius: 5px;
+    width: 70%;
+    margin: auto;
+}
+.info-text {
+    color: #29515C;
+}
+
+
+.article-text {
     font-size: 18px;
     text-align: justify;
 }
