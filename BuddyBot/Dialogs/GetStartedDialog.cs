@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using BuddyBot.Dialogs.Builders;
+using BuddyBot.Helpers;
 using BuddyBot.Models;
 using BuddyBot.Models.Enums;
 using BuddyBot.Services.Contracts;
@@ -38,30 +39,20 @@ namespace BuddyBot.Dialogs
             }
             else
             {
-
-                var typingMsg = context.MakeMessage();
-                typingMsg.Type = ActivityTypes.Typing;
-
                 // Introductions and user setup
                 await context.PostAsync("Hi there... 🤔");
-                Sleep(Pause.MediumPause);
-
-                await context.PostAsync(typingMsg);
+                await MessageHelpers.ConversationPauseAsync(context, Pause.MediumPause);
 
                 await context.PostAsync("I don't think, we've met before? Let me introduce myself..");
+                await MessageHelpers.ConversationPauseAsync(context, Pause.LongerPause);
 
-                await context.PostAsync(typingMsg);
-                Sleep(Pause.LongPause);
 
                 await context.PostAsync("I'm BuddyBot! I'm an intelligent personal assistant, here to help wherever I can! 😀");
-
-                await context.PostAsync(typingMsg);
-                Sleep(Pause.LongPause);
+                await MessageHelpers.ConversationPauseAsync(context, Pause.LongPause);
+                
 
                 await context.PostAsync("Let's get you setup. Remember, I'm still learning, so be patient, and follow my prompts carefully!");
-
-                Sleep(Pause.LongPause);
-                await context.PostAsync(typingMsg);
+                await MessageHelpers.ConversationPauseAsync(context, Pause.LongPause);
 
                 context.Call(_dialogBuilder.BuildNameDialog(context.Activity.AsMessageActivity()), Resume_AfterNameDialog);
                 await Task.CompletedTask;
@@ -71,14 +62,14 @@ namespace BuddyBot.Dialogs
         private async Task Resume_AfterNameDialog(IDialogContext context, IAwaitable<string> result)
         {
             var activity = await result;
+            await MessageHelpers.ConversationPauseAsync(context, Pause.MediumPause);
 
-            Sleep(Pause.MediumLongPause);
             await context.PostAsync($"{activity}! what a great name");
-            Sleep(Pause.ShortMediumPause);
+            await MessageHelpers.ConversationPauseAsync(context, Pause.ShortMediumPause);
 
             await context.PostAsync("Next we need to set my personality. My style, tone and attitute " +
-                                    "are dictated by my personality settings. Pick what works best with you");
-            Sleep(Pause.VeryLongPause);
+                                    "are dictated by my personality settings. Pick what works best with you. You can always change this setting later!");
+            await MessageHelpers.ConversationPauseAsync(context, Pause.VeryLongPause);
 
             IMessageActivity replyToConversation = context.MakeMessage();
 
@@ -142,22 +133,29 @@ namespace BuddyBot.Dialogs
         private async Task Resume_AfterBotPersonaDialog(IDialogContext context, IAwaitable<string> result)
         {
             var activity = await result;
+            await MessageHelpers.ConversationPauseAsync(context, Pause.MediumPause);
 
-            Sleep(Pause.MediumPause);
-            await context.PostAsync($"Okay, my personality is set to be {activity}");
-            Sleep(Pause.ShortMediumPause);
+            await context.PostAsync($"Good choice, my personality is set to be {activity}");
+            await MessageHelpers.ConversationPauseAsync(context, Pause.ShortMediumPause);
+
+            await context.PostAsync($"Okay the last step.");
 
             context.Call(_dialogBuilder.BuildPreferredWeatherLocationDialog(context.Activity.AsMessageActivity()), Resume_AfterPreferredWeatherDialog);
-           
             await Task.CompletedTask;
         }
 
         private async Task Resume_AfterPreferredWeatherDialog(IDialogContext context, IAwaitable<string> result)
         {
+            var activity = await result;
+            await MessageHelpers.ConversationPauseAsync(context, Pause.MediumPause);
 
-            Sleep(Pause.ShortMediumPause);
+            await context.PostAsync($"I love {activity}! It's such a nice city!");
+            await MessageHelpers.ConversationPauseAsync(context, Pause.MediumPause);
+
+
             await context.PostAsync("Looks like you're all set up!");
-            
+            await MessageHelpers.ConversationPauseAsync(context, Pause.ShortMediumPause);
+
             await FinishAsync(context);
         }
 

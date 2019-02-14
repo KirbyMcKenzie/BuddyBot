@@ -11,7 +11,6 @@ using Microsoft.Bot.Builder.Luis.Models;
 
 namespace BuddyBot.Dialogs
 {
-
     [Serializable]
     public class NameDialog : IDialog<string>
     {
@@ -37,7 +36,7 @@ namespace BuddyBot.Dialogs
 
             if (!string.IsNullOrWhiteSpace(_preferredName))
             {
-                PromptDialog.Confirm(context, ResumeAfterPreferredNameConfirmation, $"So you'd like me to call you {_preferredName} from now on?", $"Sorry I don't understand - try again! Should I call you {_preferredName}?");
+                PromptDialog.Confirm(context, ResumeAfterPreferredNameConfirmation, $"So you'd like me to call you {_preferredName}?", $"Sorry I don't understand - try again! Should I call you {_preferredName}?");
                 return Task.CompletedTask;
             }
 
@@ -71,7 +70,7 @@ namespace BuddyBot.Dialogs
         private async Task ResumeAfterNameFilled(IDialogContext context, IAwaitable<string> result)
         {
             _preferredName = await result;
-            PromptDialog.Confirm(context, ResumeAfterPreferredNameConfirmation, $"So you'd like me to call you {_preferredName} from now on?", $"Sorry I don't understand - try again! Should I call you {_preferredName}?");
+            PromptDialog.Confirm(context, ResumeAfterPreferredNameConfirmation, $"So you'd like me to call you {_preferredName}?", $"Sorry I don't understand - try again! Should I call you {_preferredName}?");
         }
 
         private async Task ResumeAfterConfirmation(IDialogContext context, IAwaitable<bool> result)
@@ -88,6 +87,5 @@ namespace BuddyBot.Dialogs
                     break;
             }
         }
-
     }
 }

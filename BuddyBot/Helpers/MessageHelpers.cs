@@ -10,6 +10,8 @@ using BuddyBot.Models;
 using Microsoft.Bot.Connector;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Microsoft.Bot.Builder.Dialogs;
+using System.Threading.Tasks;
 
 namespace BuddyBot.Helpers
 {
@@ -88,5 +90,13 @@ namespace BuddyBot.Helpers
             return messagePrompt.Substring(messagePrompt.LastIndexOf(',') + 1).Replace(" ", string.Empty);
         }
 
+        public async static Task ConversationPauseAsync(IDialogContext context, int pauseLength)
+        {
+            var typingMsg = context.MakeMessage();
+            typingMsg.Type = ActivityTypes.Typing;
+            await context.PostAsync(typingMsg);
+
+            System.Threading.Thread.Sleep(pauseLength);
+        }
     }
 }
