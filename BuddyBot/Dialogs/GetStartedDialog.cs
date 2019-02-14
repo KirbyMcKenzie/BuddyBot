@@ -31,8 +31,6 @@ namespace BuddyBot.Dialogs
 
         public async Task StartAsync(IDialogContext context)
         {
-            
-
             if (_botDataService.hasCompletedGetStarted(context))
             {
                 // user has already done setup, show them what Buddy can do               
@@ -40,27 +38,30 @@ namespace BuddyBot.Dialogs
             }
             else
             {
-                // Introductions and user setup
-                await context.PostAsync("Hey there!");
-                Sleep(Pause.MediumPause);
 
-                await context.PostAsync("🤔");
-                Sleep(Pause.ExtraLongPause);
-
-                await context.PostAsync("I don't think, we've met before?");
-                Sleep(Pause.LongPause);
-
-                await context.PostAsync("Let me introduce myself.");
-                Sleep(Pause.ExtraLongPause);
-
-                // Sends typing indicator to user
                 var typingMsg = context.MakeMessage();
                 typingMsg.Type = ActivityTypes.Typing;
+
+                // Introductions and user setup
+                await context.PostAsync("Hi there... 🤔");
+                Sleep(Pause.MediumPause);
+
                 await context.PostAsync(typingMsg);
 
-                await context.PostAsync("I'm BuddyBot 🤖 I'm an intelligent personal assistant, " +
-                                        "here to help wherever I can. Pleased to meet you!");
-                Sleep(Pause.ExtraLongPause);
+                await context.PostAsync("I don't think, we've met before? Let me introduce myself..");
+
+                await context.PostAsync(typingMsg);
+                Sleep(Pause.LongPause);
+
+                await context.PostAsync("I'm BuddyBot! I'm an intelligent personal assistant, here to help wherever I can! 😀");
+
+                await context.PostAsync(typingMsg);
+                Sleep(Pause.LongPause);
+
+                await context.PostAsync("Let's get you setup. Remember, I'm still learning, so be patient, and follow my prompts carefully!");
+
+                Sleep(Pause.LongPause);
+                await context.PostAsync(typingMsg);
 
                 context.Call(_dialogBuilder.BuildNameDialog(context.Activity.AsMessageActivity()), Resume_AfterNameDialog);
                 await Task.CompletedTask;

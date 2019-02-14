@@ -15,7 +15,7 @@ namespace BuddyBot.Dialogs
     [Serializable]
     public class NameDialog : IDialog<string>
     {
-        private string _preferredNameFromMessage;
+        private string _preferredName;
         private readonly IBotDataService _botDataService;
         private readonly IList<EntityRecommendation> _entities;
 
@@ -30,14 +30,14 @@ namespace BuddyBot.Dialogs
 
             if (_entities != null)
             {
-                _preferredNameFromMessage = MessageHelpers.ExtractEntityFromMessage("User.PreferredName", _entities);
+                _preferredName = MessageHelpers.ExtractEntityFromMessage("User.PreferredName", _entities);
             }
            
             string name = _botDataService.GetPreferredName(context);
 
-            if (!string.IsNullOrWhiteSpace(_preferredNameFromMessage))
+            if (!string.IsNullOrWhiteSpace(_preferredName))
             {
-                PromptDialog.Confirm(context, ResumeAfterPreferredNameConfirmation, $"So you'd like me to call you {_preferredNameFromMessage} from now on?", $"Sorry I don't understand - try again! Should I call you {_preferredNameFromMessage}?");
+                PromptDialog.Confirm(context, ResumeAfterPreferredNameConfirmation, $"So you'd like me to call you {_preferredName} from now on?", $"Sorry I don't understand - try again! Should I call you {_preferredName}?");
                 return Task.CompletedTask;
             }
 
@@ -51,23 +51,27 @@ namespace BuddyBot.Dialogs
             return Task.CompletedTask;
         }
 
-        // TODO - check true/false
         private async Task ResumeAfterPreferredNameConfirmation(IDialogContext context, IAwaitable<bool> result)
         {
-            _botDataService.SetPreferredName(context, _preferredNameFromMessage);
-            context.Done(_preferredNameFromMessage);
 
-            await Task.Yield();
+            bool confirmation = await result;
 
+            switch (confirmation)
+            {
+                case true:
+                    _botDataService.SetPreferredName(context, _preferredName);
+                    context.Done(_preferredName);
+                    break;
+                default:
+                    PromptDialog.Text(context, ResumeAfterNameFilled, "Okay, what should I call you?", "Sorry I didn't get that - try again! What should I call you?");
+                    break;
+            }
         }
 
         private async Task ResumeAfterNameFilled(IDialogContext context, IAwaitable<string> result)
         {
-            string filledName = await result;
-
-            _botDataService.SetPreferredName(context, filledName);
-
-            context.Done(filledName);
+            _preferredName = await result;
+            PromptDialog.Confirm(context, ResumeAfterPreferredNameConfirmation, $"So you'd like me to call you {_preferredName} from now on?", $"Sorry I don't understand - try again! Should I call you {_preferredName}?");
         }
 
         private async Task ResumeAfterConfirmation(IDialogContext context, IAwaitable<bool> result)
