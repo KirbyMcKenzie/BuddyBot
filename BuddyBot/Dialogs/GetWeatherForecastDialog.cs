@@ -12,6 +12,7 @@ using BuddyBot.Models;
 using BuddyBot.Services.Contracts;
 using Microsoft.Bot.Connector;
 using BuddyBot.Models.Enums;
+using BuddyBot.Helpers.Contracts;
 
 namespace BuddyBot.Dialogs
 {
@@ -21,25 +22,26 @@ namespace BuddyBot.Dialogs
         private readonly IWeatherService _weatherService;
         private readonly IList<EntityRecommendation> _entities;
         private readonly IBotDataService _botDataService;
+        private readonly IMessageHelpers _messageHelpers;
 
         // TODO - WeatherDialog - Check if pre-saved weather location matches entity city
         // TODO - WeatherDialog - If weather matches entity city, get weather by pre-saved weather id
         // TODO - WeatherDialog - Ask to save preference
 
-        public GetWeatherForecastDialog(
-            IWeatherService weatherService,IBotDataService botDataService,
-            IList<EntityRecommendation> entities)
+        public GetWeatherForecastDialog(IWeatherService weatherService, IList<EntityRecommendation> entities, 
+            IBotDataService botDataService, IMessageHelpers messageHelpers)
         {
             _weatherService = weatherService;
             _entities = entities;
             _botDataService = botDataService;
+            _messageHelpers = messageHelpers;
         }
 
         public async Task StartAsync(IDialogContext context)
         {
-            string cityName = MessageHelpers.ExtractEntityFromMessage("City.Name", _entities);
-            string countryCode = MessageHelpers.ExtractEntityFromMessage("City.CountryCode", _entities, TextCaseType.UpperCase);
-            string countryName = MessageHelpers.ExtractEntityFromMessage("City.CountryName", _entities);
+            string cityName = _messageHelpers.ExtractEntityFromMessage("City.Name", _entities);
+            string countryCode = _messageHelpers.ExtractEntityFromMessage("City.CountryCode", _entities, TextCaseType.UpperCase);
+            string countryName = _messageHelpers.ExtractEntityFromMessage("City.CountryName", _entities);
 
             City preferredCity = _botDataService.GetPreferredWeatherLocation(context);
 
@@ -120,7 +122,8 @@ namespace BuddyBot.Dialogs
         {
             var message = await result;
 
-            City city =  MessageHelpers.ExtractCityFromMessagePrompt(message.Text);
+            WeatherHelpers weatherHelper = new WeatherHelpers();
+            City city = weatherHelper.ExtractCityFromMessagePrompt(message.Text);
 
             var weatherForecast = await _weatherService.GetWeather(city);
 

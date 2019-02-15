@@ -379,6 +379,7 @@
     <Compile Include="Dialogs\DeleteUserDataDialog.cs" />
     <Compile Include="Dialogs\GetStartedDialog.cs" />
     <Compile Include="Dialogs\NameDialog.cs" />
+    <Compile Include="Helpers\Contracts\IMessageHelpers.cs" />
     <Compile Include="Models\Dtos\WeatherSearchResultDto.cs" />
     <Compile Include="Models\Enums\PersonalityChatPersona.cs" />
     <Compile Include="Models\Mappers\CityMap.cs" />
