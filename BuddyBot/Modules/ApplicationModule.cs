@@ -6,6 +6,8 @@ using System.Web;
 using Autofac;
 using BuddyBot.Dialogs;
 using BuddyBot.Dialogs.Builders;
+using BuddyBot.Helpers;
+using BuddyBot.Helpers.Contracts;
 using BuddyBot.Logging;
 using BuddyBot.Repository.DataAccess;
 using BuddyBot.Repository.DataAccess.Contracts;
@@ -96,6 +98,11 @@ namespace BuddyBot.Modules
 
             builder.RegisterType<WeatherService>()
                 .Keyed<IWeatherService>(FiberModule.Key_DoNotSerialize)
+                .AsImplementedInterfaces().SingleInstance();
+
+            // Helpers
+            builder.RegisterType<MessageHelper>()
+                .Keyed<IMessageHelper>(FiberModule.Key_DoNotSerialize)
                 .AsImplementedInterfaces().SingleInstance();
 
             // Builders 

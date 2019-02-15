@@ -61,8 +61,9 @@ namespace BuddyBot.Services
                         weatherTemperturesJsonResult.ToObject<WeatherTemperatureDto>();
 
                     // TODO - Convert temperture using entity e.g. "Weather in Auckland in fahrenheit"
+                    WeatherHelper weatherHelper = new WeatherHelper();
                     double convertedTemperture =
-                        WeatherHelpers.ConvertTemperture(weatherTemperatureResult.temp, Temperature.Celsius);
+                        weatherHelper.ConvertTemperture(weatherTemperatureResult.temp, Temperature.Celsius);
 
                     var mappedConitionReponse = await _weatherConditionResponseReader
                         .GetResponseByCondition(weatherDescriptionResult.description);
@@ -86,7 +87,8 @@ namespace BuddyBot.Services
 
             if (countryCode == null && countryName != null)
             {
-                countryCode = GlobalizationHelpers.GetCountryCode(countryName);
+                GlobalizationHelper globalizationHelper = new GlobalizationHelper();
+                countryCode = globalizationHelper.GetCountryCode(countryName);
             }
 
             if(countryCode != null)

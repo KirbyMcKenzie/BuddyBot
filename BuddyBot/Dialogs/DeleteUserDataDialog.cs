@@ -13,25 +13,27 @@ using static System.Threading.Thread;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Builder.Luis.Models;
 using BuddyBot.Helpers;
+using BuddyBot.Helpers.Contracts;
 
 namespace BuddyBot.Dialogs
 {
     public class DeleteUserDataDialog : IDialog<string>
     {
-
         private readonly IBotDataService _botDataService;
+        private readonly IMessageHelper _messageHelpers;
         private readonly IList<EntityRecommendation> _entities;
 
-        public DeleteUserDataDialog(IBotDataService botDataService, IList<EntityRecommendation> entities)
+        public DeleteUserDataDialog(IBotDataService botDataService, IMessageHelper messageHelpers,
+            IList<EntityRecommendation> entities)
         {
             SetField.NotNull(out _botDataService, nameof(botDataService), botDataService);
+            SetField.NotNull(out _messageHelpers, nameof(messageHelpers), messageHelpers);
             _entities = entities;
         }
 
-
         public Task StartAsync(IDialogContext context)
         {
-            string command = MessageHelpers.ExtractEntityFromMessage("Bot.Command", _entities) ?? string.Empty;
+            string command = _messageHelpers.ExtractEntityFromMessage("Bot.Command", _entities) ?? string.Empty;
 
             if (command.Replace(" ", string.Empty) == "--Quick")
             {

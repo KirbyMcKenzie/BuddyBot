@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using BuddyBot.Helpers;
+using BuddyBot.Helpers.Contracts;
 using BuddyBot.Services.Contracts;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Internals.Fibers;
@@ -16,11 +17,13 @@ namespace BuddyBot.Dialogs
     {
         private string _preferredName;
         private readonly IBotDataService _botDataService;
+        private readonly IMessageHelper _messageHelpers;
         private readonly IList<EntityRecommendation> _entities;
 
-        public NameDialog(IBotDataService botDataService, IList<EntityRecommendation> entities)
+        public NameDialog(IBotDataService botDataService, IMessageHelper messageHelpers, IList<EntityRecommendation> entities)
         {
             SetField.NotNull(out _botDataService, nameof(botDataService), botDataService);
+            SetField.NotNull(out _messageHelpers, nameof(messageHelpers), messageHelpers);
             _entities = entities;
         }
 
@@ -29,7 +32,7 @@ namespace BuddyBot.Dialogs
 
             if (_entities != null)
             {
-                _preferredName = MessageHelpers.ExtractEntityFromMessage("User.PreferredName", _entities);
+                _preferredName = _messageHelpers.ExtractEntityFromMessage("User.PreferredName", _entities);
             }
            
             string name = _botDataService.GetPreferredName(context);

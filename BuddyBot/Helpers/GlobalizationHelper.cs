@@ -6,9 +6,14 @@ using System.Web;
 
 namespace BuddyBot.Helpers
 {
-    public static class GlobalizationHelpers
+    public class GlobalizationHelper
     {
-        public static string GetCountryCode(string countryName)
+        /// <summary>
+        /// Returns the country code from given country name.
+        /// </summary>
+        /// <param name="countryName">Mandatory. The country name to convert to country code.</param>
+        /// <returns></returns>
+        public string GetCountryCode(string countryName)
         {
             IEnumerable<RegionInfo> regionFullNames = CultureInfo
                 .GetCultures(CultureTypes.SpecificCultures)

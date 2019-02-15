@@ -11,6 +11,7 @@ using BuddyBot.Services.Contracts;
 using Microsoft.Bot.Builder.Internals.Fibers;
 using Microsoft.Bot.Builder.Luis.Models;
 using Microsoft.Bot.Connector;
+using BuddyBot.Helpers.Contracts;
 
 namespace BuddyBot.Dialogs
 {
@@ -19,13 +20,15 @@ namespace BuddyBot.Dialogs
         private readonly IBotDataService _botDataService;
         private readonly IWeatherService _weatherService;
         private readonly IList<EntityRecommendation> _entities;
+        private readonly IMessageHelper _messageHelpers;
         private string _extractedCityFromMessage;
 
         public PreferredWeatherLocationDialog(IBotDataService botDataService, IWeatherService weatherService,
-            IList<EntityRecommendation> entities)
+            IList<EntityRecommendation> entities, IMessageHelper messageHelpers)
         {
             SetField.NotNull(out _botDataService, nameof(botDataService), botDataService);
             SetField.NotNull(out _weatherService, nameof(weatherService), weatherService);
+            SetField.NotNull(out _messageHelpers, nameof(messageHelpers), messageHelpers);
             _entities = entities;
         }
 
@@ -35,7 +38,7 @@ namespace BuddyBot.Dialogs
 
             if (_entities != null)
             {
-                _extractedCityFromMessage = MessageHelpers.ExtractEntityFromMessage("City.Name", _entities);
+                _extractedCityFromMessage = _messageHelpers.ExtractEntityFromMessage("City.Name", _entities);
             }
 
              if (!string.IsNullOrWhiteSpace(_extractedCityFromMessage))
@@ -107,7 +110,8 @@ namespace BuddyBot.Dialogs
         {
             IMessageActivity cityChoice = await result;
 
-            City extractedCity = MessageHelpers.ExtractCityFromMessagePrompt(cityChoice.Text);
+            WeatherHelper weatherHelper = new WeatherHelper();
+            City extractedCity = weatherHelper.ExtractCityFromMessagePrompt(cityChoice.Text);
 
             _botDataService.setPreferredWeatherLocation(context, extractedCity);
 
