@@ -87,7 +87,8 @@ namespace BuddyBot.Services
 
             if (countryCode == null && countryName != null)
             {
-                countryCode = GlobalizationHelpers.GetCountryCode(countryName);
+                GlobalizationHelper globalizationHelper = new GlobalizationHelper();
+                countryCode = globalizationHelper.GetCountryCode(countryName);
             }
 
             if(countryCode != null)

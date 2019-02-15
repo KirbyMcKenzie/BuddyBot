@@ -6,9 +6,9 @@ using System.Web;
 
 namespace BuddyBot.Helpers
 {
-    public static class GlobalizationHelpers
+    public class GlobalizationHelper
     {
-        public static string GetCountryCode(string countryName)
+        public string GetCountryCode(string countryName)
         {
             IEnumerable<RegionInfo> regionFullNames = CultureInfo
                 .GetCultures(CultureTypes.SpecificCultures)
