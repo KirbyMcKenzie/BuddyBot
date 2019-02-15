@@ -20,7 +20,7 @@ namespace BuddyBot.Repository.DataAccess
         {
             IList<SmallTalkResponse> responseResult = await _context.SmallTalkResponses
                 .Where(r => r.IntentName == intentName && r.PersonalityResponseType == personaType).ToListAsync();
-               
+            
             return responseResult;
         }
     }

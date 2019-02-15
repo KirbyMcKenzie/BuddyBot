@@ -12,7 +12,6 @@ namespace BuddyBot.Models
     /// </summary>
     public class ConversationPauseConstants
     {
-        public const int VeryShortPause = 500;
         public const int ShortPause = 1000;
         public const int ShortMediumPause = 1500;
         public const int MediumPause = 2000;

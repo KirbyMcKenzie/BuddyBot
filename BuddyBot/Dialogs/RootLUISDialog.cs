@@ -98,7 +98,7 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Smalltalk.User.Bored")]
         [LuisIntent("Smalltalk.User.Happy")]
         [LuisIntent("Smalltalk.User.Hungry")]
-        [LuisIntent("Smalltalk.User.KeyboardMash")] //TODO - Add to DB & Seed
+        // [LuisIntent("Smalltalk.User.KeyboardMash")] //- TODO - Add to DB & Seed
         [LuisIntent("Smalltalk.User.Kidding")]
         [LuisIntent("Smalltalk.User.Lonely")]
         [LuisIntent("Smalltalk.User.Sad")]

@@ -110,7 +110,7 @@ namespace BuddyBot.Services
 
             IList<SmallTalkResponse> result = await _smallTalkResponseReader.GetSmallTalkResponsesByIntentName(intentName, persona.ToString());
 
-            if(result == null)
+            if(result == null || result.Count == 0)
             {
                 return "Let's move on. What can I help with?";
             }
