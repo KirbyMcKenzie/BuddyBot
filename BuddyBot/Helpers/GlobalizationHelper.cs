@@ -8,6 +8,11 @@ namespace BuddyBot.Helpers
 {
     public class GlobalizationHelper
     {
+        /// <summary>
+        /// Returns the country code from given country name.
+        /// </summary>
+        /// <param name="countryName">Mandatory. The country name to convert to country code.</param>
+        /// <returns></returns>
         public string GetCountryCode(string countryName)
         {
             IEnumerable<RegionInfo> regionFullNames = CultureInfo
