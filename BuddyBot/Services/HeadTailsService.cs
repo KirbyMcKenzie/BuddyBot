@@ -6,6 +6,9 @@ namespace BuddyBot.Services
 {
     public class HeadTailsService : IHeadTailsService
     {
+        /// <summary>
+        /// Randomly returns heads or tails.
+        /// </summary>
         public Task<string> GetRandomHeadsTails()
         {
             Random random = new Random();
@@ -19,7 +22,6 @@ namespace BuddyBot.Services
                 default:
                     return Task.FromResult("Tails");
             }
-
         }
     }
 }

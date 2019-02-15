@@ -34,6 +34,10 @@ namespace BuddyBot.Services
             _weatherConditionResponseReader = weatherConditionResponseReader;
         }
 
+        /// <summary>
+        /// Gets the current weather forecast for a given City.
+        /// </summary>
+        /// <param name="city">Mandatory. City to get the current weather for.</param>
         public async Task<string> GetWeather(City city)
         {
             string requestUri = $"{_weatherBaseUrl}{city.Name},{city.Country}&appid={_weatherApiKey}";
@@ -46,7 +50,7 @@ namespace BuddyBot.Services
 
             if (response.IsSuccessStatusCode)
             {
-                String responseJsonString = await response.Content.ReadAsStringAsync();
+                string responseJsonString = await response.Content.ReadAsStringAsync();
                 JObject parsedJsonReponseString = JObject.Parse(responseJsonString);
 
                 JToken weatherDescriptionJsonResult = parsedJsonReponseString["weather"].FirstOrDefault();
@@ -72,13 +76,19 @@ namespace BuddyBot.Services
                         return $"{convertedTemperture}{Temperature.Celsius.DisplayName()} " +
                                $"with {mappedConitionReponse.MappedConditionResponse}";
                     }
-                   
                 }
             }
 
             return null;
         }
 
+        /// <summary>
+        ///  Searches for cities that match the given cityName, countryCode and countyName, 
+        ///  returning a list of matching cities.
+        /// </summary>
+        /// <param name="cityName">Mandatory. Name of the city to search for.</param>
+        /// <param name="countryCode">Optional. Two letter country code for the city to search for.</param>
+        /// <param name="countryName">Optional. Name of the country to search for. </param>
         public async Task<IList<City>> SearchForCities(string cityName, string countryCode = null,
             string countryName = null)
         {
@@ -115,6 +125,7 @@ namespace BuddyBot.Services
 
                 return cityList;
             }
+
             return null;
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -10,19 +11,22 @@ namespace BuddyBot.Services
 {
     public class JokeService : IJokeService
     {
-        private const string Url = "https://icanhazdadjoke.com/";
+        private readonly string _jokeRequestUrl = ConfigurationManager.AppSettings["jokeApi:requestUrl"];
 
+        /// <summary>
+        /// Gets random joke from JokeAPI.
+        /// </summary>
         public async Task<string> GetRandomJoke()
         {
             
-                HttpClient client = new HttpClient { BaseAddress = new Uri(Url) };
+                HttpClient client = new HttpClient { BaseAddress = new Uri(_jokeRequestUrl) };
                 client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage response = await client.GetAsync(Url);
+                HttpResponseMessage response = await client.GetAsync(_jokeRequestUrl);
                 if (response.IsSuccessStatusCode)
                 {
-                    String jokeString = await response.Content.ReadAsStringAsync();
+                    string jokeString = await response.Content.ReadAsStringAsync();
 
                     var jokeDto = JsonConvert.DeserializeObject<JokeDto>(jokeString);
 
