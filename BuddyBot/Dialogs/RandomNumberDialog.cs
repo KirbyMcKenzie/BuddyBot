@@ -7,17 +7,20 @@ using Microsoft.Bot.Builder.Luis.Models;
 using BuddyBot.Helpers;
 using static System.Threading.Thread;
 using Pause = BuddyBot.Models.ConversationPauseConstants;
+using BuddyBot.Helpers.Contracts;
 
 namespace BuddyBot.Dialogs
 {
     [Serializable]
     public class RandomNumberDialog : IDialog<int>
     {
+        private readonly IMessageHelpers _messageHelpers;
         private readonly IList<EntityRecommendation> _entities;
         private int _min, _max;
 
-        public RandomNumberDialog(IList<EntityRecommendation> entities)
+        public RandomNumberDialog(IMessageHelpers messageHelpers, IList<EntityRecommendation> entities)
         {
+            _messageHelpers = messageHelpers;
             _entities = entities;
         }
 
@@ -61,7 +64,7 @@ namespace BuddyBot.Dialogs
         {
             var message = await result;
 
-            var messageNumberList = MessageHelpers.ExtractIntegersFromMessage(message);
+            var messageNumberList = _messageHelpers.ExtractIntegersFromMessage(message);
 
             _min = messageNumberList.Min();
             _max = messageNumberList.Max();

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using BuddyBot.Helpers;
+using BuddyBot.Helpers.Contracts;
 using BuddyBot.Models.Enums;
 using BuddyBot.Services.Contracts;
 using Microsoft.Bot.Builder.Dialogs;
@@ -16,12 +17,14 @@ namespace BuddyBot.Dialogs
     {
         private readonly IBotDataService _botDataService;
         private readonly IList<EntityRecommendation> _entities;
+        private readonly IMessageHelpers _messageHelpers;
         private PersonalityChatPersona _preferredBotPersona;
 
         public BotPersonaDialog(IBotDataService botDataService, IList<EntityRecommendation> entities, 
-            PersonalityChatPersona preferredBotPersona)
+            PersonalityChatPersona preferredBotPersona, IMessageHelpers messageHelpers)
         {
             SetField.NotNull(out _botDataService, nameof(botDataService), botDataService);
+            SetField.NotNull(out _messageHelpers, nameof(messageHelpers), messageHelpers);
             _entities = entities;
             _preferredBotPersona = preferredBotPersona;
         }
@@ -59,7 +62,7 @@ namespace BuddyBot.Dialogs
             {
                 if (_entities.Count > 0 || _entities != null)
                 {
-                    Enum.TryParse(MessageHelpers.ExtractEntityFromMessage("User.PreferredBotPersona", _entities),
+                    Enum.TryParse(_messageHelpers.ExtractEntityFromMessage("User.PreferredBotPersona", _entities),
                         out PersonalityChatPersona parsedResult);
 
                     _preferredBotPersona = parsedResult;
