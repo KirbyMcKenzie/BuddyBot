@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BuddyBot.Helpers.Contracts
 {
-    public interface IMessageHelpers
+    public interface IMessageHelper
     {
         Task ConversationPauseAsync(IDialogContext context, int pauseLength);
 

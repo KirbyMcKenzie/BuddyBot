@@ -16,7 +16,7 @@ using BuddyBot.Helpers.Contracts;
 
 namespace BuddyBot.Helpers
 {
-    public class MessageHelpers: IMessageHelpers
+    public class MessageHelper: IMessageHelper
     {
         /// <summary>
         ///  Creates a typing indicator with a pause to replicate the bot typing a message.

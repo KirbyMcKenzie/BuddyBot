@@ -20,11 +20,11 @@ namespace BuddyBot.Dialogs
         private readonly IBotDataService _botDataService;
         private readonly IWeatherService _weatherService;
         private readonly IList<EntityRecommendation> _entities;
-        private readonly IMessageHelpers _messageHelpers;
+        private readonly IMessageHelper _messageHelpers;
         private string _extractedCityFromMessage;
 
         public PreferredWeatherLocationDialog(IBotDataService botDataService, IWeatherService weatherService,
-            IList<EntityRecommendation> entities, IMessageHelpers messageHelpers)
+            IList<EntityRecommendation> entities, IMessageHelper messageHelpers)
         {
             SetField.NotNull(out _botDataService, nameof(botDataService), botDataService);
             SetField.NotNull(out _weatherService, nameof(weatherService), weatherService);

@@ -17,14 +17,14 @@ namespace BuddyBot.Dialogs
     {
         private readonly IBotDataService _botDataService;
         private readonly IList<EntityRecommendation> _entities;
-        private readonly IMessageHelpers _messageHelpers;
+        private readonly IMessageHelper _messageHelper;
         private PersonalityChatPersona _preferredBotPersona;
 
         public BotPersonaDialog(IBotDataService botDataService, IList<EntityRecommendation> entities, 
-            PersonalityChatPersona preferredBotPersona, IMessageHelpers messageHelpers)
+            PersonalityChatPersona preferredBotPersona, IMessageHelper messageHelpers)
         {
             SetField.NotNull(out _botDataService, nameof(botDataService), botDataService);
-            SetField.NotNull(out _messageHelpers, nameof(messageHelpers), messageHelpers);
+            SetField.NotNull(out _messageHelper, nameof(messageHelpers), messageHelpers);
             _entities = entities;
             _preferredBotPersona = preferredBotPersona;
         }
@@ -62,7 +62,7 @@ namespace BuddyBot.Dialogs
             {
                 if (_entities.Count > 0 || _entities != null)
                 {
-                    Enum.TryParse(_messageHelpers.ExtractEntityFromMessage("User.PreferredBotPersona", _entities),
+                    Enum.TryParse(_messageHelper.ExtractEntityFromMessage("User.PreferredBotPersona", _entities),
                         out PersonalityChatPersona parsedResult);
 
                     _preferredBotPersona = parsedResult;

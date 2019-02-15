@@ -23,10 +23,10 @@ namespace BuddyBot.Dialogs
         private readonly IBotDataService _botDataService;
         private readonly IDialogBuilder _dialogBuilder;
         private readonly IConversationService _conversationService;
-        private readonly IMessageHelpers _messageHelper;
+        private readonly IMessageHelper _messageHelper;
 
         public GetStartedDialog(IBotDataService botDataService, IDialogBuilder dialogBuilder, 
-            IConversationService conversationService, IMessageHelpers messageHelper)
+            IConversationService conversationService, IMessageHelper messageHelper)
         {
             SetField.NotNull(out _botDataService, nameof(botDataService), botDataService);
             SetField.NotNull(out _dialogBuilder, nameof(dialogBuilder), dialogBuilder);

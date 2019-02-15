@@ -17,10 +17,10 @@ namespace BuddyBot.Dialogs
     {
         private string _preferredName;
         private readonly IBotDataService _botDataService;
-        private readonly IMessageHelpers _messageHelpers;
+        private readonly IMessageHelper _messageHelpers;
         private readonly IList<EntityRecommendation> _entities;
 
-        public NameDialog(IBotDataService botDataService, IMessageHelpers messageHelpers, IList<EntityRecommendation> entities)
+        public NameDialog(IBotDataService botDataService, IMessageHelper messageHelpers, IList<EntityRecommendation> entities)
         {
             SetField.NotNull(out _botDataService, nameof(botDataService), botDataService);
             SetField.NotNull(out _messageHelpers, nameof(messageHelpers), messageHelpers);

@@ -22,14 +22,14 @@ namespace BuddyBot.Dialogs
         private readonly IWeatherService _weatherService;
         private readonly IList<EntityRecommendation> _entities;
         private readonly IBotDataService _botDataService;
-        private readonly IMessageHelpers _messageHelpers;
+        private readonly IMessageHelper _messageHelpers;
 
         // TODO - WeatherDialog - Check if pre-saved weather location matches entity city
         // TODO - WeatherDialog - If weather matches entity city, get weather by pre-saved weather id
         // TODO - WeatherDialog - Ask to save preference
 
         public GetWeatherForecastDialog(IWeatherService weatherService, IList<EntityRecommendation> entities, 
-            IBotDataService botDataService, IMessageHelpers messageHelpers)
+            IBotDataService botDataService, IMessageHelper messageHelpers)
         {
             _weatherService = weatherService;
             _entities = entities;

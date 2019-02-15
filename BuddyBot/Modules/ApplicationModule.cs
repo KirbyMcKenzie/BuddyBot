@@ -101,8 +101,8 @@ namespace BuddyBot.Modules
                 .AsImplementedInterfaces().SingleInstance();
 
             // Helpers
-            builder.RegisterType<MessageHelpers>()
-                .Keyed<IMessageHelpers>(FiberModule.Key_DoNotSerialize)
+            builder.RegisterType<MessageHelper>()
+                .Keyed<IMessageHelper>(FiberModule.Key_DoNotSerialize)
                 .AsImplementedInterfaces().SingleInstance();
 
             // Builders 

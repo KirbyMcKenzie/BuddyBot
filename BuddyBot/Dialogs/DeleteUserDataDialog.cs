@@ -20,10 +20,10 @@ namespace BuddyBot.Dialogs
     public class DeleteUserDataDialog : IDialog<string>
     {
         private readonly IBotDataService _botDataService;
-        private readonly IMessageHelpers _messageHelpers;
+        private readonly IMessageHelper _messageHelpers;
         private readonly IList<EntityRecommendation> _entities;
 
-        public DeleteUserDataDialog(IBotDataService botDataService, IMessageHelpers messageHelpers,
+        public DeleteUserDataDialog(IBotDataService botDataService, IMessageHelper messageHelpers,
             IList<EntityRecommendation> entities)
         {
             SetField.NotNull(out _botDataService, nameof(botDataService), botDataService);
