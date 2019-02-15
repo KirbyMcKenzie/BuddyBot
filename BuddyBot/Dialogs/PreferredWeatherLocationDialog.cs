@@ -110,7 +110,7 @@ namespace BuddyBot.Dialogs
         {
             IMessageActivity cityChoice = await result;
 
-            WeatherHelpers weatherHelper = new WeatherHelpers();
+            WeatherHelper weatherHelper = new WeatherHelper();
             City extractedCity = weatherHelper.ExtractCityFromMessagePrompt(cityChoice.Text);
 
             _botDataService.setPreferredWeatherLocation(context, extractedCity);

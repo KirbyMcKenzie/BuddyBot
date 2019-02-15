@@ -122,7 +122,7 @@ namespace BuddyBot.Dialogs
         {
             var message = await result;
 
-            WeatherHelpers weatherHelper = new WeatherHelpers();
+            WeatherHelper weatherHelper = new WeatherHelper();
             City city = weatherHelper.ExtractCityFromMessagePrompt(message.Text);
 
             var weatherForecast = await _weatherService.GetWeather(city);

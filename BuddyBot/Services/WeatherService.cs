@@ -61,8 +61,9 @@ namespace BuddyBot.Services
                         weatherTemperturesJsonResult.ToObject<WeatherTemperatureDto>();
 
                     // TODO - Convert temperture using entity e.g. "Weather in Auckland in fahrenheit"
+                    WeatherHelper weatherHelper = new WeatherHelper();
                     double convertedTemperture =
-                        WeatherHelpers.ConvertTemperture(weatherTemperatureResult.temp, Temperature.Celsius);
+                        weatherHelper.ConvertTemperture(weatherTemperatureResult.temp, Temperature.Celsius);
 
                     var mappedConitionReponse = await _weatherConditionResponseReader
                         .GetResponseByCondition(weatherDescriptionResult.description);

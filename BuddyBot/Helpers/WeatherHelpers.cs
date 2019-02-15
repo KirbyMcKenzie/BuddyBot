@@ -7,9 +7,9 @@ using BuddyBot.Models.Enums;
 
 namespace BuddyBot.Helpers
 {
-    public class WeatherHelpers
+    public class WeatherHelper
     {
-        public static double ConvertTemperture(double temp, Temperature temperatureToConvert)
+        public double ConvertTemperture(double temp, Temperature temperatureToConvert)
         {
             switch (temperatureToConvert)
             {
