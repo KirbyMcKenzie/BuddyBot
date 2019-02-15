@@ -142,8 +142,6 @@ namespace BuddyBot.Dialogs
         public async Task HeadsTails(IDialogContext context, LuisResult result)
         {
 
-            //TODO - replace with different responses each time
-            //TODO - move to seperate dialog
             await context.PostAsync("Flipping a coin.. 🤞");
 
             Sleep(Pause.ShortPause);

@@ -60,7 +60,6 @@ namespace BuddyBot.Services
             return canIHelpPhraseList;
         }
 
-        // TODO - Pull to db 
         private List<string> getGreetingList(string name = null)
         {
             

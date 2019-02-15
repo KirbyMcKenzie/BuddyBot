@@ -24,10 +24,6 @@ namespace BuddyBot.Dialogs
         private readonly IBotDataService _botDataService;
         private readonly IMessageHelper _messageHelpers;
 
-        // TODO - WeatherDialog - Check if pre-saved weather location matches entity city
-        // TODO - WeatherDialog - If weather matches entity city, get weather by pre-saved weather id
-        // TODO - WeatherDialog - Ask to save preference
-
         public GetWeatherForecastDialog(IWeatherService weatherService, IList<EntityRecommendation> entities, 
             IBotDataService botDataService, IMessageHelper messageHelpers)
         {
@@ -89,7 +85,6 @@ namespace BuddyBot.Dialogs
             else if (citySearchResults != null && citySearchResults.Count >= 2)
             {
 
-                // TODO - Think about limiting amount of cards displayed, see more button? 
                 List<CardAction> cityCardActionList = CreateCardActionList(citySearchResults);
 
                 HeroCard card = new HeroCard
