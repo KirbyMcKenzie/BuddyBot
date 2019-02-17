@@ -10,9 +10,7 @@ using BuddyBot.Models.Enums;
 using BuddyBot.Services.Contracts;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Internals.Fibers;
-using Microsoft.Bot.Builder.Luis.Models;
 using Microsoft.Bot.Connector;
-using static System.Threading.Thread;
 using Pause = BuddyBot.Models.ConversationPauseConstants;
 
 namespace BuddyBot.Dialogs
@@ -34,6 +32,10 @@ namespace BuddyBot.Dialogs
             SetField.NotNull(out _messageHelper, nameof(messageHelper), messageHelper);
         }
 
+        /// <summary>
+        /// Execution for the <see cref="GetStartedDialog"/> starts here. 
+        /// </summary>
+        /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
         public async Task StartAsync(IDialogContext context)
         {
             if (_botDataService.hasCompletedGetStarted(context))
@@ -63,6 +65,13 @@ namespace BuddyBot.Dialogs
             }
         }
 
+
+        /// <summary>
+        /// Method called after the <seealso cref="NameDialog"/> when called from the 
+        /// <seealso cref="StartAsync"/> method.       
+        /// </summary>
+        /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
+        /// <param name="result">Mandatory. The user's preferred name specified from the <see cref="NameDialog"/>.</param>
         private async Task Resume_AfterNameDialog(IDialogContext context, IAwaitable<string> result)
         {
             var activity = await result;
@@ -80,9 +89,17 @@ namespace BuddyBot.Dialogs
             replyToConversation.AttachmentLayout = AttachmentLayoutTypes.Carousel;
             replyToConversation.Attachments = new List<Attachment>();
 
-            PersonalityChoiceHeroCard friendlyHeroCard = new PersonalityChoiceHeroCard(PersonalityChatPersona.Friendly, "Friendly", "I'm always happy to help!", "https://buddybottablestorage.blob.core.windows.net/buddybotimages/avatars/BuddyBotFriendly.svg");
-            PersonalityChoiceHeroCard professionalHeroCard = new PersonalityChoiceHeroCard(PersonalityChatPersona.Professional, "Professional", "I'm concise and helpful.", "https://buddybottablestorage.blob.core.windows.net/buddybotimages/avatars/BuddyBotProfessional.svg");
-            PersonalityChoiceHeroCard humorousHeroCard = new PersonalityChoiceHeroCard(PersonalityChatPersona.Humorous, "Humorous", "Hurry up and get on with it.", "https://buddybottablestorage.blob.core.windows.net/buddybotimages/avatars/BuddyBotSassy.svg");
+            PersonalityChoiceHeroCard friendlyHeroCard = new PersonalityChoiceHeroCard(
+                PersonalityChatPersona.Friendly, "Friendly", "I'm always happy to help!",
+                "https://buddybottablestorage.blob.core.windows.net/buddybotimages/avatars/BuddyBotFriendly.svg");
+
+            PersonalityChoiceHeroCard professionalHeroCard = new PersonalityChoiceHeroCard(
+                PersonalityChatPersona.Professional, "Professional", "I'm concise and helpful.",
+                "https://buddybottablestorage.blob.core.windows.net/buddybotimages/avatars/BuddyBotProfessional.svg");
+
+            PersonalityChoiceHeroCard humorousHeroCard = new PersonalityChoiceHeroCard(
+                PersonalityChatPersona.Humorous, "Humorous", "Hurry up and get on with it.",
+                "https://buddybottablestorage.blob.core.windows.net/buddybotimages/avatars/BuddyBotSassy.svg");
 
             List<PersonalityChoiceHeroCard> heroCardList = new List<PersonalityChoiceHeroCard>
             {
@@ -124,6 +141,12 @@ namespace BuddyBot.Dialogs
             context.Wait(Resume_AfterBotPersonaChoice);
         }
 
+
+        /// <summary>
+        /// Method called after the user has chosen which persona they'd like buddy to use.    
+        /// </summary>
+        /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
+        /// <param name="result">Mandatory. The user's preferred bot persona specified from the <see cref="PersonalityChoiceHeroCard"/>.</param>
         private async Task Resume_AfterBotPersonaChoice(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
             var activity = await result;
@@ -134,6 +157,13 @@ namespace BuddyBot.Dialogs
             await Task.CompletedTask;
         }
 
+
+        /// <summary>
+        /// Method called after the <seealso cref="BotPersonaDialog"/> when called from the 
+        /// <seealso cref="Resume_AfterBotPersonaChoice"/> method.       
+        /// </summary>
+        /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
+        /// <param name="result">Mandatory. The user's preferred bot persona specified from the <see cref="BotPersonaDialog"/>.</param>
         private async Task Resume_AfterBotPersonaDialog(IDialogContext context, IAwaitable<string> result)
         {
             var activity = await result;
@@ -148,6 +178,13 @@ namespace BuddyBot.Dialogs
             await Task.CompletedTask;
         }
 
+
+        /// <summary>
+        /// Method called after the <seealso cref="PreferredWeatherLocationDialog"/> when called from the 
+        /// <seealso cref="Resume_AfterBotPersonaDialog"/> method.       
+        /// </summary>
+        /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
+        /// <param name="result">Mandatory. The user's preferred weather location specified from the <see cref="PreferredWeatherLocationDialog"/>.</param>
         private async Task Resume_AfterPreferredWeatherDialog(IDialogContext context, IAwaitable<string> result)
         {
             var activity = await result;
@@ -156,13 +193,18 @@ namespace BuddyBot.Dialogs
             await context.PostAsync($"I love {activity}! It's such a nice city!");
             await _messageHelper.ConversationPauseAsync(context, Pause.MediumPause);
 
-
             await context.PostAsync("Looks like you're all set up!");
             await _messageHelper.ConversationPauseAsync(context, Pause.ShortMediumPause);
 
             await FinishAsync(context);
         }
 
+
+        /// <summary>
+        /// Execution for the <see cref="GetStartedDialog"/> finihses here. Displays <see cref="SuggestedActions"/> 
+        /// to help guide user on what they can do next.
+        /// </summary>
+        /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
         private async Task FinishAsync(IDialogContext context)
         {
             _botDataService.SethasCompletedGetStarted(context, true);
@@ -184,6 +226,5 @@ namespace BuddyBot.Dialogs
             context.Done(reply);
             await Task.CompletedTask;
         }
-
     }
 }
