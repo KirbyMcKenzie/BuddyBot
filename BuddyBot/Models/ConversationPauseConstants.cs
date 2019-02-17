@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Web;
+using BuddyBot.Helpers.Contracts;
 
 namespace BuddyBot.Models
 {
     /// <summary>
-    ///  Constants for use in conjuction with <see cref="Thread.Sleep"/> to maintain
+    ///  Constants for use in conjuction with <see cref="IMessageHelper.ConversationPauseAsync"/> to maintain
     ///  consistency and to assist with code refactoring.
     /// </summary>
     public class ConversationPauseConstants

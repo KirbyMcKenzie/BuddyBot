@@ -46,8 +46,8 @@ namespace BuddyBot.Dialogs
 
                 if (preferredCity?.Name == null)
                 {
-                    PromptDialog.Text(context, ResumeAfterSpecifyCityNamePrompt, "What's the name of the city you want the forecast for?", "I can't understand you. Tell me the name of the city you want the forecast for");
-                    
+                    PromptDialog.Text(context, ResumeAfterSpecifyCityNamePrompt, "What's the name of the city you want the forecast for?", 
+                        "I can't understand you. Tell me the name of the city you want the forecast for");
                 }
                 else
                 {
@@ -103,6 +103,7 @@ namespace BuddyBot.Dialogs
             }
         }
 
+
         private async Task ResumeAfterSpecifyCityNamePrompt(IDialogContext context, IAwaitable<string> result)
         {
             var cityName = await result;
@@ -112,6 +113,7 @@ namespace BuddyBot.Dialogs
 
             await  ResumeAfterCitySearch(context, cityName, citySearchResults);
         }
+
 
         private async Task ResumeAfterHeroCardCitySelect(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
@@ -126,6 +128,7 @@ namespace BuddyBot.Dialogs
                 ? $"Currently the weather in {message.Text} is {weatherForecast}"
                 : "🤧⛅ - I'm having trouble accessing weather reports. We'll have to try again later!");
         }
+
 
         private List<CardAction> CreateCardActionList(IList<City> cityResultList)
         {

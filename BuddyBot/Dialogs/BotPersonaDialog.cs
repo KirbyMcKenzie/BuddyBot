@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
-using BuddyBot.Helpers;
 using BuddyBot.Helpers.Contracts;
 using BuddyBot.Models.Enums;
 using BuddyBot.Services.Contracts;
@@ -83,7 +82,8 @@ namespace BuddyBot.Dialogs
             // Check if user has pre-saved persona, otherwise continue
             if (preSavedPersona != PersonalityChatPersona.None)
             {
-                PromptDialog.Confirm(context, ResumeAfterUpdateConfirmation, $"My persona is set to {preSavedPersona}. Would you like to change it?", $"Sorry I don't understand - try again! Would you like to change my persona?");
+                PromptDialog.Confirm(context, ResumeAfterUpdateConfirmation, $"My persona is set to {preSavedPersona}. Would you like to change it?",
+                    $"Sorry I don't understand - try again! Would you like to change my persona?");
                 return Task.CompletedTask;
             }
 

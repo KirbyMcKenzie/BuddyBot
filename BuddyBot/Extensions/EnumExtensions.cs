@@ -8,6 +8,10 @@ namespace BuddyBot.Extensions
 {
     public static class EnumExtensions
     {
+        /// <summary>
+        /// Returns the display name of the given Enum value.
+        /// </summary>
+        /// <param name="value">Enum value to get display name of.</param>
         public static string DisplayName(this Enum value)
         {
             FieldInfo field = value.GetType().GetField(value.ToString());
@@ -23,6 +27,7 @@ namespace BuddyBot.Extensions
     public class EnumDisplayNameAttribute : Attribute
     {
         private string _displayName;
+
         public string DisplayName
         {
             get
