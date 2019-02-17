@@ -14,30 +14,34 @@ using Microsoft.Bot.Builder.Internals.Fibers;
 using static System.Threading.Thread;
 using Pause = BuddyBot.Models.ConversationPauseConstants;
 using BuddyBot.Models.Enums;
+using BuddyBot.Helpers.Contracts;
 
 namespace BuddyBot.Dialogs
 {
     [Serializable]
     public class RootLuisDialog : LuisDialog<object>
     {
-        private readonly IDialogBuilder _dialogBuilder;
+        private readonly IBotDataService _botDataService;
         private readonly IConversationService _conversationService;
+        private readonly IDialogBuilder _dialogBuilder;
         private readonly IHeadTailsService _headTailsService;
         private readonly IJokeService _jokeService;
-        private readonly IBotDataService _botDataService;
+        private readonly IMessageHelper _messageHelper;
         
         public RootLuisDialog(
-            IDialogBuilder dialogBuilder, IConversationService conversationService,
-            IHeadTailsService headTailsService, IJokeService jokeService,
-            IBotDataService botDataService) : base(new LuisService(new LuisModelAttribute(
+            IBotDataService botDataService, IConversationService conversationService,
+            IDialogBuilder dialogBuilder, IHeadTailsService headTailsService, 
+            IJokeService jokeService, IMessageHelper messageHelper)
+            : base(new LuisService(new LuisModelAttribute(
             ConfigurationManager.AppSettings["luis:ModelId"],
             ConfigurationManager.AppSettings["luis:SubscriptionId"])))
         {
-            SetField.NotNull(out _dialogBuilder, nameof(dialogBuilder), dialogBuilder);
+            SetField.NotNull(out _botDataService, nameof(botDataService), botDataService);
             SetField.NotNull(out _conversationService, nameof(conversationService), conversationService);
+            SetField.NotNull(out _dialogBuilder, nameof(dialogBuilder), dialogBuilder);
             SetField.NotNull(out _headTailsService, nameof(headTailsService), headTailsService);
             SetField.NotNull(out _jokeService, nameof(jokeService), jokeService);
-            SetField.NotNull(out _botDataService, nameof(botDataService), botDataService);
+            SetField.NotNull(out _messageHelper, nameof(messageHelper), messageHelper);
         }
 
 
@@ -147,7 +151,7 @@ namespace BuddyBot.Dialogs
         /// <summary>
         /// Method for the 'GetStarted' & 'Help' LUIS intents. Calls the <seealso cref="GetStartedDialog"/> to
         /// provide assistant to user. if they havent done so already. Forwards the conversation to the
-        /// -<see cref="Resume_AfterGetStartedDialog"/> method when completed.
+        /// <see cref="Resume_AfterGetStartedDialog"/> method when completed.
         /// </summary>
         /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
         /// <param name="result">Mandatory. The scored LUIS result from the users utterance.</param>
@@ -183,10 +187,10 @@ namespace BuddyBot.Dialogs
         public async Task HeadsTails(IDialogContext context, LuisResult result)
         {
             await context.PostAsync("Flipping a coin.. 🤞");
+            await _messageHelper.ConversationPauseAsync(context, Pause.ShortPause);
 
-            Sleep(Pause.ShortPause);
             await context.PostAsync("The result is...");
-            Sleep(Pause.ShortMediumPause);
+            await _messageHelper.ConversationPauseAsync(context, Pause.MediumLongPause);
             
             await context.PostAsync(await _headTailsService.GetRandomHeadsTails());
             context.Wait(MessageReceived);

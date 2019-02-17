@@ -49,8 +49,8 @@ namespace BuddyBot.Dialogs
 
                 
                 await context.PostAsync($"Picking a random number between {_min} & {_max}... 🎲");
+                await _messageHelpers.ConversationPauseAsync(context, Pause.ShortMediumPause);
 
-                Sleep(Pause.ShortMediumPause);
                 context.Done(randomNumber);
             }
             else
@@ -72,8 +72,8 @@ namespace BuddyBot.Dialogs
             var randomNumber = new Random().Next(_min, _max);
 
             await context.PostAsync($"Generating a random number between {_min} & {_max}... 🎲");
+            await _messageHelpers.ConversationPauseAsync(context, Pause.ShortMediumPause);
 
-            Sleep(Pause.ShortMediumPause);
             context.Done(randomNumber);
         }
     }
