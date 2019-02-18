@@ -20,6 +20,10 @@ namespace BuddyBot.Dialogs
         }
 
 
+        /// <summary>
+        /// Execution for the <see cref="ConfirmRobotDialog"/> starts here. 
+        /// </summary>
+        /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
         public async Task StartAsync(IDialogContext context)
         {
             await context.PostAsync("Beep Bop... I am indeed a Robot 🤖");

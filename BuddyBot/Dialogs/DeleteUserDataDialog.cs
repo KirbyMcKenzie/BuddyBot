@@ -25,6 +25,10 @@ namespace BuddyBot.Dialogs
         }
 
 
+        /// <summary>
+        /// Execution for the <see cref="DeleteUserDataDialog"/> starts here. 
+        /// </summary>
+        /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
         public Task StartAsync(IDialogContext context)
         {
             string command = _messageHelpers.ExtractEntityFromMessage("Bot.Command", _entities) ?? string.Empty;
@@ -43,6 +47,11 @@ namespace BuddyBot.Dialogs
         }
 
 
+        /// <summary>
+        /// Method called after the user has chosen their preferred bot persona.
+        /// </summary>
+        /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
+        /// <param name="result">Mandatory. The result if the user would like to delete their data.</param>
         private async Task ResumeAfterConfirmation(IDialogContext context, IAwaitable<bool> result)
         {
             bool confirmation = await result;
@@ -61,6 +70,10 @@ namespace BuddyBot.Dialogs
         }
 
 
+        /// <summary>
+        /// Plays out the 'rebirthing' of BuddyBot while deleteing all of the users private data.
+        /// </summary>
+        /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
         private async Task EraseBuddysMemories(IDialogContext context)
         {
             await context.PostAsync("Deleting buddy's memories. 🤖🔨");

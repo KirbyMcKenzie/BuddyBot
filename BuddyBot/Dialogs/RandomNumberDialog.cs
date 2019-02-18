@@ -24,12 +24,12 @@ namespace BuddyBot.Dialogs
             _entities = entities;
         }
 
-        public async Task StartAsync(IDialogContext context)
-        {
-            await Respond(context);
-        }
 
-        public async Task Respond(IDialogContext context)
+        /// <summary>
+        /// Execution for the <see cref="RandomNumberDialog"/> starts here. 
+        /// </summary>
+        /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
+        public async Task StartAsync(IDialogContext context)
         {
             var messageNumberList = new List<int>();
 
@@ -47,7 +47,7 @@ namespace BuddyBot.Dialogs
 
                 var randomNumber = new Random().Next(_min, _max);
 
-                
+
                 await context.PostAsync($"Picking a random number between {_min} & {_max}... 🎲");
                 await _messageHelpers.ConversationPauseAsync(context, Pause.ShortMediumPause);
 
@@ -60,6 +60,12 @@ namespace BuddyBot.Dialogs
             }
         }
 
+
+        /// <summary>
+        /// Called after prompting the user to specify what range they'd like random numbers generated for.
+        /// </summary>
+        /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
+        /// <param name="result">Mandatory. The message form the user specifying the range they'd like random numbers generated for.</param>
         private async Task Resume_AfterPickNumbersPrompt(IDialogContext context, IAwaitable<string> result)
         {
             var message = await result;

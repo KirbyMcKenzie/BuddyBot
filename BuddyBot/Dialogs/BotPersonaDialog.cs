@@ -159,7 +159,7 @@ namespace BuddyBot.Dialogs
         /// Method called after the user has chosen their preferred bot persona.
         /// </summary>
         /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
-        /// <param name="result">Mandatory. The result if the user would like to update the preferredBotPersona <see cref="PromptDialog"/>.</param>
+        /// <param name="result">Mandatory. The users chosen preferred bot persona. </param>
         private async Task ResumeAfterPromptDialogChoice(IDialogContext context, IAwaitable<PersonalityChatPersona> result)
         {
             PersonalityChatPersona chosenPersona = await result;

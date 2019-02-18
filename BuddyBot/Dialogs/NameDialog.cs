@@ -27,6 +27,11 @@ namespace BuddyBot.Dialogs
             _entities = entities;
         }
 
+
+        /// <summary>
+        /// Execution for the <see cref="NameDialog"/> starts here. 
+        /// </summary>
+        /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
         public Task StartAsync(IDialogContext context)
         {
 
@@ -39,20 +44,30 @@ namespace BuddyBot.Dialogs
 
             if (!string.IsNullOrWhiteSpace(_preferredName))
             {
-                PromptDialog.Confirm(context, ResumeAfterPreferredNameConfirmation, $"So you'd like me to call you {_preferredName}?", $"Sorry I don't understand - try again! Should I call you {_preferredName}?");
+                PromptDialog.Confirm(context, ResumeAfterPreferredNameConfirmation, 
+                    $"So you'd like me to call you {_preferredName}?", $"Sorry I don't understand - try again! Should I call you {_preferredName}?");
                 return Task.CompletedTask;
             }
 
             if (!string.IsNullOrWhiteSpace(name))
             {
-                PromptDialog.Confirm(context, ResumeAfterConfirmation, $"Do you want me to keep calling you {name}?", $"Sorry I don't understand - try again! Should I call you {name}?");
+                PromptDialog.Confirm(context, ResumeAfterConfirmation,
+                    $"Do you want me to keep calling you {name}?", $"Sorry I don't understand - try again! Should I call you {name}?");
                 return Task.CompletedTask;
             }
 
-            PromptDialog.Text(context, ResumeAfterNameFilled, "What is your name?", "Sorry I didn't get that - try again! What should I call you?");
+            PromptDialog.Text(context, ResumeAfterNameFilled, 
+                "What is your name?", "Sorry I didn't get that - try again! What should I call you?");
             return Task.CompletedTask;
         }
 
+
+        /// <summary>
+        /// Called when LUIS picks up a preferred name entity from the users utterance and 
+        /// confirms if they'd like to be called by that name.
+        /// </summary>
+        /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
+        /// <param name="result">Mandatory. The result of the users confirmation. </param>
         private async Task ResumeAfterPreferredNameConfirmation(IDialogContext context, IAwaitable<bool> result)
         {
 
@@ -70,12 +85,24 @@ namespace BuddyBot.Dialogs
             }
         }
 
+
+        /// <summary>
+        /// Called when the user has entered their preferred name after being prompted by <see cref="PromptDialog"/>.
+        /// </summary>
+        /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
+        /// <param name="result">Mandatory. The result of the users preferred name. </param>
         private async Task ResumeAfterNameFilled(IDialogContext context, IAwaitable<string> result)
         {
             _preferredName = await result;
             PromptDialog.Confirm(context, ResumeAfterPreferredNameConfirmation, $"So you'd like me to call you {_preferredName}?", $"Sorry I don't understand - try again! Should I call you {_preferredName}?");
         }
 
+
+        /// <summary>
+        /// Prompts the user for comfirmation using <see cref="PromptDialog"/> after they have entered their name.
+        /// </summary>
+        /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
+        /// <param name="result">Mandatory. The result of the users confirmation. </param>
         private async Task ResumeAfterConfirmation(IDialogContext context, IAwaitable<bool> result)
         {
             bool confirmation = await result;
