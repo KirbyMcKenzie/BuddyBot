@@ -201,7 +201,7 @@ namespace BuddyBot.Dialogs
 
 
         /// <summary>
-        /// Execution for the <see cref="GetStartedDialog"/> finihses here. Displays <see cref="SuggestedActions"/> 
+        /// Execution for the <see cref="GetStartedDialog"/> finishes here. Displays <see cref="SuggestedActions"/> 
         /// to help guide user on what they can do next.
         /// </summary>
         /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>

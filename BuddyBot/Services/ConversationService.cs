@@ -75,7 +75,6 @@ namespace BuddyBot.Services
         /// </summary>
         /// <param name="intentName">The name of the LUIS intent.</param>
         /// <param name="persona">The users preferred bot persona.</param>
-        /// <returns></returns>
         public async Task<string> GetResponseByIntentName(string intentName, PersonalityChatPersona persona)
         {
 

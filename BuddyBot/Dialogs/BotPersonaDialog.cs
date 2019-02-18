@@ -28,6 +28,11 @@ namespace BuddyBot.Dialogs
             _preferredBotPersona = preferredBotPersona;
         }
 
+
+        /// <summary>
+        /// Execution for the <see cref="BotPersonaDialog"/> starts here. 
+        /// </summary>
+        /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
         public Task StartAsync(IDialogContext context)
         {
             /**
@@ -79,6 +84,7 @@ namespace BuddyBot.Dialogs
             }
 
             PersonalityChatPersona preSavedPersona = _botDataService.GetPreferredBotPersona(context);
+
             // Check if user has pre-saved persona, otherwise continue
             if (preSavedPersona != PersonalityChatPersona.None)
             {
@@ -97,6 +103,12 @@ namespace BuddyBot.Dialogs
             return Task.CompletedTask;
         }
 
+
+        /// <summary>
+        /// Method called after the user has chosen which persona they'd like buddy to use.    
+        /// </summary>
+        /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
+        /// <param name="result">Mandatory. The result if the user would like to change the preferredBotPersona <see cref="PromptDialog"/>.</param>
         private async Task ResumeAfterConfirmChosenPersona(IDialogContext context, IAwaitable<bool> result)
         {
             bool confirmation = await result;
@@ -117,6 +129,12 @@ namespace BuddyBot.Dialogs
             }
         }
 
+
+        /// <summary>
+        /// Method called after the user has confirmed that would like to update the preferred bot persona.  
+        /// </summary>
+        /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
+        /// <param name="result">Mandatory. The result if the user would like to update the preferredBotPersona <see cref="PromptDialog"/>.</param>
         private async Task ResumeAfterUpdateConfirmation(IDialogContext context, IAwaitable<bool> result)
         {
             bool confirmation = await result;
@@ -136,6 +154,12 @@ namespace BuddyBot.Dialogs
             }
         }
 
+
+        /// <summary>
+        /// Method called after the user has chosen their preferred bot persona.
+        /// </summary>
+        /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
+        /// <param name="result">Mandatory. The result if the user would like to update the preferredBotPersona <see cref="PromptDialog"/>.</param>
         private async Task ResumeAfterPromptDialogChoice(IDialogContext context, IAwaitable<PersonalityChatPersona> result)
         {
             PersonalityChatPersona chosenPersona = await result;
