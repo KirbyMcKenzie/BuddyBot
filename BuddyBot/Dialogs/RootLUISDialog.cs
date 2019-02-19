@@ -220,23 +220,8 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Random.Number")]
         public async Task RandomNumber(IDialogContext context, LuisResult result)
         {
-            context.Call(_dialogBuilder.BuildRandomNumberDialog(GetMessageActivity(context), result.Entities), Resume_AfterRandomNumberDialog);
+            context.Call(_dialogBuilder.BuildRandomNumberDialog(GetMessageActivity(context), result.Entities), Resume_AfterStringDialog);
             await Task.Yield();
-        }
-
-
-        /// <summary>
-        /// Method called after the <seealso cref="RandomNumberDialog"/> when called from the 
-        /// <seealso cref="RandomNumber"/> method.       
-        /// </summary>
-        /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
-        /// <param name="result">Mandatory. The scored LUIS result from the users utterance.</param>
-        public async Task Resume_AfterRandomNumberDialog(IDialogContext context, IAwaitable<string> result)
-        {
-            var randomNumber = await result;
-
-            await context.PostAsync(randomNumber);
-            context.Wait(MessageReceived);
         }
 
 
@@ -262,23 +247,8 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Miscellaneous.ConfirmRobot")]
         public async Task ConfirmRobot(IDialogContext context, LuisResult result)
         {
-            context.Call(_dialogBuilder.BuildConfirmRobotDialog(GetMessageActivity(context)), Resume_ConfirmRobotDialog);
+            context.Call(_dialogBuilder.BuildConfirmRobotDialog(GetMessageActivity(context)), Resume_AfterStringDialog);
             await Task.Yield();
-        }
-
-
-        /// <summary>
-        /// Method called after the <seealso cref="ConfirmRobotDialog"/> when called from the 
-        /// <seealso cref="ConfirmRobot"/> method.       
-        /// </summary>
-        /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
-        /// <param name="result">Mandatory. The scored LUIS result from the users utterance.</param>
-        private async Task Resume_ConfirmRobotDialog(IDialogContext context, IAwaitable<string> result)
-        {
-            var message = await result;
-            await context.PostAsync($"{message}");
-
-            context.Wait(MessageReceived);
         }
 
 
@@ -379,22 +349,8 @@ namespace BuddyBot.Dialogs
         [LuisIntent("User.DeleteUserData")]
         public async Task DeleteUserData(IDialogContext context, LuisResult result)
         {
-            context.Call(_dialogBuilder.BuildDeleteUserDataDialog(GetMessageActivity(context), result.Entities), Resume_AfterDeleteUserDataDialog);
+            context.Call(_dialogBuilder.BuildDeleteUserDataDialog(GetMessageActivity(context), result.Entities), Resume_AfterStringDialog);
             await Task.Yield();
-        }
-
-
-        /// <summary>
-        /// Method called after the <seealso cref="DeleteUserDataDialog"/> when called from the 
-        /// <seealso cref="DeleteUserData"/> method.       
-        /// </summary>
-        /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
-        /// <param name="result">Mandatory. The scored LUIS result from the users utterance.</param>
-        private async Task Resume_AfterDeleteUserDataDialog(IDialogContext context, IAwaitable<string> result)
-        {
-            string deleteDataResult = await result;
-            await context.PostAsync($"{deleteDataResult}");
-            context.Wait(MessageReceived);
         }
 
 
@@ -407,21 +363,21 @@ namespace BuddyBot.Dialogs
         [LuisIntent("Weather.GetForecast")]
         public async Task GetWeatherForecast(IDialogContext context, LuisResult result)
         {
-            context.Call(_dialogBuilder.BuilGetWeatherForecastDialog(GetMessageActivity(context), result.Entities), Resume_AfterGetForecastDialog);
+            context.Call(_dialogBuilder.BuilGetWeatherForecastDialog(GetMessageActivity(context), result.Entities), Resume_AfterStringDialog);
             await Task.Yield();
         }
 
 
         /// <summary>
-        /// Method called after the <seealso cref="GetWeatherForecastDialog"/> when called from the 
-        /// <seealso cref="GetWeatherForecast"/> method.       
+        /// General method called after Dialogs that return strings.
+        /// <seealso cref="DeleteUserData"/> method.       
         /// </summary>
         /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
         /// <param name="result">Mandatory. The scored LUIS result from the users utterance.</param>
-        public async Task Resume_AfterGetForecastDialog(IDialogContext context, IAwaitable<string> result)
+        private async Task Resume_AfterStringDialog(IDialogContext context, IAwaitable<string> result)
         {
-            var weatherResult = await result;
-            await context.PostAsync(weatherResult);
+            string message = await result;
+            await context.PostAsync($"{message}");
             context.Wait(MessageReceived);
         }
 
