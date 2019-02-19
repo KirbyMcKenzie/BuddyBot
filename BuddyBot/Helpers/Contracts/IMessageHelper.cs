@@ -16,6 +16,5 @@ namespace BuddyBot.Helpers.Contracts
         string ExtractEntityFromMessage(string entityToExtract, IList<EntityRecommendation> entities, TextCaseType TextCaseType = TextCaseType.TitleCase);
 
         IList<int> ExtractIntegersFromMessage(string message);
-
     }
 }

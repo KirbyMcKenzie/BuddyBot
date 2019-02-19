@@ -379,7 +379,10 @@
     <Compile Include="Dialogs\DeleteUserDataDialog.cs" />
     <Compile Include="Dialogs\GetStartedDialog.cs" />
     <Compile Include="Dialogs\NameDialog.cs" />
-    <Compile Include="Helpers\Contracts\IMessageHelpers.cs" />
+    <Compile Include="Helpers\Contracts\IMessageHelper.cs" />
+    <Compile Include="Helpers\GlobalizationHelper.cs" />
+    <Compile Include="Helpers\MessageHelper.cs" />
+    <Compile Include="Helpers\WeatherHelper.cs" />
     <Compile Include="Models\Dtos\WeatherSearchResultDto.cs" />
     <Compile Include="Models\Enums\PersonalityChatPersona.cs" />
     <Compile Include="Models\Mappers\CityMap.cs" />
@@ -387,8 +390,6 @@
     <Compile Include="Models\PersonalityChoiceHeroCard.cs" />
     <Compile Include="Dialogs\PreferredWeatherLocationDialog.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
-    <Compile Include="Helpers\GlobalizationHelpers.cs" />
-    <Compile Include="Helpers\WeatherHelpers.cs" />
     <Compile Include="Logging\ActivityLogger.cs" />
     <Compile Include="Models\DataStore.cs" />
     <Compile Include="Models\DataStoreEntryAttribute.cs" />
@@ -420,7 +421,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\MessageHelpers.cs" />
     <Compile Include="Models\Dtos\JokeDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Contracts\IJokeService.cs" />

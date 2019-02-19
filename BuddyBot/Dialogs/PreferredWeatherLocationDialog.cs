@@ -32,6 +32,11 @@ namespace BuddyBot.Dialogs
             _entities = entities;
         }
 
+
+        /// <summary>
+        /// Execution for the <see cref="PreferredWeatherLocationDialog"/> starts here. 
+        /// </summary>
+        /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
         public Task StartAsync(IDialogContext context)
         {
             City savedPreferredCity= _botDataService.GetPreferredWeatherLocation(context);
@@ -58,6 +63,13 @@ namespace BuddyBot.Dialogs
 
         }
 
+
+        /// <summary>
+        /// Called when LUIS picks up a preferred weather location entity from the users utterance and 
+        /// confirms if they'd like to update their location to the given entity.
+        /// </summary>
+        /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
+        /// <param name="result">Mandatory. The result of the users confirmation. </param>
         private async Task ResumeAfterPreferredCityConfirmation(IDialogContext context, IAwaitable<bool> result)
         {
             bool confirmation = await result;
@@ -73,6 +85,13 @@ namespace BuddyBot.Dialogs
             }
         }
 
+
+        /// <summary>
+        /// Called after the user has entered in the name of their preferred weather location. 
+        /// Searches for cities with that name.
+        /// </summary>
+        /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
+        /// <param name="result">Mandatory. The name of the city the user wnats to update as their preferred weather location. </param>
         private async Task ResumeAfterPromptForPreferredLocation(IDialogContext context, IAwaitable<string> result)
         {
             string cityName = await result;
@@ -86,8 +105,7 @@ namespace BuddyBot.Dialogs
             }
             else if (citySearchResults != null && citySearchResults.Count >= 2)
             {
-                // TODO - Change type of card
-                // TODO - Think about limiting amount of cards displayed, see more button? 
+
                 List<CardAction> cityCardActionList = CreateCardActionList(citySearchResults);
 
                 HeroCard card = new HeroCard
@@ -106,6 +124,13 @@ namespace BuddyBot.Dialogs
 
         }
 
+
+        /// <summary>
+        /// Called after the user has entered in the name of their preferred weather location. 
+        /// Searches for cities with that name.
+        /// </summary>
+        /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
+        /// <param name="result">Mandatory. The name of the city the user wants to update as their preferred weather location. </param>
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
             IMessageActivity cityChoice = await result;
@@ -118,6 +143,13 @@ namespace BuddyBot.Dialogs
             context.Done(extractedCity.Name);
         }
 
+
+        /// <summary>
+        /// Called after the user has selected their preferred weather location from the <see cref="CardAction"/> list. 
+        /// Confirms if they would like to set that city as their preferred weather location.
+        /// </summary>
+        /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
+        /// <param name="result">Mandatory.  The result of the users confirmation.</param>
         private async Task ResumeAfterConfirmation(IDialogContext context, IAwaitable<bool> result)
         {
             bool confirmation = await result;
@@ -133,7 +165,11 @@ namespace BuddyBot.Dialogs
             }
         }
 
-        // TODO - Move to helpers
+
+        /// <summary>
+        /// Creates a carousel of <see cref="CardAction"/>'s for the user to select a city to get the weather of. 
+        /// </summary>
+        /// <param name="cityResultList">Mandatory. The list of cities for the user to select from.</param>
         private List<CardAction> CreateCardActionList(IList<City> cityResultList)
         {
             List<CardAction> cardOptionsList = new List<CardAction>();

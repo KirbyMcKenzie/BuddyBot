@@ -24,7 +24,7 @@ namespace BuddyBot.Controllers
 
         /// <summary>
         /// POST: api/Messages
-        /// Receive a message from a user and reply to it
+        /// Receive a message from a user and reply to it.
         /// </summary>
         public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
         {
@@ -58,6 +58,9 @@ namespace BuddyBot.Controllers
             return response;
         }
 
+        /// <summary>
+        /// Handles any other user Activity such as adding/removing more users or requesting data deletion.
+        /// </summary>
         private Activity HandleSystemMessage(Activity message)
         {
             if (message.Type == ActivityTypes.DeleteUserData)

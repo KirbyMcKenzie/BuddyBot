@@ -7,7 +7,6 @@ using System.Configuration;
 namespace BuddyBot.Repository.Settings
 {
 
-    // TODO  Add interface
     public class RepositorySettings
     {
         public string ChatHistoryTableName { get; }

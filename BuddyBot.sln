@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuddyBot", "BuddyBot\BuddyBot.csproj", "{CA3177F0-96BC-48A1-B4F0-B0FE3C485233}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuddyBot.Bot", "BuddyBot\BuddyBot.Bot.csproj", "{CA3177F0-96BC-48A1-B4F0-B0FE3C485233}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuddyBot.Repository", "BuddyBot.Repository\BuddyBot.Repository.csproj", "{C171AD1D-58B1-4D42-8CBD-B95D5567E61A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuddyBot.Repository.Startup", "BuddyBot.Repository.Startup\BuddyBot.Repository.Startup.csproj", "{42BD4B24-40C3-48B5-89CF-011E2B0A2FD0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuddyBot.Repository.Startup", "BuddyBot.Repository.Startup\BuddyBot.Repository.Startup.csproj", "{42BD4B24-40C3-48B5-89CF-011E2B0A2FD0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

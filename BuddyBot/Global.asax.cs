@@ -34,7 +34,6 @@ namespace BuddyBot
         {
             AzureStorageSettings azureStorageSettings = new AzureStorageSettings();
 
-            // TODO - Dependancy on Azure Table Storage
             var storage = CloudStorageAccount.Parse(azureStorageSettings.ConnectionString);
 
             Log.Logger = new LoggerConfiguration()

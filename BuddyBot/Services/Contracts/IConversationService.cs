@@ -7,8 +7,6 @@ namespace BuddyBot.Services.Contracts
     {
         Task<string> GetGreeting(string name = null);
 
-        string GetHowCanIHelpPhrase();
-
         Task<string> GetResponseByIntentName(string intentName, PersonalityChatPersona persona);
     }
 }

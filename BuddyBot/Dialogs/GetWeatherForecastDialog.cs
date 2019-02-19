@@ -24,10 +24,6 @@ namespace BuddyBot.Dialogs
         private readonly IBotDataService _botDataService;
         private readonly IMessageHelper _messageHelpers;
 
-        // TODO - WeatherDialog - Check if pre-saved weather location matches entity city
-        // TODO - WeatherDialog - If weather matches entity city, get weather by pre-saved weather id
-        // TODO - WeatherDialog - Ask to save preference
-
         public GetWeatherForecastDialog(IWeatherService weatherService, IList<EntityRecommendation> entities, 
             IBotDataService botDataService, IMessageHelper messageHelpers)
         {
@@ -37,6 +33,11 @@ namespace BuddyBot.Dialogs
             _messageHelpers = messageHelpers;
         }
 
+
+        /// <summary>
+        /// Execution for the <see cref="GetWeatherForecastDialog"/> starts here. 
+        /// </summary>
+        /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
         public async Task StartAsync(IDialogContext context)
         {
             string cityName = _messageHelpers.ExtractEntityFromMessage("City.Name", _entities);
@@ -50,8 +51,8 @@ namespace BuddyBot.Dialogs
 
                 if (preferredCity?.Name == null)
                 {
-                    PromptDialog.Text(context, ResumeAfterSpecifyCityNamePrompt, "What's the name of the city you want the forecast for?", "I can't understand you. Tell me the name of the city you want the forecast for");
-                    
+                    PromptDialog.Text(context, ResumeAfterSpecifyCityNamePrompt, "What's the name of the city you want the forecast for?", 
+                        "I can't understand you. Tell me the name of the city you want the forecast for");
                 }
                 else
                 {
@@ -69,6 +70,14 @@ namespace BuddyBot.Dialogs
             }
         }
 
+
+        /// <summary>
+        /// Method called after the <see cref="IWeatherService.SearchForCities"/> method has searched for cities.
+        /// </summary>
+        /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
+        /// <param name="cityName">Mandatory. The name of the city the user wants to get the weather for.</param>
+        /// <param name="citySearchResults">Mandatory. List of potential cities retrieved from the 
+        /// <see cref="IWeatherService.SearchForCities"/> method.</param>
         private async Task ResumeAfterCitySearch(IDialogContext context, string cityName, IList<City> citySearchResults)
         {
 
@@ -89,7 +98,6 @@ namespace BuddyBot.Dialogs
             else if (citySearchResults != null && citySearchResults.Count >= 2)
             {
 
-                // TODO - Think about limiting amount of cards displayed, see more button? 
                 List<CardAction> cityCardActionList = CreateCardActionList(citySearchResults);
 
                 HeroCard card = new HeroCard
@@ -108,6 +116,12 @@ namespace BuddyBot.Dialogs
             }
         }
 
+
+        /// <summary>
+        /// Method called after the user has entered the name of the city they'd like the weather for.
+        /// </summary>
+        /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
+        /// <param name="result">Mandatory. The result of the city the user entered to get the weather for.</param>
         private async Task ResumeAfterSpecifyCityNamePrompt(IDialogContext context, IAwaitable<string> result)
         {
             var cityName = await result;
@@ -118,6 +132,12 @@ namespace BuddyBot.Dialogs
             await  ResumeAfterCitySearch(context, cityName, citySearchResults);
         }
 
+
+        /// <summary>
+        /// Method called after the user has selected a specific city from the HeroCard selection. 
+        /// </summary>
+        /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
+        /// <param name="result">Mandatory. The specific city the user wants the weather for.</param>
         private async Task ResumeAfterHeroCardCitySelect(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
             var message = await result;
@@ -132,6 +152,11 @@ namespace BuddyBot.Dialogs
                 : "🤧⛅ - I'm having trouble accessing weather reports. We'll have to try again later!");
         }
 
+
+        /// <summary>
+        /// Creates a carousel of <see cref="CardAction"/>'s for the user to select a city to get the weather of. 
+        /// </summary>
+        /// <param name="cityResultList">Mandatory. The list of cities for the user to select from.</param>
         private List<CardAction> CreateCardActionList(IList<City> cityResultList)
         {
             List<CardAction> cardOptionsList = new List<CardAction>();

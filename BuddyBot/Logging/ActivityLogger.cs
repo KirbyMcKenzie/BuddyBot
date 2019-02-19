@@ -28,6 +28,12 @@ namespace BuddyBot.Logging
             _chatHistoryWriter = chatHistoryWriter;
         }
 
+        /// <summary>
+        ///  Intercepts messages between BuddyBot and the user, logging them to the 
+        ///  <see cref="IChatHistoryWriter"/>.
+        /// </summary>
+        /// <param name="activity">Mandatory. Shared properties for all activities.</param>
+        /// <returns></returns>
         public async Task LogAsync(IActivity activity)
         {
             if (activity.AsMessageActivity() != null)
