@@ -32,6 +32,7 @@ namespace BuddyBot.Dialogs
             _entities = entities;
         }
 
+
         /// <summary>
         /// Execution for the <see cref="PreferredWeatherLocationDialog"/> starts here. 
         /// </summary>

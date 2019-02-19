@@ -66,21 +66,24 @@ namespace BuddyBot.Helpers
         }
 
         /// <summary>
-        /// Extracts any integers found in user message.
+        /// Extracts any integers found in user message. Returns null if no integers were found.
         /// </summary>
         /// <param name="entityToExtract">Mandatory. The message to try find integers in./</param>
         public IList<int> ExtractIntegersFromMessage(string message)
         {
-            string[] values = Regex.Split(message, @"\D+");
-            IList<int> integersList = new List<int>();
-
-            foreach (var value in values)
+            if (!string.IsNullOrEmpty(message))
             {
-                int.TryParse(value, out var number);
-                integersList.Add(number);
-            }
+                string[] values = Regex.Split(message, @"\D+");
+                IList<int> integersList = new List<int>();
 
-            return integersList;
+                foreach (var value in values)
+                {
+                    int.TryParse(value, out var number);
+                    integersList.Add(number);
+                }
+                return integersList;
+            }
+            return null;
         }
     }
 }

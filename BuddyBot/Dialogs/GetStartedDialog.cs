@@ -32,6 +32,7 @@ namespace BuddyBot.Dialogs
             SetField.NotNull(out _messageHelper, nameof(messageHelper), messageHelper);
         }
 
+
         /// <summary>
         /// Execution for the <see cref="GetStartedDialog"/> starts here. 
         /// </summary>

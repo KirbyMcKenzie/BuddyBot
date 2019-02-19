@@ -231,11 +231,11 @@ namespace BuddyBot.Dialogs
         /// </summary>
         /// <param name="context">Mandatory. The context for the execution of a dialog's conversational process.</param>
         /// <param name="result">Mandatory. The scored LUIS result from the users utterance.</param>
-        public async Task Resume_AfterRandomNumberDialog(IDialogContext context, IAwaitable<int> result)
+        public async Task Resume_AfterRandomNumberDialog(IDialogContext context, IAwaitable<string> result)
         {
             var randomNumber = await result;
 
-            await context.PostAsync($"The result is... {randomNumber}! 🎉🎉");
+            await context.PostAsync(randomNumber);
             context.Wait(MessageReceived);
         }
 
