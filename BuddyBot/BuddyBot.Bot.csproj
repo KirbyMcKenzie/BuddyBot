@@ -367,7 +367,9 @@
     <Content Include="src\images\BuddyBotAvatar.svg" />
     <Content Include="src\images\GitHubLogo.svg" />
     <Content Include="src\js\webChat.js" />
+    <Content Include="src\privacy.html" />
     <Content Include="src\site.css" />
+    <Content Include="src\terms.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
