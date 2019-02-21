@@ -92,15 +92,15 @@ namespace BuddyBot.Dialogs
 
             PersonalityChoiceHeroCard friendlyHeroCard = new PersonalityChoiceHeroCard(
                 PersonalityChatPersona.Friendly, "Friendly", "I'm always happy to help!",
-                "https://buddybottablestorage.blob.core.windows.net/buddybotimages/avatars/BuddyBotFriendly.svg");
+                "https://buddybottablestorage.blob.core.windows.net/buddybotimages/avatars/BuddyBotFriendly.png");
 
             PersonalityChoiceHeroCard professionalHeroCard = new PersonalityChoiceHeroCard(
                 PersonalityChatPersona.Professional, "Professional", "I'm concise and helpful.",
-                "https://buddybottablestorage.blob.core.windows.net/buddybotimages/avatars/BuddyBotProfessional.svg");
+                "https://buddybottablestorage.blob.core.windows.net/buddybotimages/avatars/BuddyBotProfessional.png");
 
             PersonalityChoiceHeroCard humorousHeroCard = new PersonalityChoiceHeroCard(
                 PersonalityChatPersona.Humorous, "Humorous", "Hurry up and get on with it.",
-                "https://buddybottablestorage.blob.core.windows.net/buddybotimages/avatars/BuddyBotSassy.svg");
+                "https://buddybottablestorage.blob.core.windows.net/buddybotimages/avatars/BuddyBotSassy.png");
 
             List<PersonalityChoiceHeroCard> heroCardList = new List<PersonalityChoiceHeroCard>
             {
