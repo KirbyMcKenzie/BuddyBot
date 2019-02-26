@@ -173,6 +173,9 @@
       "name": "Smalltalk.Greeting.OtherBot"
     },
     {
+      "name": "Smalltalk.Greeting.PleasedToMeetYou"
+    },
+    {
       "name": "Smalltalk.Greeting.WhatsUp"
     },
     {
@@ -371,6 +374,16 @@
       ]
     },
     {
+      "text": "< 3",
+      "intent": "Smalltalk.Bot.Opinion.Love",
+      "entities": []
+    },
+    {
+      "text": "<3",
+      "intent": "Smalltalk.Bot.Opinion.Love",
+      "entities": []
+    },
+    {
       "text": "☀",
       "intent": "Weather.GetForecast",
       "entities": []
@@ -386,20 +399,19 @@
       "entities": []
     },
     {
-      "text": "✋",
-      "intent": "Greeting",
+      "text": "❤",
+      "intent": "Smalltalk.Bot.Opinion.Love",
       "entities": []
     },
     {
-      "text": "0 & 100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-      "intent": "None",
-      "entities": [
-        {
-          "entity": "Number",
-          "startPos": 0,
-          "endPos": 0
-        }
-      ]
+      "text": "❤❤❤",
+      "intent": "Smalltalk.Bot.Opinion.Love",
+      "entities": []
+    },
+    {
+      "text": "✋",
+      "intent": "Greeting",
+      "entities": []
     },
     {
       "text": "11 : 15 am tomorrow reminder",
@@ -1867,6 +1879,16 @@
       "entities": []
     },
     {
+      "text": "great meeting you buddy",
+      "intent": "Smalltalk.Greeting.PleasedToMeetYou",
+      "entities": []
+    },
+    {
+      "text": "great to meet you",
+      "intent": "Smalltalk.Greeting.PleasedToMeetYou",
+      "entities": []
+    },
+    {
       "text": "ha ha",
       "intent": "Smalltalk.Dialog.Laugh",
       "entities": []
@@ -1952,6 +1974,21 @@
       "entities": []
     },
     {
+      "text": "heeeeeeeeeeeey",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "heeeeeyy",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "heeeyy",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
       "text": "hehe",
       "intent": "Smalltalk.Dialog.Laugh",
       "entities": []
@@ -1964,6 +2001,16 @@
     {
       "text": "hehehuhu",
       "intent": "Smalltalk.Dialog.Laugh",
+      "entities": []
+    },
+    {
+      "text": "hellllloo",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "helllo",
+      "intent": "Greeting",
       "entities": []
     },
     {
@@ -2087,6 +2134,16 @@
       "entities": []
     },
     {
+      "text": "heyaaaa",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "heyyy",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
       "text": "hi",
       "intent": "Greeting",
       "entities": []
@@ -2102,7 +2159,22 @@
       "entities": []
     },
     {
+      "text": "hi bbuddy",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
       "text": "hi buddy",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "hi hi",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "hi theere",
       "intent": "Greeting",
       "entities": []
     },
@@ -2113,6 +2185,16 @@
     },
     {
       "text": "hi!",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "hii hii",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "hiiiiii",
       "intent": "Greeting",
       "entities": []
     },
@@ -2200,6 +2282,11 @@
     },
     {
       "text": "how is the weather",
+      "intent": "Weather.GetForecast",
+      "entities": []
+    },
+    {
+      "text": "how is the weather today?",
       "intent": "Weather.GetForecast",
       "entities": []
     },
@@ -2507,6 +2594,11 @@
     {
       "text": "i need someone to talk to",
       "intent": "Smalltalk.User.Lonely",
+      "entities": []
+    },
+    {
+      "text": "i need the weather please",
+      "intent": "Weather.GetForecast",
       "entities": []
     },
     {
@@ -2855,6 +2947,11 @@
       "entities": []
     },
     {
+      "text": "i'm so glad we met",
+      "intent": "Smalltalk.Greeting.PleasedToMeetYou",
+      "entities": []
+    },
+    {
       "text": "i'm so happy!!",
       "intent": "Smalltalk.User.Happy",
       "entities": []
@@ -3161,12 +3258,37 @@
     },
     {
       "text": "nice",
-      "intent": "Smalltalk.Compliment.Response",
+      "intent": "Smalltalk.Compliment.Bot",
       "entities": []
     },
     {
       "text": "nice one",
       "intent": "Smalltalk.Compliment.Response",
+      "entities": []
+    },
+    {
+      "text": "nice to meet you",
+      "intent": "Smalltalk.Greeting.PleasedToMeetYou",
+      "entities": []
+    },
+    {
+      "text": "nice to meet you buddy",
+      "intent": "Smalltalk.Greeting.PleasedToMeetYou",
+      "entities": []
+    },
+    {
+      "text": "niiice",
+      "intent": "Smalltalk.Compliment.Bot",
+      "entities": []
+    },
+    {
+      "text": "niiiice",
+      "intent": "Smalltalk.Compliment.Bot",
+      "entities": []
+    },
+    {
+      "text": "niiiiiice",
+      "intent": "Smalltalk.Compliment.Bot",
       "entities": []
     },
     {
@@ -3357,6 +3479,11 @@
       "entities": []
     },
     {
+      "text": "pleased to meet you!",
+      "intent": "Smalltalk.Greeting.PleasedToMeetYou",
+      "entities": []
+    },
+    {
       "text": "postpone my eight thirty reminder to nine thirty",
       "intent": "Reminder.Change",
       "entities": []
@@ -3421,6 +3548,38 @@
           "entity": "Number",
           "startPos": 22,
           "endPos": 22
+        }
+      ]
+    },
+    {
+      "text": "ran num between -100 & 5",
+      "intent": "Random.Number",
+      "entities": [
+        {
+          "entity": "Number",
+          "startPos": 16,
+          "endPos": 19
+        },
+        {
+          "entity": "Number",
+          "startPos": 23,
+          "endPos": 23
+        }
+      ]
+    },
+    {
+      "text": "ran num between -100 & -50",
+      "intent": "Random.Number",
+      "entities": [
+        {
+          "entity": "Number",
+          "startPos": 16,
+          "endPos": 19
+        },
+        {
+          "entity": "Number",
+          "startPos": 23,
+          "endPos": 25
         }
       ]
     },
@@ -3500,6 +3659,17 @@
           "entity": "Number",
           "startPos": 25,
           "endPos": 27
+        }
+      ]
+    },
+    {
+      "text": "random number between -5 and 10",
+      "intent": "Random.Number",
+      "entities": [
+        {
+          "entity": "Number",
+          "startPos": 29,
+          "endPos": 30
         }
       ]
     },
@@ -3759,6 +3929,11 @@
     {
       "text": "smell you later",
       "intent": "Smalltalk.Greeting.Bye",
+      "entities": []
+    },
+    {
+      "text": "smile",
+      "intent": "Smalltalk.Bot.Happy",
       "entities": []
     },
     {
@@ -4184,6 +4359,11 @@
       "entities": []
     },
     {
+      "text": "was great to meet you",
+      "intent": "Smalltalk.Greeting.PleasedToMeetYou",
+      "entities": []
+    },
+    {
       "text": "wasssuuuppp",
       "intent": "Smalltalk.Greeting.WhatsUp",
       "entities": []
@@ -4582,6 +4762,16 @@
       "entities": []
     },
     {
+      "text": "where are u?",
+      "intent": "Smalltalk.Bot.WhereAreYou",
+      "entities": []
+    },
+    {
+      "text": "where are you based?",
+      "intent": "Smalltalk.Bot.WhereAreYou",
+      "entities": []
+    },
+    {
       "text": "where are you right now?",
       "intent": "Smalltalk.Bot.WhereAreYou",
       "entities": []
@@ -4593,6 +4783,11 @@
     },
     {
       "text": "where have you come from?",
+      "intent": "Smalltalk.Bot.WhereAreYou",
+      "entities": []
+    },
+    {
+      "text": "where is buddybot",
       "intent": "Smalltalk.Bot.WhereAreYou",
       "entities": []
     },
@@ -5099,8 +5294,38 @@
       "entities": []
     },
     {
+      "text": "😂😂😂",
+      "intent": "Smalltalk.Dialog.Laugh",
+      "entities": []
+    },
+    {
       "text": "😡",
       "intent": "Smalltalk.User.Angry",
+      "entities": []
+    },
+    {
+      "text": "😢",
+      "intent": "Smalltalk.User.Sad",
+      "entities": []
+    },
+    {
+      "text": "😥",
+      "intent": "Smalltalk.User.Sad",
+      "entities": []
+    },
+    {
+      "text": "😭",
+      "intent": "Smalltalk.User.Sad",
+      "entities": []
+    },
+    {
+      "text": "😭😭😭",
+      "intent": "Smalltalk.User.Sad",
+      "entities": []
+    },
+    {
+      "text": "😿",
+      "intent": "Smalltalk.User.Sad",
       "entities": []
     },
     {
