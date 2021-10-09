@@ -18,7 +18,7 @@ A bot that does what it's told, no smalltalk or remarks, just work. Prefect for 
 
 **😒 Sassy**
 
-The authentic BuddyBot experience. Sassy comes with a bad attitude and plenty of snide comments. BuddyBot isn't your friend, and you should know it.
+The authentic BuddyBot experience. Sassy comes with a bad attitude and plenty of snide remarks. BuddyBot isn't your friend, and you should know it.
 
 ## Features
 
@@ -63,7 +63,7 @@ BuddyBot can generate random numbers, simply specify a range for BuddyBot to cho
 
 **Exampe Utterances:**
 
-`Pick a number` (Defaults to 1 and 10)
+`Pick a number`
 `Choose a number between 1 and 100`
 `Num between 42 and 99`
 
