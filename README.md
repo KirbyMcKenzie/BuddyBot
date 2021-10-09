@@ -1,4 +1,22 @@
 # BuddyBot
-An intelligent personal assistant bot to assist with your everyday needs. 🤖
 
-BuddyBot is a chatbot built with the Microsoft Bot Framework; he's a text-based intelligent personal assistant, who can understand what you write using a natural language processing service called LUIS. BuddyBot has many features such as retrieving weather forecasts, telling jokes, generating random values and is configurable through swappable personalities and a database managed small talk response service.
+NLP chatbot with swappable personalities, built with the [Microsoft Bot Framework V3](https://github.com/microsoft/BotBuilder-V3).
+
+## Personalities
+
+When first starting a conversation with BuddyBot, you will be prompted to choose a personality, this determines how BuddyBot will respond to your queries, there are three personalities to select from:
+
+**😄 Friendly**
+
+Always happy to help, Friendly brings a happy go lucky chatbot experience. 
+
+
+
+**🤓 Professional**
+
+A bot that does what it's told, no smalltalk or remarks, just work. Prefect for enterprises. 
+
+
+**😒 Sassy**
+
+The authentic BuddyBot experience. Sassy comes with a bad attitude and plenty of snide comments. BuddyBot isn't your friend, and you should know it.
