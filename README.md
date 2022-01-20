@@ -18,7 +18,7 @@ A bot that does what it's told, no smalltalk or remarks, just work. Prefect for 
 
 **😒 Sassy**
 
-The authentic BuddyBot experience. Sassy comes with a bad attitude and plenty of snide remarks. BuddyBot isn't your friend, and you should know it.
+The authentic BuddyBot experience. Sassy comes with a bad attitude and plenty of snide remarks.
 
 ## Features
 
